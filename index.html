@@ -22,14 +22,74 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo-area">
-      <span class="logo-mark">∞</span>
-      <span class="logo-text">人生二周目ノート</span>
+    <div class="header-left">
+      <div class="logo-area">
+        <span class="logo-mark">∞</span>
+        <span class="logo-text">人生二周目ノート</span>
+      </div>
+      <p class="header-tagline">二周目視点で、人生をアップデートするノート</p>
+    </div>
+
+    <div class="header-right">
+      <!-- 世界観のSVG（抽象的な軌道図形） -->
+      <div class="header-orbit">
+        <svg viewBox="0 0 120 60" aria-hidden="true">
+          <defs>
+            <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#a5f3c7" />
+              <stop offset="50%" stop-color="#4ade80" />
+              <stop offset="100%" stop-color="#22c55e" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="60" cy="30" rx="45" ry="16" fill="none" stroke="url(#orbitGrad)" stroke-width="2.4" />
+          <ellipse cx="60" cy="30" rx="30" ry="10" fill="none" stroke="rgba(34,197,94,0.4)" stroke-width="1.6" />
+          <circle cx="30" cy="30" r="4" fill="#22c55e" />
+          <circle cx="90" cy="30" r="3" fill="#bbf7d0" />
+        </svg>
+      </div>
+
+      <!-- アコーディオンメニュー -->
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="header-menu">
+        <span class="material-symbols-rounded">menu</span>
+        <span class="menu-label">メニュー</span>
+      </button>
     </div>
   </div>
+
+  <!-- 折りたたみナビゲーション -->
+  <nav id="header-menu" class="header-menu" aria-hidden="true">
+    <button class="nav-item" data-go="home">
+      <span class="material-symbols-rounded">home</span>
+      <span>ホーム</span>
+    </button>
+    <button class="nav-item" data-go="generation">
+      <span class="material-symbols-rounded">diversity_3</span>
+      <span>世代別ノート</span>
+    </button>
+    <button class="nav-item" data-go="knowledge">
+      <span class="material-symbols-rounded">psychology</span>
+      <span>教養ノート</span>
+    </button>
+    <button class="nav-item" data-go="catchup">
+      <span class="material-symbols-rounded">bolt</span>
+      <span>キャッチアップノート</span>
+    </button>
+    <button class="nav-item" data-go="experiences">
+      <span class="material-symbols-rounded">menu_book</span>
+      <span>人生体験記</span>
+    </button>
+    <button class="nav-item" data-go="roadmap">
+      <span class="material-symbols-rounded">map</span>
+      <span>人生ロードマップ</span>
+    </button>
+    <button class="nav-item" data-go="stock">
+      <span class="material-symbols-rounded">grade</span>
+      <span>ユーザーストック</span>
+    </button>
+  </nav>
 </header>
 
-<!-- ✅ ホーム専用ヒーロー（id="hero" を必ず付ける） -->
+<!-- ホーム専用ヒーロー -->
 <section id="hero" class="hero-section">
   <div class="hero-inner">
     <h1 class="hero-title">人生二周目ノート</h1>
