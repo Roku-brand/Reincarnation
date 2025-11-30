@@ -6,9 +6,8 @@
   <title>人生二周目ノート</title>
 
   <link rel="stylesheet" href="css/style.css">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#0f3d2e">
 
-  <!-- PWA manifest（中身はあとで用意してOK） -->
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 </head>
@@ -17,131 +16,96 @@
 
 <header>
   <h1>人生二周目ノート</h1>
-  <p class="subtitle">迷わないための知のOS</p>
+  <p class="subtitle">人生をかしこく、後悔しないために</p>
 </header>
 
 <nav class="tabbar">
-  <button data-page="home">世代別</button>
-  <button data-page="today">今日</button>
-  <button data-page="db">人生DB</button>
-  <button data-page="values">価値観</button>
-  <button data-page="settings">設定</button>
+  <button data-page="home" class="active">ホーム</button>
+  <button data-page="generation">世代別ノート</button>
+  <button data-page="knowledge">教養ノート</button>
+  <button data-page="catchup">キャッチアップノート</button>
 </nav>
 
 <main>
 
-  <!-- 世代別マップ + 心理検索 -->
-  <section id="home" class="page active">
-    <h2>世代別マップ</h2>
+<!-- ホーム -->
+<section id="home" class="page active">
+  <div class="hero">
+    <h2>人生二周目ノート</h2>
+    <p>人生をかしこく、後悔しないために。</p>
+  </div>
+
+  <div class="card">
+    <h3>3つのノートから始めよう</h3>
+    <ul class="home-list">
+      <li>🌱 世代別ノート：<br>自分の年代の悩み・テーマ・心理学を整理</li>
+      <li>📘 教養ノート：<br>歴史・科学・心理学・社会を“二周目視点”で理解</li>
+      <li>⚡ キャッチアップノート：<br>最新の社会変化・AI・ニュースを高速で把握</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 世代別ノート -->
+<section id="generation" class="page">
+  <h2>世代別ノート</h2>
+
+  <div class="generation-tabs">
+    <button data-gen="小学生" class="gen-active">小学生</button>
+    <button data-gen="中学生">中学生</button>
+    <button data-gen="高校生">高校生</button>
+    <button data-gen="大学生">大学生</button>
+    <button data-gen="社会人">社会人</button>
+    <button data-gen="定年後">定年後</button>
+  </div>
+
+  <div id="generation-summary" class="card">
+    <h3 id="gen-title">小学生のテーマ</h3>
+    <ul id="gen-list"></ul>
+  </div>
+</section>
+
+<!-- 教養ノート -->
+<section id="knowledge" class="page">
+  <h2>教養ノート</h2>
+
+  <div class="card">
+    <h3>ショート教養（固定）</h3>
     <p>
-      今の自分のステージを選んで、よくあるテーマを見たり、<br>
-      今の状況・不安を言語化して、近い心理学の概念を探せます。
+      産業革命の本質は「蒸気」ではなく「識字率」。  
+      AI時代の識字率は「AIリテラシー」。
     </p>
+  </div>
 
-    <div class="generation-tabs">
-      <button data-gen="小学生" class="gen-active">小学生</button>
-      <button data-gen="中学生">中学生</button>
-      <button data-gen="高校生">高校生</button>
-      <button data-gen="大学生">大学生</button>
-      <button data-gen="社会人">社会人</button>
-      <button data-gen="定年後">定年後</button>
-    </div>
+  <div class="card">
+    <h3>心理学（固定）</h3>
+    <p>
+      人は「社会的比較」によって幸福度を判断しがち。  
+      二周目視点では「過去の自分」と比較する。
+    </p>
+  </div>
+</section>
 
-    <div id="generation-summary" class="card">
-      <h3 id="gen-title">小学生のよくあるテーマ</h3>
-      <ul id="gen-list">
-        <!-- JSで中身を書き換える -->
-      </ul>
-    </div>
+<!-- キャッチアップノート -->
+<section id="catchup" class="page">
+  <h2>キャッチアップノート</h2>
 
-    <div class="card">
-      <h3>あなたの状況・不安を言語化する</h3>
-      <p class="small-note">
-        例）「周りは就活が進んでいるのに、自分だけ置いていかれている感じがして不安」
-      </p>
-      <textarea id="anxiety-input" placeholder="今の気持ち・状況・不安を書いてください…"></textarea>
-      <button id="analyze-btn">心理学で説明して</button>
-      <p class="small-note">
-        ※入力内容はこの端末のブラウザ内だけで処理され、サーバーには送信されません。
-      </p>
-    </div>
+  <div class="card">
+    <h3>今日のニュース（仮）</h3>
+    <p id="news-area">（ニュースAPI接続予定）</p>
+  </div>
 
-    <section id="psych-result" class="card hidden">
-      <h3 id="psych-name">心理学的な見方</h3>
-      <p id="psych-desc"></p>
-      <p id="psych-thoughts" class="subtext"></p>
-      <p id="psych-tip" class="subtext"></p>
-    </section>
-  </section>
-
-  <!-- 今日のキャッチアップ -->
-  <section id="today" class="page">
-    <h2>今日のキャッチアップ</h2>
-
-    <div class="card">
-      <h3>📰 今日のニュース（仮API）</h3>
-      <p id="news-area">（ここにAI/ニュースAPIを接続予定）</p>
-    </div>
-
-    <div class="card">
-      <h3>🧠 心理学 Tips</h3>
-      <p>
-        人間は「即時の小さな報酬」を「後の大きな報酬」より好む（双曲割引）。<br>
-        → 勉強や習慣づけは「小さな即時ご褒美」を作ると成功しやすい。
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>📚 ショート教養</h3>
-      <p>
-        産業革命で最も重要だった資源は「蒸気」ではなく「識字率」。<br>
-        → AI時代の識字率は「AIリテラシー」。
-      </p>
-    </div>
-  </section>
-
-  <!-- 人生データベース -->
-  <section id="db" class="page">
-    <h2>人生データベース（α）</h2>
-
-    <div class="card">
-      <h3>スティーブ・ジョブズ</h3>
-      <p>
-        ・20代で成功 → 30代で追放 → 40代で復活。<br>
-        人生は直線ではなく“点と点が後からつながる”。
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>一般人の失敗談</h3>
-      <p>
-        ・20代で業界選びに失敗 → 30代で再挑戦。<br>
-        二周目視点では「20代の失敗は資産」。
-      </p>
-    </div>
-  </section>
-
-  <!-- 価値観ノート -->
-  <section id="values" class="page">
-    <h2>価値観ノート</h2>
-
-    <textarea id="values-input" placeholder="あなたの価値観、気づき、メモを書いてください…"></textarea>
-    <button id="save-values">保存</button>
-    <p id="save-status"></p>
-  </section>
-
-  <!-- 設定 -->
-  <section id="settings" class="page">
-    <h2>設定</h2>
-
-    <div class="card">
-      <h3>PWAインストール</h3>
-      <p>iPhoneの場合：Safari → 共有ボタン → ホーム画面に追加</p>
-    </div>
-  </section>
+  <div class="card">
+    <h3>今日の心理Tip</h3>
+    <p>
+      人間は「ネガティビティ」に強く引っ張られる。  
+      意図的に“今日の良かったこと”を3つ書いて中和する。
+    </p>
+  </div>
+</section>
 
 </main>
 
 <script src="js/app.js"></script>
+
 </body>
 </html>
