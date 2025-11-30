@@ -1,49 +1,27 @@
 /* =========================
-   全体の背景（グラデ・光沢）
+   全体：明るい新緑グラデーション
    ========================= */
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #ecfdf3;
-  background: #02110f;
+  background: linear-gradient(135deg, #e6ffe9, #c9ffe0, #d9fff1);
+  background-attachment: fixed;
+  color: #0a3d2f;
   overflow-x: hidden;
 }
 
-.app-bg {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 0% 0%, #36d1a7 0, transparent 50%),
-              radial-gradient(circle at 100% 100%, #0b3b32 0, #02110f 60%);
-  z-index: -2;
-}
-
-.app-bg-glow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-.app-root {
-  min-height: 100vh;
-}
-
 /* =========================
-   ヘッダー
+   ヘッダー（小さめロゴ）
    ========================= */
 
 header {
-  padding: 18px 20px 12px;
+  padding: 10px 18px 4px;
 }
 
 .header-inner {
   max-width: 1040px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
 }
 
 .logo-area {
@@ -51,30 +29,55 @@ header {
   align-items: center;
   gap: 8px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  font-size: 18px;
+  letter-spacing: 0.06em;
+  font-size: 15px;
+  color: #066142;
 }
 
 .logo-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 999px;
-  background: radial-gradient(circle at 30% 0%, #b9ffdd, #0b3b32);
-  box-shadow: 0 0 10px rgba(92, 255, 190, 0.5);
+  background: radial-gradient(circle at 30% 0%, #ffffff, #68d39b);
+  box-shadow: 0 0 10px rgba(84, 201, 140, 0.6);
   font-size: 14px;
 }
 
-.logo-text {
-  font-size: 18px;
+/* ==========================================
+   ヒーローエリア（タイトルを大きく表示）
+   ========================================== */
+
+.hero-section {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(120deg, #baffd3 0%, #eafff3 50%, #ffffff 100%);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: 0 12px 38px rgba(0, 80, 40, 0.18);
 }
 
-.subtitle {
-  margin: 0 0 4px;
-  font-size: 13px;
-  opacity: 0.85;
+.hero-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: #064b32;
+  margin: 0 0 12px;
+}
+
+.hero-sub1 {
+  font-size: 20px;
+  margin: 0;
+  color: #066142;
+  font-weight: 600;
+}
+
+.hero-sub2 {
+  margin-top: 6px;
+  font-size: 16px;
+  color: #0a3d2f;
+  opacity: 0.9;
 }
 
 /* =========================
@@ -83,8 +86,8 @@ header {
 
 main {
   max-width: 1040px;
-  margin: 0 auto 40px;
-  padding: 8px 16px 40px;
+  margin: 0 auto;
+  padding: 24px 18px 60px;
 }
 
 /* ページ切り替え */
@@ -105,73 +108,42 @@ main {
    ホーム：巨大タブ（6つ）
    ========================= */
 
-.home-hero {
-  margin-top: 16px;
-  margin-bottom: 8px;
-}
-
-.hero-tagline {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
 .large-feature-buttons {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  margin-top: 24px;
+  margin-top: 10px;
 }
 
 .large-feature {
-  position: relative;
-  width: 100%;
-  padding: 20px 18px;
+  background: linear-gradient(135deg, #ffffff, #f4fff8);
+  border: 2px solid #b1f3c7;
+  padding: 22px 20px;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: linear-gradient(135deg, rgba(7, 66, 46, 0.92), rgba(39, 174, 96, 0.85));
-  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
-  color: #ecfdf3;
+  box-shadow: 0 10px 22px rgba(0, 120, 70, 0.12);
+  color: #064b32;
   cursor: pointer;
-  overflow: hidden;
-  text-align: left;
+  transition: all 0.25s ease;
   display: flex;
   flex-direction: column;
   gap: 6px;
-}
-
-.large-feature::before {
-  content: "";
-  position: absolute;
-  top: -60%;
-  left: -40%;
-  width: 40%;
-  height: 220%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.55), transparent 60%);
-  transform: translateX(-120%) rotate(20deg);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.large-feature:hover::before {
-  opacity: 1;
-  transform: translateX(260%) rotate(20deg);
-  transition: transform 0.7s ease, opacity 0.4s ease;
+  text-align: left;
 }
 
 .large-feature:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 46px rgba(0,0,0,0.6);
+  box-shadow: 0 16px 34px rgba(0, 120, 70, 0.22);
+  background: #ffffff;
 }
 
 .feature-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
 }
 
 .feature-sub {
   font-size: 13px;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 @media (min-width: 720px) {
@@ -180,7 +152,7 @@ main {
     flex-wrap: wrap;
   }
   .large-feature {
-    flex: 1 1 calc(33% - 16px); /* 3列 × 2行を想定 */
+    flex: 1 1 calc(33% - 16px); /* 3列×2行イメージ */
     min-width: 260px;
   }
 }
@@ -193,52 +165,50 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 24px 0 16px;
+  margin: 28px 0 16px;
   gap: 12px;
 }
 
 .page-title-block h2 {
-  margin: 0 0 4px;
-  font-size: 22px;
+  margin: 0;
+  color: #064b32;
+  font-size: 24px;
 }
 
 .page-subtitle {
-  margin: 0;
-  font-size: 13px;
-  opacity: 0.85;
+  margin: 2px 0 0;
+  color: #0a3d2f;
+  opacity: 0.75;
+  font-size: 14px;
 }
 
 .back-home {
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(0,0,0,0.25);
-  color: #ecfdf3;
+  border: 1px solid #80d9a3;
+  background: #ffffffcc;
   padding: 6px 14px;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
-  backdrop-filter: blur(6px);
+  color: #064b32;
 }
 
 /* =========================
-   カード（ガラス風）
+   カード（白ベース × 新緑影）
    ========================= */
 
 .card {
+  background: #ffffff;
+  padding: 18px 20px;
   border-radius: 16px;
-  padding: 16px 18px;
-  margin-bottom: 18px;
-}
-
-.glass {
-  background: radial-gradient(circle at 0 0, rgba(255,255,255,0.16), rgba(0,0,0,0.45));
-  border: 1px solid rgba(255,255,255,0.28);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
-  backdrop-filter: blur(14px);
+  margin-bottom: 20px;
+  border: 1px solid #c3f1d4;
+  box-shadow: 0 14px 24px rgba(0, 120, 70, 0.12);
 }
 
 .card h3 {
   margin-top: 0;
   margin-bottom: 8px;
+  color: #064b32;
 }
 
 .card p {
@@ -259,25 +229,23 @@ main {
 .generation-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 8px 0 18px;
+  gap: 12px;
+  margin: 10px 0 18px;
 }
 
 .generation-tabs button {
   flex: 1 1 calc(33% - 12px);
   padding: 8px 6px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.35);
-  background: rgba(0,0,0,0.35);
-  color: #ecfdf3;
-  font-size: 13px;
+  border: 1px solid #b3efc3;
+  background: #e8fff0;
+  color: #064b32;
   cursor: pointer;
-  backdrop-filter: blur(6px);
+  font-size: 13px;
 }
 
 .generation-tabs button.gen-active {
-  background: linear-gradient(135deg, #1abc9c, #2ecc71);
-  border-color: rgba(0,0,0,0.5);
-  color: #02110f;
-  font-weight: 600;
+  background: #8ef5b8;
+  color: #003520;
+  font-weight: 700;
 }
