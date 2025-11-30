@@ -259,9 +259,82 @@ main {
 }
 
 /* =========================
-   ホーム：6ノート
+   ホーム：サイドバー + メイン
    ========================= */
 
+.home-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.home-sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-title {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #064b32;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid #c1f0d2;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  color: #064b32;
+}
+
+.sidebar-nav-item .material-symbols-rounded {
+  font-size: 18px;
+  color: #0f9f5b;
+}
+
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.home-block {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid #c3f1d4;
+  box-shadow: 0 14px 18px rgba(0, 0, 0, 0.04);
+}
+
+.home-heading {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: #064b32;
+}
+
+.home-subheading {
+  margin: 0 0 4px;
+  font-size: 16px;
+  color: #064b32;
+}
+
+.home-text {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ホーム内の機能紹介グリッド */
 .section-heading {
   margin: 0 0 16px;
   font-size: 18px;
@@ -275,7 +348,6 @@ main {
   gap: 16px;
 }
 
-/* PCでは少し非対称 */
 @media (min-width: 840px) {
   .home-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -449,6 +521,20 @@ main {
 /* =========================
    レスポンシブ微調整
    ========================= */
+
+@media (max-width: 768px) {
+  .home-layout {
+    flex-direction: column;
+  }
+  .home-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .sidebar-nav-item {
+    flex: 1 1 calc(50% - 4px);
+  }
+}
 
 @media (max-width: 640px) {
   .header-orbit {
