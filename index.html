@@ -1,188 +1,576 @@
+/* =========================
+   ベース：フォント & 背景
+   ========================= */
 
-<header>
-<div class="header-inner">
-    <!-- 左端：メニューボタン -->
-    <!-- 左端：メニューボタン（オーバーレイ） -->
-<button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="menu-overlay">
-<span class="material-symbols-rounded">menu</span>
-</button>
-@@ -111,60 +111,127 @@ <h1 class="hero-title">人生二周目ノート</h1>
+body {
+  margin: 0;
+  font-family: "Inter", "Noto Sans JP", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #e6ffe9 0, #f5fff9 30%, #f9fffd 100%);
+  background-attachment: fixed;
+  color: #0a3d2f;
+  overflow-x: hidden;
+}
 
-<main>
+/* =========================
+   ヘッダー
+   ========================= */
 
-  <!-- ホーム：6つのノート -->
-  <!-- ホーム：サイドバー + 中央コンテンツ -->
-<section id="home" class="page active">
-    <h2 class="section-heading">ノートを選ぶ</h2>
+header {
+  padding: 10px 0 4px;
+}
 
-    <div class="home-grid">
+.header-inner {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 
-      <button class="large-feature" data-go="generation">
-        <span class="feature-icon material-symbols-rounded">diversity_3</span>
-        <div class="feature-text">
-          <span class="feature-title">世代別ノート</span>
-          <span class="feature-sub">年代ごとの悩み・心理・テーマ</span>
-        </div>
-      </button>
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid #9ae6b4;
+  background: #ffffffdd;
+  cursor: pointer;
+  color: #064b32;
+}
 
-      <button class="large-feature" data-go="knowledge">
-        <span class="feature-icon material-symbols-rounded">psychology</span>
-        <div class="feature-text">
-          <span class="feature-title">教養ノート</span>
-          <span class="feature-sub">歴史・科学・心理・社会</span>
-        </div>
-      </button>
+.menu-toggle .material-symbols-rounded {
+  font-size: 20px;
+}
 
-      <button class="large-feature" data-go="catchup">
-        <span class="feature-icon material-symbols-rounded">bolt</span>
-        <div class="feature-text">
-          <span class="feature-title">キャッチアップノート</span>
-          <span class="feature-sub">社会変化・AI・ニュース</span>
-        </div>
-      </button>
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  margin-left: 6px;
+}
 
-      <button class="large-feature" data-go="experiences">
-        <span class="feature-icon material-symbols-rounded">menu_book</span>
-        <div class="feature-text">
-          <span class="feature-title">人生体験記</span>
-          <span class="feature-sub">いろんな人生ストーリー</span>
-        </div>
-      </button>
+.logo-area {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 15px;
+  color: #066142;
+}
 
-      <button class="large-feature" data-go="roadmap">
-        <span class="feature-icon material-symbols-rounded">map</span>
-        <div class="feature-text">
-          <span class="feature-title">人生ロードマップ</span>
-          <span class="feature-sub">3年・5年・10年の計画</span>
-        </div>
-      </button>
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 0%, #ffffff, #68d39b);
+  box-shadow: 0 10px 20px rgba(84, 201, 140, 0.4);
+  font-size: 14px;
+}
 
-      <button class="large-feature" data-go="stock">
-        <span class="feature-icon material-symbols-rounded">grade</span>
-        <div class="feature-text">
-          <span class="feature-title">ユーザーストック</span>
-          <span class="feature-sub">刺さった言葉・記事・メモ</span>
-        </div>
-      </button>
+.header-tagline {
+  margin: 0;
+  font-size: 11px;
+  color: #0a3d2f;
+  opacity: 0.7;
+}
 
-    <div class="home-layout">
-      <!-- 左サイドバー：ホーム + 6ノート -->
-      <aside class="home-sidebar">
-        <h2 class="sidebar-title">ノート一覧</h2>
-        <button class="sidebar-nav-item" data-go="home">
-          <span class="material-symbols-rounded">home</span>
-          <span>ホーム</span>
-        </button>
-        <button class="sidebar-nav-item" data-go="generation">
-          <span class="material-symbols-rounded">diversity_3</span>
-          <span>世代別ノート</span>
-        </button>
-        <button class="sidebar-nav-item" data-go="knowledge">
-          <span class="material-symbols-rounded">psychology</span>
-          <span>教養ノート</span>
-        </button>
-        <button class="sidebar-nav-item" data-go="catchup">
-          <span class="material-symbols-rounded">bolt</span>
-          <span>キャッチアップノート</span>
-        </button>
-        <button class="sidebar-nav-item" data-go="experiences">
-          <span class="material-symbols-rounded">menu_book</span>
-          <span>人生体験記</span>
-        </button>
-        <button class="sidebar-nav-item" data-go="roadmap">
-          <span class="material-symbols-rounded">map</span>
-          <span>人生ロードマップ</span>
-        </button>
-        <button class="sidebar-nav-item" data-go="stock">
-          <span class="material-symbols-rounded">grade</span>
-          <span>ユーザーストック</span>
-        </button>
-      </aside>
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-      <!-- 中央〜右：キャッチコピー・ストーリー・機能・デイリーメッセージ -->
-      <div class="home-main">
-        <!-- キャッチコピー -->
-        <section class="home-block">
-          <h2 class="home-heading">迷ったときに戻る「二周目の地図」</h2>
-          <p class="home-text">
-            人生は一度きりだけど、考え方は何度でもアップデートできる。<br>
-            人生二周目ノートは、世代・教養・変化キャッチアップの3つの視点で、今の自分を整理するための個人用OSです。
-          </p>
-        </section>
+.header-orbit {
+  width: 110px;
+  height: 55px;
+}
 
-        <!-- ストーリー性 -->
-        <section class="home-block">
-          <h3 class="home-subheading">ストーリー</h3>
-          <p class="home-text">
-            「もし今の知識と視点を持ったまま、もう一度やり直せるとしたら？」<br>
-            そんな二周目視点を、学生・社会人・定年後までつなげていくためのノート群として設計しています。
-          </p>
-        </section>
+.header-orbit svg {
+  width: 100%;
+  height: 100%;
+}
 
-        <!-- 機能紹介：6つのノートカード -->
-        <section class="home-block">
-          <h3 class="home-subheading">機能紹介</h3>
-          <p class="home-text">6つのノートで、人生の全体像をゆっくり整理していきます。</p>
+/* =========================
+   オーバーレイメニュー
+   ========================= */
 
-          <div class="home-grid">
-            <button class="large-feature" data-go="generation">
-              <span class="feature-icon material-symbols-rounded">diversity_3</span>
-              <div class="feature-text">
-                <span class="feature-title">世代別ノート</span>
-                <span class="feature-sub">年代ごとの悩み・心理・テーマ</span>
-              </div>
-            </button>
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+  z-index: 40;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+}
 
-            <button class="large-feature" data-go="knowledge">
-              <span class="feature-icon material-symbols-rounded">psychology</span>
-              <div class="feature-text">
-                <span class="feature-title">教養ノート</span>
-                <span class="feature-sub">歴史・科学・心理・社会</span>
-              </div>
-            </button>
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
 
-            <button class="large-feature" data-go="catchup">
-              <span class="feature-icon material-symbols-rounded">bolt</span>
-              <div class="feature-text">
-                <span class="feature-title">キャッチアップノート</span>
-                <span class="feature-sub">社会変化・AI・ニュース</span>
-              </div>
-            </button>
+.menu-panel {
+  width: 260px;
+  max-width: 80%;
+  background: #f9fffb;
+  border-right: 1px solid #c1f0d2;
+  box-shadow: 8px 0 20px rgba(0, 0, 0, 0.12);
+  padding: 14px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: translateX(-100%);
+  transition: transform 0.18s ease;
+}
 
-            <button class="large-feature" data-go="experiences">
-              <span class="feature-icon material-symbols-rounded">menu_book</span>
-              <div class="feature-text">
-                <span class="feature-title">人生体験記</span>
-                <span class="feature-sub">いろんな人生ストーリー</span>
-              </div>
-            </button>
+.menu-overlay.open .menu-panel {
+  transform: translateX(0);
+}
 
-            <button class="large-feature" data-go="roadmap">
-              <span class="feature-icon material-symbols-rounded">map</span>
-              <div class="feature-text">
-                <span class="feature-title">人生ロードマップ</span>
-                <span class="feature-sub">3年・5年・10年の計画</span>
-              </div>
-            </button>
+.menu-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
 
-            <button class="large-feature" data-go="stock">
-              <span class="feature-icon material-symbols-rounded">grade</span>
-              <div class="feature-text">
-                <span class="feature-title">ユーザーストック</span>
-                <span class="feature-sub">刺さった言葉・記事・メモ</span>
-              </div>
-            </button>
-          </div>
-        </section>
+.menu-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #064b32;
+}
 
-        <!-- デイリーメッセージ（デモ） -->
-        <section class="home-block">
-          <h3 class="home-subheading">今日のメッセージ（デモ）</h3>
-          <p class="home-text">
-            「一周目の自分を責めなくていい。<br>
-            二周目の自分が、ただ静かに道を整えていけばいい。」
-          </p>
-        </section>
-      </div>
-</div>
-</section>
+.menu-close {
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #064b32;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.menu-close .material-symbols-rounded {
+  font-size: 18px;
+}
+
+.menu-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid #c1f0d2;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  color: #064b32;
+}
+
+.nav-item .material-symbols-rounded {
+  font-size: 18px;
+  color: #0f9f5b;
+}
+
+/* =========================
+   ヒーロー
+   ========================= */
+
+.hero-section {
+  background: linear-gradient(120deg, #baffd3 0%, #eafff3 50%, #ffffff 100%);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: 0 18px 20px rgba(0, 80, 40, 0.05);
+}
+
+.hero-inner {
+  width: 100%;
+  margin: 0;
+  padding: 60px 20px 40px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: #064b32;
+  margin: 0 0 12px;
+}
+
+.hero-sub1 {
+  font-size: 20px;
+  margin: 0;
+  color: #066142;
+  font-weight: 600;
+}
+
+.hero-sub2 {
+  margin-top: 6px;
+  font-size: 16px;
+  color: #0a3d2f;
+  opacity: 0.9;
+}
+
+/* =========================
+   メイン
+   ========================= */
+
+main {
+  width: 100%;
+  margin: 0;
+  padding: 24px 20px 60px;
+  box-sizing: border-box;
+}
+
+/* ページ切り替えアニメ */
+.page {
+  display: none;
+  animation: fadeIn 0.25s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   ホーム：サイドバー + メイン
+   ========================= */
+
+.home-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.home-sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-title {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #064b32;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid #c1f0d2;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  color: #064b32;
+}
+
+.sidebar-nav-item .material-symbols-rounded {
+  font-size: 18px;
+  color: #0f9f5b;
+}
+
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.home-block {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid #c3f1d4;
+  box-shadow: 0 14px 18px rgba(0, 0, 0, 0.04);
+}
+
+.home-heading {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: #064b32;
+}
+
+.home-subheading {
+  margin: 0 0 4px;
+  font-size: 16px;
+  color: #064b32;
+}
+
+.home-text {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ホーム内の機能紹介グリッド */
+
+.section-heading {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #064b32;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 840px) {
+  .home-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .home-grid .large-feature:nth-child(1),
+  .home-grid .large-feature:nth-child(4) {
+    grid-column: span 2;
+  }
+}
+
+.large-feature {
+  border-radius: 20px;
+  border: 1px solid #b1f3c7;
+  background: #ffffff;
+  box-shadow: 0 18px 20px rgba(0, 0, 0, 0.05);
+  padding: 18px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.large-feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 28px rgba(0, 0, 0, 0.07);
+  border-color: #75e1a1;
+}
+
+.feature-icon {
+  font-size: 26px;
+  color: #0d9055;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.feature-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #064b32;
+}
+
+.feature-sub {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* =========================
+   各ページヘッダー
+   ========================= */
+
+.page-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 28px 0 16px;
+  gap: 12px;
+}
+
+.page-title-block h2 {
+  margin: 0;
+  color: #064b32;
+  font-size: 22px;
+}
+
+.page-subtitle {
+  margin: 2px 0 0;
+  color: #0a3d2f;
+  opacity: 0.75;
+  font-size: 14px;
+}
+
+.back-home {
+  border-radius: 999px;
+  border: 1px solid #80d9a3;
+  background: #ffffffcc;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #064b32;
+}
+
+/* =========================
+   カード
+   ========================= */
+
+.card {
+  background: #ffffff;
+  padding: 18px 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #c3f1d4;
+  box-shadow: 0 18px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* 中央寄せではなく、画面幅いっぱいに近づける */
+.page .card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* デフォルトのテキストスタイル */
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #064b32;
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.card ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+/* Markdownブロック用 */
+
+.markdown-block {
+  line-height: 1.6;
+}
+
+.markdown-block h1,
+.markdown-block h2,
+.markdown-block h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.markdown-block p {
+  margin: 6px 0;
+}
+
+.markdown-block ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.markdown-placeholder {
+  opacity: 0.6;
+  font-size: 13px;
+}
+
+/* =========================
+   世代別ノート：タブ
+   ========================= */
+
+.generation-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 10px 0 18px;
+}
+
+.generation-tabs button {
+  flex: 1 1 calc(33% - 12px);
+  padding: 8px 6px;
+  border-radius: 999px;
+  border: 1px solid #b3efc3;
+  background: #e8fff0;
+  color: #064b32;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.generation-tabs button.gen-active {
+  background: #8ef5b8;
+  color: #003520;
+  font-weight: 700;
+}
+
+/* =========================
+   レスポンシブ微調整
+   ========================= */
+
+@media (max-width: 768px) {
+  .home-layout {
+    flex-direction: column;
+  }
+
+  .home-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar-nav-item {
+    flex: 1 1 calc(50% - 4px);
+  }
+}
+
+@media (max-width: 640px) {
+  .header-orbit {
+    display: none;
+  }
+
+  main {
+    padding: 20px 12px 48px;
+  }
+
+  .hero-inner {
+    padding: 40px 12px 28px;
+  }
+}
