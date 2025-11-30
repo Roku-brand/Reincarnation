@@ -1,18 +1,26 @@
-/* 全体 */
+/* =========================
+   共通レイアウト
+   ========================= */
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #e8f5e9;
+  background: #e8f5e9;        /* 新緑系の明るい背景 */
   color: #0d3023;
 }
 
 header {
   padding: 24px;
   text-align: center;
-  background: #0f3d2e;
+  background: #0f3d2e;        /* 濃い緑ヘッダー */
   color: #ffffff;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
 }
 
 .subtitle {
@@ -22,53 +30,74 @@ header {
 
 main {
   padding: 16px;
-  margin-bottom: 80px;
+  margin-bottom: 80px;        /* 下タブバーの高さ分 */
 }
 
 /* ページ切り替え */
-.page { display: none; }
-.page.active { display: block; }
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
 
-/* —— ホームの巨大タブ —— */
+/* =========================
+   ホーム：巨大タブ（三大ノート）
+   ========================= */
+
 .large-feature-buttons {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-top: 28px;
+  gap: 22px;
+  margin-top: 40px;
+  padding: 0 12px;
 }
 
 .large-feature {
   width: 100%;
-  padding: 26px 14px;
+  padding: 32px 20px;
   border-radius: 18px;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   text-align: center;
   border: none;
-  background: #c5e7d4;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  color: #0d3023;
+  background: #d7efe1;        /* 明るい緑カード */
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  color: #083225;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .large-feature:hover {
-  background: #b5dcc8;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  background: #c8e6d6;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 680px) {
   .large-feature-buttons {
     flex-direction: row;
   }
   .large-feature {
     flex: 1;
+    font-size: 26px;
+    padding: 36px 24px;
   }
 }
 
-/* ページ上部のタイトル＋戻るボタン */
+/* =========================
+   各ページ上部：タイトル＋ホームに戻る
+   ========================= */
+
 .page-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+}
+
+.page-header-row h2 {
+  margin: 0;
 }
 
 .back-home {
@@ -78,9 +107,13 @@ main {
   border-radius: 999px;
   padding: 6px 14px;
   font-size: 13px;
+  cursor: pointer;
 }
 
-/* カード */
+/* =========================
+   カード共通
+   ========================= */
+
 .card {
   background: #ffffff;
   padding: 16px;
@@ -89,7 +122,10 @@ main {
   box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
-/* 世代別タブ */
+/* =========================
+   世代別ノート：年代タブ
+   ========================= */
+
 .generation-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -104,6 +140,8 @@ main {
   background: #c5e7d4;
   border: none;
   color: #0d3023;
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .generation-tabs button.gen-active {
@@ -111,14 +149,19 @@ main {
   color: #ffffff;
 }
 
-/* 下部タブバー */
+/* =========================
+   下部タブバー（ホーム／世代別／教養／変化）
+   ========================= */
+
 .tabbar {
   position: fixed;
-  bottom: 0; left: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   display: flex;
   background: #0f3d2e;
   border-top: 2px solid #075e42;
+  z-index: 100;
 }
 
 .tabbar button {
@@ -128,9 +171,10 @@ main {
   border: none;
   background: none;
   color: #c7eedd;
+  cursor: pointer;
 }
 
 .tabbar button.active {
   background: #145c43;
-  color: #fff;
+  color: #ffffff;
 }
