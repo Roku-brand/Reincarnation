@@ -72,10 +72,13 @@
         <span class="material-symbols-rounded">home</span>
         <span>ホーム</span>
       </button>
-      <button class="nav-item" data-go="generation">
+
+      <!-- ★ 修正：世代別ノートは別ページへのリンクに変更 -->
+      <a class="nav-item" href="contents/generation-notes.html">
         <span class="material-symbols-rounded">diversity_3</span>
         <span>世代別ノート</span>
-      </button>
+      </a>
+
       <button class="nav-item" data-go="knowledge">
         <span class="material-symbols-rounded">psychology</span>
         <span>教養ノート</span>
@@ -121,10 +124,13 @@
           <span class="material-symbols-rounded">home</span>
           <span>ホーム</span>
         </button>
-        <button class="sidebar-nav-item" data-go="generation">
+
+        <!-- ★ 修正：世代別ノートは別ページへのリンクに変更 -->
+        <a class="sidebar-nav-item" href="contents/generation-notes.html">
           <span class="material-symbols-rounded">diversity_3</span>
           <span>世代別ノート</span>
-        </button>
+        </a>
+
         <button class="sidebar-nav-item" data-go="knowledge">
           <span class="material-symbols-rounded">psychology</span>
           <span>教養ノート</span>
@@ -173,13 +179,14 @@
           <p class="home-text">6つのノートで、人生の全体像をゆっくり整理していきます。</p>
 
           <div class="home-grid">
-            <button class="large-feature" data-go="generation">
+            <!-- ★ 修正：ここも別ページリンクに -->
+            <a class="large-feature" href="contents/generation-notes.html">
               <span class="feature-icon material-symbols-rounded">diversity_3</span>
               <div class="feature-text">
                 <span class="feature-title">世代別ノート</span>
                 <span class="feature-sub">年代ごとの悩み・心理・テーマ</span>
               </div>
-            </button>
+            </a>
 
             <button class="large-feature" data-go="knowledge">
               <span class="feature-icon material-symbols-rounded">psychology</span>
@@ -235,7 +242,7 @@
     </div>
   </section>
 
-  <!-- 世代別ノート -->
+  <!-- 世代別ノート（※今は内部ページとして残しておくが、ナビからは飛ばない） -->
   <section id="generation" class="page">
     <div class="page-header-row">
       <div class="page-title-block">
