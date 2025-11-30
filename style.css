@@ -1,5 +1,5 @@
 /* =========================
-   全体：フォント & ベースカラー
+   ベース：フォント & 背景
    ========================= */
 
 body {
@@ -13,7 +13,7 @@ body {
 }
 
 /* =========================
-   ヘッダー（小さめロゴ）
+   ヘッダー
    ========================= */
 
 header {
@@ -47,9 +47,9 @@ header {
   font-size: 14px;
 }
 
-/* ==========================================
-   ヒーローエリア
-   ========================================== */
+/* =========================
+   ヒーロー
+   ========================= */
 
 .hero-section {
   background: linear-gradient(120deg, #baffd3 0%, #eafff3 50%, #ffffff 100%);
@@ -87,7 +87,7 @@ header {
 }
 
 /* =========================
-   メインレイアウト
+   メイン
    ========================= */
 
 main {
@@ -96,7 +96,7 @@ main {
   padding: 24px 18px 60px;
 }
 
-/* アニメ付きページ切り替え */
+/* ページ切り替えアニメ */
 .page {
   display: none;
   animation: fadeIn 0.25s ease;
@@ -111,78 +111,11 @@ main {
 }
 
 /* =========================
-   コンセプト帯
-   ========================= */
-
-.concept-strip {
-  margin-top: 18px;
-  padding: 14px 18px;
-  border-radius: 18px;
-  background: linear-gradient(90deg, #e5fff1, #f3fff9);
-  box-shadow: 0 18px 20px rgba(0, 120, 70, 0.05);
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  font-size: 13px;
-}
-
-.concept-item h3 {
-  margin: 0 0 4px;
-  font-size: 14px;
-  color: #066142;
-}
-
-/* =========================
-   導線帯（おすすめの始め方）
-   ========================= */
-
-.flow-strip {
-  margin-top: 26px;
-}
-
-.flow-title {
-  margin: 0 0 10px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #064b32;
-}
-
-.flow-steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.flow-step {
-  border-radius: 16px;
-  border: 1px solid #b1f3c7;
-  background: #f8fffb;
-  box-shadow: 0 18px 20px rgba(0, 120, 70, 0.05);
-  padding: 12px 10px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.step-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: #0c6a3c;
-}
-
-.step-body {
-  display: block;
-  margin-top: 4px;
-  font-size: 13px;
-  color: #0a3d2f;
-}
-
-/* =========================
-   ホーム：巨大タブ（6つ）
+   ホーム：6ノート
    ========================= */
 
 .section-heading {
-  margin: 32px 0 14px;
+  margin: 0 0 16px;
   font-size: 18px;
   font-weight: 700;
   color: #064b32;
@@ -194,14 +127,12 @@ main {
   gap: 16px;
 }
 
-/* 黄金比っぽい非対称レイアウト：PC */
+/* PCでは少しだけ非対称だが、シンプルさ優先 */
 @media (min-width: 840px) {
   .home-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .home-grid .large-feature:nth-child(1) {
-    grid-column: span 2;
-  }
+  .home-grid .large-feature:nth-child(1),
   .home-grid .large-feature:nth-child(4) {
     grid-column: span 2;
   }
@@ -249,7 +180,7 @@ main {
 }
 
 /* =========================
-   各ページ上部：タイトル＋ホームに戻る
+   各ページヘッダー
    ========================= */
 
 .page-header-row {
@@ -284,7 +215,7 @@ main {
 }
 
 /* =========================
-   カード（白ベース × シャドウ）
+   カード
    ========================= */
 
 .card {
@@ -314,7 +245,7 @@ main {
 }
 
 /* =========================
-   世代別ノート：年代タブ
+   世代別ノート：タブ
    ========================= */
 
 .generation-tabs {
