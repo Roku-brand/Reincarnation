@@ -107,17 +107,16 @@
     </div>
 
     <div class="generation-tabs">
-      <button data-gen="小学生" class="gen-active">小学生</button>
-      <button data-gen="中学生">中学生</button>
-      <button data-gen="高校生">高校生</button>
-      <button data-gen="大学生">大学生</button>
-      <button data-gen="社会人">社会人</button>
-      <button data-gen="定年後">定年後</button>
+      <button data-gen="elementary" class="gen-active">小学生</button>
+      <button data-gen="junior">中学生</button>
+      <button data-gen="high">高校生</button>
+      <button data-gen="university">大学生</button>
+      <button data-gen="worker">社会人</button>
+      <button data-gen="senior">定年後</button>
     </div>
 
-    <div id="generation-summary" class="card">
-      <h3 id="gen-title">小学生のテーマ</h3>
-      <ul id="gen-list"></ul>
+    <div id="generation-content" class="card markdown-block">
+      <p class="markdown-placeholder">年代を選ぶと、ここにノートが表示されます。</p>
     </div>
   </section>
 
@@ -131,14 +130,8 @@
       <button class="back-home">← ホーム</button>
     </div>
 
-    <div class="card">
-      <h3>ショート教養（デモ）</h3>
-      <p>産業革命の本質は「蒸気」ではなく「識字率」。<br>AI時代の識字率は「AIリテラシー」。</p>
-    </div>
-
-    <div class="card">
-      <h3>心理学の視点（デモ）</h3>
-      <p>人は「社会的比較」で幸福度を決めがち。<br>二周目視点では「過去の自分」と比較する。</p>
+    <div id="knowledge-content" class="card markdown-block">
+      <p class="markdown-placeholder">教養ノートの内容がここに表示されます。</p>
     </div>
   </section>
 
@@ -152,21 +145,8 @@
       <button class="back-home">← ホーム</button>
     </div>
 
-    <div class="card">
-      <h3>今日のニュース（デモ）</h3>
-      <p>
-        ・AI：企業が業務の70%自動化実験を開始。<br>
-        ・経済：金利変動でAI銘柄に資金集中。<br>
-        ・社会：リスキリング支援制度を拡充へ。
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>今日の心理Tip（デモ）</h3>
-      <p>
-        不安時は「最悪の未来」を想像しやすい。<br>
-        「一番マシ」「現実的」未来も書いて中和する。
-      </p>
+    <div id="catchup-content" class="card markdown-block">
+      <p class="markdown-placeholder">キャッチアップノートの内容がここに表示されます。</p>
     </div>
   </section>
 
@@ -180,14 +160,8 @@
       <button class="back-home">← ホーム</button>
     </div>
 
-    <div class="card">
-      <h3>体験記ライブラリ（デモ）</h3>
-      <p>挫折・転職・病気・留学などを「年代 × テーマ」で整理。</p>
-    </div>
-
-    <div class="card">
-      <h3>今日のピックアップ（デモ）</h3>
-      <p>20代で退職 → 30代で再スタートした人の話。</p>
+    <div id="experiences-content" class="card markdown-block">
+      <p class="markdown-placeholder">人生体験記の内容がここに表示されます。</p>
     </div>
   </section>
 
@@ -201,14 +175,8 @@
       <button class="back-home">← ホーム</button>
     </div>
 
-    <div class="card">
-      <h3>マイルストーン整理（デモ）</h3>
-      <p>3年・5年・10年で仕事・お金・健康を設計。</p>
-    </div>
-
-    <div class="card">
-      <h3>今日の問い（デモ）</h3>
-      <p>「二周目の自分なら今の自分に何と言う？」</p>
+    <div id="roadmap-content" class="card markdown-block">
+      <p class="markdown-placeholder">ロードマップの内容がここに表示されます。</p>
     </div>
   </section>
 
@@ -222,24 +190,16 @@
       <button class="back-home">← ホーム</button>
     </div>
 
-    <div class="card">
-      <h3>自分だけのストック（デモ）</h3>
-      <p>刺さった言葉・記事などをタグ＆メモで保存。</p>
-    </div>
-
-    <div class="card">
-      <h3>最近のストック例（デモ）</h3>
-      <ul>
-        <li>「焦らなくていい。でも止まったら苦しい。」</li>
-        <li>AI×キャリア記事</li>
-        <li>未来の自分宛てメモ</li>
-      </ul>
+    <div id="stock-content" class="card markdown-block">
+      <p class="markdown-placeholder">ユーザーストックの内容がここに表示されます。</p>
     </div>
   </section>
 
 </main>
 
-<!-- 🔥 ここだけ変更：JS を外部ファイル化 -->
+<!-- Markdownパーサ（marked.js） -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- アプリ本体JS -->
 <script src="app.js"></script>
 
 </body>
