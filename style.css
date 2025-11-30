@@ -71,31 +71,38 @@ main {
 .hero {
   background: linear-gradient(135deg, #377e62, #0f3d2e);
   color: #fff;
-  padding: 32px;
+  padding: 24px 20px;
   border-radius: 14px;
-  text-align: center;
-  margin-bottom: 20px;
+  text-align: left;
+  margin-bottom: 16px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 }
 
 .hero h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  margin: 0 0 8px;
 }
 
-/* ホームの大ボタン */
+.hero p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* ホームの大ボタン（横並び） */
 .home-buttons {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 16px;
 }
 
 .home-feature {
-  width: 100%;
+  flex: 1 1 calc(33.333% - 8px);
+  min-width: 0;
   border: none;
   text-align: left;
-  padding: 16px 18px;
+  padding: 14px 12px;
   border-radius: 16px;
   background: #c5e7d4;
   color: #0d3023;
@@ -106,13 +113,42 @@ main {
 }
 
 .home-feature-title {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
 }
 
 .home-feature-desc {
-  font-size: 13px;
+  font-size: 11px;
   opacity: 0.9;
+}
+
+/* 狭い画面では縦並びにフォールバック */
+@media (max-width: 480px) {
+  .home-feature {
+    flex: 1 1 100%;
+  }
+}
+
+/* 各ページ上部の見出し＋ホームボタン */
+.page-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.page-header-row h2 {
+  margin: 0;
+}
+
+.back-home {
+  border: 1px solid #0f3d2e;
+  background: #ffffff;
+  color: #0f3d2e;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
 }
 
 /* 世代別タブ */
