@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>人生二周目ノート</title>
 
-  <!-- ルート直下の style.css を読む -->
   <link rel="stylesheet" href="style.css">
   <meta name="theme-color" content="#0f3d2e">
-
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 
@@ -28,24 +26,82 @@
 
 <main>
 
-  <!-- ホーム -->
+  <!-- ホーム：3つの大ボタン＋デモ内容 -->
   <section id="home" class="page active">
     <div class="hero">
       <h2>人生二周目ノート</h2>
       <p>人生をかしこく、後悔しないために。</p>
     </div>
 
-    <div class="card">
-      <h3>3つのノートから始めよう</h3>
-      <ul class="home-list">
-        <li>🌱 世代別ノート：<br>自分の年代の悩み・テーマ・心理学を整理</li>
-        <li>📘 教養ノート：<br>歴史・科学・心理学・社会を“二周目視点”で理解</li>
-        <li>⚡ キャッチアップノート：<br>最新の社会変化・AI・ニュースを高速で把握</li>
+    <h3 class="section-title">どのノートから始める？</h3>
+
+    <div class="home-buttons">
+      <button class="home-feature active" data-target="home-gen">
+        <span class="home-feature-title">世代別ノート</span>
+        <span class="home-feature-desc">
+          自分の年代の悩み・テーマ・心理学を整理
+        </span>
+      </button>
+
+      <button class="home-feature" data-target="home-knowledge">
+        <span class="home-feature-title">教養ノート</span>
+        <span class="home-feature-desc">
+          歴史・科学・心理学・社会を“二周目視点”で理解
+        </span>
+      </button>
+
+      <button class="home-feature" data-target="home-catchup">
+        <span class="home-feature-title">キャッチアップノート</span>
+        <span class="home-feature-desc">
+          最新の社会変化・AI・ニュースを高速で把握
+        </span>
+      </button>
+    </div>
+
+    <!-- デモ内容（押したボタンに応じて切り替え） -->
+    <div id="home-gen" class="card home-demo">
+      <h3>世代別ノート（デモ）</h3>
+      <p>
+        あなたの年代（高校生・大学生・社会人など）を選ぶと、<br>
+        よくある悩み・心理学のキーワード・「二周目目線の捉え直し」が表示されます。
+      </p>
+      <ul>
+        <li>例：大学生 → 就活不安 / 社会的比較 / アイデンティティの揺れ</li>
+        <li>例：社会人 → バーンアウト / キャリアの曲がり角 / 同期との比較</li>
       </ul>
+      <p class="demo-note">※現在はサンプル表示です。本実装では年代ごとの詳細データを紐づけ予定。</p>
+    </div>
+
+    <div id="home-knowledge" class="card home-demo hidden">
+      <h3>教養ノート（デモ）</h3>
+      <p>
+        歴史・科学・心理学・社会の出来事を、<br>
+        「今の自分の人生にどう関係するか？」という視点でまとめていくノートです。
+      </p>
+      <ul>
+        <li>産業革命 → 「識字率」と現代の「AIリテラシー」を対応させて理解</li>
+        <li>行動経済学 → 自分の買い物・勉強・人間関係のクセを言語化</li>
+        <li>社会構造の変化 → AI時代のキャリア設計に落とし込む</li>
+      </ul>
+      <p class="demo-note">※今は固定テキストですが、将来はトピックごとにカード化予定。</p>
+    </div>
+
+    <div id="home-catchup" class="card home-demo hidden">
+      <h3>キャッチアップノート（デモ）</h3>
+      <p>
+        1日5分で、世界と日本・AI・社会変化の「今だけ大事なところ」だけ拾うページ。<br>
+        気になったトピックは教養ノートや世代別ノートに送って深掘りできます。
+      </p>
+      <ul>
+        <li>今日のニュース3本（AI要約）</li>
+        <li>今日のキーワード：例）「生成AIエージェント」「リスキリング」</li>
+        <li>自分メモ：「これは将来の自分に関係しそう / しなさそう」</li>
+      </ul>
+      <p class="demo-note">※今はサンプル文章です。API連携で自動更新を予定。</p>
     </div>
   </section>
 
-  <!-- 世代別ノート -->
+  <!-- 世代別ノート（詳細ページ） -->
   <section id="generation" class="page">
     <h2>世代別ノート</h2>
 
@@ -64,12 +120,12 @@
     </div>
   </section>
 
-  <!-- 教養ノート -->
+  <!-- 教養ノート（詳細ページ） -->
   <section id="knowledge" class="page">
     <h2>教養ノート</h2>
 
     <div class="card">
-      <h3>ショート教養（固定）</h3>
+      <h3>ショート教養（デモ）</h3>
       <p>
         産業革命の本質は「蒸気」ではなく「識字率」。<br>
         AI時代の識字率は「AIリテラシー」。
@@ -77,36 +133,38 @@
     </div>
 
     <div class="card">
-      <h3>心理学（固定）</h3>
+      <h3>心理学の視点（デモ）</h3>
       <p>
         人は「社会的比較」によって幸福度を判断しがち。<br>
-        二周目視点では「過去の自分」と比較する。
+        二周目視点では「他人」ではなく「過去の自分」と比較する。
       </p>
     </div>
   </section>
 
-  <!-- キャッチアップノート -->
+  <!-- キャッチアップノート（詳細ページ） -->
   <section id="catchup" class="page">
     <h2>キャッチアップノート</h2>
 
     <div class="card">
-      <h3>今日のニュース（仮）</h3>
-      <p id="news-area">（ニュースAPI接続予定）</p>
+      <h3>今日のニュース（デモ）</h3>
+      <p id="news-area">
+        ・AI関連：企業が社内業務の70%を自動化する実証実験を開始。<br>
+        ・経済：世界的な金利動向により、投資マネーがAI銘柄に集中。<br>
+        ・社会：リスキリング支援制度の拡充を検討。
+      </p>
     </div>
 
     <div class="card">
-      <h3>今日の心理Tip</h3>
+      <h3>今日の心理Tip（デモ）</h3>
       <p>
-        人間は「ネガティビティ」に強く引っ張られる。<br>
-        意図的に“今日の良かったこと”を3つ書いて中和する。
+        不安なときほど「最悪の未来」を想像してしまうのはネガティビティ・バイアス。<br>
+        逆に「一番マシな未来」「現実的に起こりそうな未来」も書き出して、バランスを取ってみる。
       </p>
     </div>
   </section>
 
 </main>
 
-<!-- ルート直下の app.js を読む -->
 <script src="app.js"></script>
-
 </body>
 </html>
