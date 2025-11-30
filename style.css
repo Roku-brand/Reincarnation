@@ -30,7 +30,7 @@ header h1 {
 
 main {
   padding: 16px;
-  margin-bottom: 80px;        /* 下タブバーの高さ分 */
+  margin-bottom: 24px;        /* ちょい余白 */
 }
 
 /* ページ切り替え */
@@ -146,35 +146,5 @@ main {
 
 .generation-tabs button.gen-active {
   background: #0d3023;
-  color: #ffffff;
-}
-
-/* =========================
-   下部タブバー（ホーム／世代別／教養／変化）
-   ========================= */
-
-.tabbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  background: #0f3d2e;
-  border-top: 2px solid #075e42;
-  z-index: 100;
-}
-
-.tabbar button {
-  flex: 1;
-  padding: 12px 4px;
-  font-size: 12px;
-  border: none;
-  background: none;
-  color: #c7eedd;
-  cursor: pointer;
-}
-
-.tabbar button.active {
-  background: #145c43;
   color: #ffffff;
 }
