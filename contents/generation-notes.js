@@ -208,7 +208,7 @@ const stages = [
         "バイト以外の“タダ働きでもやりたいこと”を一度やってみる"
       ],
       avoid: [
-        "とりあえずの忙しさでスケジュールを埋める",
+        "とりあえずの忙しさでスケジュールを詰める",
         "就活サイトのテンプレだけで業界を選ぶ",
         "モラトリアム＝何も決めなくていい期間と勘違いする"
       ],
@@ -702,9 +702,45 @@ function setActiveStage(id) {
 }
 
 // =========================
+// オーバーレイメニュー初期化
+// =========================
+function initOverlayMenu() {
+  const overlay = document.getElementById("gn-menu-overlay");
+  const toggleBtn = document.getElementById("gn-menu-toggle");
+  const closeBtn = document.getElementById("gn-menu-close");
+
+  if (!overlay || !toggleBtn || !closeBtn) return;
+
+  const openMenu = () => {
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+    toggleBtn.setAttribute("aria-expanded", "true");
+  };
+
+  const closeMenu = () => {
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    toggleBtn.setAttribute("aria-expanded", "false");
+  };
+
+  toggleBtn.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+
+  // オーバーレイ背景クリックで閉じる
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      closeMenu();
+    }
+  });
+}
+
+// =========================
 // 初期化
 // =========================
 document.addEventListener("DOMContentLoaded", () => {
-  // 初期は社会人前期を表示（好みで変えてOK）
+  // 初期は社会人前期を表示
   setActiveStage("work_early");
+
+  // オーバーレイメニュー初期化
+  initOverlayMenu();
 });
