@@ -1,77 +1,177 @@
 /* =========================
-   共通レイアウト
+   全体の背景（グラデ・光沢）
    ========================= */
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #e8f5e9;        /* 新緑系の明るい背景 */
-  color: #0d3023;
+  color: #ecfdf3;
+  background: #02110f;
+  overflow-x: hidden;
 }
+
+.app-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 0% 0%, #36d1a7 0, transparent 50%),
+              radial-gradient(circle at 100% 100%, #0b3b32 0, #02110f 60%);
+  z-index: -2;
+}
+
+.app-bg-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.app-root {
+  min-height: 100vh;
+}
+
+/* =========================
+   ヘッダー
+   ========================= */
 
 header {
-  padding: 24px;
-  text-align: center;
-  background: #0f3d2e;        /* 濃い緑ヘッダー */
-  color: #ffffff;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  padding: 18px 20px 12px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 28px;
+.header-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.logo-area {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 18px;
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 0%, #b9ffdd, #0b3b32);
+  box-shadow: 0 0 10px rgba(92, 255, 190, 0.5);
+  font-size: 14px;
+}
+
+.logo-text {
+  font-size: 18px;
 }
 
 .subtitle {
-  margin-top: 6px;
+  margin: 0 0 4px;
+  font-size: 13px;
   opacity: 0.85;
 }
 
+/* =========================
+   メインレイアウト
+   ========================= */
+
 main {
-  padding: 16px;
-  margin-bottom: 24px;        /* ちょい余白 */
+  max-width: 1040px;
+  margin: 0 auto 40px;
+  padding: 8px 16px 40px;
 }
 
 /* ページ切り替え */
 .page {
   display: none;
+  animation: fadeIn 0.25s ease;
 }
 .page.active {
   display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* =========================
    ホーム：巨大タブ（6つ）
    ========================= */
 
+.home-hero {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.hero-tagline {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
 .large-feature-buttons {
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  margin-top: 40px;
-  padding: 0 12px;
+  gap: 18px;
+  margin-top: 24px;
 }
 
 .large-feature {
+  position: relative;
   width: 100%;
-  padding: 32px 20px;
+  padding: 20px 18px;
   border-radius: 18px;
-  font-size: 20px;
-  font-weight: 700;
-  text-align: center;
-  border: none;
-  background: #d7efe1;        /* 明るい緑カード */
-  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-  color: #083225;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: linear-gradient(135deg, rgba(7, 66, 46, 0.92), rgba(39, 174, 96, 0.85));
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  color: #ecfdf3;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.large-feature::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -40%;
+  width: 40%;
+  height: 220%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.55), transparent 60%);
+  transform: translateX(-120%) rotate(20deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.large-feature:hover::before {
+  opacity: 1;
+  transform: translateX(260%) rotate(20deg);
+  transition: transform 0.7s ease, opacity 0.4s ease;
 }
 
 .large-feature:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-  background: #c8e6d6;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 46px rgba(0,0,0,0.6);
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.feature-sub {
+  font-size: 13px;
+  opacity: 0.9;
 }
 
 @media (min-width: 720px) {
@@ -80,9 +180,8 @@ main {
     flex-wrap: wrap;
   }
   .large-feature {
-    flex: 1 1 calc(33% - 16px); /* 3列×2行イメージ */
-    font-size: 22px;
-    padding: 30px 18px;
+    flex: 1 1 calc(33% - 16px); /* 3列 × 2行を想定 */
+    min-width: 260px;
   }
 }
 
@@ -94,33 +193,63 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin: 24px 0 16px;
+  gap: 12px;
 }
 
-.page-header-row h2 {
+.page-title-block h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+
+.page-subtitle {
   margin: 0;
+  font-size: 13px;
+  opacity: 0.85;
 }
 
 .back-home {
-  border: 1px solid #0f3d2e;
-  background: #ffffff;
-  color: #0f3d2e;
   border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.25);
+  color: #ecfdf3;
   padding: 6px 14px;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
+  backdrop-filter: blur(6px);
 }
 
 /* =========================
-   カード共通
+   カード（ガラス風）
    ========================= */
 
 .card {
-  background: #ffffff;
-  padding: 16px;
-  border-radius: 14px;
-  margin-bottom: 16px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+
+.glass {
+  background: radial-gradient(circle at 0 0, rgba(255,255,255,0.16), rgba(0,0,0,0.45));
+  border: 1px solid rgba(255,255,255,0.28);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+  backdrop-filter: blur(14px);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.card ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
 }
 
 /* =========================
@@ -130,22 +259,25 @@ main {
 .generation-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin: 16px 0;
+  gap: 10px;
+  margin: 8px 0 18px;
 }
 
 .generation-tabs button {
   flex: 1 1 calc(33% - 12px);
-  padding: 10px 6px;
+  padding: 8px 6px;
   border-radius: 999px;
-  background: #c5e7d4;
-  border: none;
-  color: #0d3023;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.35);
+  color: #ecfdf3;
   font-size: 13px;
   cursor: pointer;
+  backdrop-filter: blur(6px);
 }
 
 .generation-tabs button.gen-active {
-  background: #0d3023;
-  color: #ffffff;
+  background: linear-gradient(135deg, #1abc9c, #2ecc71);
+  border-color: rgba(0,0,0,0.5);
+  color: #02110f;
+  font-weight: 600;
 }
