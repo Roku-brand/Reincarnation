@@ -3,8 +3,8 @@
   "short_name": "二周目ノート",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#0f3d2e",
+  "theme_color": "#0f3d2e",
   "icons": [
     {
       "src": "assets/icons/icon-192.png",
