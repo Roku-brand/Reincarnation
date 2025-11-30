@@ -26,7 +26,7 @@
 
 <main>
 
-  <!-- ホーム：3つの大ボタン（ページ切り替え用） -->
+  <!-- ホーム -->
   <section id="home" class="page active">
     <div class="hero">
       <h2>人生二周目ノート</h2>
@@ -59,7 +59,7 @@
     </div>
   </section>
 
-  <!-- 世代別ノート（詳細ページ） -->
+  <!-- 世代別ノート -->
   <section id="generation" class="page">
     <h2>世代別ノート</h2>
 
@@ -78,7 +78,7 @@
     </div>
   </section>
 
-  <!-- 教養ノート（詳細ページ・デモ内容） -->
+  <!-- 教養ノート -->
   <section id="knowledge" class="page">
     <h2>教養ノート</h2>
 
@@ -99,11 +99,125 @@
     </div>
   </section>
 
-  <!-- キャッチアップノート（詳細ページ・デモ内容） -->
+  <!-- キャッチアップノート -->
   <section id="catchup" class="page">
     <h2>キャッチアップノート</h2>
 
     <div class="card">
       <h3>今日のニュース（デモ）</h3>
-      <p id="news-area">
-        ・AI関連：企業が社
+      <p>
+        ・AI関連：企業が社内業務の70%を自動化する実証実験を開始。<br>
+        ・経済：世界的な金利動向により、投資マネーがAI銘柄に集中。<br>
+        ・社会：リスキリング支援制度の拡充を検討。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>今日の心理Tip（デモ）</h3>
+      <p>
+        不安なときほど「最悪の未来」を想像してしまうのはネガティビティ・バイアス。<br>
+        逆に「一番マシな未来」「現実的に起こりそうな未来」も書き出して、バランスを取ってみる。
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- JS をここに直接書く -->
+<script>
+  // ページ切り替え用
+  const pages = document.querySelectorAll(".page");
+  const tabButtons = document.querySelectorAll(".tabbar button");
+
+  function switchPage(pageId) {
+    // ページ表示
+    pages.forEach(p => p.classList.remove("active"));
+    const target = document.getElementById(pageId);
+    if (target) target.classList.add("active");
+
+    // 下タブの見た目
+    tabButtons.forEach(b => {
+      b.classList.toggle("active", b.dataset.page === pageId);
+    });
+  }
+
+  // 下タブのクリック
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      switchPage(btn.dataset.page);
+    });
+  });
+
+  // ホームの大ボタン → 各ページへ
+  const homeButtons = document.querySelectorAll(".home-feature");
+  homeButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetPage = btn.dataset.go;
+      if (targetPage) switchPage(targetPage);
+    });
+  });
+
+  // 世代別ノートのデモデータ
+  const generationData = {
+    "小学生": [
+      "友だち関係、仲間外れへの不安",
+      "怒られる恐怖と承認欲求",
+      "勉強より“遊び”の優先順位問題"
+    ],
+    "中学生": [
+      "自分のキャラづくり問題",
+      "SNSと比較で自信が揺らぐ",
+      "進路への漠然とした不安"
+    ],
+    "高校生": [
+      "進路選択のストレス",
+      "模試の結果で自己評価が上下",
+      "親の期待とのズレ"
+    ],
+    "大学生": [
+      "就活・キャリア不安",
+      "周りがうまくいって見える問題",
+      "自分が何者かわからない感覚"
+    ],
+    "社会人": [
+      "仕事量と責任の増加による疲労",
+      "キャリアの方向に迷う",
+      "同期との比較"
+    ],
+    "定年後": [
+      "役割の喪失とアイデンティティ問題",
+      "健康と老後資金への不安",
+      "地域・家族の関係変化"
+    ]
+  };
+
+  const genTitle = document.getElementById("gen-title");
+  const genList  = document.getElementById("gen-list");
+  const genButtons = document.querySelectorAll(".generation-tabs button");
+
+  function renderGeneration(gen) {
+    if (!genTitle || !genList) return;
+    genTitle.textContent = gen + "のテーマ";
+    genList.innerHTML = "";
+    (generationData[gen] || []).forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      genList.appendChild(li);
+    });
+  }
+
+  // 初期表示
+  renderGeneration("小学生");
+
+  genButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const gen = btn.dataset.gen;
+      genButtons.forEach(b => b.classList.remove("gen-active"));
+      btn.classList.add("gen-active");
+      renderGeneration(gen);
+    });
+  });
+</script>
+
+</body>
+</html>
