@@ -6,232 +6,227 @@
   <title>人生二周目ノート</title>
 
   <link rel="stylesheet" href="style.css">
-  <meta name="theme-color" content="#0b3b32">
+  <meta name="theme-color" content="#b8f5c8">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 
 <body>
 
-<div class="app-bg">
-  <div class="app-bg-glow"></div>
-</div>
-
-<div class="app-root">
-  <header>
-    <div class="header-inner">
-      <div class="logo-area">
-        <span class="logo-mark">∞</span>
-        <span class="logo-text">人生二周目ノート</span>
-      </div>
-      <p class="subtitle">人生をかしこく、後悔しないために</p>
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <span class="logo-mark">∞</span>
+      <span class="logo-text">人生二周目ノート</span>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
+<section class="hero-section">
+  <h1 class="hero-title">人生二周目ノート</h1>
+  <p class="hero-sub1">人生をかしこく、後悔しないために</p>
+  <p class="hero-sub2">二周目視点で、人生をアップデートする。</p>
+</section>
 
-    <!-- ホーム：6つの巨大タブ -->
-    <section id="home" class="page active">
-      <div class="home-hero">
-        <p class="hero-tagline">二周目視点で、人生をアップデートする。</p>
+<main>
+
+  <!-- ホーム：6つの巨大タブ -->
+  <section id="home" class="page active">
+    <div class="large-feature-buttons">
+      <button class="large-feature" data-go="generation">
+        <span class="feature-title">🌱 世代別ノート</span>
+        <span class="feature-sub">年代ごとの悩み・心理・テーマを整理</span>
+      </button>
+
+      <button class="large-feature" data-go="knowledge">
+        <span class="feature-title">📘 教養ノート</span>
+        <span class="feature-sub">歴史・科学・心理・社会を二周目視点で理解</span>
+      </button>
+
+      <button class="large-feature" data-go="catchup">
+        <span class="feature-title">⚡ キャッチアップノート</span>
+        <span class="feature-sub">社会変化・AI・ニュースを素早く把握</span>
+      </button>
+
+      <button class="large-feature" data-go="experiences">
+        <span class="feature-title">📚 人生体験記</span>
+        <span class="feature-sub">いろんな人生のストーリーを要約で読む</span>
+      </button>
+
+      <button class="large-feature" data-go="roadmap">
+        <span class="feature-title">🗺️ 人生ロードマップ</span>
+        <span class="feature-sub">3年・5年・10年のマイルストーンを描く</span>
+      </button>
+
+      <button class="large-feature" data-go="stock">
+        <span class="feature-title">⭐ ユーザーストック</span>
+        <span class="feature-sub">自分に刺さった言葉・記事・メモを貯める</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 世代別ノート -->
+  <section id="generation" class="page">
+    <div class="page-header-row">
+      <div class="page-title-block">
+        <h2>世代別ノート</h2>
+        <p class="page-subtitle">年代ごとの“詰まりポイント”を見える化する。</p>
       </div>
+      <button class="back-home">← ホームに戻る</button>
+    </div>
 
-      <div class="large-feature-buttons">
-        <button class="large-feature" data-go="generation">
-          <span class="feature-title">🌱 世代別ノート</span>
-          <span class="feature-sub">年代ごとの悩み・心理・テーマを整理</span>
-        </button>
+    <div class="generation-tabs">
+      <button data-gen="小学生" class="gen-active">小学生</button>
+      <button data-gen="中学生">中学生</button>
+      <button data-gen="高校生">高校生</button>
+      <button data-gen="大学生">大学生</button>
+      <button data-gen="社会人">社会人</button>
+      <button data-gen="定年後">定年後</button>
+    </div>
 
-        <button class="large-feature" data-go="knowledge">
-          <span class="feature-title">📘 教養ノート</span>
-          <span class="feature-sub">歴史・科学・心理・社会を二周目視点で理解</span>
-        </button>
+    <div id="generation-summary" class="card">
+      <h3 id="gen-title">小学生のテーマ</h3>
+      <ul id="gen-list"></ul>
+    </div>
+  </section>
 
-        <button class="large-feature" data-go="catchup">
-          <span class="feature-title">⚡ キャッチアップノート</span>
-          <span class="feature-sub">社会変化・AI・ニュースを素早く把握</span>
-        </button>
-
-        <button class="large-feature" data-go="experiences">
-          <span class="feature-title">📚 人生体験記</span>
-          <span class="feature-sub">いろんな人生のストーリーを要約で読む</span>
-        </button>
-
-        <button class="large-feature" data-go="roadmap">
-          <span class="feature-title">🗺️ 人生ロードマップ</span>
-          <span class="feature-sub">3年・5年・10年のマイルストーンを描く</span>
-        </button>
-
-        <button class="large-feature" data-go="stock">
-          <span class="feature-title">⭐ ユーザーストック</span>
-          <span class="feature-sub">自分に刺さった言葉・記事・メモを貯める</span>
-        </button>
+  <!-- 教養ノート -->
+  <section id="knowledge" class="page">
+    <div class="page-header-row">
+      <div class="page-title-block">
+        <h2>教養ノート</h2>
+        <p class="page-subtitle">世界のルールを“二周目の目”で読み解く。</p>
       </div>
-    </section>
+      <button class="back-home">← ホームに戻る</button>
+    </div>
 
-    <!-- 世代別ノート -->
-    <section id="generation" class="page">
-      <div class="page-header-row">
-        <div class="page-title-block">
-          <h2>世代別ノート</h2>
-          <p class="page-subtitle">年代ごとの“詰まりポイント”を見える化する。</p>
-        </div>
-        <button class="back-home">← ホームに戻る</button>
+    <div class="card">
+      <h3>ショート教養（デモ）</h3>
+      <p>
+        産業革命の本質は「蒸気」ではなく「識字率」。<br>
+        AI時代の識字率は「AIリテラシー」。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>心理学の視点（デモ）</h3>
+      <p>
+        人は「社会的比較」によって幸福度を判断しがち。<br>
+        二周目視点では「他人」ではなく「過去の自分」と比較する。
+      </p>
+    </div>
+  </section>
+
+  <!-- キャッチアップノート -->
+  <section id="catchup" class="page">
+    <div class="page-header-row">
+      <div class="page-title-block">
+        <h2>キャッチアップノート</h2>
+        <p class="page-subtitle">“今何が起きているか”だけを素早く押さえる。</p>
       </div>
+      <button class="back-home">← ホームに戻る</button>
+    </div>
 
-      <div class="generation-tabs">
-        <button data-gen="小学生" class="gen-active">小学生</button>
-        <button data-gen="中学生">中学生</button>
-        <button data-gen="高校生">高校生</button>
-        <button data-gen="大学生">大学生</button>
-        <button data-gen="社会人">社会人</button>
-        <button data-gen="定年後">定年後</button>
+    <div class="card">
+      <h3>今日のニュース（デモ）</h3>
+      <p>
+        ・AI関連：企業が社内業務の70%を自動化する実証実験を開始。<br>
+        ・経済：世界的な金利動向により、投資マネーがAI銘柄に集中。<br>
+        ・社会：リスキリング支援制度の拡充を検討。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>今日の心理Tip（デモ）</h3>
+      <p>
+        不安なときほど「最悪の未来」を想像してしまうのはネガティビティ・バイアス。<br>
+        「一番マシな未来」「現実的な未来」も書き出して中和する。
+      </p>
+    </div>
+  </section>
+
+  <!-- 人生体験記 -->
+  <section id="experiences" class="page">
+    <div class="page-header-row">
+      <div class="page-title-block">
+        <h2>人生体験記</h2>
+        <p class="page-subtitle">他人の一周目から、自分の二周目へのヒントをもらう。</p>
       </div>
+      <button class="back-home">← ホームに戻る</button>
+    </div>
 
-      <div id="generation-summary" class="card glass">
-        <h3 id="gen-title">小学生のテーマ</h3>
-        <ul id="gen-list"></ul>
+    <div class="card">
+      <h3>体験記ライブラリ（デモ）</h3>
+      <p>
+        人生の岐路・挫折・転職・病気・留学など、<br>
+        さまざまな人のストーリーを「年代 × テーマ」で整理して読むためのスペース。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>今日のピックアップ（デモ）</h3>
+      <p>
+        「20代で一度会社を辞めて、30代でやり直した人」の体験記。<br>
+        不安・後悔・再スタートのプロセスにフォーカス。
+      </p>
+    </div>
+  </section>
+
+  <!-- 人生ロードマップ -->
+  <section id="roadmap" class="page">
+    <div class="page-header-row">
+      <div class="page-title-block">
+        <h2>人生ロードマップ</h2>
+        <p class="page-subtitle">二周目の自分だったら、どんな道筋を描くか。</p>
       </div>
-    </section>
+      <button class="back-home">← ホームに戻る</button>
+    </div>
 
-    <!-- 教養ノート -->
-    <section id="knowledge" class="page">
-      <div class="page-header-row">
-        <div class="page-title-block">
-          <h2>教養ノート</h2>
-          <p class="page-subtitle">世界のルールを“二周目の目”で読み解く。</p>
-        </div>
-        <button class="back-home">← ホームに戻る</button>
+    <div class="card">
+      <h3>マイルストーン整理（デモ）</h3>
+      <p>
+        「3年・5年・10年」スパンで、<br>
+        仕事・お金・健康・人間関係・学びをざっくり設計するためのページ。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>今日の問い（デモ）</h3>
+      <p>
+        「もし人生が二周目だったら、今の自分にどんな助言をする？」<br>
+        その答えをヒントに、次の一歩を言語化する。
+      </p>
+    </div>
+  </section>
+
+  <!-- ユーザーストック -->
+  <section id="stock" class="page">
+    <div class="page-header-row">
+      <div class="page-title-block">
+        <h2>ユーザーストック</h2>
+        <p class="page-subtitle">自分の中に“残しておきたいもの”だけを集める。</p>
       </div>
+      <button class="back-home">← ホームに戻る</button>
+    </div>
 
-      <div class="card glass">
-        <h3>ショート教養（デモ）</h3>
-        <p>
-          産業革命の本質は「蒸気」ではなく「識字率」。<br>
-          AI時代の識字率は「AIリテラシー」。
-        </p>
-      </div>
+    <div class="card">
+      <h3>自分だけのストック（デモ）</h3>
+      <p>
+        心に刺さった言葉・記事・動画・ツイートなどを、<br>
+        「タグ」と「ひと言メモ」と一緒にストックしていくエリア。
+      </p>
+    </div>
 
-      <div class="card glass">
-        <h3>心理学の視点（デモ）</h3>
-        <p>
-          人は「社会的比較」によって幸福度を判断しがち。<br>
-          二周目視点では「他人」ではなく「過去の自分」と比較する。
-        </p>
-      </div>
-    </section>
+    <div class="card">
+      <h3>最近のストック例（デモ）</h3>
+      <ul>
+        <li>「焦らなくていい。でも止まるとしんどくなる。」</li>
+        <li>AI×キャリアのインタビュー記事</li>
+        <li>将来の自分宛てに書いたメモ</li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- キャッチアップノート -->
-    <section id="catchup" class="page">
-      <div class="page-header-row">
-        <div class="page-title-block">
-          <h2>キャッチアップノート</h2>
-          <p class="page-subtitle">“今何が起きているか”だけを素早く押さえる。</p>
-        </div>
-        <button class="back-home">← ホームに戻る</button>
-      </div>
-
-      <div class="card glass">
-        <h3>今日のニュース（デモ）</h3>
-        <p>
-          ・AI関連：企業が社内業務の70%を自動化する実証実験を開始。<br>
-          ・経済：世界的な金利動向により、投資マネーがAI銘柄に集中。<br>
-          ・社会：リスキリング支援制度の拡充を検討。
-        </p>
-      </div>
-
-      <div class="card glass">
-        <h3>今日の心理Tip（デモ）</h3>
-        <p>
-          不安なときほど「最悪の未来」を想像してしまうのはネガティビティ・バイアス。<br>
-          「一番マシな未来」「現実的な未来」も書き出して中和する。
-        </p>
-      </div>
-    </section>
-
-    <!-- 人生体験記 -->
-    <section id="experiences" class="page">
-      <div class="page-header-row">
-        <div class="page-title-block">
-          <h2>人生体験記</h2>
-          <p class="page-subtitle">他人の一周目から、自分の二周目へのヒントをもらう。</p>
-        </div>
-        <button class="back-home">← ホームに戻る</button>
-      </div>
-
-      <div class="card glass">
-        <h3>体験記ライブラリ（デモ）</h3>
-        <p>
-          人生の岐路・挫折・転職・病気・留学など、<br>
-          さまざまな人のストーリーを「年代 × テーマ」で整理して読むためのスペース。
-        </p>
-      </div>
-
-      <div class="card glass">
-        <h3>今日のピックアップ（デモ）</h3>
-        <p>
-          「20代で一度会社を辞めて、30代でやり直した人」の体験記。<br>
-          不安・後悔・再スタートのプロセスにフォーカス。
-        </p>
-      </div>
-    </section>
-
-    <!-- 人生ロードマップ -->
-    <section id="roadmap" class="page">
-      <div class="page-header-row">
-        <div class="page-title-block">
-          <h2>人生ロードマップ</h2>
-          <p class="page-subtitle">二周目の自分だったら、どんな道筋を描くか。</p>
-        </div>
-        <button class="back-home">← ホームに戻る</button>
-      </div>
-
-      <div class="card glass">
-        <h3>マイルストーン整理（デモ）</h3>
-        <p>
-          「3年・5年・10年」スパンで、<br>
-          仕事・お金・健康・人間関係・学びをざっくり設計するためのページ。
-        </p>
-      </div>
-
-      <div class="card glass">
-        <h3>今日の問い（デモ）</h3>
-        <p>
-          「もし人生が二周目だったら、今の自分にどんな助言をする？」<br>
-          その答えをヒントに、次の一歩を言語化する。
-        </p>
-      </div>
-    </section>
-
-    <!-- ユーザーストック -->
-    <section id="stock" class="page">
-      <div class="page-header-row">
-        <div class="page-title-block">
-          <h2>ユーザーストック</h2>
-          <p class="page-subtitle">自分の中に“残しておきたいもの”だけを集める。</p>
-        </div>
-        <button class="back-home">← ホームに戻る</button>
-      </div>
-
-      <div class="card glass">
-        <h3>自分だけのストック（デモ）</h3>
-        <p>
-          心に刺さった言葉・記事・動画・ツイートなどを、<br>
-          「タグ」と「ひと言メモ」と一緒にストックしていくエリア。
-        </p>
-      </div>
-
-      <div class="card glass">
-        <h3>最近のストック例（デモ）</h3>
-        <ul>
-          <li>「焦らなくていい。でも止まるとしんどくなる。」</li>
-          <li>AI×キャリアのインタビュー記事</li>
-          <li>将来の自分宛てに書いたメモ</li>
-        </ul>
-      </div>
-    </section>
-
-  </main>
-</div>
+</main>
 
 <script>
   /* -------- ページ切り替え -------- */
