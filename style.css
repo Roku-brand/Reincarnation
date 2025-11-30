@@ -115,22 +115,6 @@ main {
   opacity: 0.9;
 }
 
-.home-feature.active {
-  background: #0f3d2e;
-  color: #ffffff;
-}
-
-/* ホームのデモカード */
-.home-demo.hidden {
-  display: none;
-}
-
-.demo-note {
-  margin-top: 8px;
-  font-size: 12px;
-  opacity: 0.75;
-}
-
 /* 世代別タブ */
 .generation-tabs {
   display: flex;
