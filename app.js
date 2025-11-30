@@ -2,18 +2,18 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   //----------------------------------
-  // 汎用：ページ切り替え関数
+  // 共通：ページ切り替え
   //----------------------------------
   const pages = document.querySelectorAll(".page");
   const tabButtons = document.querySelectorAll(".tabbar button");
 
   function switchPage(pageId) {
-    // ページ表示の切り替え
+    // ページ表示切替
     pages.forEach(p => p.classList.remove("active"));
     const target = document.getElementById(pageId);
     if (target) target.classList.add("active");
 
-    // 下タブの見た目切り替え
+    // 下タブの見た目切替
     tabButtons.forEach(b => {
       b.classList.toggle("active", b.dataset.page === pageId);
     });
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //----------------------------------
-  // ホームの大ボタン：別ページへ切り替え
+  // ホームの大ボタン：各ノートのページへジャンプ
   //----------------------------------
   const homeButtons = document.querySelectorAll(".home-feature");
 
@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderGeneration(gen) {
     if (!genTitle || !genList) return;
+
     genTitle.textContent = `${gen}のテーマ`;
     genList.innerHTML = "";
 
@@ -98,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 初期表示（小学生）
   renderGeneration("小学生");
 
+  // 世代タブクリック
   genButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       const gen = btn.dataset.gen;
