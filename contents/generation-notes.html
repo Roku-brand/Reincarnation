@@ -13,13 +13,23 @@
     rel="stylesheet"
   />
 
+  <!-- Material Icons（ヘッダーメニュー用） -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
   <!-- このページ専用のCSS -->
   <link rel="stylesheet" href="generation-notes.css" />
 </head>
 <body>
-  <!-- ==================== ヘッダー ==================== -->
-  <header>
-    <div class="header-inner">
+
+  <!-- ==================== ヘッダー（オーバーレイ付き） ==================== -->
+  <header class="gn-header">
+    <div class="gn-header-inner">
+      <!-- メニュー（オーバーレイ開閉） -->
+      <button id="gn-menu-toggle" class="gn-menu-toggle" aria-expanded="false" aria-controls="gn-menu-overlay">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+
+      <!-- ロゴ -->
       <div class="header-logo">
         <div class="logo-symbol">∞</div>
         <div>
@@ -27,9 +37,56 @@
           <div class="logo-text-sub">人生を「二周目視点」で整理する、世代別ノート</div>
         </div>
       </div>
-      <div class="header-right">世代ごとの“チャプター”を俯瞰して、今の位置を確認するページ。</div>
+
+      <!-- 右サマリーテキスト -->
+      <div class="header-right">
+        世代ごとの“チャプター”を俯瞰して、今の位置とこれからの分岐を確認するページ。
+      </div>
     </div>
   </header>
+
+  <!-- ==================== 左から出るオーバーレイメニュー ==================== -->
+  <div id="gn-menu-overlay" class="gn-menu-overlay" aria-hidden="true">
+    <div class="gn-menu-panel">
+      <div class="gn-menu-panel-header">
+        <span class="gn-menu-title">人生二周目ノート</span>
+        <button id="gn-menu-close" class="gn-menu-close" aria-label="メニューを閉じる">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <div class="gn-menu-panel-body">
+        <a class="gn-nav-item" href="../index.html">
+          <span class="material-symbols-rounded">home</span>
+          <span>ホーム</span>
+        </a>
+        <a class="gn-nav-item" href="generation-notes.html">
+          <span class="material-symbols-rounded">diversity_3</span>
+          <span>世代別ノート</span>
+        </a>
+        <a class="gn-nav-item" href="../index.html#knowledge">
+          <span class="material-symbols-rounded">psychology</span>
+          <span>教養ノート</span>
+        </a>
+        <a class="gn-nav-item" href="../index.html#catchup">
+          <span class="material-symbols-rounded">bolt</span>
+          <span>キャッチアップノート</span>
+        </a>
+        <a class="gn-nav-item" href="../index.html#experiences">
+          <span class="material-symbols-rounded">menu_book</span>
+          <span>人生体験記</span>
+        </a>
+        <a class="gn-nav-item" href="../index.html#roadmap">
+          <span class="material-symbols-rounded">map</span>
+          <span>人生ロードマップ</span>
+        </a>
+        <a class="gn-nav-item" href="../index.html#stock">
+          <span class="material-symbols-rounded">grade</span>
+          <span>ユーザーストック</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- ==================== ヒーロー ==================== -->
   <section class="hero">
