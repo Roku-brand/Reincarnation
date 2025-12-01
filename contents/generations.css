@@ -1,559 +1,345 @@
-/* ==============================
-   ベース
-   ============================== */
+/* =========================================================
+   世代別ノート 専用スタイル
+   - 既存の style.css を前提に、クラス名は gen- で完結させる
+   ========================================================= */
 
-:root {
-  --bg-grad-start: #e6fff2;
-  --bg-grad-end: #c8f5d8;
-  --card-bg: #ffffff;
-  --card-soft: #f8fffb;
-  --accent: #22c55e;
-  --accent-soft: #bbf7d0;
-  --accent-deep: #166534;
-  --text-main: #064e3b;
-  --text-sub: #4b5563;
-  --border-soft: #d1fae5;
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.06);
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-pill: 999px;
-  --max-width: 1120px;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  min-height: 100vh;
-  font-family: "Inter", "Noto Sans JP", system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--text-main);
-  background: radial-gradient(circle at top left, #f0fff7 0, var(--bg-grad-start) 40%, var(--bg-grad-end) 100%);
-}
-
-/* ==============================
-   ヘッダー
-   ============================== */
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  backdrop-filter: blur(16px);
-  background: linear-gradient(
-    to bottom,
-    rgba(230, 255, 242, 0.96),
-    rgba(200, 245, 216, 0.9)
-  );
-  border-bottom: 1px solid rgba(148, 163, 184, 0.28);
-}
-
-.header-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.logo-block {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: inherit;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e);
-  color: #f8fffb;
-  font-weight: 700;
-  box-shadow: 0 10px 24px rgba(34, 197, 94, 0.45);
-}
-
-.logo-texts {
-  display: flex;
-  flex-direction: column;
-}
-
-.logo-title {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.logo-sub {
-  font-size: 11px;
-  color: var(--text-sub);
-}
-
-.main-nav {
-  margin-left: auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.nav-link {
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.78);
-  text-decoration: none;
-  font-size: 12px;
-  color: var(--text-main);
-  border: 1px solid transparent;
-  transition: background 0.18s ease, transform 0.18s ease,
-    box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.nav-link:hover {
-  background: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-soft);
-  border-color: rgba(148, 163, 184, 0.25);
-}
-
-.nav-link-current {
-  background: #22c55e;
-  color: #ecfdf5;
-  font-weight: 600;
-}
-
-/* ==============================
-   ページレイアウト
-   ============================== */
-
-.page {
-  padding: 80px 16px 40px;
-}
-
-.page-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
+/* ページ内レイアウト */
+.gen-page-inner {
+  padding-top: 16px;
+  padding-bottom: 40px;
 }
 
 /* ページヘッダー */
-
-.page-header {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.gen-page-header {
+  margin-top: 12px;
 }
 
-.page-header-main {
-  background: linear-gradient(135deg, #dcfce7, #ecfdf5);
-  border-radius: var(--radius-lg);
-  padding: 16px 18px;
-  box-shadow: var(--shadow-soft);
+.gen-page-header-main {
+  max-width: 720px;
 }
 
-.page-title {
+.gen-page-title {
   margin: 0 0 6px;
-  font-size: 22px;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
-.page-subtitle {
+.gen-page-subtitle {
   margin: 0;
-  font-size: 13px;
+  font-size: 0.94rem;
+  line-height: 1.7;
   color: var(--text-sub);
 }
 
-/* ステージタブ */
+/* ========== タブUI ========== */
 
-.stage-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.stage-tab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.85);
-  text-decoration: none;
-  font-size: 12px;
-  color: var(--text-main);
-  border: 1px solid rgba(148, 163, 184, 0.45);
-  transition: background 0.18s ease, transform 0.18s ease,
-    box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.stage-tab:hover {
-  background: #e0f2fe;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.26);
-  border-color: rgba(59, 130, 246, 0.6);
-}
-
-.stage-tab.active {
-  background: #22c55e;
-  border-color: #22c55e;
-  color: #ecfdf5;
-  box-shadow: 0 10px 26px rgba(34, 197, 94, 0.5);
-}
-
-/* 汎用セクション */
-
-.section {
-  margin-top: 20px;
-}
-
-/* ==============================
-   概要
-   ============================== */
-
-.section-overview {
-  background: rgba(236, 253, 245, 0.98);
-  border-radius: var(--radius-lg);
-  padding: 14px 18px 16px;
-  box-shadow: var(--shadow-soft);
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.overview-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--accent-deep);
-  padding: 4px 8px;
-  border-radius: var(--radius-pill);
-  background: rgba(187, 247, 208, 0.9);
-  align-self: flex-start;
-}
-
-.overview-main {
-  flex: 1;
-}
-
-.stage-title {
-  margin: 0 0 4px;
-  font-size: 18px;
-}
-
-.overview-text {
-  margin: 0;
-  font-size: 13px;
-  color: var(--text-sub);
-}
-
-/* ==============================
-   アコーディオン
-   ============================== */
-
-.section-accordion {
+.gen-tabs-section {
   margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
-/* 共通 */
-
-.accordion {
-  background: rgba(248, 250, 252, 0.98);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
-  border: 1px solid rgba(209, 250, 229, 0.9);
-}
-
-/* ヘッダー */
-
-.accordion-header {
-  width: 100%;
-  padding: 12px 16px;
-  background: linear-gradient(
-    to right,
-    rgba(187, 247, 208, 0.65),
-    rgba(224, 242, 254, 0.65)
-  );
-  border: none;
-  outline: none;
+.gen-tabs-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 8px;
-  cursor: pointer;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
 }
 
-.accordion-header-main {
+.gen-tabs-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+.gen-tabs-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.6);
+  border-radius: 999px;
+}
+
+.gen-tab {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-sub);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.gen-tab:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
+  background: #ffffff;
+}
+
+.gen-tab-active {
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+  color: #ffffff;
+  box-shadow: 0 16px 40px rgba(22, 163, 74, 0.35);
+}
+
+/* 「≪トップ≫」だけ少しだけ幅感を強調 */
+.gen-tab[data-stage="top"] {
+  font-weight: 600;
+}
+
+/* ========== コンテンツ共通 ========== */
+
+.gen-content-section {
+  margin-top: 28px;
+}
+
+.gen-card {
+  border-radius: 20px;
+  padding: 20px 20px 22px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.gen-card + .gen-card {
+  margin-top: 18px;
+}
+
+.gen-section-title {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.gen-section-sub {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  color: var(--text-sub);
+}
+
+/* ========== トップタブ：人生マップ ========== */
+
+.gen-map-header {
+  margin-bottom: 18px;
+}
+
+.gen-map-title {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.gen-map-sub {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-sub);
+}
+
+/* タイムライン */
+.gen-map-timeline {
+  position: relative;
+  margin-top: 14px;
+  padding: 24px 12px 8px;
+}
+
+.gen-map-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 38px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #bbf7d0, #22c55e, #bbf7d0);
+  opacity: 0.8;
+}
+
+.gen-map-stage-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.gen-map-stage {
+  position: relative;
+  text-align: center;
+}
+
+.gen-map-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  margin: 0 auto 6px;
+  border: 2px solid #22c55e;
+  background: #ecfdf5;
+  box-shadow: 0 0 0 4px rgba(187, 247, 208, 0.7);
+}
+
+.gen-map-dot--mid {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 5px rgba(74, 222, 128, 0.7);
+}
+
+.gen-map-dot--end {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.7);
+}
+
+.gen-map-stage-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.gen-map-stage-note {
+  font-size: 0.74rem;
+  color: var(--text-sub);
+}
+
+/* フェーズカード（成長のフェーズなど） */
+
+.gen-map-phases {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gen-phase-card {
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(240, 253, 244, 0.96)
+  );
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.gen-phase-title {
+  margin: 0 0 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.gen-phase-text {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--text-sub);
+}
+
+/* ========== 各ステージ用：概要 + セクション ========== */
+
+.gen-stage-header {
+  margin-bottom: 18px;
+}
+
+.gen-stage-title {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.gen-stage-overview {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-sub);
+}
+
+/* 小さなタグ群 */
+.gen-tag-row {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
+  gap: 6px;
 }
 
-.accordion-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent-deep);
+.gen-tag-pill {
+  font-size: 0.72rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(187, 247, 208, 0.6);
+  color: var(--text-main);
 }
 
-.accordion-subtitle {
-  font-size: 11px;
-  color: var(--text-sub);
-}
+/* リスト群 */
 
-.accordion-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(148, 163, 184, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  color: var(--text-sub);
-  background: rgba(255, 255, 255, 0.9);
-  flex-shrink: 0;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-/* ボディ */
-
-.accordion-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.28s ease;
-  background: rgba(255, 255, 255, 0.95);
-}
-
-.accordion-inner {
-  padding: 14px 16px 16px;
-}
-
-/* 開いたとき */
-
-.accordion.open .accordion-icon {
-  transform: rotate(90deg);
-  background: #ecfdf5;
-}
-
-/* ==============================
-   各セクションごとの見た目
-   ============================== */
-
-/* 本質（Essence） */
-
-.essence-list {
+.gen-list {
   margin: 0;
-  padding-left: 1.1rem;
-  font-size: 13px;
+  padding-left: 1.2em;
+  font-size: 0.88rem;
   color: var(--text-sub);
 }
 
-.essence-list li + li {
+.gen-list li + li {
   margin-top: 4px;
 }
 
-/* 分岐パターン */
-
-.paths-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.path-item-label {
-  font-size: 13px;
+.gen-inline-label {
   font-weight: 600;
-  color: var(--accent-deep);
+  color: var(--text-main);
 }
 
-.path-item-desc {
-  font-size: 13px;
-  color: var(--text-sub);
-  margin: 2px 0 0;
-}
+/* Insights / Choices のカード内分割 */
 
-/* 迷い・不安 */
-
-.pains-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.pain-card {
-  background: var(--card-soft);
-  border-radius: var(--radius-md);
+.gen-insight-item,
+.gen-choice-item {
+  border-radius: 14px;
   padding: 10px 12px;
-  font-size: 13px;
-  color: var(--text-sub);
-  border: 1px solid rgba(209, 250, 229, 0.9);
+  background: rgba(249, 250, 251, 0.9);
 }
 
-/* Insights */
-
-.insights-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.gen-insight-item + .gen-insight-item,
+.gen-choice-item + .gen-choice-item {
+  margin-top: 10px;
 }
 
-.insight-card {
-  border-radius: var(--radius-md);
-  background: var(--card-bg);
-  padding: 12px 14px;
-  box-shadow: var(--shadow-soft);
-}
-
-.insight-title {
+.gen-insight-title,
+.gen-choice-title {
   margin: 0 0 4px;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
-.insight-abstract {
+.gen-insight-abstract {
   margin: 0 0 4px;
-  font-size: 12px;
+  font-size: 0.82rem;
   color: var(--text-sub);
 }
 
-.insight-action {
+.gen-insight-action,
+.gen-choice-text {
   margin: 0;
-  font-size: 12px;
-  color: var(--accent-deep);
+  font-size: 0.8rem;
+  color: var(--text-main);
 }
 
-/* Choices */
+/* Final Line */
 
-.choices-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.choice-card {
-  border-radius: var(--radius-md);
-  background: var(--card-soft);
-  padding: 10px 12px;
-  border: 1px dashed rgba(52, 211, 153, 0.8);
-}
-
-.choice-title {
-  margin: 0 0 4px;
-  font-size: 13px;
+.gen-final-line {
+  margin: 0;
+  font-size: 0.94rem;
   font-weight: 600;
-  color: var(--accent-deep);
-}
-
-.choice-insight {
-  margin: 0;
-  font-size: 12px;
-  color: var(--text-sub);
-}
-
-/* ==============================
-   Final Line
-   ============================== */
-
-.section-final {
-  margin-top: 26px;
-  padding-bottom: 20px;
-}
-
-.final-label {
-  font-size: 11px;
-  color: var(--text-sub);
-  margin: 0 0 4px;
-}
-
-.final-line {
-  margin: 0;
-  padding: 16px 18px;
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: var(--shadow-soft);
-  border-left: 4px solid var(--accent);
-  font-size: 13px;
-  color: var(--accent-deep);
-}
-
-/* ==============================
-   フッター
-   ============================== */
-
-.site-footer {
-  padding: 12px 16px 20px;
   text-align: center;
-  font-size: 11px;
-  color: var(--text-sub);
 }
 
-/* ==============================
-   レスポンシブ
-   ============================== */
+/* ========== レスポンシブ調整 ========== */
 
-.sp-only {
-  display: none;
+@media (max-width: 900px) {
+  .gen-map-stage-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .gen-map-phases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-@media (max-width: 768px) {
-  .header-inner {
-    gap: 8px 12px;
+@media (max-width: 640px) {
+  .gen-map-stage-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .logo-sub {
-    display: none;
-  }
-
-  .stage-tabs {
-    gap: 6px;
-  }
-
-  .stage-tab {
-    font-size: 11px;
-    padding-inline: 10px;
-  }
-
-  .pains-grid {
+  .gen-map-phases {
     grid-template-columns: 1fr;
-  }
-
-  .sp-only {
-    display: inline;
-  }
-}
-
-@media (max-width: 480px) {
-  .page {
-    padding-inline: 10px;
-  }
-
-  .page-header-main {
-    padding-inline: 14px;
-  }
-
-  .section-overview {
-    flex-direction: column;
-  }
-
-  .overview-label {
-    align-self: flex-start;
   }
 }
