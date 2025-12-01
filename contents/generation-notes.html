@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>人生二周目ノート – 世代別ノート</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- フォント -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Material Icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- 共通CSS + ページCSS -->
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="generation-notes.css" />
+</head>
+
+<body>
+
+  <!-- ▼ 共通ヘッダー -->
+  <header class="site-header">
+    <div class="site-header-inner">
+
+      <!-- 左：メニュー -->
+      <button class="menu-toggle" aria-expanded="false" aria-controls="menu-overlay">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+
+      <!-- ロゴ -->
+      <div class="header-logo">
+        <div class="logo-symbol">∞</div>
+        <div>
+          <div class="logo-text-main">人生二周目ノート</div>
+          <div class="logo-text-sub">人生のステージを俯瞰する、8チャプター構造</div>
+        </div>
+      </div>
+
+      <!-- 右：説明 -->
+      <div class="header-right">
+        人生のステージ（6〜80歳）を、二周目視点で体系化したノート。
+      </div>
+    </div>
+  </header>
+
+  <!-- ▼ 共通オーバーレイメニュー -->
+  <div class="menu-overlay" aria-hidden="true">
+    <div class="menu-panel">
+      <div class="menu-panel-header">
+        <span class="menu-title">人生二周目ノート</span>
+        <button class="menu-close"><span class="material-symbols-rounded">close</span></button>
+      </div>
+
+      <div class="menu-panel-body">
+
+        <a class="nav-item" href="../index.html">
+          <span class="material-symbols-rounded">home</span>
+          <span>ホーム</span>
+        </a>
+
+        <a class="nav-item" href="generation-notes.html">
+          <span class="material-symbols-rounded">diversity_3</span>
+          <span>世代別ノート</span>
+        </a>
+
+        <a class="nav-item" href="knowledge-notes.html">
+          <span class="material-symbols-rounded">psychology</span>
+          <span>教養ノート</span>
+        </a>
+
+        <a class="nav-item" href="life-stories.html">
+          <span class="material-symbols-rounded">menu_book</span>
+          <span>人生体験記ノート</span>
+        </a>
+
+        <a class="nav-item" href="user-notes.html">
+          <span class="material-symbols-rounded">person</span>
+          <span>ユーザーノート</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▼ ヒーロー -->
+  <section class="hero">
+    <h1 class="hero-title">世代別ノート</h1>
+    <p class="hero-sub1">人生を8チャプターに分解し、迷いの構造を見抜く</p>
+    <p class="hero-sub2">
+      小学生 → 中学生 → 高校生 → 大学/専門 → 社会人前期 → 中期 → 後期 → セカンドキャリア。<br>
+      各ステージの「心理・分岐・つまずき・生存戦略」を整理したノートです。
+    </p>
+  </section>
+
+  <!-- ▼ 横スクロールの世代バー（8ステージ） -->
+  <div class="stage-bar-wrapper">
+    <div class="stage-bar" id="genStageTabs"></div>
+  </div>
+
+  <!-- ▼ メインコンテンツ -->
+  <main>
+    <div class="page-inner">
+
+      <!-- JSで全セクションを描画 -->
+      <section id="genContent" class="card"></section>
+
+    </div>
+  </main>
+
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!-- 共通JS + ページJS -->
+  <script src="menu.js"></script>
+  <script src="generation-notes.js"></script>
+
+</body>
+</html>

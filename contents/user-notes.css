@@ -1,0 +1,179 @@
+/* ヒーロー */
+
+.hero {
+  background: linear-gradient(135deg, #dcfce7 0%, #ecfdf5 45%, #ffffff 100%);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  margin: 6px auto 12px;
+  padding: 24px 20px 20px;
+  text-align: center;
+  max-width: 1400px;
+}
+
+.hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.hero-sub1 {
+  font-size: 18px;
+  margin: 0 0 4px;
+  color: var(--text-sub);
+  font-weight: 600;
+}
+
+.hero-sub2 {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* メインレイアウト */
+
+main {
+  padding: 8px 8px 32px;
+}
+
+.page-inner {
+  margin: 0 auto;
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+  gap: 18px;
+}
+
+@media (max-width: 960px) {
+  .page-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 心に留めたい言葉 */
+
+.quote-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.quote-input-row input {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.quote-input-row input:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
+}
+
+.quote-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.quote-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.quote-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-text {
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+.quote-date {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.quote-delete {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+/* チャット */
+
+.chat-window {
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 10px 10px;
+  height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.chat-message {
+  max-width: 80%;
+  padding: 6px 10px;
+  border-radius: 12px;
+  line-height: 1.5;
+}
+
+.chat-message.user {
+  margin-left: auto;
+  background: #dcfce7;
+  border-radius: 12px 12px 2px 12px;
+}
+
+.chat-message.ai {
+  margin-right: auto;
+  background: #ffffff;
+  border-radius: 12px 12px 12px 2px;
+  border: 1px solid #e5e7eb;
+}
+
+.chat-meta {
+  font-size: 10px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+.chat-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#chatInput {
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 8px 10px;
+  font-size: 13px;
+  resize: vertical;
+  min-height: 60px;
+}
+
+#chatInput:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
+}
+
+.chat-input-row .primary-btn {
+  align-self: flex-end;
+}

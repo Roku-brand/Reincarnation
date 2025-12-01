@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>人生二周目ノート – 教養ノート</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- フォント -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Material Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- 共通CSS ＋ ページCSS -->
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="knowledge-notes.css" />
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <button class="menu-toggle" aria-expanded="false" aria-controls="menu-overlay">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+
+      <div class="header-logo">
+        <div class="logo-symbol">∞</div>
+        <div>
+          <div class="logo-text-main">人生二周目ノート</div>
+          <div class="logo-text-sub">人生のベーススキルを4つの軸で整理する、教養ノート</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        人間関係・心理学・ビジネス・AI活用術を「二周目視点」でまとめた教養ページ。
+      </div>
+    </div>
+  </header>
+
+  <!-- オーバーレイメニュー（5タブ） -->
+  <div class="menu-overlay" aria-hidden="true">
+    <div class="menu-panel">
+      <div class="menu-panel-header">
+        <span class="menu-title">人生二周目ノート</span>
+        <button class="menu-close" aria-label="メニューを閉じる">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <div class="menu-panel-body">
+        <a class="nav-item" href="../index.html">
+          <span class="material-symbols-rounded">home</span>
+          <span>ホーム</span>
+        </a>
+        <a class="nav-item" href="generation-notes.html">
+          <span class="material-symbols-rounded">diversity_3</span>
+          <span>世代別ノート</span>
+        </a>
+        <a class="nav-item" href="knowledge-notes.html">
+          <span class="material-symbols-rounded">psychology</span>
+          <span>教養ノート</span>
+        </a>
+        <a class="nav-item" href="life-stories.html">
+          <span class="material-symbols-rounded">menu_book</span>
+          <span>人生体験記ノート</span>
+        </a>
+        <a class="nav-item" href="user-notes.html">
+          <span class="material-symbols-rounded">person</span>
+          <span>ユーザーノート</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <h1 class="hero-title">教養ノート</h1>
+    <p class="hero-sub1">人生のベーススキルを4つの軸で整理する</p>
+    <p class="hero-sub2">
+      人間関係・心理学・ビジネス・AI活用。<br>
+      一度身につければ、どの時代・どの職業でも使える「二周目用の教養」をここにまとめていきます。
+    </p>
+  </section>
+
+  <!-- カテゴリタブ -->
+  <div class="category-bar-wrapper">
+    <div class="category-bar">
+      <div class="category-list" id="knCategoryTabs"></div>
+    </div>
+  </div>
+
+  <!-- メイン -->
+  <main>
+    <div class="page-inner">
+      <section class="card" id="knCategoryContent">
+        <!-- JSでカテゴリ＆カードを描画 -->
+      </section>
+    </div>
+  </main>
+
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <!-- 共通メニューJS ＋ ページJS -->
+  <script src="menu.js"></script>
+  <script src="knowledge-notes.js"></script>
+</body>
+</html>
