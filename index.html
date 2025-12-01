@@ -1,142 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>人生二周目ノート</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生二周目ノート</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        /* 追加の軽微なトップページ専用スタイル */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(180deg, #e8fbe8 0%, #f3fff5 100%);
+            color: #1f3b2c;
+        }
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+        header {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-  <link rel="stylesheet" href="style.css" />
-  <meta name="theme-color" content="#c8f5d8" />
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #3cc47c;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .site-text .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .site-text .subtitle {
+            font-size: 12px;
+            color: #456;
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            margin-left: auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #265f3a;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            transition: 0.2s ease;
+        }
+
+        nav a:hover {
+            background: rgba(60, 196, 124, 0.15);
+            transform: translateY(-1px);
+        }
+
+        /* メインレイアウト */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            margin-bottom: 12px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffffcc;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.08);
+        }
+
+        .badge {
+            background: #3cc47c;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                display: none; /* 必要ならハンバーガーに改修可能 */
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <!-- ================= HEADER ================= -->
-  <header class="site-header">
-    <div class="header-inner">
-      <!-- Logo block -->
-      <a href="index.html" class="logo-block">
+
+<header>
+    <div class="logo-area">
         <div class="logo-icon">∞</div>
-        <div class="logo-texts">
-          <span class="logo-title">人生二周目ノート</span>
-          <span class="logo-sub">二周目視点で、人生をアップデートするノート</span>
+        <div class="site-text">
+            <div class="title">人生二周目ノート</div>
+            <div class="subtitle">二周目視点で、人生をアップデートするノート</div>
         </div>
-      </a>
-
-      <!-- Main navigation -->
-      <nav class="main-nav" aria-label="メインナビゲーション">
-        <a href="contents/generation-notes.html" class="nav-link">
-          <span class="nav-index">1</span>
-          <span>世代別ノート</span>
-        </a>
-        <a href="contents/knowledge-notes.html" class="nav-link">
-          <span class="nav-index">2</span>
-          <span>教養ノート</span>
-        </a>
-        <a href="contents/life-stories.html" class="nav-link">
-          <span class="nav-index">3</span>
-          <span>人生体験記ノート</span>
-        </a>
-        <a href="contents/user-notes.html" class="nav-link">
-          <span class="nav-index">4</span>
-          <span>ユーザー機能</span>
-        </a>
-        <a href="contents/concept.html" class="nav-link">
-          <span class="nav-index">5</span>
-          <span>コンセプト</span>
-        </a>
-      </nav>
     </div>
-  </header>
 
-  <main class="page">
-    <div class="page-inner">
+    <nav>
+        <a href="generations.html">1 世代別ノート</a>
+        <a href="knowledge-notes.html">2 教養ノート</a>
+        <a href="life-stories.html">3 人生体験記ノート</a>
+        <a href="user-notes.html">4 ユーザー機能</a>
+        <a href="concept.html">5 コンセプト</a>
+    </nav>
+</header>
 
-      <!-- ========== 今日の本質3つ ========== -->
-      <section class="section essentials">
-        <div class="section-header">
-          <h2 class="section-title">今日の本質3つ（1分で世界がわかる）</h2>
-          <p class="section-lead">
-            毎日変わるニュースより、「変わらない構造」を3つだけ。
-          </p>
+<div class="container">
+
+    <h2>今日の本質3つ（1分で世界がわかる）</h2>
+    <div class="cards">
+        <div class="card">
+            <div class="badge">本質 1</div>
+            <b>長期視点は心を安定させる</b>
+            <p>10年スパンで物事を見ると、焦りは減り、行動の精度が上がる。</p>
         </div>
 
-        <div class="card-grid essentials-grid">
-          <article class="card essentials-card">
-            <h3 class="card-title">長期で見ると、変化はゆっくり</h3>
-            <p class="card-text">
-              一年単位では大きく見える変化も、十年スパンで見ると意外と滑らかな曲線。
-            </p>
-          </article>
-
-          <article class="card essentials-card">
-            <h3 class="card-title">人は「物語」で意思決定する</h3>
-            <p class="card-text">
-              数字よりも「どんな人生を歩みたいか」という物語が行動を決める。
-            </p>
-          </article>
-
-          <article class="card essentials-card">
-            <h3 class="card-title">今の自分も、過去の選択の積み重ね</h3>
-            <p class="card-text">
-              後悔より、「次の一手」に集中するための距離感を持つのが二周目視点。
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- ====================== 削除したセクション（utilities） ======================
-      <section class="section utilities">
-         （ユーザー機能カード & コンセプトカード）
-      </section>
-      =============================================================================== -->
-
-      <!-- ========== メイン3カード ========== -->
-      <section class="section features">
-        <div class="section-header">
-          <h2 class="section-title">入口は3つのノートから</h2>
-          <p class="section-lead">
-            迷ったときは、まずこの3つのどれかを開けばOKです。
-          </p>
+        <div class="card">
+            <div class="badge">本質 2</div>
+            <b>人生は「物語」で意思決定される</b>
+            <p>数字よりも“どんな物語を歩みたいか”が選択を左右する。</p>
         </div>
 
-        <div class="card-grid feature-grid">
-
-          <a href="contents/generation-notes.html" class="card feature-card">
-            <div class="card-badge">1</div>
-            <h3 class="card-title">世代別ノート</h3>
-            <p class="card-text">
-              人生を8ステージで整理し、迷いやすいポイントと乗り越え方をまとめたノート。
-            </p>
-          </a>
-
-          <a href="contents/knowledge-notes.html" class="card feature-card">
-            <div class="card-badge">2</div>
-            <h3 class="card-title">教養ノート</h3>
-            <p class="card-text">
-              心理学・人間関係・キャリアなど、日常で使える教養だけを整理したノート。
-            </p>
-          </a>
-
-          <a href="contents/life-stories.html" class="card feature-card">
-            <div class="card-badge">3</div>
-            <h3 class="card-title">人生体験記ノート</h3>
-            <p class="card-text">
-              さまざまな人生ストーリーから、選択と結果のパターンを抽出したノート。
-            </p>
-          </a>
+        <div class="card">
+            <div class="badge">本質 3</div>
+            <b>未来は過去の選択の積み重ね</b>
+            <p>構造を知るだけで、選択の迷いは劇的に減る。</p>
         </div>
-      </section>
     </div>
-  </main>
 
-  <footer class="site-footer">
-    <small>© 人生二周目ノート</small>
-  </footer>
+    <h2 style="margin-top: 60px;">入口は3つのノートから</h2>
+    <div class="cards">
+
+        <a class="card" href="generations.html">
+            <div class="badge">1</div>
+            <b>世代別ノート</b>
+            <p>「小学生〜セカンドキャリア」まで、人生を構造で読み解くステージ別ノート。</p>
+        </a>
+
+        <a class="card" href="knowledge-notes.html">
+            <div class="badge">2</div>
+            <b>教養ノート</b>
+            <p>心理・人間関係・社会構造など、日常に効く本質的な教養を整理。</p>
+        </a>
+
+        <a class="card" href="life-stories.html">
+            <div class="badge">3</div>
+            <b>人生体験記ノート</b>
+            <p>人生ストーリーから“共通パターン”を抽出し、次の選択に活かす。</p>
+        </a>
+
+    </div>
+
+</div>
 
 </body>
 </html>
