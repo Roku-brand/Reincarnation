@@ -16,29 +16,30 @@
   <!-- Material Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
+  <!-- 共通CSS ＋ ページCSS -->
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="life-stories.css" />
+  <!-- ホームと共通のヘッダーデザイン -->
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 
   <!-- ヘッダー -->
   <header class="site-header">
-    <div class="site-header-inner">
-      <button class="menu-toggle" aria-expanded="false" aria-controls="menu-overlay">
-        <span class="material-symbols-rounded">menu</span>
-      </button>
-
-      <div class="header-logo">
-        <div class="logo-symbol">∞</div>
-        <div>
-          <div class="logo-text-main">人生二周目ノート</div>
-          <div class="logo-text-sub">典型パターンから、自分の物語を俯瞰するページ</div>
-        </div>
+    <div class="header-inner container">
+      <div class="logo-block">
+        <div class="logo-title">人生二周目ノート</div>
+        <div class="logo-sub">二周目視点で、人生をアップデートするノート</div>
       </div>
 
-      <div class="header-right">
-        実際によくある人生のコースをケーススタディとして並べ、「自分は今どこにいるか？」を確認するためのノート。
-      </div>
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">ホーム</a>
+        <a href="generations.html" class="nav-link">世代別ノート</a>
+        <a href="knowledge-notes.html" class="nav-link">教養ノート</a>
+        <a href="life-stories.html" class="nav-link is-current">人生体験記ノート</a>
+        <a href="user-notes.html" class="nav-link">ユーザー機能</a>
+        <a href="concept.html" class="nav-link">コンセプト</a>
+      </nav>
     </div>
   </header>
 
@@ -57,7 +58,7 @@
           <span class="material-symbols-rounded">home</span>
           <span>ホーム</span>
         </a>
-        <a class="nav-item" href="generation-notes.html">
+        <a class="nav-item" href="generations.html">
           <span class="material-symbols-rounded">diversity_3</span>
           <span>世代別ノート</span>
         </a>
