@@ -10,28 +10,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
+  <!-- 共通スタイル（ホームと共有） -->
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- ページ固有CSS -->
   <link rel="stylesheet" href="generations.css">
 </head>
 <body>
 
+  <!-- ========== ヘッダー（index.html と統一） ========== -->
   <header class="site-header">
-    <div class="header-inner">
-      <!-- ロゴ -->
-      <a href="../index.html" class="logo-block">
-        <div class="logo-icon">∞</div>
-        <div class="logo-texts">
-          <span class="logo-title">人生二周目ノート</span>
-          <span class="logo-sub">二周目視点で、人生をアップデートするノート</span>
-        </div>
-      </a>
+    <div class="header-inner container">
+      <div class="logo-block">
+        <div class="logo-title">人生二周目ノート</div>
+        <div class="logo-sub">二周目視点で、人生をアップデートするノート</div>
+      </div>
 
-      <!-- ナビ（簡易・世代タブへの導線はこのページ内で完結） -->
-      <nav class="main-nav" aria-label="メインナビゲーション">
+      <nav class="header-nav">
         <a href="../index.html" class="nav-link">ホーム</a>
-        <span class="nav-link nav-link-current">世代別ノート</span>
+        <a href="generations.html" class="nav-link is-current">世代別ノート</a>
         <a href="knowledge-notes.html" class="nav-link">教養ノート</a>
-        <a href="life-stories.html" class="nav-link">人生体験記</a>
+        <a href="life-stories.html" class="nav-link">人生体験記ノート</a>
         <a href="user-notes.html" class="nav-link">ユーザー機能</a>
         <a href="concept.html" class="nav-link">コンセプト</a>
       </nav>
@@ -71,7 +70,7 @@
         </div>
       </section>
 
-      <!-- ②〜⑥ アコーディオンリスト -->
+      <!-- ②〜⑥ アコーディオンリスト（Essence / Paths / Pains / Insights / Choices） -->
       <section class="section section-accordion" id="accordionRoot">
         <!-- JS で生成 -->
       </section>
@@ -86,7 +85,9 @@
   </main>
 
   <footer class="site-footer">
-    <small>© 人生二周目ノート</small>
+    <div class="container footer-inner">
+      <p class="footer-copy">© 人生二周目ノート</p>
+    </div>
   </footer>
 
   <script src="generations.js"></script>
