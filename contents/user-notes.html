@@ -18,27 +18,27 @@
 
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="user-notes.css" />
+  <!-- ホームと共通のヘッダーデザイン -->
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 
   <!-- ヘッダー -->
   <header class="site-header">
-    <div class="site-header-inner">
-      <button class="menu-toggle" aria-expanded="false" aria-controls="menu-overlay">
-        <span class="material-symbols-rounded">menu</span>
-      </button>
-
-      <div class="header-logo">
-        <div class="logo-symbol">∞</div>
-        <div>
-          <div class="logo-text-main">人生二周目ノート</div>
-          <div class="logo-text-sub">自分だけの言葉と悩みログを残すページ</div>
-        </div>
+    <div class="header-inner container">
+      <div class="logo-block">
+        <div class="logo-title">人生二周目ノート</div>
+        <div class="logo-sub">二周目視点で、人生をアップデートするノート</div>
       </div>
 
-      <div class="header-right">
-        心に留めたい言葉・悩み相談のログをためて、「二周目の自分」が読み返せるストックにしていくノート。
-      </div>
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">ホーム</a>
+        <a href="generations.html" class="nav-link">世代別ノート</a>
+        <a href="knowledge-notes.html" class="nav-link">教養ノート</a>
+        <a href="life-stories.html" class="nav-link">人生体験記ノート</a>
+        <a href="user-notes.html" class="nav-link is-current">ユーザー機能</a>
+        <a href="concept.html" class="nav-link">コンセプト</a>
+      </nav>
     </div>
   </header>
 
@@ -57,7 +57,7 @@
           <span class="material-symbols-rounded">home</span>
           <span>ホーム</span>
         </a>
-        <a class="nav-item" href="generation-notes.html">
+        <a class="nav-item" href="generations.html">
           <span class="material-symbols-rounded">diversity_3</span>
           <span>世代別ノート</span>
         </a>
@@ -123,7 +123,7 @@
         </div>
 
         <form id="chatForm" class="chat-input-row">
-          <textarea id="chatInput" rows="2" placeholder="今の悩みやモヤモヤを書いてみる..." ></textarea>
+          <textarea id="chatInput" rows="2" placeholder="今の悩みやモヤモヤを書いてみる."></textarea>
           <button type="submit" class="primary-btn">
             <span class="material-symbols-rounded">send</span>
             <span>送信</span>
