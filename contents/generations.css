@@ -25,7 +25,7 @@
 
 /* HERO（テキストは HTML 側、レイアウトは style.css の hero-* に準拠） */
 .generation-hero-copy {
-  padding-top: 40px;   /* ホームより少し浅めに開始 */
+  padding-top: 24px;   /* ホームより少し浅めに開始 */
   padding-bottom: 16px;
 }
 
@@ -527,4 +527,5 @@
     flex-basis: 160px;
   }
 }
+
 
