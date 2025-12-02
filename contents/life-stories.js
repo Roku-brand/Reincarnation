@@ -1,13 +1,57 @@
 // life-stories.js
 // 「人生体験記ノート」ページ用スクリプト
-// - JSONをfetchで読み込み
-// - 人生パターン図鑑（カード + アコーディオン）を動的生成
-// - 職業図鑑（タグボタン + 詳細カード）を動的生成
+// - チャプタータブ切り替え
+// - 人生パターン図鑑（JSON → カード + アコーディオン）
+// - 職業図鑑（JSON → タグボタン + 詳細カード）
 
 document.addEventListener("DOMContentLoaded", () => {
+  initChapterTabs();
   loadLifePatterns();
   loadJobs();
 });
+
+/**
+ * ------------- チャプタータブ -------------
+ */
+
+function initChapterTabs() {
+  const tabs = document.querySelectorAll(".chapter-tab");
+  const chapters = document.querySelectorAll(".chapter");
+
+  if (!tabs.length || !chapters.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const targetId = tab.dataset.target;
+      if (!targetId) return;
+
+      // タブの状態更新
+      tabs.forEach((t) => {
+        t.classList.toggle("is-active", t === tab);
+        t.setAttribute("aria-selected", t === tab ? "true" : "false");
+      });
+
+      // チャプター表示切り替え
+      chapters.forEach((chapter) => {
+        if (chapter.id === targetId) {
+          chapter.hidden = false;
+          chapter.classList.add("is-active");
+        } else {
+          chapter.hidden = true;
+          chapter.classList.remove("is-active");
+        }
+      });
+
+      // 画面上部へ少し戻す（見やすさ用・任意）
+      const main = document.querySelector(".main-content");
+      if (main) {
+        const rect = main.getBoundingClientRect();
+        const offset = window.scrollY + rect.top - 16;
+        window.scrollTo({ top: offset, behavior: "smooth" });
+      }
+    });
+  });
+}
 
 /**
  * ------------- 共通ユーティリティ -------------
@@ -120,13 +164,13 @@ function buildPatternCard(data) {
   header.appendChild(headerMain);
   header.appendChild(toggleIcon);
 
-  // --- 概要（常時表示のサマリー） ---
+  // --- 概要（常時表示） ---
   const summary = createElement("div", {
     className: "pattern-card-summary",
     text: data.overview || "",
   });
 
-  // --- 詳細アコーディオン部 ---
+  // --- 詳細アコーディオン ---
   const detailsWrapper = createElement("div", {
     className: "pattern-card-details-wrapper",
   });
@@ -135,7 +179,7 @@ function buildPatternCard(data) {
     className: "pattern-card-details-inner",
   });
 
-  // 本質ブロック
+  // 本質
   if (data.essence) {
     const essenceBlock = createPatternDetailBlock(
       "このルートの「本質」",
@@ -144,7 +188,7 @@ function buildPatternCard(data) {
     detailsInner.appendChild(essenceBlock);
   }
 
-  // 主な分岐ブロック
+  // 分岐
   if (data.branches) {
     const branchesBlock = createPatternDetailBlock(
       "よく出てくる分岐",
@@ -153,7 +197,7 @@ function buildPatternCard(data) {
     detailsInner.appendChild(branchesBlock);
   }
 
-  // つまずきやすいポイント
+  // つまずき
   if (data.pains) {
     const painsBlock = createPatternDetailBlock(
       "つまずきやすいポイント",
@@ -162,7 +206,7 @@ function buildPatternCard(data) {
     detailsInner.appendChild(painsBlock);
   }
 
-  // インサイト ブロック（抽象・二周目視点・行動ヒント）
+  // インサイト
   if (data.insight) {
     const insightBlock = createElement("div", {
       className: "pattern-insight",
@@ -253,7 +297,7 @@ function togglePatternCard(card, detailsWrapper, open) {
   const headerButton = card.querySelector(".pattern-card-header");
   const allCards = document.querySelectorAll(".pattern-card");
 
-  // 単一開閉にしたい場合はここで他カードを閉じる
+  // 単一開閉（他カードは閉じる）
   allCards.forEach((c) => {
     if (c !== card && c.classList.contains("is-open")) {
       const wrapper = c.querySelector(".pattern-card-details-wrapper");
@@ -429,7 +473,7 @@ function buildJobCard(job) {
     card.appendChild(block);
   }
 
-  // この仕事ならではの喜び
+  // 喜び・やりがい
   if (job.joys) {
     const block = createJobListBlock("喜び・やりがい", safeArray(job.joys));
     card.appendChild(block);
