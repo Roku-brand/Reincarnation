@@ -35,14 +35,14 @@ body {
     "Segoe UI", sans-serif;
   color: var(--text-main);
 
-  /* 背景グラデーション */
-  background: linear-gradient(180deg, #e9fdf3 0%, #e0f7ec 45%, #ecfdf5 100%);
+  /* 背景グラデーション（淡いグリーン＋白は維持、やや白寄り） */
+  background: linear-gradient(180deg, #ecfdf5 0%, #e0f7ec 45%, #f5fdf8 100%);
   min-height: 100vh;
   position: relative;
 }
 
 /* =========================
-   コンパス風の線画背景（濃いめ表示バージョン）
+   コンパス風の線画背景（濃紺系に調整）
    ========================= */
 
 body::before {
@@ -54,34 +54,35 @@ body::before {
   max-height: 540px;
   border-radius: 50%;
 
-  /* コンパス外円（濃いめ） */
-  border: 2px solid rgba(255, 255, 255, 0.9);
+  /* 外円：濃紺 × 薄めライン（0.7〜1px程度の印象） */
+  border: 1px solid rgba(15, 37, 64, 0.22);
 
-  /* 外側リングの存在感アップ */
+  /* 外側リング（紺トーンのハロー） */
   box-shadow:
-    0 0 0 22px rgba(255, 255, 255, 0.26),
-    0 0 0 42px rgba(187, 247, 208, 0.30);
+    0 0 0 20px rgba(255, 255, 255, 0.20),
+    0 0 0 38px rgba(15, 37, 64, 0.18);
 
-  /* 背景に円 + 線 + 北南ドット */
+  /* 背景に円 + ドット + 斜めの針 */
   background-image:
 
-    /* 北側の白ドット（現在地） */
-    radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 1) 0 6px, transparent 7px),
+    /* 北側ドット（現在地） */
+    radial-gradient(circle at 50% 8%, rgba(15, 37, 64, 0.9) 0 5px, transparent 6px),
 
-    /* 南側の緑ドット（次の選択） */
-    radial-gradient(circle at 50% 92%, rgba(34, 197, 94, 1) 0 6px, transparent 7px),
+    /* 南側ドット（次の選択） */
+    radial-gradient(circle at 50% 92%, rgba(15, 37, 64, 0.6) 0 5px, transparent 6px),
 
-    /* 中央を貫く縦の針（白→薄緑グラデ） */
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(34, 197, 94, 0.4));
+    /* 斜めの針（135度方向） */
+    linear-gradient(135deg, rgba(15, 37, 64, 0.9), rgba(15, 37, 64, 0));
 
   background-repeat: no-repeat;
   background-position: center;
   background-size:
     100% 100%,
     100% 100%,
-    3px 80%;
+    1px 80%;
 
-  opacity: 0.58; /* ←背景の中でも十分視認できる濃さ */
+  /* 全体の透明度：知的にうっすら見えるレベル */
+  opacity: 0.2;
 
   pointer-events: none;
   z-index: 0;
@@ -96,12 +97,12 @@ body::after {
   max-height: 680px;
   border-radius: 50%;
 
-  /* 外側ふわっと光るエフェクト（強め） */
+  /* 外側ふわっと光るエフェクト（紺寄り） */
   box-shadow:
-    0 0 110px rgba(255, 255, 255, 0.55),
-    0 0 200px rgba(187, 247, 208, 0.45);
+    0 0 110px rgba(15, 37, 64, 0.35),
+    0 0 200px rgba(15, 37, 64, 0.22);
 
-  opacity: 0.45;
+  opacity: 0.18;
   pointer-events: none;
   z-index: 0;
 }
@@ -111,6 +112,7 @@ body::after {
   display: flex;
   flex-direction: column;
 }
+
 .container {
   width: 100%;
   max-width: 1040px;
@@ -203,18 +205,53 @@ body::after {
   padding: 16px 0 40px;
 }
 
-/* ① 一行コピー */
+/* ① 一行コピー（ホーム見出し＋二重アンダーバー付き） */
 .hero-copy {
-  padding: 32px 0 12px;
+  padding: 80px 0 40px;
+}
+
+.hero-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.hero-heading-block {
+  flex-shrink: 0;
+  min-width: 140px;
+}
+
+.hero-section-title {
+  margin: 0 0 8px;
+  font-size: 1.6rem; /* だいたい 24〜28px 相当 */
+  font-weight: 600;
+  color: #111827; /* 墨色系 */
+  letter-spacing: 0.06em;
+}
+
+.hero-section-underline {
+  height: 1px;
+  width: 100%;
+  max-width: 140px;
+  background: rgba(10, 61, 46, 0.30); /* 深緑を30%程度 */
+  border-radius: 999px;
+}
+
+.hero-section-underline.second {
+  margin-top: 4px;
+  width: 72%;
+  background: rgba(10, 61, 46, 0.25);
 }
 
 .hero-text {
   margin: 0;
-  text-align: center;
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--text-main);
   font-weight: 500;
+  text-align: left; /* 既存コピーはそのまま、左揃えに */
 }
 
 /* 共通セクション */
@@ -398,6 +435,7 @@ body::after {
     inset: 8% 8%;
     max-width: 420px;
     max-height: 420px;
+    opacity: 0.22; /* モバイルではやや濃いめでもOK */
   }
 
   body::after {
@@ -415,6 +453,19 @@ body::after {
   .header-nav {
     margin-top: 4px;
   }
+
+  .hero-inner {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero-heading-block {
+    min-width: 0;
+  }
+
+  .hero-section-title {
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -428,7 +479,7 @@ body::after {
   }
 
   .hero-copy {
-    padding-top: 24px;
+    padding-top: 40px;
   }
 }
 
