@@ -1,23 +1,28 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <title>人生地図禄 | 人生二周目ノート</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="人生を8つのチャプターに分けて、二周目視点で「詰まりやすい構造」を見える化する人生地図禄。小学生〜セカンドキャリアまでを俯瞰できます。">
+  <meta charset="utf-8" />
+  <title>処世術禄｜人生二周目ノート</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- フォント（index.html と統一） -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- フォント -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
 
-  <!-- 共通スタイル -->
-  <link rel="stylesheet" href="../style.css">
-  <!-- 世代別ノート専用スタイル -->
-  <link rel="stylesheet" href="generations.css">
+  <!-- 共通CSS / このページ専用CSS -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="knowledge-notes.css" />
 </head>
-<body class="home-body generation-body">
-  <!-- ========== ヘッダー（index.html と完全同一構造・クラス） ========== -->
+
+<body class="home-body page-knowledge-notes">
+  <!-- ======================
+       ヘッダー（ホームと統一）
+       ※仕様により変更禁止
+       ====================== -->
   <header class="site-header">
     <div class="header-inner container">
       <div class="logo-block">
@@ -27,8 +32,8 @@
 
       <nav class="header-nav">
         <a href="../index.html" class="nav-link">ホーム</a>
-        <a href="generations.html" class="nav-link is-current">人生地図禄</a>
-        <a href="knowledge-notes.html" class="nav-link">処世術禄</a>
+        <a href="generations.html" class="nav-link">人生地図禄</a>
+        <a href="knowledge-notes.html" class="nav-link is-current">処世術禄</a>
         <a href="life-stories.html" class="nav-link">人生体験禄</a>
         <a href="user-notes.html" class="nav-link">ユーザー機能</a>
         <a href="concept.html" class="nav-link">コンセプト</a>
@@ -36,152 +41,149 @@
     </div>
   </header>
 
-  <!-- ========== メイン ========== -->
-  <main class="site-main generation-main">
+  <main class="site-main">
     <div class="container">
-      <div class="generation-container">
-        <!-- HERO：ホームと同じ2カラム構造 -->
-        <section class="hero-copy generation-hero-copy">
-          <div class="hero-inner">
-            <div class="hero-heading-block">
-              <h1 class="hero-section-title">人生地図禄</h1>
-              <div class="hero-section-underline"></div>
-              <div class="hero-section-underline second"></div>
-            </div>
-            <p class="hero-text generation-hero-text">
-              人生は一度きりだけど、視点は何度でもアップデートできる。
-              人生地図禄は、そのための「8チャプターの地図」です。
-            </p>
+      <!-- ======================
+           HERO（変更禁止エリア）
+           ====================== -->
+      <section class="hero-copy">
+        <div class="hero-inner">
+          <div class="hero-heading-block">
+            <h1 class="hero-section-title">処世術禄</h1>
+            <div class="hero-section-underline"></div>
+            <div class="hero-section-underline second"></div>
           </div>
-        </section>
+          <p class="hero-text">
+            人生を賢く、したたかに。<br>
+            情報が多すぎる時代に必要なのは、「知識」ではなく「生き抜くための構造」。
+          </p>
+        </div>
+      </section>
 
-        <!-- タブ（≪トップ≫ + 8ステージ） -->
-        <section class="generation-tabs-section">
-          <div class="stage-tabs-wrapper">
-            <div class="stage-tabs" role="tablist" aria-label="人生のステージ">
-              <button class="stage-tab is-active" type="button" data-stage="top">≪トップ≫</button>
-              <button class="stage-tab" type="button" data-stage="elementary">小学生</button>
-              <button class="stage-tab" type="button" data-stage="middle">中学生</button>
-              <button class="stage-tab" type="button" data-stage="high">高校生</button>
-              <button class="stage-tab" type="button" data-stage="university">大学・専門期</button>
-              <button class="stage-tab" type="button" data-stage="earlyCareer">社会人前期</button>
-              <button class="stage-tab" type="button" data-stage="midCareer">社会人中期</button>
-              <button class="stage-tab" type="button" data-stage="lateCareer">社会人後期</button>
-              <button class="stage-tab" type="button" data-stage="secondCareer">セカンドキャリア</button>
-            </div>
-          </div>
-        </section>
+      <!-- ======================
+           HEROより下：今回の改修範囲
+           ====================== -->
+      <div class="page-inner">
 
-        <!-- ≪トップ≫ 用ビュー：人生マップ（デモ） -->
-        <section id="top-view" class="generation-section is-visible" aria-hidden="false">
-          <header class="generation-hero">
-            <h1 class="generation-title">人生地図禄</h1>
-            <p class="generation-lead">
-              人生を 8 つのチャプターに分けて、二周目視点で「詰まりやすい構造」を見える化します。
-            </p>
-          </header>
+        <div class="kn-layout">
+          <!-- 左サイド：処世術禄一覧タブ -->
+          <aside class="kn-sidebar" id="kn-sidebar" aria-label="処世術禄一覧">
+            <div class="kn-sidebar-title">処世術禄一覧</div>
+            <button class="kn-os-tab is-active" type="button" data-category="all">
+              ≪トップ≫
+            </button>
+            <button class="kn-os-tab" type="button" data-category="mind">
+              1.心の扱い方<br><span class="kn-os-label">内部OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="relation">
+              2.人との関わり方<br><span class="kn-os-label">対人OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="work">
+              3.社会での立ち回り<br><span class="kn-os-label">社会OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="habit">
+              4.行動・習慣の技術<br><span class="kn-os-label">行動OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="future">
+              5.キャッチアップの極意<br><span class="kn-os-label">未来OS</span>
+            </button>
+          </aside>
 
-          <section class="life-map card-block">
-            <h2 class="life-map-title">人生マップ（デモ）</h2>
-            <p class="life-map-sub">
-              小学生〜セカンドキャリアまでの流れを、ざっくり俯瞰できるマップです。細かい人生の違いよりも、「どんなフェーズがあるか」をつかむことを目的にしています。
-            </p>
+          <!-- メインコンテンツ -->
+          <section class="kn-main">
+            <!-- スマホ用：OSカテゴリ折りたたみトグル -->
+            <button
+              class="kn-sidebar-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="kn-sidebar"
+            >
+              <span class="kn-sidebar-toggle-icon"></span>
+              <span class="kn-sidebar-toggle-label">処世術禄一覧</span>
+            </button>
 
-            <!-- 横長タイムライン -->
-            <div class="life-map-timeline">
-              <div class="timeline-line"></div>
-              <div class="timeline-steps">
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">小学生</div>
-                  <div class="timeline-caption">「世界のルール」をはじめて学ぶ時期</div>
+            <!-- 総合検索バー（全タブ共通） -->
+            <section class="kn-section kn-search-section" aria-label="処世術の総合検索">
+              <div class="kn-search-inner">
+                <div class="kn-search-icon" aria-hidden="true">
+                  <!-- シンプルなSVG虫眼鏡 -->
+                  <svg viewBox="0 0 24 24" class="kn-search-svg">
+                    <circle cx="11" cy="11" r="6" stroke-width="2" fill="none"></circle>
+                    <line x1="15" y1="15" x2="20" y2="20" stroke-width="2"></line>
+                  </svg>
                 </div>
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">中学生</div>
-                  <div class="timeline-caption">自己意識が強まり、他人の目が気になり始める</div>
-                </div>
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">高校生</div>
-                  <div class="timeline-caption">進路と「自分らしさ」をめぐって揺れる時期</div>
-                </div>
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">大学・専門期</div>
-                  <div class="timeline-caption">自由度が一気に高まり、選択肢が爆発するフェーズ</div>
-                </div>
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">社会人前期</div>
-                  <div class="timeline-caption">仕事のリアルに触れつつ、「この道でいいのか」を考え始める</div>
-                </div>
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">社会人中期</div>
-                  <div class="timeline-caption">責任・立場・生活基盤が重くなり、方向転換のハードルが上がる</div>
-                </div>
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">社会人後期</div>
-                  <div class="timeline-caption">仕事・家族・健康など、複数のテーマが交差するフェーズ</div>
-                </div>
-                <div class="timeline-step">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-label">セカンドキャリア</div>
-                  <div class="timeline-caption">「何を残したいか」「どう終わりたいか」を再設計する時期</div>
-                </div>
+                <input
+                  id="kn-search-input"
+                  class="kn-search-input"
+                  type="search"
+                  placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
+                  autocomplete="off"
+                />
               </div>
-            </div>
+            </section>
 
-            <!-- フェーズごとのカード群 -->
-            <div class="life-map-phases">
-              <article class="phase-card">
-                <h3 class="phase-title">成長のフェーズ</h3>
-                <p class="phase-body">
-                  小学生〜高校生は、「外のルール」を学びながら、自分の軸がゆっくり形になる時期。後悔は「知らなかったこと」から生まれやすい。
+            <!-- ======================
+                 トップ専用モード
+                 ====================== -->
+
+            <!-- 今日の処世術（おすすめカード）※トップのみ表示 -->
+            <section class="kn-section kn-today-section kn-top-only" aria-label="今日の処世術">
+              <div class="kn-section-header kn-today-header">
+                <div>
+                  <h2 class="kn-section-title">今日の処世術</h2>
+                  <p class="kn-section-subtitle">
+                    ページを開くたび、または「更新」を押すたびにランダムで1つだけ表示します。
+                  </p>
+                </div>
+                <button id="kn-today-refresh" class="kn-today-refresh-btn" type="button">
+                  ↻ 更新
+                </button>
+              </div>
+              <div id="kn-today-card" class="kn-today-card-container">
+                <p class="kn-loading-text">処世術カードを読み込み中です…</p>
+              </div>
+            </section>
+
+            <!-- 今の悩みから探す（シチュエーション別ショートカット）※トップのみ表示 -->
+            <section class="kn-section kn-shortcuts-section kn-top-only" aria-label="今の悩みから探す">
+              <div class="kn-section-header kn-shortcuts-header">
+                <h2 class="kn-section-title">今の悩みから探す →</h2>
+                <p class="kn-section-subtitle">
+                  いま気になっているテーマに近いボタンを押すと、そのキーワードで検索欄がセットされます。
                 </p>
-              </article>
-              <article class="phase-card">
-                <h3 class="phase-title">選択が増えるフェーズ</h3>
-                <p class="phase-body">
-                  大学・専門期〜社会人前期は、選べる道が一気に増える時期。二周目視点では、「選ばなかった道」をどう整理するかがカギになる。
+              </div>
+              <div class="kn-shortcut-list">
+                <button class="kn-shortcut" type="button" data-keyword="職場">🔘 職場</button>
+                <button class="kn-shortcut" type="button" data-keyword="恋愛">🔘 恋愛</button>
+                <button class="kn-shortcut" type="button" data-keyword="将来">🔘 将来</button>
+                <button class="kn-shortcut" type="button" data-keyword="メンタル">🔘 メンタル</button>
+                <button class="kn-shortcut" type="button" data-keyword="お金">🔘 お金</button>
+              </div>
+            </section>
+
+            <!-- ======================
+                 OSタブ専用モード（≪トップ≫以外）
+                 ====================== -->
+            <section class="kn-section kn-results-section" aria-label="処世術カード一覧">
+              <div class="kn-section-header kn-results-header">
+                <h2 class="kn-section-title">処世術カード一覧</h2>
+                <p id="kn-results-meta" class="kn-results-meta">
+                  データを読み込み中です…
                 </p>
-              </article>
-              <article class="phase-card">
-                <h3 class="phase-title">仕事の重みが増すフェーズ</h3>
-                <p class="phase-body">
-                  社会人中期〜後期は、立場や責任が増え、いきなりの方向転換が難しくなるフェーズ。ここでの迷いは、「構造の理解不足」からも生まれる。
-                </p>
-              </article>
-              <article class="phase-card">
-                <h3 class="phase-title">自由度が再び高まるフェーズ</h3>
-                <p class="phase-body">
-                  セカンドキャリアは、「もう一度、人生を編集し直す」タイミング。制約はあるが、視点さえあれば一周目とは違う選び方ができる。
-                </p>
-              </article>
-            </div>
+              </div>
+              <div id="kn-results-container" class="kn-card-grid" aria-live="polite"></div>
+            </section>
+
+            <footer class="page-footer">
+              <p>人生二周目ノート — 処世術OSを手に入れるノート</p>
+            </footer>
           </section>
-        </section>
-
-        <!-- 各世代ステージ用ビュー（JSON描画先） -->
-        <section id="stage-view" class="generation-section" aria-hidden="true">
-          <div id="stage-content" class="stage-content">
-            <!-- JSがここに 7部構成 UI を生成します -->
-          </div>
-        </section>
+        </div>
       </div>
     </div>
   </main>
 
-  <!-- ========== フッター ========== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-copy">© 人生二周目ノート</p>
-    </div>
-  </footer>
-
-  <!-- スクリプト -->
-  <script src="generations.js"></script>
+  <!-- JS：このページ専用だけ -->
+  <script src="knowledge-notes.js" defer></script>
 </body>
 </html>
