@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <title>人生二周目ノート – 人生体験記ノート</title>
+  <title>人生体験記ノート | 人生二周目ノート</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- フォント -->
@@ -14,17 +14,18 @@
   />
 
   <!-- Material Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-  <!-- 共通CSS ＋ ページCSS -->
-  <link rel="stylesheet" href="base.css" />
-  <link rel="stylesheet" href="life-stories.css" />
-  <!-- ホームと共通のヘッダーデザイン -->
+  <!-- 共通CSS ＋ このページ専用CSS -->
   <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="life-stories.css" />
 </head>
-<body class="page-life-stories">
+<body class="home-body page-life-stories">
 
-  <!-- ヘッダー（knowledge-notes.html と完全同一構造） -->
+  <!-- ======================
+       ヘッダー（index.html と同一構造）
+       ====================== -->
   <header class="site-header">
     <div class="header-inner container">
       <div class="logo-block">
@@ -35,7 +36,7 @@
       <nav class="header-nav">
         <a href="../index.html" class="nav-link">ホーム</a>
         <a href="generations.html" class="nav-link">世代別ノート</a>
-        <a href="knowledge-notes.html" class="nav-link">教養ノート</a>
+        <a href="knowledge-notes.html" class="nav-link">処世術ノート</a>
         <a href="life-stories.html" class="nav-link is-current">人生体験記ノート</a>
         <a href="user-notes.html" class="nav-link">ユーザー機能</a>
         <a href="concept.html" class="nav-link">コンセプト</a>
@@ -43,7 +44,7 @@
     </div>
   </header>
 
-  <!-- オーバーレイメニュー（knowledge-notes.html と同じ構造） -->
+  <!-- オーバーレイメニュー（構造は従来どおり、文言のみ調整） -->
   <div class="menu-overlay" aria-hidden="true">
     <div class="menu-panel">
       <div class="menu-panel-header">
@@ -64,7 +65,7 @@
         </a>
         <a class="nav-item" href="knowledge-notes.html">
           <span class="material-symbols-rounded">psychology</span>
-          <span>教養ノート</span>
+          <span>処世術ノート</span>
         </a>
         <a class="nav-item" href="life-stories.html">
           <span class="material-symbols-rounded">menu_book</span>
@@ -72,141 +73,156 @@
         </a>
         <a class="nav-item" href="user-notes.html">
           <span class="material-symbols-rounded">person</span>
-          <span>ユーザーノート</span>
+          <span>ユーザー機能</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- ヒーロー（教養ノートと同じ .hero デザインを流用） -->
-  <section class="hero">
-    <h1 class="hero-title">人生体験記ノート</h1>
-    <p class="hero-sub1">人生10人10色。</p>
-    <p class="hero-sub2">それぞれの人生に迷いと喜びがある。</p>
-  </section>
+  <main class="site-main">
+    <div class="container">
 
-  <!-- メイン：ここから下がこのページ固有 -->
-  <main>
-    <div class="page-inner">
+      <!-- ======================
+           HERO（ホームと同じ2カラム構造）
+           ====================== -->
+      <section class="hero-copy">
+        <div class="hero-inner">
+          <div class="hero-heading-block">
+            <h1 class="hero-section-title">人生体験記ノート</h1>
+            <div class="hero-section-underline"></div>
+            <div class="hero-section-underline second"></div>
+          </div>
+          <p class="hero-text">
+            人生は10人10色。それぞれの物語から「どこで迷い、どう抜けていくか」を静かに読み解くためのノートです。<br>
+            典型パターンや職業ルートを構造として整理し、自分の現在地とこれからを考えるヒントにします。
+          </p>
+        </div>
+      </section>
 
-      <!-- 3チャプタータブ -->
-      <div class="chapter-tabs" role="tablist" aria-label="人生体験記ノートのチャプター">
-        <button
-          type="button"
-          class="chapter-tab is-active"
-          data-target="chapter-top"
-          role="tab"
-          aria-selected="true"
-        >
-          トップ
-        </button>
-        <button
-          type="button"
-          class="chapter-tab"
-          data-target="chapter-patterns"
-          role="tab"
-          aria-selected="false"
-        >
-          人生パターン図鑑
-        </button>
-        <button
-          type="button"
-          class="chapter-tab"
-          data-target="chapter-jobs"
-          role="tab"
-          aria-selected="false"
-        >
-          職業図鑑
-        </button>
+      <!-- ======================
+           ページ本体
+           ====================== -->
+      <div class="page-inner main-content">
+
+        <!-- 3チャプタータブ -->
+        <div class="chapter-tabs" role="tablist" aria-label="人生体験記ノートのチャプター">
+          <button
+            type="button"
+            class="chapter-tab is-active"
+            data-target="chapter-top"
+            role="tab"
+            aria-selected="true"
+          >
+            トップ
+          </button>
+          <button
+            type="button"
+            class="chapter-tab"
+            data-target="chapter-patterns"
+            role="tab"
+            aria-selected="false"
+          >
+            人生パターン図鑑
+          </button>
+          <button
+            type="button"
+            class="chapter-tab"
+            data-target="chapter-jobs"
+            role="tab"
+            aria-selected="false"
+          >
+            職業図鑑
+          </button>
+        </div>
+
+        <!-- ① トップ -->
+        <section id="chapter-top" class="chapter chapter-top is-active" role="tabpanel">
+          <section class="section section-top-intro">
+            <div class="section-header">
+              <h2 class="section-title">このノートについて</h2>
+              <p class="section-subtitle">
+                典型パターンから、自分の人生の位置を見つけるためのノートです。
+              </p>
+            </div>
+            <div class="top-intro-body">
+              <p>
+                「地方公立 → 国立大 → 大企業総合職」「専門学校 → 地元中小 → 手に職」など、<br>
+                よく見られる人生ルートをカードにして並べていきます。
+              </p>
+              <p>
+                正解・不正解を決めるためではなく、<br>
+                <strong>「どこで迷いやすく、どこで軌道修正しやすいか」</strong>を理解するためのページです。
+              </p>
+              <p>
+                下のタブから、<strong>人生パターン図鑑</strong>と<strong>職業図鑑</strong>を切り替えて閲覧できます。
+              </p>
+            </div>
+          </section>
+        </section>
+
+        <!-- ② 人生パターン図鑑 -->
+        <section id="chapter-patterns" class="chapter chapter-patterns" role="tabpanel" hidden>
+          <section class="section section-patterns" id="life-patterns">
+            <div class="section-header">
+              <h2 class="section-title">人生パターン図鑑</h2>
+              <p class="section-subtitle">
+                自分の人生ルートに近いパターンを見つけて、<br>
+                「分岐」と「つまずき」の構造を理解する。
+              </p>
+            </div>
+
+            <div class="patterns-intro">
+              <p>
+                ここでは、価値判断をできる限り取り除き、<br>
+                「どんなルートをたどっている（／たどる可能性がある）のか」という構造だけを切り出しています。
+              </p>
+            </div>
+
+            <!-- JSでカード（2列グリッド）を動的生成 -->
+            <div class="pattern-card-grid" id="pattern-card-grid" aria-live="polite">
+              <!-- JavaScriptにより挿入 -->
+            </div>
+          </section>
+        </section>
+
+        <!-- ③ 職業図鑑 -->
+        <section id="chapter-jobs" class="chapter chapter-jobs" role="tabpanel" hidden>
+          <section class="section section-jobs" id="job-catalog">
+            <div class="section-header">
+              <h2 class="section-title">職業図鑑</h2>
+              <p class="section-subtitle">
+                仕事の「なり方」「1日の流れ」「悩み」「喜び」を<br>
+                コンパクトに構造化した働き方の図鑑。
+              </p>
+            </div>
+
+            <div class="jobs-intro">
+              <p>
+                上のタブで<strong>「職業図鑑」</strong>を選ぶと、このエリアに職業タグが並びます。<br>
+                気になる職業タグをタップすると、下に概要カードが開きます。
+              </p>
+              <p>
+                「なり方」「日々のルーティン」「よくある悩み」「この仕事ならではの喜び」を、<br>
+                一枚のカードに整理しています。
+              </p>
+            </div>
+
+            <!-- タグ風ボタンを並べるエリア -->
+            <div class="job-tag-container" id="job-tag-container" aria-label="職業タグ一覧">
+              <!-- JavaScriptで挿入 -->
+            </div>
+
+            <!-- 選択された職業の詳細カード -->
+            <div class="job-detail-container" id="job-detail-container" aria-live="polite">
+              <!-- JavaScriptで挿入 -->
+            </div>
+          </section>
+        </section>
+
+        <footer class="page-footer">
+          <p>人生二周目ノート &mdash; 人生の構造を静かに見つめるためのノート</p>
+        </footer>
       </div>
-
-      <!-- ① トップ -->
-      <section id="chapter-top" class="chapter chapter-top is-active" role="tabpanel">
-        <section class="section section-top-intro">
-          <div class="section-header">
-            <h2 class="section-title">このノートについて</h2>
-            <p class="section-subtitle">
-              典型パターンから、自分の人生の位置を見つけるためのノートです。
-            </p>
-          </div>
-          <div class="top-intro-body">
-            <p>
-              「地方公立 → 国立大 → 大企業総合職」「専門学校 → 地元中小 → 手に職」など、<br>
-              よく見られる人生ルートをカードにして並べていきます。
-            </p>
-            <p>
-              正解・不正解を決めるためではなく、<br>
-              <strong>「どこで迷いやすく、どこで軌道修正しやすいか」</strong>を理解するためのページです。
-            </p>
-            <p>
-              下のタブから、<strong>人生パターン図鑑</strong>と<strong>職業図鑑</strong>を切り替えて閲覧できます。
-            </p>
-          </div>
-        </section>
-      </section>
-
-      <!-- ② 人生パターン図鑑 -->
-      <section id="chapter-patterns" class="chapter chapter-patterns" role="tabpanel" hidden>
-        <section class="section section-patterns" id="life-patterns">
-          <div class="section-header">
-            <h2 class="section-title">人生パターン図鑑</h2>
-            <p class="section-subtitle">
-              自分の人生ルートに近いパターンを見つけて、<br>
-              「分岐」と「つまずき」の構造を理解する。
-            </p>
-          </div>
-
-          <div class="patterns-intro">
-            <p>
-              ここでは、価値判断をできる限り取り除き、<br>
-              「どんなルートをたどっている（／たどる可能性がある）のか」という構造だけを切り出しています。
-            </p>
-          </div>
-
-          <!-- JSでカード（2列グリッド）を動的生成 -->
-          <div class="pattern-card-grid" id="pattern-card-grid" aria-live="polite">
-            <!-- JavaScriptにより挿入 -->
-          </div>
-        </section>
-      </section>
-
-      <!-- ③ 職業図鑑 -->
-      <section id="chapter-jobs" class="chapter chapter-jobs" role="tabpanel" hidden>
-        <section class="section section-jobs" id="job-catalog">
-          <div class="section-header">
-            <h2 class="section-title">職業図鑑</h2>
-            <p class="section-subtitle">
-              仕事の「なり方」「1日の流れ」「悩み」「喜び」を<br>
-              コンパクトに構造化した働き方の図鑑。
-            </p>
-          </div>
-
-          <div class="jobs-intro">
-            <p>
-              上のタブで<strong>「職業図鑑」</strong>を選ぶと、このエリアに職業タグが並びます。<br>
-              気になる職業タグをタップすると、下に概要カードが開きます。
-            </p>
-            <p>
-              「なり方」「日々のルーティン」「よくある悩み」「この仕事ならではの喜び」を、<br>
-              一枚のカードに整理しています。
-            </p>
-          </div>
-
-          <!-- タグ風ボタンを並べるエリア -->
-          <div class="job-tag-container" id="job-tag-container" aria-label="職業タグ一覧">
-            <!-- JavaScriptで挿入 -->
-          </div>
-
-          <!-- 選択された職業の詳細カード -->
-          <div class="job-detail-container" id="job-detail-container" aria-live="polite">
-            <!-- JavaScriptで挿入 -->
-          </div>
-        </section>
-      </section>
-
-      <footer class="page-footer">
-        <p>人生二周目ノート &mdash; 人生の構造を静かに見つめるためのノート</p>
-      </footer>
     </div>
   </main>
 
