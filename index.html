@@ -9,12 +9,11 @@
   <!-- フォント -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wgh...ly=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="home-body">
-  <!-- ========== ヘッダー ========== -->
   <header class="site-header">
     <div class="header-inner container">
       <div class="logo-block">
@@ -37,56 +36,66 @@
     <div class="container">
       <!-- ========== ① 二周目の知恵 一行コピー ========== -->
       <section class="hero-copy">
-        <p class="hero-text">
+        <div class="hero-inner">
+          <span class="hero-label">ホーム</span>
+          <p class="hero-text">
           情報過多の時代を終わらせる。二周目視点で、人生の本質だけを残すノート。
-        </p>
+          </p>
+        </div>
       </section>
 
       <!-- ========== ② できること（目的別導線） ========== -->
       <section class="section section-actions">
-        <div class="section-header">
-          <h2 class="section-title">できること</h2>
-          <p class="section-sub">
-            今の自分がやりたいことから、入口を選んでください。
-          </p>
-        </div>
+        <h2 class="section-heading">このサイトでできること</h2>
+        <p class="section-lead">
+          「なんとなく不安」「将来が見えない」を、“構造的に理解できる感覚”に変える。
+        </p>
 
         <div class="card-grid three">
-          <!-- カード1 -->
-          <a class="card action-card" href="contents/generations.html">
-            <h3 class="card-heading">人生の攻略法を知りたい</h3>
+          <!-- 世代別ノート -->
+          <article class="card">
+            <h3 class="card-heading">世代ごとの「人生の地図」を知る</h3>
             <p class="card-body">
-              ライフステージごとの「つまずき」と「乗り越え方」を俯瞰できる。
+              10代〜80代までの「人生の分岐点」「よくあるつまずき」「やり直しポイント」を俯瞰して、
+              今いる場所とこれからを見通せるようにする。
             </p>
-            <p class="card-tag">#世代別ノート</p>
-          </a>
+            <a class="card-link" href="contents/generations.html">
+              世代別ノートをひらく
+            </a>
+          </article>
 
-          <!-- カード2 -->
-          <a class="card action-card" href="contents/knowledge-notes.html">
-            <h3 class="card-heading">人間関係・心理の本質を知りたい</h3>
+          <!-- 教養ノート -->
+          <article class="card">
+            <h3 class="card-heading">実社会で役立つ「教養のOS」をインストール</h3>
             <p class="card-body">
-              対人関係・感情・キャリアなど、実生活で使える教養をまとめたノート。
+              心理学・人間関係・働き方・お金・社会構造など、バラバラな知識を「生き抜くためのOS」として再整理。
+              “二周目視点”で、実用的な教養だけを残す。
             </p>
-            <p class="card-tag">#教養ノート</p>
-          </a>
+            <a class="card-link" href="contents/knowledge-notes.html">
+              教養ノートをひらく
+            </a>
+          </article>
 
-          <!-- カード3 -->
-          <a class="card action-card" href="contents/life-stories.html">
-            <h3 class="card-heading">他人の人生から学びたい</h3>
+          <!-- 人生体験記ノート -->
+          <article class="card">
+            <h3 class="card-heading">リアルな人生パターンから学ぶ</h3>
             <p class="card-body">
-              さまざまな人生ストーリーから、選択と結果のパターンを読み解く。
+              就職・転職・起業・専門職・フリーター・専業主婦／主夫など、
+              実際の人生パターンと「そこで起きたこと」を、構造的に読み解く。
             </p>
-            <p class="card-tag">#人生体験記ノート</p>
-          </a>
+            <a class="card-link" href="contents/life-stories.html">
+              人生体験記ノートをひらく
+            </a>
+          </article>
         </div>
       </section>
 
-      <!-- ========== ③ 3つのノートを「でかいタイル」にする ========== -->
+      <!-- ========== ③ 3つのノート ========== -->
       <section class="section section-tiles">
-        <div class="section-header">
-          <h2 class="section-title">3つのノート</h2>
-          <p class="section-sub">ここから先は、それぞれのノートの世界に入っていきます。</p>
-        </div>
+        <h2 class="section-heading">3つのノート</h2>
+        <p class="section-lead">
+          人生二周目ノートは、「世代別ノート」「教養ノート」「人生体験記ノート」の3つで構成されています。
+        </p>
 
         <div class="tile-list">
           <!-- 世代別ノート -->
@@ -95,7 +104,8 @@
             <div class="tile-text">
               <h3 class="tile-title">世代別ノート</h3>
               <p class="tile-sub">
-                人生を、小学生〜セカンドキャリアまでのステージで整理した「人生の攻略マップ」。
+                10代〜80代までの「人生の地図」。それぞれの年代で起こりがちな分岐・迷い・やり直しのポイントを俯瞰して、
+                自分の今とこれからの位置をつかむためのノート。
               </p>
             </div>
           </a>
@@ -117,36 +127,42 @@
             <div class="tile-text">
               <h3 class="tile-title">人生体験記ノート</h3>
               <p class="tile-sub">
-                さまざまな人の人生の分岐と結果から、「こう生きるとこうなる」をコンパクトに学ぶ。
+                一人ひとりの人生体験を、「ルート」「分岐」「つまずき」「その後の選択」という視点で整理。
               </p>
             </div>
           </a>
         </div>
       </section>
 
-      <!-- ========== ④ 補助コンテンツ（ユーザー機能・コンセプト） ========== -->
+      <!-- ========== ④ 補助ノート ========== -->
       <section class="section section-subcards">
-        <div class="section-header">
-          <h2 class="section-title">補助ノート</h2>
-          <p class="section-sub">自分だけのログと、このノートが生まれた背景。</p>
-        </div>
+        <h2 class="section-heading">補助ノート</h2>
+        <p class="section-lead">
+          3つのノートを使いながら、自分自身の「一次情報」を記録していくための補助ノートです。
+        </p>
 
         <div class="card-grid two">
-          <!-- ユーザー機能 -->
-          <a class="card sub-card" href="contents/user-notes.html">
-            <h3 class="card-heading">ユーザー機能</h3>
+          <!-- マイノート -->
+          <article class="card sub-card">
+            <h3 class="card-heading">マイノート（自分用メモ）</h3>
             <p class="card-body">
-              自分の気づきや価値観をストックし、二周目視点のコメントと一緒に振り返れるマイノート機能。
+              気づき・モヤモヤ・これから試したいことなどを、自由に書きためるためのノート。
             </p>
-          </a>
+            <a class="card-link" href="contents/user-notes.html">
+              マイノートをひらく
+            </a>
+          </article>
 
-          <!-- コンセプト -->
-          <a class="card sub-card" href="contents/concept.html">
-            <h3 class="card-heading">コンセプト</h3>
+          <!-- コンセプトノート -->
+          <article class="card sub-card">
+            <h3 class="card-heading">コンセプトノート</h3>
             <p class="card-body">
-              なぜこのノートが生まれたのか、二周目視点とは何かをまとめた解説ページ。
+              人生二周目ノート全体の設計思想や、「二周目視点」の考え方をまとめたノート。
             </p>
-          </a>
+            <a class="card-link" href="contents/concept.html">
+              コンセプトノートをひらく
+            </a>
+          </article>
         </div>
       </section>
     </div>
