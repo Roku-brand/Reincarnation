@@ -1,225 +1,166 @@
-/* =========================
-   共通スタイル
-   ========================= */
+/* ============================================================
+   Quiet Strength Design System 基本トーン
+   （淡いグリーン / 白 / 深緑 / 墨色）
+============================================================ */
 
 :root {
-  --bg-light: #e6fbf0;
-  --bg-light-2: #e0f7ec;
-  --card-bg: #ffffff;
-  --card-bg-soft: rgba(255, 255, 255, 0.96);
-  --accent: #16a34a;
-  --accent-soft: #bbf7d0;
-  --text-main: #14532d;
-  --text-sub: #4b5563;
-  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-sm: 999px;
+  --text-main: #0f172a;
+  --text-sub: #475569;
+
+  --green-deep: #0A3D2E;
+  --green-soft: #F3F8F5;
+  --green-border: rgba(10, 61, 46, 0.18);
+
+  --card-bg-soft: #ffffff;
+  --card-bg-soft2: #f7faf8;
+
+  --border-hairline: rgba(10, 61, 46, 0.15);
 }
 
-/* リセットに近い軽い調整 */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* ============================================================
+   全体背景（コンパス背景を撤去し、静かな淡緑に）
+============================================================ */
 
-html,
-body {
+body.home-body {
   margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Inter", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: "Inter", "Noto Sans JP", sans-serif;
   color: var(--text-main);
 
-  /* 背景グラデーション */
-  background: linear-gradient(180deg, #e9fdf3 0%, #e0f7ec 45%, #ecfdf5 100%);
-  min-height: 100vh;
-  position: relative;
+  /* Quiet Strength 背景 */
+  background: linear-gradient(180deg, #F3F8F5 0%, #F8FBF9 100%);
+
+  /* 旧：コンパス背景（削除）
+  &::before, &::after {...}
+  */
 }
 
-/* =========================
-   コンパス風の線画背景（濃いめ表示バージョン）
-   ========================= */
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 5% 10%;
-  margin: auto;
-  max-width: 540px;
-  max-height: 540px;
-  border-radius: 50%;
-
-  /* コンパス外円（濃いめ） */
-  border: 2px solid rgba(255, 255, 255, 0.9);
-
-  /* 外側リングの存在感アップ */
-  box-shadow:
-    0 0 0 22px rgba(255, 255, 255, 0.26),
-    0 0 0 42px rgba(187, 247, 208, 0.30);
-
-  /* 背景に円 + 線 + 北南ドット */
-  background-image:
-
-    /* 北側の白ドット（現在地） */
-    radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 1) 0 6px, transparent 7px),
-
-    /* 南側の緑ドット（次の選択） */
-    radial-gradient(circle at 50% 92%, rgba(34, 197, 94, 1) 0 6px, transparent 7px),
-
-    /* 中央を貫く縦の針（白→薄緑グラデ） */
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(34, 197, 94, 0.4));
-
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size:
-    100% 100%,
-    100% 100%,
-    3px 80%;
-
-  opacity: 0.58; /* ←背景の中でも十分視認できる濃さ */
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 10% 14%;
-  margin: auto;
-  max-width: 680px;
-  max-height: 680px;
-  border-radius: 50%;
-
-  /* 外側ふわっと光るエフェクト（強め） */
-  box-shadow:
-    0 0 110px rgba(255, 255, 255, 0.55),
-    0 0 200px rgba(187, 247, 208, 0.45);
-
-  opacity: 0.45;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 背景の上に内容を乗せるため */
-.home-body {
-  display: flex;
-  flex-direction: column;
-}
 .container {
-  width: 100%;
-  max-width: 1040px;
+  width: min(1100px, 92%);
   margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1;
 }
 
-/* =========================
-   ヘッダー
-   ========================= */
+/* ============================================================
+   1. ヘッダー — Quiet Strength 化
+============================================================ */
 
 .site-header {
-  padding: 18px 0 12px;
+  background: #ffffffA0;
+  backdrop-filter: blur(8px);
+  border-bottom: 0.5px solid var(--border-hairline);
 }
 
 .header-inner {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 24px;
-}
-
-.logo-block {
-  min-width: 0;
+  align-items: center;
+  padding: 18px 0;
 }
 
 .logo-title {
-  font-size: 1.2rem;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  color: var(--green-deep);
 }
 
 .logo-sub {
-  margin-top: 2px;
-  font-size: 0.78rem;
+  font-size: 11px;
   color: var(--text-sub);
-  opacity: 0.9;
 }
 
 .header-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  font-size: 0.9rem;
+  gap: 20px;
 }
 
 .nav-link {
   position: relative;
-  color: var(--text-sub);
   text-decoration: none;
-  padding: 4px 2px;
-  transition: color 0.18s ease, transform 0.18s ease;
+  color: var(--text-sub);
+  font-size: 14px;
+  padding-bottom: 4px;
+  transition: color .2s ease;
+}
+
+.nav-link:hover {
+  color: var(--green-deep);
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -2px;
-  width: 0;
+  bottom: -1px;
+  width: 0%;
   height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #4ade80, #22c55e);
-  transition: width 0.2s ease;
+  background: var(--green-deep);
+  border-radius: 2px;
+  transition: width .25s ease;
 }
 
-.nav-link:hover {
-  color: var(--text-main);
-  transform: translateY(-1px);
-}
-
-.nav-link:hover::after,
-.nav-link.is-current::after {
+.nav-link:hover::after {
   width: 100%;
 }
 
 .nav-link.is-current {
-  color: var(--text-main);
+  color: var(--green-deep);
   font-weight: 600;
 }
 
-/* =========================
-   メイン
-   ========================= */
-
-.site-main {
-  flex: 1;
-  padding: 16px 0 40px;
+.nav-link.is-current::after {
+  width: 100%;
 }
 
-/* ① 一行コピー */
+/* ============================================================
+   2. HEROセクション（ホームバッジ追加対応）
+============================================================ */
+
 .hero-copy {
-  padding: 32px 0 12px;
+  margin: 70px 0 60px;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card-bg-soft);
+  border: 1px solid var(--green-border);
+  border-radius: 14px;
+  padding: 26px 32px;
+  box-shadow: 0 8px 18px rgba(10, 61, 46, 0.08);
+}
+
+.hero-label {
+  background: var(--green-deep);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .hero-text {
-  margin: 0;
-  text-align: center;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--text-main);
+  font-size: 17px;
   font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-main);
 }
 
-/* 共通セクション */
+@media (max-width: 600px) {
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 24px;
+  }
+}
+
+/* ============================================================
+   共通セクション
+============================================================ */
+
 .section {
-  margin-top: 36px;
+  margin-bottom: 60px;
 }
 
 .section-header {
@@ -227,229 +168,183 @@ body::after {
 }
 
 .section-title {
-  margin: 0 0 4px;
-  font-size: 1.2rem;
+  font-size: 20px;
   font-weight: 700;
+  color: var(--green-deep);
 }
 
 .section-sub {
-  margin: 0;
-  font-size: 0.9rem;
+  font-size: 14px;
   color: var(--text-sub);
 }
 
-/* =========================
-   カードレイアウト
-   ========================= */
-
-.card-grid {
-  display: grid;
-  gap: 18px;
-}
+/* ============================================================
+   3. カード（できることセクション）
+============================================================ */
 
 .card-grid.three {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
 }
 
-.card-grid.two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-/* 汎用カード */
 .card {
-  position: relative;
-  padding: 18px 20px 20px;
-  border-radius: var(--radius-lg);
   background: var(--card-bg-soft);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
+  padding: 22px 24px;
+  border-radius: 14px;
+
+  /* Quiet Strength トーン */
+  border: 0.5px solid var(--green-border);
+  box-shadow: 0 4px 10px rgba(10, 61, 46, 0.08);
+
+  transition: transform .2s ease, box-shadow .2s ease;
   text-decoration: none;
-  color: var(--text-main);
-  display: block;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  color: inherit;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.16);
-  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 61, 46, 0.12);
 }
 
 .card-heading {
-  margin: 0 0 8px;
-  font-size: 1rem;
+  font-size: 17px;
   font-weight: 600;
+  margin: 0 0 6px;
 }
 
 .card-body {
-  margin: 0 0 12px;
-  font-size: 0.9rem;
+  font-size: 13px;
   color: var(--text-sub);
+  line-height: 1.6;
+  margin: 0 0 10px;
 }
 
 .card-tag {
-  margin: 0;
-  font-size: 0.78rem;
-  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green-deep);
 }
 
-/* =========================
-   ③ でかいタイル
-   ========================= */
-
-.section-tiles {
-  margin-top: 44px;
+.card-link {
+  margin-top: 10px;
+  display: inline-block;
+  font-size: 14px;
+  color: var(--green-deep);
+  font-weight: 600;
+  text-decoration: underline;
 }
+
+/* responsive */
+@media (max-width: 900px) {
+  .card-grid.three {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   4. タイルカード（3つのノート）
+============================================================ */
 
 .tile-list {
-  max-width: 960px;
-  margin: 20px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  display: grid;
+  gap: 22px;
 }
 
 .tile-card {
-  position: relative;
+  background: var(--card-bg-soft2);
+  padding: 24px 28px;
+  border-radius: 16px;
+
   display: flex;
+  gap: 22px;
   align-items: flex-start;
-  gap: 16px;
-  padding: 22px 22px 24px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(240, 253, 244, 0.98));
-  box-shadow: var(--shadow-soft);
+
+  border: 0.5px solid var(--green-border);
+  box-shadow: 0 5px 16px rgba(10, 61, 46, 0.07);
+
   text-decoration: none;
-  color: var(--text-main);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  color: inherit;
+
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .tile-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 26px 60px rgba(15, 23, 42, 0.22);
-  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(10, 61, 46, 0.12);
 }
 
 .tile-badge {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-soft);
-  color: var(--accent);
+  font-size: 20px;
   font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.tile-text {
-  min-width: 0;
+  color: var(--green-deep);
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 0.5px solid var(--green-border);
 }
 
 .tile-title {
-  margin: 0 0 6px;
-  font-size: 1.05rem;
+  margin: 0 0 4px;
+  font-size: 18px;
   font-weight: 600;
+  color: var(--green-deep);
 }
 
 .tile-sub {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 13px;
   color: var(--text-sub);
+  line-height: 1.6;
 }
 
-/* =========================
-   補助カード
-   ========================= */
+/* ============================================================
+   5. 補助ノートカード
+============================================================ */
 
-.section-subcards {
-  margin-top: 44px;
+.card-grid.two {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
 }
 
 .sub-card {
-  min-height: 140px;
+  background: var(--card-bg-soft);
+  border: 0.5px solid var(--green-border);
+  border-radius: 14px;
+  padding: 24px;
+
+  box-shadow: 0 4px 12px rgba(10, 61, 46, 0.07);
+
+  transition: transform .2s ease, box-shadow .2s ease;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* =========================
-   フッター
-   ========================= */
-
-.site-footer {
-  padding: 16px 0 24px;
-  font-size: 0.8rem;
-  color: var(--text-sub);
+.sub-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 61, 46, 0.12);
 }
 
-.footer-inner {
-  display: flex;
-  justify-content: center;
-}
-
-.footer-copy {
-  margin: 0;
-}
-
-/* =========================
-   レスポンシブ
-   ========================= */
-
-@media (max-width: 960px) {
-  body::before {
-    inset: 8% 8%;
-    max-width: 420px;
-    max-height: 420px;
-  }
-
-  body::after {
-    inset: 12% 10%;
-    max-width: 520px;
-    max-height: 520px;
-  }
-
-  .header-inner {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .header-nav {
-    margin-top: 4px;
-  }
-}
-
-@media (max-width: 768px) {
-  .card-grid.three,
+@media (max-width: 900px) {
   .card-grid.two {
     grid-template-columns: 1fr;
   }
-
-  .tile-card {
-    flex-direction: row;
-  }
-
-  .hero-copy {
-    padding-top: 24px;
-  }
 }
 
-@media (max-width: 480px) {
-  .logo-title {
-    font-size: 1.05rem;
-  }
+/* ============================================================
+   6. フッター
+============================================================ */
 
-  .logo-sub {
-    font-size: 0.74rem;
-  }
+.site-footer {
+  margin-top: 60px;
+  padding: 24px 0;
+  background: #ffffff;
+  border-top: 0.5px solid var(--border-hairline);
+}
 
-  .hero-text {
-    font-size: 0.98rem;
-  }
-
-  .section-title {
-    font-size: 1.08rem;
-  }
-
-  .tile-card {
-    padding: 18px 18px 20px;
-  }
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-sub);
+  text-align: center;
 }
