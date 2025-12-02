@@ -1,159 +1,90 @@
 /* ==============================
-   ベーススタイル
+   ヒーロー（knowledge-notes.css と同じデザイン）
    ============================== */
 
-:root {
-  --color-bg: #f5faf7;
-  --color-bg-card: #ffffff;
-  --color-border-soft: #d7e8dd;
-  --color-accent: #7bbf9b;
-  --color-accent-soft: #e5f3eb;
-  --color-text-main: #243528;
-  --color-text-sub: #5f7463;
-  --color-tag-bg: #e8f4ee;
-  --color-tag-border: #b9d8c6;
-  --shadow-soft: 0 16px 40px rgba(9, 40, 26, 0.08);
-  --radius-card: 22px;
-  --radius-pill: 999px;
-  --font-main: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+/* ヒーロー */
+.hero {
+  background: linear-gradient(135deg, #dcfce7 0%, #ecfdf5 45%, #ffffff 100%);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  margin: 6px auto 12px;
+  padding: 24px 20px 20px;
+  text-align: center;
+  max-width: 1400px;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+.hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 0 6px;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-body.page-life-stories {
-  font-family: var(--font-main);
-  background-color: var(--color-bg);
-  color: var(--color-text-main);
-  line-height: 1.7;
-}
-
-.page-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ==============================
-   共通ヘッダー（他ページと統一）
-   ============================== */
-
-.site-header {
-  border-bottom: 1px solid rgba(196, 220, 205, 0.9);
-  background-color: #ffffff;
-}
-
-.site-header-inner {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 14px 16px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.site-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.site-title {
+.hero-sub1 {
   font-size: 18px;
+  margin: 0 0 4px;
+  color: var(--text-sub);
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-decoration: none;
-  color: var(--color-text-main);
 }
 
-.site-tagline {
+.hero-sub2 {
   margin: 0;
-  font-size: 11px;
-  color: var(--color-text-sub);
-}
-
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.nav-link {
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  color: var(--color-text-main);
-  background-color: #f5faf7;
-  border: 1px solid rgba(196, 220, 205, 0.8);
-  transition: background-color 0.15s ease, color 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.nav-link:hover {
-  box-shadow: 0 6px 14px rgba(24, 78, 47, 0.18);
-  background-color: #ffffff;
-}
-
-.nav-link.is-current {
-  background-color: var(--color-accent);
-  color: #ffffff;
-  border-color: var(--color-accent);
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
 /* ==============================
-   メイン & チャプタータブ
+   メインレイアウト（knowledge-notes を踏襲）
    ============================== */
 
-.main-content {
-  flex: 1;
-  padding: 24px 16px 56px;
+main {
+  padding: 8px 8px 32px;
 }
 
-/* タブ（教養ノートのサブタブと揃えたチップ） */
+.page-inner {
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+/* ==============================
+   チャプタータブ（このページ固有）
+   ============================== */
 
 .chapter-tabs {
-  max-width: 1040px;
-  margin: 0 auto 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin: 8px 0 16px;
 }
 
 .chapter-tab {
   padding: 6px 16px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(196, 220, 205, 0.9);
-  background-color: #ffffff;
+  border: 1px solid rgba(148, 239, 193, 0.8);
+  background: rgba(255, 255, 255, 0.95);
+  display: inline-flex;
+  align-items: center;
   font-size: 12px;
   cursor: pointer;
-  color: var(--color-text-main);
-  transition: background-color 0.15s ease, border-color 0.15s ease,
-    box-shadow 0.15s ease, transform 0.1s ease;
+  color: var(--text-muted);
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease,
+    transform 0.12s ease, border-color 0.18s ease;
 }
 
 .chapter-tab:hover {
-  box-shadow: 0 6px 14px rgba(22, 70, 43, 0.15);
+  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.22);
   transform: translateY(-1px);
 }
 
 .chapter-tab.is-active {
-  background-color: var(--color-accent);
-  color: #ffffff;
-  border-color: var(--color-accent);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #f0fdf4;
+  border-color: transparent;
+  box-shadow: 0 10px 20px rgba(22, 163, 74, 0.4);
 }
 
-/* チャプター共通 */
+/* ==============================
+   チャプター共通
+   ============================== */
 
 .chapter {
   display: block;
@@ -164,119 +95,39 @@ body.page-life-stories {
 }
 
 /* ==============================
-   トップ：コンパス背景つきヒーロー
-   （教養ノートのヒーローと同じ構造）
-   ============================== */
-
-.hero {
-  max-width: 1040px;
-  margin: 8px auto 20px;
-  padding: 56px 32px 54px;
-  border-radius: 32px;
-  background-color: #f3fbf7;
-  box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(215, 232, 221, 0.95);
-  position: relative;
-  overflow: hidden;
-}
-
-/* コンパス（同心円）背景 */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  background-image:
-    radial-gradient(circle at 50% 30%,
-      rgba(123, 191, 155, 0.12) 0,
-      rgba(123, 191, 155, 0.05) 36%,
-      transparent 37%),
-    radial-gradient(circle at 50% 30%,
-      transparent 0,
-      transparent 48%,
-      rgba(123, 191, 155, 0.13) 49%,
-      transparent 50%),
-    radial-gradient(circle at 50% 30%,
-      transparent 0,
-      transparent 65%,
-      rgba(123, 191, 155, 0.11) 66%,
-      transparent 67%),
-    radial-gradient(circle at 50% 120%,
-      rgba(204, 231, 216, 0.75) 0,
-      rgba(204, 231, 216, 0.45) 40%,
-      transparent 70%);
-  opacity: 0.9;
-  pointer-events: none;
-}
-
-.hero-inner {
-  max-width: 640px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-label {
-  display: inline-block;
-  padding: 4px 14px;
-  margin-bottom: 16px;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  border-radius: var(--radius-pill);
-  background-color: rgba(229, 243, 235, 0.95);
-}
-
-.hero-title {
-  margin: 0 0 18px;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-}
-
-.hero-copy-line {
-  margin: 4px 0;
-  font-size: 15px;
-  color: var(--color-text-sub);
-}
-
-/* ==============================
-   セクション共通（カード）
+   セクション共通（カードUI）
    ============================== */
 
 .section {
-  max-width: 1040px;
-  margin: 0 auto 32px;
-  padding: 24px 22px 28px;
-  background-color: rgba(255, 255, 255, 0.96);
-  border-radius: var(--radius-card);
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #dcfce7;
   box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(215, 232, 221, 0.9);
+  padding: 18px 18px 22px;
+  margin-bottom: 18px;
 }
 
 .section-header {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .section-title {
-  margin: 0 0 8px;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px;
 }
 
 .section-subtitle {
-  margin: 0;
   font-size: 13px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
+  margin: 0;
 }
 
+.top-intro-body,
 .patterns-intro,
-.jobs-intro,
-.top-intro-body {
+.jobs-intro {
   font-size: 13px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
 }
 
 .top-intro-body p {
@@ -284,35 +135,41 @@ body.page-life-stories {
 }
 
 /* ==============================
-   人生パターン図鑑（カード）
+   人生パターン図鑑：カード & アコーディオン
    ============================== */
 
 .pattern-card-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 860px) {
+  .pattern-card-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .pattern-card {
-  background-color: var(--color-bg-card);
-  border-radius: 18px;
-  border: 1px solid var(--color-border-soft);
-  box-shadow: 0 10px 22px rgba(18, 56, 36, 0.06);
+  border-radius: 16px;
+  border: 1px solid #bbf7d0;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
   overflow: hidden;
   transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
 .pattern-card-header {
-  padding: 14px 16px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   background: linear-gradient(
     90deg,
-    rgba(229, 243, 235, 0.92),
-    rgba(245, 250, 247, 1)
+    rgba(220, 252, 231, 0.9),
+    rgba(236, 253, 245, 0.95)
   );
   border: none;
   width: 100%;
@@ -326,41 +183,41 @@ body.page-life-stories {
 
 .pattern-card-title {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .pattern-card-route-label {
   margin: 0;
   font-size: 11px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
 }
 
 .pattern-card-toggle-icon {
-  margin-left: 16px;
+  margin-left: 12px;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 999px;
-  border: 1px solid rgba(123, 191, 155, 0.4);
+  border: 1px solid rgba(34, 197, 94, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
-  color: var(--color-accent);
-  background-color: rgba(255, 255, 255, 0.95);
+  color: #16a34a;
+  background-color: #f0fdf4;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .pattern-card-summary {
-  padding: 10px 16px 10px;
+  padding: 8px 12px;
   font-size: 12px;
-  color: var(--color-text-sub);
-  border-top: 1px solid rgba(230, 240, 234, 0.9);
-  background-color: rgba(250, 252, 251, 0.96);
+  color: var(--text-muted);
+  border-top: 1px solid #dcfce7;
+  background: #f9fffb;
 }
 
-/* アコーディオン */
+/* アコーディオン内容 */
 
 .pattern-card-details-wrapper {
   overflow: hidden;
@@ -369,28 +226,28 @@ body.page-life-stories {
 }
 
 .pattern-card-details-inner {
-  padding: 14px 16px 16px;
+  padding: 10px 12px 12px;
   font-size: 12px;
-  background-color: #ffffff;
+  background: #ffffff;
 }
 
 .pattern-detail-block {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .pattern-detail-title {
   margin: 0 0 4px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-text-main);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
+  color: var(--text-sub);
 }
 
 .pattern-detail-list {
   margin: 0;
   padding-left: 16px;
   font-size: 12px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
 }
 
 .pattern-detail-list li {
@@ -398,17 +255,17 @@ body.page-life-stories {
 }
 
 .pattern-insight {
-  padding: 10px 12px;
-  margin-top: 6px;
+  margin-top: 4px;
+  padding: 8px 10px;
   border-radius: 12px;
-  background-color: var(--color-accent-soft);
-  border: 1px solid rgba(123, 191, 155, 0.28);
+  background: #ecfdf3;
+  border: 1px solid #bbf7d0;
 }
 
 .pattern-insight-line {
   margin: 0 0 4px;
   font-size: 11px;
-  color: var(--color-text-main);
+  color: var(--text-sub);
 }
 
 .pattern-insight-line:last-child {
@@ -416,61 +273,60 @@ body.page-life-stories {
 }
 
 .pattern-final-line {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   font-size: 11px;
-  color: var(--color-text-main);
+  color: var(--text-sub);
   font-style: italic;
 }
 
-/* 開閉時 */
+/* 開閉時の強調 */
 
 .pattern-card.is-open {
-  border-color: rgba(123, 191, 155, 0.65);
-  box-shadow: 0 18px 44px rgba(15, 54, 35, 0.16);
+  border-color: #22c55e;
+  box-shadow: 0 14px 26px rgba(22, 163, 74, 0.32);
   transform: translateY(-1px);
 }
 
 .pattern-card.is-open .pattern-card-toggle-icon {
   transform: rotate(90deg);
-  background-color: rgba(229, 243, 235, 1);
+  background-color: #bbf7d0;
 }
 
 /* ==============================
-   職業図鑑
+   職業図鑑：タグ & 詳細カード
    ============================== */
 
 .job-tag-container {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 8px;
-  margin-bottom: 18px;
+  margin-top: 6px;
+  margin-bottom: 14px;
 }
 
 .job-tag-button {
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--color-tag-border);
-  background-color: var(--color-tag-bg);
+  border: 1px solid #bae6fd;
+  background: #eff6ff;
   font-size: 11px;
-  line-height: 1.4;
-  color: var(--color-text-main);
+  color: #1e3a8a;
   cursor: pointer;
-  outline: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease,
-    transform 0.12s ease, box-shadow 0.12s ease;
+  transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease,
+    border-color 0.18s ease;
   white-space: nowrap;
 }
 
 .job-tag-button:hover {
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(16, 58, 36, 0.12);
 }
 
 .job-tag-button.is-active {
-  background-color: var(--color-accent);
-  color: #ffffff;
-  border-color: var(--color-accent);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-color: transparent;
+  color: #f0fdf4;
+  box-shadow: 0 10px 20px rgba(22, 163, 74, 0.4);
 }
 
 /* 詳細カード */
@@ -480,16 +336,16 @@ body.page-life-stories {
 }
 
 .job-card {
-  background-color: var(--color-bg-card);
-  border-radius: 18px;
-  border: 1px solid var(--color-border-soft);
-  box-shadow: 0 12px 28px rgba(14, 52, 34, 0.1);
-  padding: 16px 16px 18px;
+  border-radius: 16px;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  padding: 14px 14px 16px;
+  box-shadow: var(--shadow-soft);
   font-size: 12px;
 }
 
 .job-card-header {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .job-card-title {
@@ -499,43 +355,44 @@ body.page-life-stories {
 }
 
 .job-card-category {
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   font-size: 11px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
 }
 
 .job-card-examples {
   margin: 0;
   font-size: 11px;
-  color: var(--color-text-main);
+  color: var(--text-sub);
 }
 
 .job-card-examples span {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .job-detail-block {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .job-detail-title {
   margin: 0 0 4px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
+  color: var(--text-sub);
 }
 
 .job-detail-text {
   margin: 0;
   font-size: 12px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
 }
 
 .job-detail-list {
   margin: 0;
   padding-left: 16px;
   font-size: 12px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
 }
 
 .job-detail-list li {
@@ -543,63 +400,23 @@ body.page-life-stories {
 }
 
 .job-two-round-view {
-  margin-top: 12px;
-  padding: 9px 11px;
+  margin-top: 10px;
+  padding: 8px 10px;
   border-radius: 12px;
-  background-color: var(--color-accent-soft);
-  border: 1px solid rgba(123, 191, 155, 0.28);
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
   font-size: 11px;
-  color: var(--color-text-main);
+  color: var(--text-sub);
 }
 
 /* ==============================
-   フッター
+   フッター（軽め）
    ============================== */
 
 .page-footer {
-  padding: 18px 16px 24px;
+  margin-top: 10px;
+  padding: 10px 4px 0;
   font-size: 11px;
-  color: var(--color-text-sub);
+  color: var(--text-muted);
   text-align: center;
-}
-
-/* ==============================
-   レスポンシブ
-   ============================== */
-
-@media (min-width: 720px) {
-  .site-header-inner {
-    padding: 16px 24px 12px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .main-content {
-    padding: 28px 24px 72px;
-  }
-
-  .hero {
-    margin-top: 12px;
-    padding: 60px 40px 56px;
-  }
-
-  .hero-title {
-    font-size: 30px;
-  }
-
-  .section {
-    padding: 28px 28px 32px;
-  }
-
-  .pattern-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-  }
-}
-
-@media (min-width: 960px) {
-  .pattern-card-grid {
-    gap: 20px;
-  }
 }
