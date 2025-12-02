@@ -47,7 +47,7 @@
 .kn-sidebar {
   width: 220px;
   flex-shrink: 0;
-  background: transparent;           /* 枠・背景を削除 */
+  background: transparent;
   border: none;
   border-radius: 0;
   padding: 4px 0;
@@ -71,7 +71,7 @@
   text-align: left;
   padding: 8px 10px;
   margin-bottom: 4px;
-  border-radius: 4px; /* 角をさらにシャープに */
+  border-radius: 4px; /* シャープめ */
   border: 1px solid transparent;
   background: transparent;
   color: #065f46;
@@ -334,7 +334,7 @@
 }
 
 /* =============================================================
-   検索結果グリッド
+   検索結果グリッド（≪トップ≫以外のタブ用）
    ============================================================= */
 
 .kn-results-header {
