@@ -1,141 +1,488 @@
-const lsPatterns = [
-  {
-    title: "地方公立 → 国立大 → 大企業総合職ルート",
-    tag: "安定志向 × 王道",
-    flow: "高校：地方公立 / 大学：地方 or 首都圏国立 / 就職：大企業総合職",
-    forks: [
-      "大学進学時に「地元に残るか／都市部に出るか」で迷う",
-      "3〜5年目で「このまま会社に残るか／転職か」で揺れやすい"
-    ],
-    risks: [
-      "「レールに乗ってきただけ」という感覚から、自己肯定感が下がることがある",
-      "社内評価に自分の価値を寄せすぎて、潰れそうになるパターン"
-    ],
-    secondLoop: [
-      "二周目視点では、“安定しているからこそできる挑戦”を小さく積むと満足度が上がりやすい。",
-      "社外コミュニティや副業で、もう一つの物語のタネを育てておくと later の自由度が広がる。"
-    ]
-  },
-  {
-    title: "専門学校 → 地元中小 → 手に職ルート",
-    tag: "技能 × ローカル",
-    flow: "高校：進学 or 就職 / 専門学校：2〜3年 / 就職：地元の中小企業・専門職",
-    forks: [
-      "20代後半で「この技術を続けるか、マネジメントに回るか」を選ぶ場面が来る",
-      "30代で、独立・フリーランス化を考えるタイミングが訪れやすい"
-    ],
-    risks: [
-      "職場によっては教育体制が弱く、“我流のまま止まる”危険がある",
-      "地元コミュニティが狭く、人間関係のトラブルが大きく感じやすい"
-    ],
-    secondLoop: [
-      "長く続けるほど“暗黙知”が増えるので、早めに言語化・発信しておくと武器になる。",
-      "二周目視点では、「技術 × 教える」「技術 × 地域」など掛け合わせの選択肢が広い。"
-    ]
-  },
-  {
-    title: "非進学 → フリーター → 正社員／転職ルート",
-    tag: "回り道 × 再スタート",
-    flow: "高校卒業後：非進学・アルバイト / 20代中盤以降：正社員 or 契約社員化",
-    forks: [
-      "フリーター期間中に“何となく続けるか／どこかで職歴を積み始めるか”の分岐がある",
-      "正社員化後も「本当にやりたいことは別にある気がする…」というモヤモヤを抱えがち"
-    ],
-    risks: [
-      "自己評価を低く見積もりすぎて、“選択肢がない”と感じやすい",
-      "生活リズムが不安定になり、健康とメンタルが揺れやすい"
-    ],
-    secondLoop: [
-      "回り道の経験は、後から“共感力”という形で強みになる。",
-      "二周目視点では、「何から逃げてきたのか」「何を守りたかったのか」を整理すると、進みたい方向が見えやすい。"
-    ]
-  },
-  {
-    title: "地方 → 都市圏私大 → ベンチャー企業ルート",
-    tag: "挑戦 × カオス",
-    flow: "高校：地方 / 大学：都市圏私大 / 就職：ベンチャー・スタートアップ",
-    forks: [
-      "入社1〜2年で、会社の成長スピードと自分の適性にギャップを感じやすい",
-      "20代後半で「このままベンチャーに残るか／大企業に移るか」を考える"
-    ],
-    risks: [
-      "仕事とプライベートの境目が曖昧になり、燃え尽きリスクが高い",
-      "会社の事情で事業撤退・組織変更が頻繁に起こり、心が落ち着かない"
-    ],
-    secondLoop: [
-      "混沌の中で鍛えられた“問題解決力・スピード感”は、どこに行っても強い武器になる。",
-      "二周目視点では、短期的な成長ストーリーだけでなく、“自分の寿命に合った働き方”を設計することが大切。"
-    ]
-  },
-  {
-    title: "留学・海外志向ルート",
-    tag: "グローバル × 外の視点",
-    flow: "高校〜大学：短期 or 長期留学 / 社会人：海外就職 or 外資系企業",
-    forks: [
-      "現地に残るか、日本に戻るかで大きく人生が変わる",
-      "家族やパートナーとの生活拠点をどこに置くかで悩みやすい"
-    ],
-    risks: [
-      "どちらの国にも完全にはフィットしていない“中途半端感”を抱えることがある",
-      "帰国後に、海外経験がうまく評価されない職場に入るとストレスが高い"
-    ],
-    secondLoop: [
-      "二つ以上の文化を行き来した経験は、“通訳”や“橋渡し”としての価値が大きい。",
-      "二周目視点では、「どこに所属するか」よりも「どこに貢献するか」で場所を選べる。"
-    ]
-  },
-  {
-    title: "専業主婦・主夫 → 再就職・副業ルート",
-    tag: "ケア × 再起動",
-    flow: "結婚・出産などで一時的に離職 / 子育て・介護のフェーズ後に再び働き始める",
-    forks: [
-      "フルタイムで戻るか、パート・時短で戻るか",
-      "オンラインワークや副業という選択肢を取るかどうか"
-    ],
-    risks: [
-      "ブランク期間を“キャリアの空白”と捉えすぎて、自信を失う",
-      "家庭と仕事の両立プレッシャーで、自分の時間がゼロになりがち"
-    ],
-    secondLoop: [
-      "家庭・ケアの経験は、“マネジメント・調整力・観察力”として仕事に活きる。",
-      "二周目視点では、“量より質”で仕事を選ぶことで、心身のバランスを保ちやすい。"
-    ]
-  }
-];
-
-function renderStories() {
-  const container = document.getElementById("lsStories");
-  container.innerHTML = lsPatterns
-    .map(
-      (p) => `
-    <article class="story-card">
-      <div class="story-header">
-        <h3 class="story-title">${p.title}</h3>
-        <span class="story-tag">${p.tag}</span>
-      </div>
-      <div class="story-flow">${p.flow}</div>
-
-      <div class="story-subheading">分岐ポイント</div>
-      <ul class="story-list">
-        ${p.forks.map((f) => `<li>${f}</li>`).join("")}
-      </ul>
-
-      <div class="story-subheading">注意したい落とし穴</div>
-      <ul class="story-list">
-        ${p.risks.map((r) => `<li>${r}</li>`).join("")}
-      </ul>
-
-      <div class="story-subheading">二周目視点での学び</div>
-      <ul class="story-list">
-        ${p.secondLoop.map((s) => `<li>${s}</li>`).join("")}
-      </ul>
-    </article>
-  `
-    )
-    .join("");
-}
+// life-stories.js
+// 「人生体験記ノート」ページ用スクリプト
+// - JSONをfetchで読み込み
+// - 人生パターン図鑑（カード + アコーディオン）を動的生成
+// - 職業図鑑（タグボタン + 詳細カード）を動的生成
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderStories();
-  if (window.feather) feather.replace();
+  loadLifePatterns();
+  loadJobs();
 });
+
+/**
+ * ------------- 共通ユーティリティ -------------
+ */
+
+function createElement(tagName, options = {}) {
+  const el = document.createElement(tagName);
+  const { className, text, html, attrs } = options;
+
+  if (className) {
+    el.className = className;
+  }
+  if (text !== undefined) {
+    el.textContent = text;
+  }
+  if (html !== undefined) {
+    el.innerHTML = html;
+  }
+  if (attrs) {
+    Object.entries(attrs).forEach(([key, value]) => {
+      el.setAttribute(key, value);
+    });
+  }
+  return el;
+}
+
+function safeArray(value) {
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string" && value.trim() !== "") return [value];
+  return [];
+}
+
+/**
+ * ------------- 人生パターン図鑑 -------------
+ */
+
+async function loadLifePatterns() {
+  const container = document.getElementById("pattern-card-grid");
+  if (!container) return;
+
+  const patternFiles = [
+    "data/patterns/pattern1.json",
+    "data/patterns/pattern2.json",
+    "data/patterns/pattern3.json",
+    "data/patterns/pattern4.json",
+    "data/patterns/pattern5.json",
+    "data/patterns/pattern6.json"
+  ];
+
+  try {
+    const patternDataList = await Promise.all(
+      patternFiles.map((path) =>
+        fetch(path).then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to load ${path}`);
+          }
+          return res.json();
+        })
+      )
+    );
+
+    patternDataList.forEach((patternData) => {
+      const card = buildPatternCard(patternData);
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error("人生パターンJSONの読み込みに失敗しました:", error);
+    const errorMsg = createElement("p", {
+      className: "pattern-error-message",
+      text: "人生パターンの読み込み中にエラーが発生しました。",
+    });
+    container.appendChild(errorMsg);
+  }
+}
+
+function buildPatternCard(data) {
+  const card = createElement("article", {
+    className: "pattern-card",
+  });
+
+  // --- ヘッダー部分（クリックで開閉） ---
+  const header = createElement("button", {
+    className: "pattern-card-header",
+  });
+  header.type = "button";
+  header.setAttribute("aria-expanded", "false");
+
+  const headerMain = createElement("div", {
+    className: "pattern-card-header-main",
+  });
+
+  const titleEl = createElement("h3", {
+    className: "pattern-card-title",
+    text: data.title || "",
+  });
+
+  const routeLabelEl = createElement("p", {
+    className: "pattern-card-route-label",
+    text: data.routeLabel || "",
+  });
+
+  headerMain.appendChild(titleEl);
+  headerMain.appendChild(routeLabelEl);
+
+  const toggleIcon = createElement("div", {
+    className: "pattern-card-toggle-icon",
+    text: "›",
+  });
+
+  header.appendChild(headerMain);
+  header.appendChild(toggleIcon);
+
+  // --- 概要（常時表示のサマリー） ---
+  const summary = createElement("div", {
+    className: "pattern-card-summary",
+    text: data.overview || "",
+  });
+
+  // --- 詳細アコーディオン部 ---
+  const detailsWrapper = createElement("div", {
+    className: "pattern-card-details-wrapper",
+  });
+
+  const detailsInner = createElement("div", {
+    className: "pattern-card-details-inner",
+  });
+
+  // 本質ブロック
+  if (data.essence) {
+    const essenceBlock = createPatternDetailBlock(
+      "このルートの「本質」",
+      safeArray(data.essence)
+    );
+    detailsInner.appendChild(essenceBlock);
+  }
+
+  // 主な分岐ブロック
+  if (data.branches) {
+    const branchesBlock = createPatternDetailBlock(
+      "よく出てくる分岐",
+      safeArray(data.branches)
+    );
+    detailsInner.appendChild(branchesBlock);
+  }
+
+  // つまずきやすいポイント
+  if (data.pains) {
+    const painsBlock = createPatternDetailBlock(
+      "つまずきやすいポイント",
+      safeArray(data.pains)
+    );
+    detailsInner.appendChild(painsBlock);
+  }
+
+  // インサイト ブロック（抽象・二周目視点・行動ヒント）
+  if (data.insight) {
+    const insightBlock = createElement("div", {
+      className: "pattern-insight",
+    });
+
+    if (data.insight.abstract) {
+      insightBlock.appendChild(
+        createElement("p", {
+          className: "pattern-insight-line",
+          text: `抽象化: ${data.insight.abstract}`,
+        })
+      );
+    }
+
+    if (data.insight.twoRoundView) {
+      insightBlock.appendChild(
+        createElement("p", {
+          className: "pattern-insight-line",
+          text: `二周目視点: ${data.insight.twoRoundView}`,
+        })
+      );
+    }
+
+    if (data.insight.actionHint) {
+      insightBlock.appendChild(
+        createElement("p", {
+          className: "pattern-insight-line",
+          text: `行動ヒント: ${data.insight.actionHint}`,
+        })
+      );
+    }
+
+    detailsInner.appendChild(insightBlock);
+  }
+
+  // 最後の一文
+  if (data.finalLine) {
+    const finalLine = createElement("p", {
+      className: "pattern-final-line",
+      text: data.finalLine,
+    });
+    detailsInner.appendChild(finalLine);
+  }
+
+  detailsWrapper.appendChild(detailsInner);
+
+  // --- 開閉イベント ---
+  header.addEventListener("click", () => {
+    const isOpen = card.classList.contains("is-open");
+    togglePatternCard(card, detailsWrapper, !isOpen);
+  });
+
+  card.appendChild(header);
+  card.appendChild(summary);
+  card.appendChild(detailsWrapper);
+
+  return card;
+}
+
+function createPatternDetailBlock(title, items) {
+  const block = createElement("div", {
+    className: "pattern-detail-block",
+  });
+
+  const titleEl = createElement("h4", {
+    className: "pattern-detail-title",
+    text: title,
+  });
+
+  const listEl = createElement("ul", {
+    className: "pattern-detail-list",
+  });
+
+  items.forEach((item) => {
+    const li = createElement("li", {
+      text: item,
+    });
+    listEl.appendChild(li);
+  });
+
+  block.appendChild(titleEl);
+  block.appendChild(listEl);
+
+  return block;
+}
+
+function togglePatternCard(card, detailsWrapper, open) {
+  const headerButton = card.querySelector(".pattern-card-header");
+  const allCards = document.querySelectorAll(".pattern-card");
+
+  // 単一開閉にしたい場合はここで他カードを閉じる
+  allCards.forEach((c) => {
+    if (c !== card && c.classList.contains("is-open")) {
+      const wrapper = c.querySelector(".pattern-card-details-wrapper");
+      if (wrapper) {
+        wrapper.style.maxHeight = "0px";
+      }
+      c.classList.remove("is-open");
+      const header = c.querySelector(".pattern-card-header");
+      if (header) header.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  if (open) {
+    card.classList.add("is-open");
+    const scrollHeight = detailsWrapper.scrollHeight;
+    detailsWrapper.style.maxHeight = scrollHeight + "px";
+    if (headerButton) headerButton.setAttribute("aria-expanded", "true");
+  } else {
+    card.classList.remove("is-open");
+    detailsWrapper.style.maxHeight = "0px";
+    if (headerButton) headerButton.setAttribute("aria-expanded", "false");
+  }
+}
+
+/**
+ * ------------- 職業図鑑 -------------
+ */
+
+let jobDataList = [];
+let activeJobId = null;
+
+async function loadJobs() {
+  const tagContainer = document.getElementById("job-tag-container");
+  const detailContainer = document.getElementById("job-detail-container");
+  if (!tagContainer || !detailContainer) return;
+
+  const jobFiles = [
+    "data/jobs/job1.json",
+    "data/jobs/job2.json",
+    "data/jobs/job3.json",
+    "data/jobs/job4.json",
+    "data/jobs/job5.json",
+    "data/jobs/job6.json"
+  ];
+
+  try {
+    jobDataList = await Promise.all(
+      jobFiles.map((path) =>
+        fetch(path).then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to load ${path}`);
+          }
+          return res.json();
+        })
+      )
+    );
+
+    // タグボタン生成
+    jobDataList.forEach((job) => {
+      const button = createElement("button", {
+        className: "job-tag-button",
+        text: job.name || "",
+      });
+      button.type = "button";
+      button.dataset.jobId = job.id || "";
+
+      button.addEventListener("click", () => {
+        setActiveJob(job.id);
+      });
+
+      tagContainer.appendChild(button);
+    });
+
+    // 初期状態: 先頭の職業を表示
+    if (jobDataList.length > 0) {
+      setActiveJob(jobDataList[0].id);
+    }
+  } catch (error) {
+    console.error("職業JSONの読み込みに失敗しました:", error);
+    const errorMsg = createElement("p", {
+      className: "job-error-message",
+      text: "職業データの読み込み中にエラーが発生しました。",
+    });
+    detailContainer.appendChild(errorMsg);
+  }
+}
+
+function setActiveJob(jobId) {
+  activeJobId = jobId;
+  const tagButtons = document.querySelectorAll(".job-tag-button");
+  tagButtons.forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.jobId === jobId);
+  });
+
+  const job = jobDataList.find((j) => j.id === jobId);
+  const detailContainer = document.getElementById("job-detail-container");
+  if (!job || !detailContainer) return;
+
+  // 既存の内容をクリア
+  detailContainer.innerHTML = "";
+  const card = buildJobCard(job);
+  detailContainer.appendChild(card);
+}
+
+function buildJobCard(job) {
+  const card = createElement("article", {
+    className: "job-card",
+  });
+
+  const header = createElement("div", {
+    className: "job-card-header",
+  });
+
+  const title = createElement("h3", {
+    className: "job-card-title",
+    text: job.name || "",
+  });
+
+  const category = createElement("p", {
+    className: "job-card-category",
+    text: job.category ? `カテゴリ: ${job.category}` : "",
+  });
+
+  const examples = createElement("p", {
+    className: "job-card-examples",
+    html: job.examples
+      ? `<span>具体例：</span>${escapeHtml(job.examples)}`
+      : "",
+  });
+
+  header.appendChild(title);
+  header.appendChild(category);
+  header.appendChild(examples);
+
+  card.appendChild(header);
+
+  // 概要
+  if (job.overview) {
+    const overviewBlock = createElement("div", {
+      className: "job-detail-block",
+    });
+
+    const overviewTitle = createElement("h4", {
+      className: "job-detail-title",
+      text: "概要",
+    });
+
+    const overviewText = createElement("p", {
+      className: "job-detail-text",
+      text: job.overview,
+    });
+
+    overviewBlock.appendChild(overviewTitle);
+    overviewBlock.appendChild(overviewText);
+    card.appendChild(overviewBlock);
+  }
+
+  // なり方
+  if (job.howToEnter) {
+    const block = createJobListBlock("なり方", safeArray(job.howToEnter));
+    card.appendChild(block);
+  }
+
+  // 1日の流れ
+  if (job.routine) {
+    const block = createJobListBlock("1日の流れ", safeArray(job.routine));
+    card.appendChild(block);
+  }
+
+  // よくある悩み
+  if (job.pains) {
+    const block = createJobListBlock("よくある悩み", safeArray(job.pains));
+    card.appendChild(block);
+  }
+
+  // この仕事ならではの喜び
+  if (job.joys) {
+    const block = createJobListBlock("喜び・やりがい", safeArray(job.joys));
+    card.appendChild(block);
+  }
+
+  // 二周目視点
+  if (job.twoRoundView) {
+    const twoRound = createElement("div", {
+      className: "job-two-round-view",
+      text: job.twoRoundView,
+    });
+    card.appendChild(twoRound);
+  }
+
+  return card;
+}
+
+function createJobListBlock(title, items) {
+  const block = createElement("div", {
+    className: "job-detail-block",
+  });
+
+  const titleEl = createElement("h4", {
+    className: "job-detail-title",
+    text: title,
+  });
+
+  const list = createElement("ul", {
+    className: "job-detail-list",
+  });
+
+  items.forEach((item) => {
+    const li = createElement("li", {
+      text: item,
+    });
+    list.appendChild(li);
+  });
+
+  block.appendChild(titleEl);
+  block.appendChild(list);
+
+  return block;
+}
+
+/**
+ * HTMLエスケープ
+ */
+function escapeHtml(str) {
+  if (typeof str !== "string") return "";
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
