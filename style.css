@@ -199,7 +199,7 @@ body::after {
 
 /* ① 一行コピー（ホーム見出し＋二重アンダーバー付き） */
 .hero-copy {
-  padding: 80px 0 40px;
+  padding: 28px 0 32px;
 }
 
 /* ★ HEROもフル幅寄せ：max-widthを撤廃して containerに合わせる */
@@ -495,4 +495,5 @@ body::after {
     font-size: 1.08rem;
   }
 }
+
 
