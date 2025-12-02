@@ -13,13 +13,14 @@
   padding-bottom: 40px;
 }
 
-/* コンテンツ幅：ホームと同じくフル画面寄せ + 中央カラム */
+/* ★ コンテンツ幅：ホームと同じ“ほぼフル幅”に寄せる */
 .generation-container {
   position: relative;
   z-index: 1;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px 32px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 12px 32px;
 }
 
 /* HERO（テキストは HTML 側、レイアウトは style.css の hero-* に準拠） */
