@@ -1,6 +1,7 @@
 // knowledge-notes.js
-// 処世術禄：サイドOSタブ / 総合検索 / 今日の処世術（ランダムカード） / ショートカット連動
-// 「今日の処世術」「今の悩みから探す」は ≪トップ≫（all）タブのみ表示
+// 処世術禄：
+//  - ≪トップ≫：今日の処世術 ＋ ショートカット（カード一覧なし）
+//  - その他タブ：検索 ＋ カード一覧（トップ専用機能は非表示）
 
 (function () {
   // ============================================================
@@ -46,6 +47,7 @@
   const searchInput = document.getElementById("kn-search-input");
   const todayCardContainer = document.getElementById("kn-today-card");
   const todayRefreshBtn = document.getElementById("kn-today-refresh");
+  const resultsSection = document.querySelector(".kn-results-section");
   const resultsContainer = document.getElementById("kn-results-container");
   const resultsMetaEl = document.getElementById("kn-results-meta");
   const shortcutButtons = document.querySelectorAll(".kn-shortcut");
@@ -69,9 +71,9 @@
         state.loaded = true;
         // 今日の処世術カード
         renderTodayCard();
-        // 検索結果（初期はランダムピックアップ）
+        // 検索結果（≪トップ≫では出さないが内部状態として用意）
         renderResults();
-        // トップ専用セクションの表示制御
+        // トップ／OSタブ表示の切り替え
         updateTopOnlySections();
       })
       .catch((err) => {
@@ -86,7 +88,7 @@
         }
       });
 
-    // 初期状態（activeCategory = all）の可視状態を保証
+    // 初期状態（≪トップ≫）の表示制御
     updateTopOnlySections();
   }
 
@@ -162,23 +164,29 @@
       });
     }
 
-    // トップ専用セクションの表示制御
+    // トップモード／OSモードの表示制御
     updateTopOnlySections();
 
-    // 再描画
+    // 再描画（OSタブのときだけカード一覧を使う）
     renderResults();
   }
 
   // 「今日の処世術」「今の悩みから探す」を
-  // ≪トップ≫（all）のときだけ表示する
+  // ≪トップ≫（all）のときだけ表示。
+  // カード一覧セクションはその逆（OSタブのときのみ表示）。
   function updateTopOnlySections() {
     const isTop = state.activeCategory === "all";
-    if (!topOnlySections || topOnlySections.length === 0) return;
 
-    topOnlySections.forEach((sec) => {
-      if (!sec) return;
-      sec.hidden = !isTop;
-    });
+    if (topOnlySections && topOnlySections.length > 0) {
+      topOnlySections.forEach((sec) => {
+        if (!sec) return;
+        sec.hidden = !isTop;
+      });
+    }
+
+    if (resultsSection) {
+      resultsSection.hidden = isTop;
+    }
   }
 
   // ============================================================
@@ -215,10 +223,17 @@
         searchInput.value = keyword;
         state.search = keyword;
         renderResults();
-        // 必要ならスクロール
-        const resultsSection = document.querySelector(".kn-results-section");
-        if (resultsSection && typeof resultsSection.scrollIntoView === "function") {
-          resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        // OSタブの結果エリアにスクロール（≪トップ≫では非表示だが仕様通り）
+        const resultsSectionEl = document.querySelector(".kn-results-section");
+        if (
+          resultsSectionEl &&
+          !resultsSectionEl.hidden &&
+          typeof resultsSectionEl.scrollIntoView === "function"
+        ) {
+          resultsSectionEl.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
         }
       });
     });
@@ -273,11 +288,21 @@
   }
 
   // ============================================================
-  // 検索結果のレンダリング
+  // 検索結果のレンダリング（≪トップ≫では一覧を出さない）
   // ============================================================
 
   function renderResults() {
     if (!resultsContainer || !resultsMetaEl) return;
+
+    // ≪トップ≫モードのときはカード一覧を使わない
+    if (state.activeCategory === "all") {
+      resultsContainer.innerHTML = "";
+      if (resultsMetaEl) {
+        resultsMetaEl.textContent =
+          "≪トップ≫ではカード一覧は表示していません。OSタブを選ぶと、そのOSの処世術が一覧できます。";
+      }
+      return;
+    }
 
     resultsContainer.innerHTML = "";
 
@@ -298,7 +323,7 @@
 
     let filtered = allTopics;
 
-    // カテゴリフィルタ
+    // カテゴリフィルタ（≪トップ≫以外のみ到達）
     if (activeCat && activeCat !== "all") {
       filtered = filtered.filter((t) => t._category === activeCat);
     }
@@ -316,18 +341,12 @@
 
     // メタ情報表示
     const catLabelText =
-      activeCat === "all"
-        ? "すべてのOS"
-        : categoryConfigs[activeCat]
+      activeCat && categoryConfigs[activeCat]
         ? categoryConfigs[activeCat].label
         : "不明カテゴリ";
 
-    if (!keyword && activeCat === "all") {
-      resultsMetaEl.textContent = `全カテゴリからランダムに最大6件をピックアップして表示しています（登録総数：${allTopics.length}件）。`;
-    } else if (!keyword && activeCat !== "all") {
+    if (!keyword) {
       resultsMetaEl.textContent = `${catLabelText} から ${totalCount}件を表示中。`;
-    } else if (keyword && activeCat === "all") {
-      resultsMetaEl.textContent = `「${keyword}」で全カテゴリから ${totalCount}件ヒットしました。`;
     } else {
       resultsMetaEl.textContent = `${catLabelText} × 「${keyword}」で ${totalCount}件ヒットしました。`;
     }
@@ -339,12 +358,6 @@
       p.textContent = "条件に合う処世術カードがありませんでした。";
       resultsContainer.appendChild(p);
       return;
-    }
-
-    // 初期表示（キーワードなし・カテゴリall）の場合は上限6件ランダム表示
-    if (!keyword && activeCat === "all") {
-      const shuffled = shuffleArray(filtered.slice());
-      filtered = shuffled.slice(0, 6);
     }
 
     filtered.forEach((topic) => {
@@ -368,7 +381,7 @@
   }
 
   // ============================================================
-  // ユーティリティ：配列シャッフル
+  // ユーティリティ：配列シャッフル（今は今日の処世術でのみ使用）
   // ============================================================
 
   function shuffleArray(arr) {
