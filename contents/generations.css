@@ -23,6 +23,14 @@
 }
 
 /* HERO（テキストは HTML 側、レイアウトは style.css の hero-* に準拠） */
+/* HERO 左寄せ */
+.generation-hero-copy,
+.generation-hero-text {
+  text-align: left;
+  margin-left: 0;
+  justify-content: flex-start;
+}
+
 .generation-hero-copy {
   padding-top: 40px;   /* ホームより少し浅めに開始 */
   padding-bottom: 16px;
@@ -540,3 +548,4 @@
     flex-basis: 160px;
   }
 }
+
