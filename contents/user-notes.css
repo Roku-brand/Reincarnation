@@ -1,10 +1,11 @@
 /* =========================
-   レイアウト（ホームと統一）
+   レイアウト（コンセプト寄せの余白）
    ========================= */
 
 .page-user-notes .site-main {
-  padding-top: 16px;
-  padding-bottom: 40px;
+  /* HERO の高さをコンセプトに近づける */
+  padding-top: 40px;
+  padding-bottom: 80px;
 }
 
 .page-inner {
