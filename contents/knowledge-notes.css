@@ -8,14 +8,14 @@
 
 /* コンセプトページと同じくらいの高さ感に寄せる */
 .page-knowledge-notes .site-main {
-  padding-top: 16px;   /* ← 上を詰める */
-  padding-bottom: 64px;
+  padding-top: 16px;      /* ← 40px から詰めて HERO をヘッダー近くに */
+  padding-bottom: 80px;
 }
 
 /* コンテンツラッパ */
 .page-inner {
-  margin: 0 auto;
   max-width: 1120px;
+  margin: 0 auto;
   padding: 0 24px 24px;
 }
 
@@ -75,20 +75,17 @@
     transform 0.18s ease-out;
 }
 
-/* 表示中のパネル */
 .tab-panel.is-active {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-/* フェードアウト中のパネル */
 .tab-panel.is-leaving {
   opacity: 0;
   transform: translateY(-2px);
 }
 
-/* 完全に非表示にするとき */
 .tab-panel[hidden] {
   display: none;
 }
@@ -185,5 +182,194 @@
   color: #6b7280;
 }
 
-/* ……以下、元の knowledge-notes.css の残り（カテゴリごとのカード／リストなど）が
-   すべて続きます（アップしてもらったファイルをベースにそのまま維持） */
+/* =============================================================
+   カテゴリタブ内部
+   ============================================================= */
+
+.category-header {
+  margin-bottom: 14px;
+}
+
+.category-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.small-label {
+  font-size: 12px;
+  margin-left: 8px;
+  background: #dcfce7;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #065f46;
+}
+
+.category-desc {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* =============================================================
+   検索ボックス
+   ============================================================= */
+
+.search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #d1fae5;
+  background: #ffffff;
+  font-size: 13px;
+  margin-bottom: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #34d399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25);
+  outline: none;
+}
+
+/* =============================================================
+   タグフィルタ
+   ============================================================= */
+
+.tag-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.tag-button {
+  padding: 4px 10px;
+  font-size: 11px;
+  background: #eff6ff;
+  border: 1px solid #bae6fd;
+  color: #1e3a8a;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tag-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.25);
+}
+
+.tag-button.is-active {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-color: transparent;
+  color: #f0fdf4;
+}
+
+/* =============================================================
+   カードグリッド
+   ============================================================= */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 860px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   処世術カード（概要＋アコーディオン）
+   ============================================================= */
+
+.shosei-card {
+  background: #ffffff;
+  border: 1px solid #d1fae5;
+  padding: 14px 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.08);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.shosei-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.15);
+}
+
+.shosei-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.shosei-summary {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.shosei-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-chip {
+  background: #ecfdf5;
+  padding: 3px 8px;
+  font-size: 10px;
+  border-radius: 10px;
+  border: 1px solid #bbf7d0;
+  color: #065f46;
+}
+
+.shosei-detail {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.25s ease;
+}
+
+.shosei-detail-inner {
+  padding: 10px 14px 14px;
+  background: #f9fffb;
+  border-top: 1px solid #dcfce7;
+  border-radius: 0 0 12px 12px;
+}
+
+.detail-block {
+  margin-bottom: 10px;
+}
+
+.detail-title {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #065f46;
+  letter-spacing: 0.05em;
+}
+
+.detail-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.detail-list li {
+  margin-bottom: 3px;
+}
+
+/* =============================================================
+   フッター
+   ============================================================= */
+
+.page-footer {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 11px;
+  color: #6b7280;
+}
