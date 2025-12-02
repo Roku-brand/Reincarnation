@@ -101,64 +101,121 @@
               <span class="kn-sidebar-toggle-label">処世術禄一覧</span>
             </button>
 
-            <!-- 共通：総合検索バー（トップ・OS共通） -->
-            <section class="kn-section kn-search-section" aria-label="処世術の総合検索">
-              <div class="kn-search-inner">
-                <div class="kn-search-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" class="kn-search-svg">
-                    <circle cx="11" cy="11" r="6" stroke-width="2" fill="none"></circle>
-                    <line x1="15" y1="15" x2="20" y2="20" stroke-width="2"></line>
-                  </svg>
-                </div>
-                <input
-                  id="kn-search-input"
-                  class="kn-search-input"
-                  type="search"
-                  placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
-                  autocomplete="off"
-                />
-              </div>
-            </section>
+            <!-- ▼≪トップ≫モード用 2カラムレイアウト（左：検索＋今日＋悩み / 右：OS構造カード） -->
+            <div class="kn-top-shell">
+              <!-- 左カラム：検索 / 今日の処世術 / 今の悩みから探す -->
+              <div class="kn-top-left">
+                <div class="kn-top-left-inner">
+                  <!-- 共通：総合検索バー（トップ・OS共通） -->
+                  <section class="kn-section kn-search-section" aria-label="処世術の総合検索">
+                    <div class="kn-search-inner">
+                      <div class="kn-search-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" class="kn-search-svg">
+                          <circle cx="11" cy="11" r="6" stroke-width="2" fill="none"></circle>
+                          <line x1="15" y1="15" x2="20" y2="20" stroke-width="2"></line>
+                        </svg>
+                      </div>
+                      <input
+                        id="kn-search-input"
+                        class="kn-search-input"
+                        type="search"
+                        placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </section>
 
-            <!-- ======================
-                 トップモード（≪トップ≫専用）
-                 ====================== -->
-            <section id="top-mode" aria-label="処世術禄トップモード">
-              <!-- 今日の処世術 -->
-              <section class="kn-section kn-today-section" aria-label="今日の処世術">
-                <div class="kn-section-header kn-today-header">
-                  <div>
-                    <h2 class="kn-section-title">今日の処世術</h2>
-                    <p class="kn-section-subtitle">
-                      ページを開くたび、または「更新」を押すたびにランダムで1つだけ表示します。
+                  <!-- ======================
+                       トップモード（≪トップ≫専用）
+                       ====================== -->
+                  <section id="top-mode" aria-label="処世術禄トップモード">
+                    <!-- 今日の処世術 -->
+                    <section class="kn-section kn-today-section" aria-label="今日の処世術">
+                      <div class="kn-section-header kn-today-header">
+                        <div>
+                          <h2 class="kn-section-title">今日の処世術</h2>
+                          <p class="kn-section-subtitle">
+                            ページを開くたび、または「更新」を押すたびにランダムで1つだけ表示します。
+                          </p>
+                        </div>
+                        <button id="kn-today-refresh" class="kn-today-refresh-btn" type="button">
+                          ↻ 更新
+                        </button>
+                      </div>
+                      <div id="kn-today-card" class="kn-today-card-container">
+                        <p class="kn-loading-text">処世術カードを読み込み中です…</p>
+                      </div>
+                    </section>
+
+                    <!-- 今の悩みから探す -->
+                    <section class="kn-section kn-shortcuts-section" aria-label="今の悩みから探す">
+                      <div class="kn-section-header kn-shortcuts-header">
+                        <h2 class="kn-section-title">今の悩みから探す →</h2>
+                        <p class="kn-section-subtitle">
+                          いま気になっているテーマに近いボタンを押すと、そのキーワードで検索欄がセットされます。
+                        </p>
+                      </div>
+                      <div class="kn-shortcut-list">
+                        <button class="kn-shortcut" type="button" data-keyword="職場">🔘 職場</button>
+                        <button class="kn-shortcut" type="button" data-keyword="恋愛">🔘 恋愛</button>
+                        <button class="kn-shortcut" type="button" data-keyword="将来">🔘 将来</button>
+                        <button class="kn-shortcut" type="button" data-keyword="メンタル">🔘 メンタル</button>
+                        <button class="kn-shortcut" type="button" data-keyword="お金">🔘 お金</button>
+                      </div>
+                    </section>
+                  </section>
+                </div>
+              </div>
+
+              <!-- 右カラム：OSの構造化カード（≪トップ≫時のみ表示） -->
+              <aside class="kn-top-right">
+                <section class="kn-section kn-os-structure-section" aria-label="処世術OSの構造化">
+                  <div class="kn-os-structure-card">
+                    <h2 class="kn-os-structure-title">処世術OSの全体構造</h2>
+                    <p class="kn-os-structure-lead">
+                      人生の「詰まり」を分解すると、だいたいこの5つのOSに整理できます。
+                      どのOSが現在バグっているかを見極めるのが、この処世術禄の使い方です。
+                    </p>
+                    <ul class="kn-os-structure-list">
+                      <li>
+                        <span class="kn-os-pill">1. 心の扱い方（内部OS）</span>
+                        <span class="kn-os-structure-text">
+                          感情・自己評価・不安との付き合い方。土台のメンタル環境を整える。
+                        </span>
+                      </li>
+                      <li>
+                        <span class="kn-os-pill">2. 人との関わり方（対人OS）</span>
+                        <span class="kn-os-structure-text">
+                          上司・同僚・友人・家族など、人間関係を「詰ませない」ための構造。
+                        </span>
+                      </li>
+                      <li>
+                        <span class="kn-os-pill">3. 社会での立ち回り（社会OS）</span>
+                        <span class="kn-os-structure-text">
+                          組織・ルール・評価軸。社会のゲームを理解し、自分の駒を正しく置く。
+                        </span>
+                      </li>
+                      <li>
+                        <span class="kn-os-pill">4. 行動・習慣の技術（行動OS）</span>
+                        <span class="kn-os-structure-text">
+                          行動量・習慣化・集中力。実行フェーズを支えるオペレーション。
+                        </span>
+                      </li>
+                      <li>
+                        <span class="kn-os-pill">5. キャッチアップの極意（未来OS）</span>
+                        <span class="kn-os-structure-text">
+                          情報収集・学び直し・AI活用。変化の激しい時代で「置いていかれない」ためのOS。
+                        </span>
+                      </li>
+                    </ul>
+                    <p class="kn-os-structure-footer">
+                      まずは気になるOSから1つ選んで、カードを眺めてみてください。<br>
+                      「いまの悩み」ボタン → 検索 → OSタブ の3ステップで、自分の詰まりポイントが見えてきます。
                     </p>
                   </div>
-                  <button id="kn-today-refresh" class="kn-today-refresh-btn" type="button">
-                    ↻ 更新
-                  </button>
-                </div>
-                <div id="kn-today-card" class="kn-today-card-container">
-                  <p class="kn-loading-text">処世術カードを読み込み中です…</p>
-                </div>
-              </section>
-
-              <!-- 今の悩みから探す -->
-              <section class="kn-section kn-shortcuts-section" aria-label="今の悩みから探す">
-                <div class="kn-section-header kn-shortcuts-header">
-                  <h2 class="kn-section-title">今の悩みから探す →</h2>
-                  <p class="kn-section-subtitle">
-                    いま気になっているテーマに近いボタンを押すと、そのキーワードで検索欄がセットされます。
-                  </p>
-                </div>
-                <div class="kn-shortcut-list">
-                  <button class="kn-shortcut" type="button" data-keyword="職場">🔘 職場</button>
-                  <button class="kn-shortcut" type="button" data-keyword="恋愛">🔘 恋愛</button>
-                  <button class="kn-shortcut" type="button" data-keyword="将来">🔘 将来</button>
-                  <button class="kn-shortcut" type="button" data-keyword="メンタル">🔘 メンタル</button>
-                  <button class="kn-shortcut" type="button" data-keyword="お金">🔘 お金</button>
-                </div>
-              </section>
-            </section>
+                </section>
+              </aside>
+            </div>
 
             <!-- ======================
                  OSモード（≪トップ≫以外のタブ専用）
@@ -188,4 +245,3 @@
   <script src="knowledge-notes.js" defer></script>
 </body>
 </html>
-
