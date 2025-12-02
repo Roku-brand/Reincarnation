@@ -3,8 +3,8 @@
    ========================= */
 
 .page-user-notes .site-main {
-  padding-top: 40px;
-  padding-bottom: 80px;
+  padding-top: 12px;
+  padding-bottom: 72px;
 }
 
 .page-inner {
@@ -168,3 +168,4 @@
 .chat-input-row .primary-btn {
   align-self: flex-end;
 }
+
