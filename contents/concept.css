@@ -1,0 +1,159 @@
+/* =========================================
+   コンセプトページ専用スタイル
+   共通レイアウト（header / footer / .container 等）は
+   ../style.css に委譲
+========================================= */
+
+.concept-body {
+  background-color: #f4fbf7; /* ほんのり淡いグリーンで「静けさ」 */
+  color: #111827;
+  font-family: "Inter", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.concept-main {
+  padding: 40px 0 80px;
+}
+
+.concept-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ---------- ヒーロー ---------- */
+.concept-hero {
+  margin-bottom: 32px;
+}
+
+.concept-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.concept-lead {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #374151;
+}
+
+/* スマホだけ改行を効かせるクラス（既存HTMLと同じ想定） */
+.sp-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sp-only {
+    display: inline;
+  }
+
+  .concept-title {
+    font-size: 1.7rem;
+  }
+
+  .concept-lead {
+    font-size: 0.98rem;
+  }
+}
+
+/* ---------- 3カードレイアウト ---------- */
+
+.concept-section {
+  margin-top: 16px;
+}
+
+.concept-grid {
+  display: grid;
+  gap: 24px;
+}
+
+/* 幅が広いときは3カード横並び */
+@media (min-width: 960px) {
+  .concept-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* カード本体（共通 .card の上に軽く上書き） */
+.concept-card {
+  position: relative;
+  padding: 24px 20px 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(15, 118, 110, 0.08);
+  border: 0.5px solid rgba(15, 118, 110, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 番号バッジ */
+.concept-card .card-badge {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 118, 110, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #065f46;
+  background: #ecfdf5;
+}
+
+/* タイトルをバッジの右から始める */
+.concept-card-title {
+  margin: 0 0 4px;
+  padding-left: 44px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* 本文テキスト */
+.concept-card-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: #374151;
+}
+
+/* 補足ノート */
+.concept-card-note {
+  margin: 8px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: #047857;
+}
+
+/* ホバーで少しだけ浮かせる */
+.concept-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.16);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.concept-card:not(:hover) {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* タブレット以下で少し余白を広めに */
+@media (max-width: 959px) {
+  .concept-card {
+    padding: 20px 18px 20px;
+  }
+
+  .concept-card-title {
+    padding-left: 40px;
+    font-size: 1.02rem;
+  }
+
+  .concept-card-text {
+    font-size: 0.93rem;
+  }
+}
