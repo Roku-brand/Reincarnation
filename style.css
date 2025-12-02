@@ -54,7 +54,7 @@ body::before {
   max-height: 540px;
   border-radius: 50%;
 
-  /* 外円：濃紺 × 薄めライン（0.7〜1px程度の印象） */
+  /* 外円：濃紺 × 薄めライン */
   border: 1px solid rgba(15, 37, 64, 0.22);
 
   /* 外側リング（紺トーンのハロー） */
@@ -64,14 +64,8 @@ body::before {
 
   /* 背景に円 + ドット + 斜めの針 */
   background-image:
-
-    /* 北側ドット（現在地） */
     radial-gradient(circle at 50% 8%, rgba(15, 37, 64, 0.9) 0 5px, transparent 6px),
-
-    /* 南側ドット（次の選択） */
     radial-gradient(circle at 50% 92%, rgba(15, 37, 64, 0.6) 0 5px, transparent 6px),
-
-    /* 斜めの針（135度方向） */
     linear-gradient(135deg, rgba(15, 37, 64, 0.9), rgba(15, 37, 64, 0));
 
   background-repeat: no-repeat;
@@ -81,9 +75,7 @@ body::before {
     100% 100%,
     1px 80%;
 
-  /* 全体の透明度：知的にうっすら見えるレベル */
   opacity: 0.2;
-
   pointer-events: none;
   z-index: 0;
 }
@@ -97,7 +89,6 @@ body::after {
   max-height: 680px;
   border-radius: 50%;
 
-  /* 外側ふわっと光るエフェクト（紺寄り） */
   box-shadow:
     0 0 110px rgba(15, 37, 64, 0.35),
     0 0 200px rgba(15, 37, 64, 0.22);
@@ -113,11 +104,12 @@ body::after {
   flex-direction: column;
 }
 
+/* ★ 横余白を限りなく少なくしたコンテナ */
 .container {
   width: 100%;
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: none;        /* 中央カラムをやめて画面幅いっぱいに */
+  margin: 0;
+  padding: 0 12px;        /* ほぼフル画面。安全のため左右12pxだけ余裕 */
   position: relative;
   z-index: 1;
 }
@@ -210,8 +202,9 @@ body::after {
   padding: 80px 0 40px;
 }
 
+/* ★ HEROもフル幅寄せ：max-widthを撤廃して containerに合わせる */
 .hero-inner {
-  max-width: 1040px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: flex-start;
@@ -251,7 +244,7 @@ body::after {
   line-height: 1.6;
   color: var(--text-main);
   font-weight: 500;
-  text-align: left; /* 既存コピーはそのまま、左揃えに */
+  text-align: left;
 }
 
 /* 共通セクション */
@@ -284,6 +277,7 @@ body::after {
   gap: 18px;
 }
 
+/* 3列カード：フル幅寄せでも自然なバランス */
 .card-grid.three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -337,8 +331,9 @@ body::after {
   margin-top: 44px;
 }
 
+/* ★ タイルもmax-width撤廃してフル幅寄せ */
 .tile-list {
-  max-width: 960px;
+  width: 100%;
   margin: 20px auto 0;
   display: flex;
   flex-direction: column;
@@ -435,7 +430,7 @@ body::after {
     inset: 8% 8%;
     max-width: 420px;
     max-height: 420px;
-    opacity: 0.22; /* モバイルではやや濃いめでもOK */
+    opacity: 0.22;
   }
 
   body::after {
@@ -466,20 +461,20 @@ body::after {
   .hero-section-title {
     font-size: 1.4rem;
   }
-}
 
-@media (max-width: 768px) {
   .card-grid.three,
   .card-grid.two {
     grid-template-columns: 1fr;
   }
+}
 
-  .tile-card {
-    flex-direction: row;
-  }
-
+@media (max-width: 768px) {
   .hero-copy {
     padding-top: 40px;
+  }
+
+  .tile-card {
+    padding: 18px 18px 20px;
   }
 }
 
@@ -498,9 +493,5 @@ body::after {
 
   .section-title {
     font-size: 1.08rem;
-  }
-
-  .tile-card {
-    padding: 18px 18px 20px;
   }
 }
