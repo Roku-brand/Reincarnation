@@ -3,8 +3,8 @@
    ============================== */
 
 .page-life-stories .site-main {
-  padding-top: 16px;   /* HEROをヘッダーに近づける */
-  padding-bottom: 64px;
+  padding-top: 16px;      /* ← 40px から詰めて HERO をヘッダー近くに */
+  padding-bottom: 80px;
 }
 
 .page-life-stories .page-inner {
@@ -67,20 +67,17 @@
     transform 0.18s ease-out;
 }
 
-/* 表示中のチャプター */
 .chapter.is-active {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-/* フェードアウト中のチャプター */
 .chapter.is-leaving {
   opacity: 0;
   transform: translateY(-2px);
 }
 
-/* 完全に非表示にするとき */
 .chapter[hidden] {
   display: none;
 }
@@ -89,5 +86,332 @@
    セクション共通（カードUI）
    ============================== */
 
-/* ……以下、アップしてくれた life-stories.css の残りが
-   そのまま続いています（カード／アコーディオンなど） */
+.section {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #dcfce7;
+  box-shadow: var(--shadow-soft);
+  padding: 18px 18px 22px;
+  margin-bottom: 18px;
+}
+
+.section-header {
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin: 0;
+}
+
+.top-intro-body,
+.patterns-intro,
+.jobs-intro {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.top-intro-body p {
+  margin: 0 0 8px;
+}
+
+/* ==============================
+   人生パターン図鑑：カード & アコーディオン
+   ============================== */
+
+.pattern-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 860px) {
+  .pattern-card-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.pattern-card {
+  border-radius: 16px;
+  border: 1px solid #bbf7d0;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pattern-card-header {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: linear-gradient(
+    90deg,
+    rgba(220, 252, 231, 0.9),
+    rgba(236, 253, 245, 0.95)
+  );
+  border: none;
+  width: 100%;
+}
+
+.pattern-card-header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pattern-card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pattern-card-route-label {
+  margin: 0;
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.pattern-card-toggle-icon {
+  margin-left: 12px;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #16a34a;
+  background-color: #f0fdf4;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.pattern-card-summary {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-sub);
+  border-top: 1px solid #dcfce7;
+  background: #f9fffb;
+}
+
+/* アコーディオン内容 */
+
+.pattern-card-details-wrapper {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.26s ease;
+}
+
+.pattern-card-details-inner {
+  padding: 10px 12px 12px;
+  font-size: 12px;
+  background: #ffffff;
+}
+
+.pattern-detail-block {
+  margin-bottom: 10px;
+}
+
+.pattern-detail-title {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-sub);
+}
+
+.pattern-detail-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.pattern-detail-list li {
+  margin-bottom: 2px;
+}
+
+.pattern-insight {
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #ecfdf3;
+  border: 1px solid #bbf7d0;
+}
+
+.pattern-insight-line {
+  margin: 0 0 4px;
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.pattern-insight-line:last-child {
+  margin-bottom: 0;
+}
+
+.pattern-final-line {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: var(--text-sub);
+  font-style: italic;
+}
+
+/* 開閉時の強調 */
+
+.pattern-card.is-open {
+  border-color: #22c55e;
+  box-shadow: 0 14px 26px rgba(22, 163, 74, 0.32);
+  transform: translateY(-1px);
+}
+
+.pattern-card.is-open .pattern-card-toggle-icon {
+  transform: rotate(90deg);
+  background-color: #bbf7d0;
+}
+
+/* ==============================
+   職業図鑑：タグ & 詳細カード
+   ============================== */
+
+.job-tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+}
+
+.job-tag-button {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #bae6fd;
+  background: #eff6ff;
+  font-size: 11px;
+  color: #1e3a8a;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.12s ease,
+    border-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.job-tag-button:hover {
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
+}
+
+.job-tag-button.is-active {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-color: transparent;
+  color: #f0fdf4;
+}
+
+/* 詳細カード */
+
+.job-detail-container {
+  min-height: 80px;
+}
+
+.job-card {
+  border-radius: 16px;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  padding: 14px 14px 16px;
+  box-shadow: var(--shadow-soft);
+  font-size: 12px;
+}
+
+.job-card-header {
+  margin-bottom: 6px;
+}
+
+.job-card-title {
+  margin: 0 0 2px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.job-card-category {
+  margin: 0 0 2px;
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.job-card-examples {
+  margin: 0;
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.job-card-examples span {
+  font-weight: 600;
+}
+
+.job-detail-block {
+  margin-top: 10px;
+}
+
+.job-detail-title {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-sub);
+}
+
+.job-detail-text {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.job-detail-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.job-detail-list li {
+  margin-bottom: 2px;
+}
+
+.job-two-round-view {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+/* ==============================
+   フッター
+   ============================== */
+
+.page-footer {
+  margin-top: 10px;
+  padding: 10px 4px 0;
+  font-size: 11px;
+  color: var(--text-sub);
+  text-align: center;
+}
