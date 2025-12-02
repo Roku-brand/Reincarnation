@@ -1,6 +1,6 @@
 // knowledge-notes.js
 // モード分離：
-//  - ≪トップ≫(activeCategory === "all") → #top-mode だけ表示
+//  - ≪トップ≫(activeCategory === "all") → #top-mode + OS構造カードを表示
 //  - その他OSタブ → #os-mode だけ表示（カード一覧）
 
 (function () {
@@ -47,6 +47,7 @@
 
   const topModeSection   = document.getElementById("top-mode");
   const osModeSection    = document.getElementById("os-mode");
+  const osStructureSection = document.querySelector(".kn-os-structure-section");
 
   const todayCardContainer = document.getElementById("kn-today-card");
   const todayRefreshBtn    = document.getElementById("kn-today-refresh");
@@ -171,11 +172,15 @@
 
     if (topModeSection) {
       topModeSection.hidden = !isTop;
-      topModeSection.style.display = isTop ? "" : "none"; // ← 確実に消す
+      topModeSection.style.display = isTop ? "" : "none"; // 確実に消す
     }
     if (osModeSection) {
       osModeSection.hidden = isTop;
-      osModeSection.style.display = isTop ? "none" : ""; // ← 確実に出す
+      osModeSection.style.display = isTop ? "none" : ""; // 確実に出す
+    }
+    if (osStructureSection) {
+      osStructureSection.hidden = !isTop;
+      osStructureSection.style.display = isTop ? "" : "none";
     }
   }
 
