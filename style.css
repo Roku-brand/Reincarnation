@@ -194,12 +194,12 @@ body::after {
 
 .site-main {
   flex: 1;
-  padding: 12px 0 36px;
+  padding: 16px 0 40px;
 }
 
 /* ① 一行コピー（ホーム見出し＋二重アンダーバー付き） */
 .hero-copy {
-  padding: 28px 0 32px;
+  padding: 80px 0 40px;
 }
 
 /* ★ HEROもフル幅寄せ：max-widthを撤廃して containerに合わせる */
@@ -496,4 +496,43 @@ body::after {
   }
 }
 
+/* =========================
+   タブナビゲーション ＆ コンテンツ共通アニメーション
+   ========================= */
 
+/* 各ページのタブバーを相対配置にして、インジケーターを中に置けるようにする */
+.notes-tabs,
+.chapter-tabs,
+.stage-tabs {
+  position: relative;
+}
+
+/* アクティブタブの下に走る 0.5px ライン（インジケーター） */
+.tab-indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 0.5px;
+  border-radius: 999px;
+  background: #111827; /* 墨色 */
+  width: var(--tab-indicator-width, 0);
+  transform: translateX(var(--tab-indicator-x, 0));
+  pointer-events: none;
+  transition:
+    transform 0.16s cubic-bezier(0.33, 1, 0.68, 1),
+    width 0.16s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* カードやリストをまとめてフェードさせたいときに使えるユーティリティ */
+.fade-slide-item {
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+}
+
+.fade-slide-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
