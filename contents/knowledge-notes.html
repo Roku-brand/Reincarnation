@@ -1,502 +1,189 @@
-/* =============================================================
-   ページ全体（淡いグリーンで他ページと統一）
-   ============================================================= */
-
-.page-knowledge-notes {
-  background: radial-gradient(circle at top, #ecfdf5 0, #d1fae5 45%, #f0fdfa 100%);
-  color: #0f172a;
-  font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-}
-
-/* コンテナを「ほぼフル幅」にしてサイドタブを左寄せ */
-.page-knowledge-notes .container {
-  max-width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.page-knowledge-notes .site-main {
-  padding-top: 16px;
-  padding-bottom: 80px;
-  background: transparent;
-}
-
-.page-knowledge-notes .hero-copy {
-  margin-bottom: 10px;
-}
-
-/* コンテンツラッパ：中央寄せをやめてフル幅寄りに */
-.page-inner {
-  max-width: 100%;
-  margin: 0;
-  padding: 0 0 24px;
-}
-
-/* =============================================================
-   レイアウト：左サイドバー + メイン
-   ============================================================= */
-
-.kn-layout {
-  display: flex;
-  gap: 20px;
-  margin-top: 4px;
-}
-
-/* PC時：横並び。枠・背景を消して“タスクバー感”だけ残す */
-.kn-sidebar {
-  width: 220px;
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 4px 0;
-  box-shadow: none;
-}
-
-.kn-sidebar-title {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #047857;
-  margin-bottom: 8px;
-}
-
-/* OSタブボタン（角張り＆フラット） */
-
-.kn-os-tab {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 8px 10px;
-  margin-bottom: 4px;
-  border-radius: 4px; /* シャープめ */
-  border: 1px solid transparent;
-  background: transparent;
-  color: #065f46;
-  font-size: 12px;
-  line-height: 1.4;
-  cursor: pointer;
-  user-select: none;
-  transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.12s ease,
-    box-shadow 0.18s ease,
-    color 0.18s ease;
-  white-space: normal;
-}
-
-.kn-os-tab:hover {
-  background: #ecfdf5;
-  border-color: #6ee7b7;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.24);
-  color: #065f46;
-}
-
-.kn-os-tab.is-active {
-  background: #059669;
-  border-color: #059669;
-  color: #ecfdf5;
-  box-shadow: 0 10px 24px rgba(5, 150, 105, 0.6);
-}
-
-.kn-os-label {
-  display: inline-block;
-  margin-top: 2px;
-  font-size: 10px;
-  opacity: 0.9;
-  color: #bbf7d0;
-}
-
-/* メイン側 */
-
-.kn-main {
-  flex: 1;
-  min-width: 0;
-}
-
-/* =============================================================
-   スマホ用：カテゴリ折りたたみトグル
-   ============================================================= */
-
-.kn-sidebar-toggle {
-  display: none; /* PCでは非表示 */
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  margin-bottom: 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(34, 197, 94, 0.7);
-  background: rgba(236, 253, 245, 0.95);
-  color: #064e3b;
-  font-size: 12px;
-  cursor: pointer;
-  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.2);
-}
-
-.kn-sidebar-toggle-icon {
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
-  border: 1px solid rgba(34, 197, 94, 0.8);
-  position: relative;
-}
-
-.kn-sidebar-toggle-icon::before,
-.kn-sidebar-toggle-icon::after {
-  content: "";
-  position: absolute;
-  left: 2px;
-  right: 2px;
-  height: 1px;
-  background: #047857;
-}
-
-.kn-sidebar-toggle-icon::before {
-  top: 4px;
-}
-
-.kn-sidebar-toggle-icon::after {
-  bottom: 4px;
-}
-
-.kn-sidebar-toggle-label {
-  letter-spacing: 0.08em;
-}
-
-/* トグルON時の簡単な変化 */
-
-.kn-sidebar-toggle[aria-expanded="true"] {
-  border-color: #22c55e;
-  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.35),
-    0 10px 24px rgba(16, 185, 129, 0.4);
-}
-
-/* =============================================================
-   共通セクション枠
-   ============================================================= */
-
-.kn-section {
-  background: transparent;
-  border-radius: 0;
-  border: none;
-  padding: 10px 0 14px;
-  margin-bottom: 4px;
-  box-shadow: none;
-}
-
-.kn-section-header {
-  margin-bottom: 8px;
-}
-
-.kn-section-title {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #064e3b;
-  margin: 0 0 3px;
-}
-
-.kn-section-subtitle {
-  font-size: 12px;
-  color: #4b5563;
-  margin: 0;
-}
-
-/* =============================================================
-   検索バー（全タブ共通）
-   ============================================================= */
-
-.kn-search-section {
-  margin-bottom: 10px;
-}
-
-.kn-search-inner {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: #ffffff;
-  border: 1px solid #a7f3d0;
-  box-shadow: 0 6px 14px rgba(16, 185, 129, 0.18);
-}
-
-.kn-search-icon {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
-.kn-search-svg {
-  width: 100%;
-  height: 100%;
-  stroke: #6b7280;
-}
-
-.kn-search-input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: #111827;
-  font-size: 13px;
-  outline: none;
-}
-
-.kn-search-input::placeholder {
-  color: #9ca3af;
-}
-
-/* =============================================================
-   今日の処世術（トップのみ）
-   ============================================================= */
-
-.kn-today-card-container {
-  margin-top: 4px;
-}
-
-.kn-loading-text {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-/* ヘッダーレイアウト＋更新ボタン */
-
-.kn-today-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.kn-today-refresh-btn {
-  border-radius: 999px;
-  border: 1px solid #34d399;
-  background: #ecfdf5;
-  padding: 4px 12px;
-  font-size: 11px;
-  font-weight: 500;
-  color: #047857;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.28);
-  transition:
-    background 0.16s ease,
-    transform 0.12s ease,
-    box-shadow 0.16s ease;
-}
-
-.kn-today-refresh-btn:hover {
-  background: #bbf7d0;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
-}
-
-/* =============================================================
-   ショートカット（トップのみ）
-   ============================================================= */
-
-.kn-shortcuts-header {
-  margin-bottom: 6px;
-}
-
-.kn-shortcut-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.kn-shortcut {
-  border-radius: 999px;
-  border: none;
-  background: #ecfdf5;
-  padding: 6px 12px;
-  font-size: 12px;
-  color: #065f46;
-  cursor: pointer;
-  transition:
-    background 0.16s ease,
-    transform 0.12s ease,
-    box-shadow 0.16s ease;
-  white-space: nowrap;
-}
-
-.kn-shortcut:hover {
-  background: #bbf7d0;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(16, 185, 129, 0.35);
-}
-
-/* =============================================================
-   検索結果グリッド（≪トップ≫以外のタブ用）
-   ============================================================= */
-
-.kn-results-header {
-  margin-bottom: 6px;
-}
-
-.kn-results-meta {
-  font-size: 11px;
-  color: #6b7280;
-  margin: 0;
-}
-
-.kn-card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-@media (max-width: 900px) {
-  .kn-card-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* =============================================================
-   処世術カード（おすすめ・検索結果共通）
-   ============================================================= */
-
-.shosei-card {
-  background: #ffffff;
-  border-radius: 14px;
-  border: 1px solid #d1d5db;
-  padding: 11px 13px;
-  box-shadow: 0 10px 20px rgba(15, 118, 110, 0.08);
-  cursor: pointer;
-  transition:
-    transform 0.16s ease,
-    box-shadow 0.18s ease,
-    border-color 0.16s ease,
-    background 0.18s ease;
-}
-
-.shosei-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 34px rgba(5, 150, 105, 0.2);
-  border-color: #22c55e;
-  background: #f0fdf4;
-}
-
-.shosei-card.is-today {
-  border-color: #22c55e;
-  box-shadow: 0 20px 42px rgba(22, 163, 74, 0.35);
-  background: #ecfdf5;
-}
-
-.shosei-title {
-  margin: 0 0 4px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #111827;
-}
-
-.shosei-summary {
-  margin: 0 0 6px;
-  font-size: 12px;
-  color: #4b5563;
-}
-
-.shosei-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.tag-chip {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  border: 1px solid rgba(45, 212, 191, 0.9);
-  background: #ecfeff;
-  padding: 2px 8px;
-  font-size: 10px;
-  color: #0f766e;
-}
-
-/* カテゴリ表示用ラベル（オプション） */
-.tag-chip-category {
-  border-color: rgba(129, 140, 248, 0.95);
-  background: #eef2ff;
-  color: #3730a3;
-}
-
-/* 詳細アコーディオン部 */
-
-.shosei-detail {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.25s ease;
-}
-
-.shosei-detail-inner {
-  padding: 8px 10px 10px;
-  margin-top: 6px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
-}
-
-.detail-block {
-  margin-bottom: 8px;
-}
-
-.detail-title {
-  margin: 0 0 4px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #047857;
-  letter-spacing: 0.06em;
-}
-
-.detail-list {
-  margin: 0;
-  padding-left: 16px;
-  font-size: 12px;
-  color: #374151;
-}
-
-.detail-list li {
-  margin-bottom: 3px;
-}
-
-/* =============================================================
-   フッター
-   ============================================================= */
-
-.page-footer {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 11px;
-  color: #6b7280;
-}
-
-/* =============================================================
-   レスポンシブ調整
-   ============================================================= */
-
-@media (max-width: 900px) {
-  .kn-layout {
-    flex-direction: column;
-  }
-
-  .kn-sidebar {
-    width: 100%;
-    display: none; /* トグルで開く */
-  }
-
-  .kn-sidebar.is-open {
-    display: block;
-  }
-
-  .kn-sidebar-toggle {
-    display: inline-flex;
-  }
-}
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>処世術禄｜人生二周目ノート</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- フォント -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- 共通CSS / このページ専用CSS -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="knowledge-notes.css" />
+</head>
+
+<body class="home-body page-knowledge-notes">
+  <!-- ======================
+       ヘッダー（ホームと統一）
+       ※仕様により変更禁止
+       ====================== -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <div class="logo-block">
+        <div class="logo-title">人生二周目ノート</div>
+        <div class="logo-sub">二周目視点で、人生をアップデートするノート</div>
+      </div>
+
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">ホーム</a>
+        <a href="generations.html" class="nav-link">人生地図禄</a>
+        <a href="knowledge-notes.html" class="nav-link is-current">処世術禄</a>
+        <a href="life-stories.html" class="nav-link">人生体験禄</a>
+        <a href="user-notes.html" class="nav-link">ユーザー機能</a>
+        <a href="concept.html" class="nav-link">コンセプト</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <!-- ======================
+           HERO（変更禁止エリア）
+           ====================== -->
+      <section class="hero-copy">
+        <div class="hero-inner">
+          <div class="hero-heading-block">
+            <h1 class="hero-section-title">処世術禄</h1>
+            <div class="hero-section-underline"></div>
+            <div class="hero-section-underline second"></div>
+          </div>
+          <p class="hero-text">
+            人生を賢く、したたかに。<br>
+            情報が多すぎる時代に必要なのは、「知識」ではなく「生き抜くための構造」。
+          </p>
+        </div>
+      </section>
+
+      <!-- ======================
+           HEROより下：今回の改修範囲
+           ====================== -->
+      <div class="page-inner">
+
+        <div class="kn-layout">
+          <!-- 左サイド：処世術禄一覧タブ -->
+          <aside class="kn-sidebar" id="kn-sidebar" aria-label="処世術禄一覧">
+            <div class="kn-sidebar-title">処世術禄一覧</div>
+            <button class="kn-os-tab is-active" type="button" data-category="all">
+              ≪トップ≫
+            </button>
+            <button class="kn-os-tab" type="button" data-category="mind">
+              1.心の扱い方<br><span class="kn-os-label">内部OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="relation">
+              2.人との関わり方<br><span class="kn-os-label">対人OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="work">
+              3.社会での立ち回り<br><span class="kn-os-label">社会OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="habit">
+              4.行動・習慣の技術<br><span class="kn-os-label">行動OS</span>
+            </button>
+            <button class="kn-os-tab" type="button" data-category="future">
+              5.キャッチアップの極意<br><span class="kn-os-label">未来OS</span>
+            </button>
+          </aside>
+
+          <!-- メインコンテンツ -->
+          <section class="kn-main">
+            <!-- スマホ用：OSカテゴリ折りたたみトグル -->
+            <button
+              class="kn-sidebar-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="kn-sidebar"
+            >
+              <span class="kn-sidebar-toggle-icon"></span>
+              <span class="kn-sidebar-toggle-label">処世術禄一覧</span>
+            </button>
+
+            <!-- 総合検索バー（全タブ共通） -->
+            <section class="kn-section kn-search-section" aria-label="処世術の総合検索">
+              <div class="kn-search-inner">
+                <div class="kn-search-icon" aria-hidden="true">
+                  <!-- シンプルなSVG虫眼鏡 -->
+                  <svg viewBox="0 0 24 24" class="kn-search-svg">
+                    <circle cx="11" cy="11" r="6" stroke-width="2" fill="none"></circle>
+                    <line x1="15" y1="15" x2="20" y2="20" stroke-width="2"></line>
+                  </svg>
+                </div>
+                <input
+                  id="kn-search-input"
+                  class="kn-search-input"
+                  type="search"
+                  placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
+                  autocomplete="off"
+                />
+              </div>
+            </section>
+
+            <!-- ======================
+                 トップ専用モード
+                 ====================== -->
+
+            <!-- 今日の処世術（おすすめカード）※トップのみ表示 -->
+            <section class="kn-section kn-today-section kn-top-only" aria-label="今日の処世術">
+              <div class="kn-section-header kn-today-header">
+                <div>
+                  <h2 class="kn-section-title">今日の処世術</h2>
+                  <p class="kn-section-subtitle">
+                    ページを開くたび、または「更新」を押すたびにランダムで1つだけ表示します。
+                  </p>
+                </div>
+                <button id="kn-today-refresh" class="kn-today-refresh-btn" type="button">
+                  ↻ 更新
+                </button>
+              </div>
+              <div id="kn-today-card" class="kn-today-card-container">
+                <p class="kn-loading-text">処世術カードを読み込み中です…</p>
+              </div>
+            </section>
+
+            <!-- 今の悩みから探す（シチュエーション別ショートカット）※トップのみ表示 -->
+            <section class="kn-section kn-shortcuts-section kn-top-only" aria-label="今の悩みから探す">
+              <div class="kn-section-header kn-shortcuts-header">
+                <h2 class="kn-section-title">今の悩みから探す →</h2>
+                <p class="kn-section-subtitle">
+                  いま気になっているテーマに近いボタンを押すと、そのキーワードで検索欄がセットされます。
+                </p>
+              </div>
+              <div class="kn-shortcut-list">
+                <button class="kn-shortcut" type="button" data-keyword="職場">🔘 職場</button>
+                <button class="kn-shortcut" type="button" data-keyword="恋愛">🔘 恋愛</button>
+                <button class="kn-shortcut" type="button" data-keyword="将来">🔘 将来</button>
+                <button class="kn-shortcut" type="button" data-keyword="メンタル">🔘 メンタル</button>
+                <button class="kn-shortcut" type="button" data-keyword="お金">🔘 お金</button>
+              </div>
+            </section>
+
+            <!-- ======================
+                 OSタブ専用モード（≪トップ≫以外）
+                 ====================== -->
+            <section class="kn-section kn-results-section" aria-label="処世術カード一覧">
+              <div class="kn-section-header kn-results-header">
+                <h2 class="kn-section-title">処世術カード一覧</h2>
+                <p id="kn-results-meta" class="kn-results-meta">
+                  データを読み込み中です…
+                </p>
+              </div>
+              <div id="kn-results-container" class="kn-card-grid" aria-live="polite"></div>
+            </section>
+
+            <footer class="page-footer">
+              <p>人生二周目ノート — 処世術OSを手に入れるノート</p>
+            </footer>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- JS：このページ専用だけ -->
+  <script src="knowledge-notes.js" defer></script>
+</body>
+</html>
