@@ -1,184 +1,380 @@
-const knCategories = [
-  {
-    id: "relation",
-    label: "人間関係ノート",
-    icon: "users",
-    desc: "信頼・距離感・与える／奪うのバランスを整えるためのノート。",
-    notes: [
-      {
-        tag: "ギバーとテイカー",
-        title: "与える人・奪う人・マッチャー",
-        bullets: [
-          "一時的にはテイカーが得をして見えるが、長期的にはギバー型が信頼資本を貯めやすい。",
-          "ただし「自己犠牲型ギバー」は燃え尽きやすいので、境界線を引くことが前提。"
-        ]
-      },
-      {
-        tag: "リーダーシップ",
-        title: "やってみせ、言って聞かせて…",
-        bullets: [
-          "まず背中で見せる → 言葉で伝える → やらせてみる → 褒める、という順番が信頼を生みやすい。",
-          "指示よりも、「一緒に考えるスタンス」の方が二周目視点では再現性が高い。"
-        ]
-      },
-      {
-        tag: "距離感",
-        title: "近すぎず・遠すぎずの関係",
-        bullets: [
-          "何でも共有し合う関係よりも、“共有する範囲をお互いに選べる関係”の方が長続きしやすい。",
-          "職場では「信頼＋適度な他人感覚」があると、感情に飲まれにくい。"
-        ]
+// knowledge-notes.js
+// 処世術ノート：タブ切り替え / JSONロード / 検索 / タグフィルタ / カード展開
+
+(function () {
+  // ============================================================
+  // タブ切り替え（≪トップ≫〜未来OS）
+  // ============================================================
+  const tabButtons = document.querySelectorAll(".notes-tab");
+  const tabPanels = document.querySelectorAll(".tab-panel");
+
+  function switchTab(targetId) {
+    tabButtons.forEach((btn) => {
+      const target = btn.getAttribute("data-target");
+      btn.classList.toggle("is-active", target === targetId);
+    });
+
+    tabPanels.forEach((panel) => {
+      if (panel.id === targetId) {
+        panel.hidden = false;
+        panel.classList.add("is-active");
+      } else {
+        panel.hidden = true;
+        panel.classList.remove("is-active");
       }
-    ]
-  },
-  {
-    id: "psychology",
-    label: "心理学ノート",
-    icon: "brain",
-    desc: "心のクセを知って、感情に振り回されにくくするノート。",
-    notes: [
-      {
-        tag: "プラシーボ効果",
-        title: "「効く」と信じることで本当に変わる",
-        bullets: [
-          "期待や安心感が、脳内のホルモン分泌を通じて本当に身体や行動に影響を与える。",
-          "逆に「どうせ無理だ」と思い込むノセボ効果もあるので、自分の内なるナレーションに注意。"
-        ]
-      },
-      {
-        tag: "認知不協和",
-        title: "自分の行動と信念がズレたとき",
-        bullets: [
-          "人は、行動と信念が矛盾すると、どちらかを無意識に書き換えて辻褄を合わせようとする。",
-          "二周目視点では、「今どの矛盾を解消しようとしているのか？」を観察すると自己理解が深まる。"
-        ]
-      },
-      {
-        tag: "承認欲求",
-        title: "「見てほしい気持ち」との付き合い方",
-        bullets: [
-          "承認欲求を消す必要はなく、「誰に・どんな形で認められたいか」を言語化することが大事。",
-          "他人からの承認だけでなく、「過去の自分が喜ぶ選択か?」という軸を持つとブレにくい。"
-        ]
-      }
-    ]
-  },
-  {
-    id: "business",
-    label: "ビジネスノート",
-    icon: "briefcase",
-    desc: "どの職種でも通用する“仕事の基本動作”をまとめるノート。",
-    notes: [
-      {
-        tag: "資料作成",
-        title: "1枚で伝わるスライドの型",
-        bullets: [
-          "結論 → 理由 → 具体例 の順に並べるだけで、多くの資料は読みやすくなる。",
-          "目的：「何を決めるための資料か？」を書き出してから作り始めると、迷子になりにくい。"
-        ]
-      },
-      {
-        tag: "ロジカルシンキング",
-        title: "分けて・並べて・つなげる",
-        bullets: [
-          "問題を「要素に分ける」、要素を「比較して並べる」、最後に「ストーリーでつなげる」。",
-          "ロジカルさは“賢さ”ではなく、“分解と整理の筋トレ”に近い。"
-        ]
-      },
-      {
-        tag: "報連相",
-        title: "上司の頭の中の“地図”を共有する",
-        bullets: [
-          "事実・解釈・感情をごちゃまぜにせず、「事実ベースの報告」を先に出す。",
-          "相談は「選択肢A/B/Cを考えたのですが、どれが良さそうですか？」と、思考の途中まで見せる。"
-        ]
-      }
-    ]
-  },
-  {
-    id: "ai",
-    label: "AI活用ノート",
-    icon: "cpu",
-    desc: "AIを“賢い相棒”として使うための、プロンプト思考とコラボ術。",
-    notes: [
-      {
-        tag: "プロンプト思考",
-        title: "AIに聞く前に決めておく3つのこと",
-        bullets: [
-          "①ゴール（何に使うのか） ②前提（今わかっていること） ③制約（文字数・トーンなど）。",
-          "人に頼むのと同じで、「期待値のすり合わせ」をするとアウトプットの質が上がる。"
-        ]
-      },
-      {
-        tag: "共同作業",
-        title: "AIは“たたき台”担当にする",
-        bullets: [
-          "最初の案はAIに任せて、人間は“取捨選択と編集”に集中する。",
-          "「0→1をAI、1→10を人間」と役割分担すると、思考のスタミナが持ちやすい。"
-        ]
-      },
-      {
-        tag: "生活への組み込み",
-        title: "毎日のルーティンにAIを埋め込む",
-        bullets: [
-          "日記の要約・タスク分解・食事案・勉強計画など、既にやっている習慣にAIを混ぜる。",
-          "“AIを起動するまでが面倒”にならないように、ショートカットやブックマークを整理しておく。"
-        ]
-      }
-    ]
+    });
+
+    // カテゴリタブなら、初回ロードをトリガー
+    const categoryIdMap = {
+      "tab-mind": "mind",
+      "tab-relation": "relation",
+      "tab-work": "work",
+      "tab-habit": "habit",
+      "tab-future": "future"
+    };
+    const catId = categoryIdMap[targetId];
+    if (catId) {
+      ensureCategoryLoaded(catId);
+    }
   }
-];
 
-function renderCategoryTabs(activeId) {
-  const container = document.getElementById("knCategoryTabs");
-  container.innerHTML = "";
-  knCategories.forEach((cat) => {
-    const btn = document.createElement("button");
-    btn.className = "category-pill" + (cat.id === activeId ? " active" : "");
-    btn.dataset.catId = cat.id;
-    btn.innerHTML = `
-      <span data-feather="${cat.icon}"></span>
-      <span>${cat.label}</span>
-    `;
-    btn.addEventListener("click", () => setActiveCategory(cat.id));
-    container.appendChild(btn);
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-target");
+      switchTab(target);
+    });
   });
-  if (window.feather) feather.replace();
-}
 
-function renderCategoryContent(cat) {
-  const el = document.getElementById("knCategoryContent");
-  el.innerHTML = `
-    <h2 class="category-title">${cat.label}</h2>
-    <p class="category-desc">${cat.desc}</p>
-    <div class="notes-grid">
-      ${cat.notes
-        .map(
-          (n) => `
-        <article class="note-card">
-          <div class="note-tag">
-            <span data-feather="bookmark"></span>
-            <span>${n.tag}</span>
-          </div>
-          <h3 class="note-title">${n.title}</h3>
-          <ul class="note-bullets">
-            ${n.bullets.map((b) => `<li>${b}</li>`).join("")}
-          </ul>
-        </article>
-      `
-        )
-        .join("")}
-    </div>
-  `;
-  if (window.feather) feather.replace();
-}
+  // 初期表示
+  switchTab("tab-top");
 
-function setActiveCategory(id) {
-  const cat = knCategories.find((c) => c.id === id) || knCategories[0];
-  renderCategoryTabs(cat.id);
-  renderCategoryContent(cat);
-}
+  // ============================================================
+  // カテゴリごとの設定・状態
+  // ============================================================
 
-document.addEventListener("DOMContentLoaded", () => {
-  setActiveCategory("relation");
-});
+  const categoryConfigs = {
+    mind: {
+      jsonPath: "data/shoseijutsu/mind.json",
+      cardsContainerId: "cards-mind",
+      tagsContainerId: "tags-mind"
+    },
+    relation: {
+      jsonPath: "data/shoseijutsu/relation.json",
+      cardsContainerId: "cards-relation",
+      tagsContainerId: "tags-relation"
+    },
+    work: {
+      jsonPath: "data/shoseijutsu/work.json",
+      cardsContainerId: "cards-work",
+      tagsContainerId: "tags-work"
+    },
+    habit: {
+      jsonPath: "data/shoseijutsu/habit.json",
+      cardsContainerId: "cards-habit",
+      tagsContainerId: "tags-habit"
+    },
+    future: {
+      jsonPath: "data/shoseijutsu/future.json",
+      cardsContainerId: "cards-future",
+      tagsContainerId: "tags-future"
+    }
+  };
+
+  const categoryState = {
+    mind: { loaded: false, data: null, search: "", activeTag: null },
+    relation: { loaded: false, data: null, search: "", activeTag: null },
+    work: { loaded: false, data: null, search: "", activeTag: null },
+    habit: { loaded: false, data: null, search: "", activeTag: null },
+    future: { loaded: false, data: null, search: "", activeTag: null }
+  };
+
+  // ============================================================
+  // カテゴリ JSON のロード
+  // ============================================================
+
+  function ensureCategoryLoaded(categoryId) {
+    const state = categoryState[categoryId];
+    if (!state || state.loaded) return;
+
+    const config = categoryConfigs[categoryId];
+    if (!config) return;
+
+    fetch(config.jsonPath)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`failed to load ${config.jsonPath}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        state.loaded = true;
+        state.data = data;
+        buildTagButtons(categoryId);
+        renderCards(categoryId);
+        attachSearchListener(categoryId);
+      })
+      .catch((err) => {
+        console.error(err);
+        const container = document.getElementById(config.cardsContainerId);
+        if (container) {
+          container.innerHTML =
+            '<p style="font-size:12px;color:#b91c1c;">データの読み込み中にエラーが発生しました。</p>';
+        }
+      });
+  }
+
+  // ============================================================
+  // タグボタン生成
+  // ============================================================
+
+  function buildTagButtons(categoryId) {
+    const state = categoryState[categoryId];
+    const config = categoryConfigs[categoryId];
+    if (!state || !state.data || !config) return;
+
+    const tagsContainer = document.getElementById(config.tagsContainerId);
+    if (!tagsContainer) return;
+
+    const topics = Array.isArray(state.data.topics) ? state.data.topics : [];
+    const tagSet = new Set();
+    topics.forEach((topic) => {
+      if (Array.isArray(topic.tags)) {
+        topic.tags.forEach((t) => {
+          if (t && typeof t === "string") {
+            tagSet.add(t);
+          }
+        });
+      }
+    });
+
+    tagsContainer.innerHTML = "";
+
+    if (tagSet.size === 0) {
+      return;
+    }
+
+    const tags = Array.from(tagSet);
+    tags.forEach((tagText) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "tag-button";
+      btn.textContent = tagText;
+      btn.addEventListener("click", () => {
+        // 同じタグを再クリックしたら解除
+        if (state.activeTag === tagText) {
+          state.activeTag = null;
+        } else {
+          state.activeTag = tagText;
+        }
+        updateActiveTagButtons(categoryId);
+        renderCards(categoryId);
+      });
+      tagsContainer.appendChild(btn);
+    });
+  }
+
+  function updateActiveTagButtons(categoryId) {
+    const state = categoryState[categoryId];
+    const config = categoryConfigs[categoryId];
+    if (!state || !config) return;
+    const tagsContainer = document.getElementById(config.tagsContainerId);
+    if (!tagsContainer) return;
+
+    const buttons = tagsContainer.querySelectorAll(".tag-button");
+    buttons.forEach((btn) => {
+      if (btn.textContent === state.activeTag) {
+        btn.classList.add("is-active");
+      } else {
+        btn.classList.remove("is-active");
+      }
+    });
+  }
+
+  // ============================================================
+  // 検索ボックスのイベント紐付け
+  // ============================================================
+
+  function attachSearchListener(categoryId) {
+    const selector = `.search-input[data-category="${categoryId}"]`;
+    const input = document.querySelector(selector);
+    if (!input) return;
+
+    const state = categoryState[categoryId];
+    input.value = state.search || "";
+
+    input.addEventListener("input", () => {
+      state.search = input.value || "";
+      renderCards(categoryId);
+    });
+  }
+
+  // ============================================================
+  // カード描画
+  // ============================================================
+
+  function renderCards(categoryId) {
+    const state = categoryState[categoryId];
+    const config = categoryConfigs[categoryId];
+    if (!state || !state.data || !config) return;
+
+    const container = document.getElementById(config.cardsContainerId);
+    if (!container) return;
+
+    const topics = Array.isArray(state.data.topics) ? state.data.topics : [];
+
+    const keyword = (state.search || "").trim().toLowerCase();
+    const activeTag = state.activeTag;
+
+    const filtered = topics.filter((topic) => {
+      // キーワードフィルタ
+      if (keyword) {
+        const title = (topic.title || "").toLowerCase();
+        const summary = (topic.summary || "").toLowerCase();
+        if (!title.includes(keyword) && !summary.includes(keyword)) {
+          return false;
+        }
+      }
+      // タグフィルタ
+      if (activeTag) {
+        const tags = Array.isArray(topic.tags) ? topic.tags : [];
+        if (!tags.includes(activeTag)) {
+          return false;
+        }
+      }
+      return true;
+    });
+
+    container.innerHTML = "";
+
+    if (filtered.length === 0) {
+      const p = document.createElement("p");
+      p.style.fontSize = "12px";
+      p.style.color = "#6b7280";
+      p.textContent = "条件に合う処世術カードがありません。";
+      container.appendChild(p);
+      return;
+    }
+
+    filtered.forEach((topic) => {
+      const card = createShoseiCard(topic);
+      container.appendChild(card);
+    });
+  }
+
+  // ============================================================
+  // 処世術カード生成（概要＋アコーディオン詳細）
+  // ============================================================
+
+  function createShoseiCard(topic) {
+    const card = document.createElement("article");
+    card.className = "shosei-card";
+
+    // タイトル
+    const titleEl = document.createElement("h3");
+    titleEl.className = "shosei-title";
+    titleEl.textContent = topic.title || "タイトル未設定";
+
+    // サマリー
+    const summaryEl = document.createElement("p");
+    summaryEl.className = "shosei-summary";
+    summaryEl.textContent = topic.summary || "";
+
+    // タグ列
+    const tagsWrap = document.createElement("div");
+    tagsWrap.className = "shosei-tags";
+    if (Array.isArray(topic.tags)) {
+      topic.tags.forEach((tag) => {
+        const chip = document.createElement("span");
+        chip.className = "tag-chip";
+        chip.textContent = tag;
+        tagsWrap.appendChild(chip);
+      });
+    }
+
+    // 詳細（アコーディオン部）
+    const detailWrapper = document.createElement("div");
+    detailWrapper.className = "shosei-detail";
+
+    const detailInner = document.createElement("div");
+    detailInner.className = "shosei-detail-inner";
+
+    // essence
+    if (Array.isArray(topic.essence) && topic.essence.length > 0) {
+      detailInner.appendChild(
+        createDetailBlock("本質ポイント", topic.essence)
+      );
+    }
+
+    // traps
+    if (Array.isArray(topic.traps) && topic.traps.length > 0) {
+      detailInner.appendChild(
+        createDetailBlock("よくある罠", topic.traps)
+      );
+    }
+
+    // actionTips
+    if (Array.isArray(topic.actionTips) && topic.actionTips.length > 0) {
+      detailInner.appendChild(
+        createDetailBlock("行動ヒント", topic.actionTips)
+      );
+    }
+
+    detailWrapper.appendChild(detailInner);
+
+    // カードクリックで詳細開閉
+    let isOpen = false;
+    function toggleDetail() {
+      isOpen = !isOpen;
+      if (isOpen) {
+        card.classList.add("is-open");
+        // 一旦 maxHeight を計算するために auto にする
+        detailWrapper.style.maxHeight = detailInner.scrollHeight + "px";
+      } else {
+        card.classList.remove("is-open");
+        detailWrapper.style.maxHeight = "0";
+      }
+    }
+
+    card.addEventListener("click", (e) => {
+      // テキスト選択中のクリックなどもあるので一応許容
+      toggleDetail();
+    });
+
+    // 概要部分と詳細部分をカードに追加
+    card.appendChild(titleEl);
+    card.appendChild(summaryEl);
+    card.appendChild(tagsWrap);
+    card.appendChild(detailWrapper);
+
+    return card;
+  }
+
+  function createDetailBlock(title, items) {
+    const block = document.createElement("div");
+    block.className = "detail-block";
+
+    const titleEl = document.createElement("h4");
+    titleEl.className = "detail-title";
+    titleEl.textContent = title;
+
+    const ul = document.createElement("ul");
+    ul.className = "detail-list";
+
+    items.forEach((text) => {
+      const li = document.createElement("li");
+      li.textContent = text;
+      ul.appendChild(li);
+    });
+
+    block.appendChild(titleEl);
+    block.appendChild(ul);
+    return block;
+  }
+
+  // ============================================================
+  // 初期ロード：トップタブはHTMLのみ、カテゴリは初回アクセスでロード
+  // ============================================================
+
+  // ここでは特に何もしない（タブ切り替え時に ensureCategoryLoaded が走る）
+
+})();
