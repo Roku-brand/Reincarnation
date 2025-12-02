@@ -9,8 +9,8 @@
 }
 
 .generation-main {
-  padding-top: 10px;
-  padding-bottom: 40px;
+  padding-top: 12px;
+  padding-bottom: 36px;
 }
 
 /* ★ コンテンツ幅：ホームと同じ“ほぼフル幅”に寄せる */
@@ -527,3 +527,4 @@
     flex-basis: 160px;
   }
 }
+
