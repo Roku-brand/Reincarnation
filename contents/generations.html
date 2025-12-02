@@ -4,22 +4,20 @@
   <meta charset="utf-8">
   <title>世代別ノート | 人生二周目ノート</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="人生を8つのチャプターに分けて、二周目視点で「詰まりやすい構造」を見える化する世代別ノート。小学生〜セカンドキャリアまでを俯瞰できます。">
 
-  <!-- フォント -->
+  <!-- フォント（index.html と統一） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- 共通スタイル（ホームと同じ） -->
-  <link rel="stylesheet" href="style.css">
+  <!-- 共通スタイル -->
+  <link rel="stylesheet" href="../style.css">
   <!-- 世代別ノート専用スタイル -->
   <link rel="stylesheet" href="generations.css">
 </head>
-<body class="home-body">
-  <!-- ================= HEADER（index.html と同一構造） ================= -->
+<body class="home-body generation-body">
+  <!-- ========== ヘッダー（index.html と完全同一構造・クラス） ========== -->
   <header class="site-header">
     <div class="header-inner container">
       <div class="logo-block">
@@ -28,7 +26,7 @@
       </div>
 
       <nav class="header-nav">
-        <a href="index.html" class="nav-link">ホーム</a>
+        <a href="../index.html" class="nav-link">ホーム</a>
         <a href="generations.html" class="nav-link is-current">世代別ノート</a>
         <a href="knowledge-notes.html" class="nav-link">教養ノート</a>
         <a href="life-stories.html" class="nav-link">人生体験記ノート</a>
@@ -38,52 +36,142 @@
     </div>
   </header>
 
-  <main class="site-main">
-    <div class="container gen-page-inner">
+  <!-- ========== メイン ========== -->
+  <main class="site-main generation-main">
+    <div class="container generation-container">
+      <!-- 一行コピー（軽め） -->
+      <section class="hero-copy generation-hero-copy">
+        <p class="hero-text generation-hero-text">
+          人生は一度きりだけど、視点は何度でもアップデートできる。世代別ノートは、そのための「8チャプターの地図」です。
+        </p>
+      </section>
 
-      <!-- ページヘッダー -->
-      <section class="section gen-page-header">
-        <div class="gen-page-header-main">
-          <h1 class="gen-page-title">世代別ノート</h1>
-          <p class="gen-page-subtitle">
-            人生を 8 つのステージに分けて、<br class="sp-only" />
-            それぞれの「詰まりやすい構造」と「乗り越え方」を見える化します。
+      <!-- タブ（≪トップ≫ + 8ステージ） -->
+      <section class="generation-tabs-section">
+        <div class="stage-tabs-wrapper">
+          <div class="stage-tabs" role="tablist" aria-label="人生のステージ">
+            <button class="stage-tab is-active" type="button" data-stage="top">≪トップ≫</button>
+            <button class="stage-tab" type="button" data-stage="elementary">小学生</button>
+            <button class="stage-tab" type="button" data-stage="middle">中学生</button>
+            <button class="stage-tab" type="button" data-stage="high">高校生</button>
+            <button class="stage-tab" type="button" data-stage="university">大学・専門期</button>
+            <button class="stage-tab" type="button" data-stage="earlyCareer">社会人前期</button>
+            <button class="stage-tab" type="button" data-stage="midCareer">社会人中期</button>
+            <button class="stage-tab" type="button" data-stage="lateCareer">社会人後期</button>
+            <button class="stage-tab" type="button" data-stage="secondCareer">セカンドキャリア</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ≪トップ≫ 用ビュー：人生マップ（デモ） -->
+      <section id="top-view" class="generation-section is-visible" aria-hidden="false">
+        <header class="generation-hero">
+          <h1 class="generation-title">世代別ノート</h1>
+          <p class="generation-lead">
+            人生を 8 つのチャプターに分けて、二周目視点で「詰まりやすい構造」を見える化します。
           </p>
-        </div>
+        </header>
+
+        <section class="life-map card-block">
+          <h2 class="life-map-title">人生マップ（デモ）</h2>
+          <p class="life-map-sub">
+            小学生〜セカンドキャリアまでの流れを、ざっくり俯瞰できるマップです。細かい人生の違いよりも、「どんなフェーズがあるか」をつかむことを目的にしています。
+          </p>
+
+          <!-- 横長タイムライン -->
+          <div class="life-map-timeline">
+            <div class="timeline-line"></div>
+            <div class="timeline-steps">
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">小学生</div>
+                <div class="timeline-caption">「世界のルール」をはじめて学ぶ時期</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">中学生</div>
+                <div class="timeline-caption">自己意識が強まり、他人の目が気になり始める</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">高校生</div>
+                <div class="timeline-caption">進路と「自分らしさ」をめぐって揺れる時期</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">大学・専門期</div>
+                <div class="timeline-caption">自由度が一気に高まり、選択肢が爆発するフェーズ</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">社会人前期</div>
+                <div class="timeline-caption">仕事のリアルに触れつつ、「この道でいいのか」を考え始める</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">社会人中期</div>
+                <div class="timeline-caption">責任・立場・生活基盤が重くなり、方向転換のハードルが上がる</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">社会人後期</div>
+                <div class="timeline-caption">仕事・家族・健康など、複数のテーマが交差するフェーズ</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-dot"></div>
+                <div class="timeline-label">セカンドキャリア</div>
+                <div class="timeline-caption">「何を残したいか」「どう終わりたいか」を再設計する時期</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- フェーズごとのカード群 -->
+          <div class="life-map-phases">
+            <article class="phase-card">
+              <h3 class="phase-title">成長のフェーズ</h3>
+              <p class="phase-body">
+                小学生〜高校生は、「外のルール」を学びながら、自分の軸がゆっくり形になる時期。後悔は「知らなかったこと」から生まれやすい。
+              </p>
+            </article>
+            <article class="phase-card">
+              <h3 class="phase-title">選択が増えるフェーズ</h3>
+              <p class="phase-body">
+                大学・専門期〜社会人前期は、選べる道が一気に増える時期。二周目視点では、「選ばなかった道」をどう整理するかがカギになる。
+              </p>
+            </article>
+            <article class="phase-card">
+              <h3 class="phase-title">仕事の重みが増すフェーズ</h3>
+              <p class="phase-body">
+                社会人中期〜後期は、立場や責任が増え、いきなりの方向転換が難しくなるフェーズ。ここでの迷いは、「構造の理解不足」からも生まれる。
+              </p>
+            </article>
+            <article class="phase-card">
+              <h3 class="phase-title">自由度が再び高まるフェーズ</h3>
+              <p class="phase-body">
+                セカンドキャリアは、「もう一度、人生を編集し直す」タイミング。制約はあるが、視点さえあれば一周目とは違う選び方ができる。
+              </p>
+            </article>
+          </div>
+        </section>
       </section>
 
-      <!-- ステージタブ -->
-      <section class="section gen-tabs-section" aria-label="世代タブ">
-        <div class="gen-tabs-wrapper">
-          <button class="gen-tab gen-tab-active" data-stage="top">≪トップ≫</button>
-          <button class="gen-tab" data-stage="elementary">小学生</button>
-          <button class="gen-tab" data-stage="middle">中学生</button>
-          <button class="gen-tab" data-stage="high">高校生</button>
-          <button class="gen-tab" data-stage="university">大学・専門期</button>
-          <button class="gen-tab" data-stage="earlyCareer">社会人前期</button>
-          <button class="gen-tab" data-stage="midCareer">社会人中期</button>
-          <button class="gen-tab" data-stage="lateCareer">社会人後期</button>
-          <button class="gen-tab" data-stage="secondCareer">セカンドキャリア</button>
+      <!-- 各世代ステージ用ビュー（JSON描画先） -->
+      <section id="stage-view" class="generation-section" aria-hidden="true">
+        <div id="stage-content" class="stage-content">
+          <!-- JSがここに 7部構成 UI を生成します -->
         </div>
       </section>
-
-      <!-- コンテンツルート：ここを書き換える -->
-      <section class="section gen-content-section">
-        <div id="genContentRoot">
-          <!-- JS で 「トップ用人生マップ」 or 各世代ノート を描画 -->
-        </div>
-      </section>
-
     </div>
   </main>
 
+  <!-- ========== フッター ========== -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <p class="footer-copy">© 人生二周目ノート</p>
     </div>
   </footer>
 
-  <!-- 世代別ノート用JS -->
+  <!-- スクリプト -->
   <script src="generations.js"></script>
 </body>
 </html>
