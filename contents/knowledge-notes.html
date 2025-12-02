@@ -55,7 +55,7 @@
           </div>
           <p class="hero-text">
             人生を賢く、したたかに。<br>
-            情報が多すぎる時代に必要なのは、「断片的な知識」ではなく「構造化された知識」。
+            情報が多すぎる時代に必要なのは、「知識」ではなく「生き抜くための構造」。
           </p>
         </div>
       </section>
@@ -67,8 +67,8 @@
 
         <div class="kn-layout">
           <!-- OSカテゴリサイドバー（PCでは左端・縦並び） -->
-          <aside class="kn-sidebar" id="kn-sidebar" aria-label="処世術OSカテゴリ">
-            <div class="kn-sidebar-title">処世術OS</div>
+          <aside class="kn-sidebar" id="kn-sidebar" aria-label="処世術禄一覧">
+            <div class="kn-sidebar-title">処世術禄一覧</div>
             <button class="kn-os-tab is-active" type="button" data-category="all">
               ≪トップ≫
             </button>
@@ -99,10 +99,10 @@
               aria-controls="kn-sidebar"
             >
               <span class="kn-sidebar-toggle-icon"></span>
-              <span class="kn-sidebar-toggle-label">処世術OS カテゴリ</span>
+              <span class="kn-sidebar-toggle-label">処世術禄一覧</span>
             </button>
 
-            <!-- 総合検索バー -->
+            <!-- 総合検索バー（全タブ共通） -->
             <section class="kn-section kn-search-section" aria-label="処世術の総合検索">
               <div class="kn-search-inner">
                 <div class="kn-search-icon" aria-hidden="true">
@@ -122,21 +122,26 @@
               </div>
             </section>
 
-            <!-- 今日の処世術（おすすめカード） -->
-            <section class="kn-section kn-today-section" aria-label="今日の処世術">
-              <div class="kn-section-header">
-                <h2 class="kn-section-title">今日の処世術</h2>
-                <p class="kn-section-subtitle">
-                  ページを開くたびに、ランダムで1つだけ処世術カードをおすすめ表示します。
-                </p>
+            <!-- 今日の処世術（おすすめカード）※トップのみ表示 -->
+            <section class="kn-section kn-today-section kn-top-only" aria-label="今日の処世術">
+              <div class="kn-section-header kn-today-header">
+                <div>
+                  <h2 class="kn-section-title">今日の処世術</h2>
+                  <p class="kn-section-subtitle">
+                    ページを開くたび、または「更新」を押すたびにランダムで1つだけ表示します。
+                  </p>
+                </div>
+                <button id="kn-today-refresh" class="kn-today-refresh-btn" type="button">
+                  ↻ 更新
+                </button>
               </div>
               <div id="kn-today-card" class="kn-today-card-container">
                 <p class="kn-loading-text">処世術カードを読み込み中です…</p>
               </div>
             </section>
 
-            <!-- 今の悩みから探す（シチュエーション別ショートカット） -->
-            <section class="kn-section kn-shortcuts-section" aria-label="今の悩みから探す">
+            <!-- 今の悩みから探す（シチュエーション別ショートカット）※トップのみ表示 -->
+            <section class="kn-section kn-shortcuts-section kn-top-only" aria-label="今の悩みから探す">
               <div class="kn-section-header kn-shortcuts-header">
                 <h2 class="kn-section-title">今の悩みから探す →</h2>
                 <p class="kn-section-subtitle">
@@ -152,7 +157,7 @@
               </div>
             </section>
 
-            <!-- 検索結果 / ピックアップ一覧 -->
+            <!-- 検索結果 / ピックアップ一覧（全タブ共通） -->
             <section class="kn-section kn-results-section" aria-label="処世術カード一覧">
               <div class="kn-section-header kn-results-header">
                 <h2 class="kn-section-title">処世術カード一覧</h2>
@@ -176,4 +181,3 @@
   <script src="knowledge-notes.js" defer></script>
 </body>
 </html>
-
