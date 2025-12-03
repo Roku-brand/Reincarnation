@@ -228,7 +228,7 @@
 }
 
 /* =============================================================
-   検索バー
+   検索バー（上の1本だけ）
    ============================================================= */
 
 .kn-search-section {
@@ -468,22 +468,16 @@
   box-shadow: 0 6px 14px rgba(5, 150, 105, 0.4);
 }
 
-/* カードグリッド */
+/* カードグリッド：1列固定（隣のカードが存在しないようにする） */
 
 .kn-card-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 10px;
 }
 
-@media (max-width: 900px) {
-  .kn-card-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* =============================================================
-   処世術カード（共通）
+   処世術カード（共通）  ─ 高さ揃え無し
    ============================================================= */
 
 .shosei-card {
@@ -550,19 +544,19 @@
   color: #3730a3;
 }
 
-/* 詳細アコーディオン */
+/* 詳細アコーディオン：高さ揃えを一切しない */
 
 .shosei-detail {
-  display: none;              /* デフォルト非表示 */
+  display: none; /* デフォルト非表示 */
   margin-top: 6px;
 }
 
 .shosei-card.is-open .shosei-detail {
-  display: block;             /* カードが is-open のときだけ表示 */
+  display: block; /* そのカードだけ開く */
 }
+
 .shosei-detail-inner {
   padding: 8px 10px 10px;
-  margin-top: 6px;
   border-radius: 10px;
   border: 1px solid #e5e7eb;
   background: #f9fafb;
@@ -636,4 +630,3 @@
     margin-top: 8px;
   }
 }
-
