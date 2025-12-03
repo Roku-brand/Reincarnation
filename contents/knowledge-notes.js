@@ -95,8 +95,7 @@
   const sidebarToggleBtn   = document.querySelector(".kn-sidebar-toggle");
   const osTabButtons       = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
 
-  const searchInputTop     = document.getElementById("kn-search-input");
-  const searchInputOs      = document.getElementById("kn-search-input-os");
+  const searchInput        = document.getElementById("kn-search-input");
 
   const topModeSection     = document.getElementById("top-mode");
   const osModeSection      = document.getElementById("os-mode");
@@ -245,13 +244,6 @@
       osStructureSection.hidden = !isTop;
       osStructureSection.style.display = isTop ? "" : "none";
     }
-
-    // 検索入力の同期（どちらモードでも同じ検索語を使う）
-    if (isTop) {
-      if (searchInputTop) searchInputTop.value = state.search;
-    } else {
-      if (searchInputOs) searchInputOs.value = state.search;
-    }
   }
 
   // ============================================================
@@ -320,40 +312,22 @@
   }
 
   // ============================================================
-  // 検索入力（トップ・OS両方を同期）
+  // 検索入力（上の1本だけを全タブ共通で使う）
   // ============================================================
   function setupSearchInput() {
-    if (searchInputTop) {
-      searchInputTop.addEventListener("input", () => {
-        state.search = searchInputTop.value || "";
-        if (searchInputOs) searchInputOs.value = state.search;
+    if (!searchInput) return;
+
+    searchInput.addEventListener("input", () => {
+      state.search = searchInput.value || "";
+      renderResults();
+    });
+
+    searchInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        state.search = searchInput.value || "";
         renderResults();
-      });
-
-      searchInputTop.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          state.search = searchInputTop.value || "";
-          if (searchInputOs) searchInputOs.value = state.search;
-          renderResults();
-        }
-      });
-    }
-
-    if (searchInputOs) {
-      searchInputOs.addEventListener("input", () => {
-        state.search = searchInputOs.value || "";
-        if (searchInputTop) searchInputTop.value = state.search;
-        renderResults();
-      });
-
-      searchInputOs.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          state.search = searchInputOs.value || "";
-          if (searchInputTop) searchInputTop.value = state.search;
-          renderResults();
-        }
-      });
-    }
+      }
+    });
   }
 
   // ============================================================
@@ -365,14 +339,10 @@
     shortcutButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const keyword = btn.getAttribute("data-keyword") || "";
-        if (searchInputTop) {
-          searchInputTop.value = keyword;
-        }
-        if (searchInputOs) {
-          searchInputOs.value = keyword;
+        if (searchInput) {
+          searchInput.value = keyword;
         }
         state.search = keyword;
-
         renderResults();
       });
     });
@@ -528,7 +498,7 @@
   }
 
   // ============================================================
-  // カード生成（各カードごとに独立して開閉）
+  // カード生成（各カードごとに独立して開閉・高さ揃え無し）
   // ============================================================
   function createShoseiCard(topic) {
     const card = document.createElement("article");
@@ -581,17 +551,17 @@
       detailWrapper.appendChild(detailInner);
     }
 
-    // ▼ 各カードごとに独立した開閉状態を持たせる
+    // ▼ 各カードごとに独立した開閉状態を持たせる（高さはCSS側に任せる）
     let isOpen = false;
 
     card.addEventListener("click", (event) => {
-      // aタグとかボタンを中に置いた場合に備えて一応
+      // aタグやボタンが中に入ってきた場合の保険
       if (event.target.closest("a, button")) return;
 
       isOpen = !isOpen;
       card.classList.toggle("is-open", isOpen);
-
-      
+      // 詳細の display 切り替えは CSS:
+      // .shosei-card.is-open .shosei-detail { display:block; }
     });
 
     card.appendChild(titleEl);
@@ -629,4 +599,3 @@
   // ============================================================
   init();
 })();
-
