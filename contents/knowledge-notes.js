@@ -1,7 +1,7 @@
 // knowledge-notes.js
 // モード分離：
-//  - ≪トップ≫(activeCategory === "all") → #top-mode だけ表示
-//  - その他OSタブ → #os-mode だけ表示（カード一覧）
+//  - ≪トップ≫(activeCategory === "all") → top-mode + 構造カードを表示
+//  - その他OSタブ → os-mode だけ表示（カード一覧）
 
 (function () {
   // ============================================================
@@ -91,15 +91,16 @@
   };
 
   // DOM参照
-  const sidebarEl        = document.getElementById("kn-sidebar");
-  const sidebarToggleBtn = document.querySelector(".kn-sidebar-toggle");
-  const osTabButtons     = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
+  const sidebarEl          = document.getElementById("kn-sidebar");
+  const sidebarToggleBtn   = document.querySelector(".kn-sidebar-toggle");
+  const osTabButtons       = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
 
-  const searchInputTop   = document.getElementById("kn-search-input");
-  const searchInputOs    = document.getElementById("kn-search-input-os");
+  const searchInputTop     = document.getElementById("kn-search-input");
+  const searchInputOs      = document.getElementById("kn-search-input-os");
 
-  const topModeSection   = document.getElementById("top-mode");
-  const osModeSection    = document.getElementById("os-mode");
+  const topModeSection     = document.getElementById("top-mode");
+  const osModeSection      = document.getElementById("os-mode");
+  const osStructureSection = document.querySelector(".kn-os-structure-section");
 
   const todayCardContainer = document.getElementById("kn-today-card");
   const todayRefreshBtn    = document.getElementById("kn-today-refresh");
@@ -239,6 +240,10 @@
     if (osModeSection) {
       osModeSection.hidden = isTop;
       osModeSection.style.display = isTop ? "none" : "";
+    }
+    if (osStructureSection) {
+      osStructureSection.hidden = !isTop;
+      osStructureSection.style.display = isTop ? "" : "none";
     }
 
     // 検索入力の同期（どちらモードでも同じ検索語を使う）
@@ -587,7 +592,6 @@
       card.classList.toggle("is-open", isOpen);
 
       if (isOpen) {
-        // 一旦 autoにして高さを計測してからmax-heightに反映
         detailWrapper.style.maxHeight = "none";
         const h = detailInner.scrollHeight;
         detailWrapper.style.maxHeight = h + "px";
