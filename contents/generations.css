@@ -13,13 +13,20 @@
   padding-bottom: 40px;
 }
 
-/* コンテンツ幅：ホームと同じくフル画面寄せ + 中央カラム */
+/* コンテナを「ほぼフル幅」にしてフル画面寄せ */
+.generation-main .container {
+  max-width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* コンテンツラッパ：中央固定幅をやめてフル幅寄りに */
 .generation-container {
   position: relative;
   z-index: 1;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px 32px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 0 32px;
 }
 
 /* HERO（テキストは HTML 側、レイアウトは style.css の hero-* に準拠） */
@@ -41,59 +48,85 @@
 }
 
 /* ==============================
-   タブ（≪トップ≫ + 8ステージ）
+   左サイドタブ + 右メイン
+   （処世術禄のレイアウトトーンを踏襲）
    ============================== */
 
-.generation-tabs-section {
+.generation-layout {
+  display: flex;
+  gap: 20px;
   margin-top: 8px;
-  margin-bottom: 10px;
+  align-items: flex-start;
 }
 
-.stage-tabs-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  padding-bottom: 4px;
+/* 左サイドバー（縦タブ） */
+
+.gen-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 4px 0;
+  box-shadow: none;
 }
 
-.stage-tabs {
-  display: inline-flex;
-  gap: 8px;
-  padding: 6px 4px 6px 2px;
-  min-width: 100%;
+.gen-sidebar-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #047857;
+  margin-bottom: 8px;
 }
+
+/* ステージタブ（処世術禄の OS タブと同系統のデザイン） */
 
 .stage-tab {
-  flex: 0 0 auto;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(22, 163, 74, 0.16);
-  background: rgba(255, 255, 255, 0.9);
-  color: #14532d;
-  font-size: 0.86rem;
-  font-family: inherit;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #065f46;
+  font-size: 12px;
+  line-height: 1.4;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.09);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
+  user-select: none;
   transition:
     background 0.18s ease,
-    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease,
     box-shadow 0.18s ease,
-    transform 0.18s ease,
-    border-color 0.18s ease;
+    color 0.18s ease;
+  white-space: normal;
 }
 
 .stage-tab:hover {
+  background: #ecfdf5;
+  border-color: #6ee7b7;
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.24);
+  color: #065f46;
 }
 
+/* アクティブ時の色は処世術禄と同じ深緑 (#059669) */
+
 .stage-tab.is-active {
-  background: linear-gradient(135deg, #bbf7d0, #4ade80);
-  color: #064e3b;
-  border-color: rgba(16, 185, 129, 0.6);
+  background: #059669;
+  border-color: #059669;
+  color: #ecfdf5;
+  box-shadow: 0 10px 24px rgba(5, 150, 105, 0.6);
+}
+
+/* 右メイン側 */
+
+.gen-main {
+  flex: 1;
+  min-width: 0;
 }
 
 /* ==============================
@@ -176,7 +209,11 @@
   margin-bottom: 18px;
   padding: 18px 10px 6px;
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(240, 253, 244, 0.95), rgba(209, 250, 229, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(240, 253, 244, 0.95),
+    rgba(209, 250, 229, 0.9)
+  );
   overflow-x: auto;
 }
 
@@ -187,7 +224,11 @@
   right: 28px;
   height: 2px;
   transform: translateY(-50%);
-  background: linear-gradient(90deg, rgba(34, 197, 94, 0.4), rgba(52, 211, 153, 0.8));
+  background: linear-gradient(
+    90deg,
+    rgba(34, 197, 94, 0.4),
+    rgba(52, 211, 153, 0.8)
+  );
   opacity: 0.65;
 }
 
@@ -262,7 +303,7 @@
   margin-top: 6px;
 }
 
-/* 概要カード */
+/* 概要カード（必要に応じて HTML/JS 側で使用） */
 .stage-overview {
   padding: 18px 18px 20px;
   border-radius: 20px;
@@ -505,13 +546,56 @@
   color: #4b5563;
 }
 
+/* メタ情報用コンテナ（任意） */
+
+.stage-meta {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stage-meta-block {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  font-size: 0.8rem;
+}
+
+.stage-meta-title {
+  margin: 0 0 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #14532d;
+}
+
+.stage-meta-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 0.78rem;
+  color: #4b5563;
+}
+
+.stage-meta-list li {
+  margin-bottom: 2px;
+}
+
 /* ==============================
    レスポンシブ
    ============================== */
 
 @media (max-width: 960px) {
+  .generation-layout {
+    flex-direction: column;
+  }
+
+  .gen-sidebar {
+    width: 100%;
+  }
+
   .generation-container {
-    padding: 0 16px 28px;
+    padding: 0 0 28px;
   }
 
   .life-map-phases {
@@ -529,15 +613,24 @@
   .pains-list {
     grid-template-columns: 1fr;
   }
+
+  .stage-meta {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
-  .generation-hero {
-    padding: 18px 14px;
+  .generation-hero-copy {
+    padding-top: 32px;
   }
 
   .card-block {
     padding: 16px 14px 18px;
+  }
+
+  .life-map-timeline {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .timeline-steps {
@@ -548,4 +641,3 @@
     flex-basis: 160px;
   }
 }
-
