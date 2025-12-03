@@ -41,16 +41,16 @@
     <div class="container">
       <div class="generation-container">
 
-        <!-- HERO：チャプター名＋二重アンダーライン（動的に切り替え） -->
+        <!-- HERO：常に固定（タブ切替でも一切変えない） -->
         <section class="hero-copy generation-hero-copy">
           <div class="hero-inner">
             <div class="hero-heading-block">
-              <h1 id="chapter-title" class="hero-section-title">人生地図禄</h1>
+              <h1 class="hero-section-title">人生地図禄</h1>
               <div class="hero-section-underline"></div>
               <div class="hero-section-underline second"></div>
             </div>
-            <p id="chapter-subtitle" class="hero-text generation-hero-text">
-              人生を 8 つのチャプターに分けて、二周目視点で「詰まりやすい構造」を見える化します。
+            <p class="hero-text generation-hero-text">
+              人生を 8 つのチャプターに分けて、二周目視点で「詰まりやすい構造」を見える化します。<br>
               一歩先の人生フェーズが見えれば、賢い選択ができる。
             </p>
           </div>
@@ -185,9 +185,9 @@
             <!-- 各チャプター用：7部構成ビュー -->
             <section id="chapter-view" class="generation-section" aria-hidden="true">
               <div class="chapter-sections">
-                <!-- ① チャプター概要 -->
+                <!-- ① チャプター概要：見出しにチャプター名を表示する（例：小学生） -->
                 <section class="chapter-section chapter-overview">
-                  <h2 class="chapter-section-heading">① チャプター概要</h2>
+                  <h2 id="overviewHeading" class="chapter-section-heading">チャプター概要</h2>
                   <p id="overviewText" class="chapter-section-text">
                     （このステージの概要が入ります）
                   </p>
@@ -197,8 +197,12 @@
                 <section class="chapter-section accordion" data-key="essence">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
-                      <div class="accordion-title">② 本質</div>
-                      <div class="accordion-subtitle">この年代の「根本的な性質」</div>
+                      <div class="accordion-title" data-base="② 本質">
+                        ② 本質
+                      </div>
+                      <div class="accordion-subtitle">
+                        この年代の「根本的な性質」
+                      </div>
                     </div>
                     <div class="accordion-icon">＋</div>
                   </button>
@@ -213,8 +217,12 @@
                 <section class="chapter-section accordion" data-key="branches">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
-                      <div class="accordion-title">③ 分岐パターン</div>
-                      <div class="accordion-subtitle">人生のよくある分かれ道</div>
+                      <div class="accordion-title" data-base="③ 分岐パターン">
+                        ③ 分岐パターン
+                      </div>
+                      <div class="accordion-subtitle">
+                        人生のよくある分かれ道
+                      </div>
                     </div>
                     <div class="accordion-icon">＋</div>
                   </button>
@@ -229,8 +237,12 @@
                 <section class="chapter-section accordion" data-key="pains">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
-                      <div class="accordion-title">④ 迷い・不安・つまずき</div>
-                      <div class="accordion-subtitle">この年代特有の「崩れどころ」</div>
+                      <div class="accordion-title" data-base="④ 迷い・不安・つまずき">
+                        ④ 迷い・不安・つまずき
+                      </div>
+                      <div class="accordion-subtitle">
+                        この年代特有の「崩れどころ」
+                      </div>
                     </div>
                     <div class="accordion-icon">＋</div>
                   </button>
@@ -245,7 +257,9 @@
                 <section class="chapter-section accordion chapter-core" data-key="secondRound">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
-                      <div class="accordion-title">⑤ 二周目視点（抽象）＋ 処世術（具体）</div>
+                      <div class="accordion-title" data-base="⑤ 二周目視点＋処世術">
+                        ⑤ 二周目視点＋処世術
+                      </div>
                       <div class="accordion-subtitle">
                         抽象と具体の両方で、このフェーズを乗り越えるための知恵
                       </div>
@@ -267,8 +281,12 @@
                 <section class="chapter-section accordion" data-key="compass">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
-                      <div class="accordion-title">⑥ 選択のコンパス（Q&A）</div>
-                      <div class="accordion-subtitle">ありがちな二択・迷いに対する“方向性”</div>
+                      <div class="accordion-title" data-base="⑥ 選択のコンパス">
+                        ⑥ 選択のコンパス
+                      </div>
+                      <div class="accordion-subtitle">
+                        ありがちな二択・迷いに対する“方向性”
+                      </div>
                     </div>
                     <div class="accordion-icon">＋</div>
                   </button>
