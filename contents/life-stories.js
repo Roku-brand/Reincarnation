@@ -359,13 +359,38 @@ async function loadJobs() {
   const detailContainer = document.getElementById("job-detail-container");
   if (!groupsContainer || !detailContainer) return;
 
+  // ★ここを修正：job1〜job30 までを読み込む
   const jobFiles = [
     "data/jobs/job1.json",
     "data/jobs/job2.json",
     "data/jobs/job3.json",
     "data/jobs/job4.json",
     "data/jobs/job5.json",
-    "data/jobs/job6.json"
+    "data/jobs/job6.json",
+    "data/jobs/job7.json",
+    "data/jobs/job8.json",
+    "data/jobs/job9.json",
+    "data/jobs/job10.json",
+    "data/jobs/job11.json",
+    "data/jobs/job12.json",
+    "data/jobs/job13.json",
+    "data/jobs/job14.json",
+    "data/jobs/job15.json",
+    "data/jobs/job16.json",
+    "data/jobs/job17.json",
+    "data/jobs/job18.json",
+    "data/jobs/job19.json",
+    "data/jobs/job20.json",
+    "data/jobs/job21.json",
+    "data/jobs/job22.json",
+    "data/jobs/job23.json",
+    "data/jobs/job24.json",
+    "data/jobs/job25.json",
+    "data/jobs/job26.json",
+    "data/jobs/job27.json",
+    "data/jobs/job28.json",
+    "data/jobs/job29.json",
+    "data/jobs/job30.json"
   ];
 
   try {
@@ -677,4 +702,3 @@ function createJobListBlock(title, items) {
 
   return block;
 }
-
