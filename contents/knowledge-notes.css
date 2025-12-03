@@ -553,11 +553,13 @@
 /* 詳細アコーディオン */
 
 .shosei-detail {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.25s ease;
+  display: none;              /* デフォルト非表示 */
+  margin-top: 6px;
 }
 
+.shosei-card.is-open .shosei-detail {
+  display: block;             /* カードが is-open のときだけ表示 */
+}
 .shosei-detail-inner {
   padding: 8px 10px 10px;
   margin-top: 6px;
@@ -634,3 +636,4 @@
     margin-top: 8px;
   }
 }
+
