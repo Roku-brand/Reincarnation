@@ -234,48 +234,45 @@
   // ============================================================
   // データロード（② JSON一元管理 ＋ ① 永続ID付与）
   // ============================================================
-  function loadAllCategories() {
-    const entries = Object.entries(categoryConfigs);
-    const promises = entries.map(([categoryId, config]) => {
-      return fetch(config.jsonPath)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`failed to load ${config.jsonPath} (${res.status})`);
-          }
-          return res.json();
-        })
-        .then((json) => {
+ function loadAllCategories() {
+  const entries = Object.entries(categoryConfigs);
+
+  const promises = entries.map(([categoryId, config]) => {
+    return fetch(config.jsonPath)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`failed to load ${config.jsonPath} (${res.status})`);
+        }
+        // いったんテキストとして受け取る
+        return res.text();
+      })
+      .then((text) => {
+        try {
+          const json = JSON.parse(text);
+
           const topics = Array.isArray(json.topics) ? json.topics : [];
-          topics.forEach((topic, index) => {
+          topics.forEach((topic) => {
             const rawSub = (topic.subCategory || "").trim();
             const normalizedSub = rawSub || "other";
-
-            // ★ カードIDの決定ルール
-            // 1. topic.cardId があればそれを採用（番号振りを JSON に書いた場合）
-            // 2. なければ topic.id を利用（現行 mind/work/... の id）
-            // 3. それもなければ categoryId + 連番でフォールバック
-            const baseId =
-              (topic.cardId && String(topic.cardId).trim()) ||
-              (topic.id && String(topic.id).trim()) ||
-              `${categoryId}-${index + 1}`;
-
-            // グローバル一意ID（localStorageや連携で一生使うキー）
-            const globalId = `${categoryId}:${baseId}`;
-
             const cloned = Object.assign({}, topic, {
               _category: categoryId,
-              _subCategory: normalizedSub,
-              _cardId: baseId,
-              _globalId: globalId
+              _subCategory: normalizedSub
             });
-
             state.topics.push(cloned);
           });
-        });
-    });
+        } catch (error) {
+          console.error("JSON パースエラー:", config.jsonPath, error);
+          console.error("----- 問題の JSON 末尾 500 文字 -----");
+          console.error(text.slice(-500));
+          // ここで throw しておけば、どこで落ちたか分かる
+          throw error;
+        }
+      });
+  });
 
-    return Promise.all(promises);
-  }
+  return Promise.all(promises);
+}
+
 
   // ============================================================
   // サイドバー（OSタブ）
@@ -772,3 +769,4 @@
   // ============================================================
   init();
 })();
+
