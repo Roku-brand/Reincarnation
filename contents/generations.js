@@ -25,19 +25,12 @@
 // =====================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ----- HERO（チャプター名＋サブコメント） -----
-  const heroTitleEl = document.getElementById("chapter-title");
-  const heroSubtitleEl = document.getElementById("chapter-subtitle");
-
-  const DEFAULT_TITLE = "人生地図禄";
-  const DEFAULT_SUBTITLE =
-    "人生を 8 つのチャプターに分けて、二周目視点で「詰まりやすい構造」を見える化します。一歩先の人生フェーズが見えれば、賢い選択ができる。";
-
   // ----- ビュー切り替え用 -----
   const topView = document.getElementById("top-view");
   const chapterView = document.getElementById("chapter-view");
 
   // ----- 7部構成 各パネルのDOM -----
+  const overviewHeadingEl = document.getElementById("overviewHeading");
   const overviewTextEl = document.getElementById("overviewText");
   const essenceTextEl = document.getElementById("essenceText");
   const branchesTextEl = document.getElementById("branchesText");
@@ -49,6 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ----- サイドタブ -----
   const stageTabs = Array.from(document.querySelectorAll(".stage-tab"));
+
+  // ステージマップ（チャプター名をタブのラベルから取る）
+  const stageLabelMap = {};
+  stageTabs.forEach((tab) => {
+    const stage = tab.getAttribute("data-stage");
+    if (!stage) return;
+    const raw = tab.textContent.trim();
+    // 「1. 小学生」「5. 社会人前期（22〜28歳）」 → 数字・カッコを取って本体だけ
+    const noNumber = raw.replace(/^\d+\.\s*/, "");
+    const label = noNumber.replace(/（.*?）/g, "");
+    stageLabelMap[stage] = label;
+  });
 
   // 利用するステージ一覧（ファイル名もこれに準拠）
   const validStages = [
@@ -124,6 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = `data/${stage}.json`;
 
     // 軽いローディング表示（概要だけ）
+    if (overviewHeadingEl) {
+      const label = stageLabelMap[stage] || "チャプター概要";
+      overviewHeadingEl.textContent = label;
+    }
     if (overviewTextEl) {
       overviewTextEl.textContent = "このチャプターの構造を読み込んでいます…";
     }
@@ -143,11 +152,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return res.json();
       })
       .then((data) => {
-        renderChapter(data);
+        renderChapter(data, stage);
       })
       .catch((err) => {
         console.error(err);
-        renderError(url);
+        renderError(url, stage);
       });
   }
 
@@ -180,10 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
    * ≪トップ≫ビュー表示
    */
   function showTopView() {
-    // HERO をデフォルトに戻す
-    if (heroTitleEl) heroTitleEl.textContent = DEFAULT_TITLE;
-    if (heroSubtitleEl) heroSubtitleEl.textContent = DEFAULT_SUBTITLE;
-
     if (topView) {
       topView.classList.add("is-visible");
       topView.setAttribute("aria-hidden", "false");
@@ -210,10 +215,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /**
    * JSON から 7部構成ビューを描画
-   * 既存 JSON の配列・オブジェクトを「箇条書きテキスト」に変換してはめ込む
+   * 既存 JSON の配列・オブジェクトを
+   * 「ヘッダーの要点サマリ＋パネル内の詳細」に分けてはめ込む
    */
-  function renderChapter(data) {
-    const title = data.title || DEFAULT_TITLE;
+  function renderChapter(data, stage) {
     const overview = data.overview || "";
     const essenceArr = Array.isArray(data.essence) ? data.essence : [];
     const pathsArr = Array.isArray(data.commonPaths) ? data.commonPaths : [];
@@ -222,20 +227,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const choicesArr = Array.isArray(data.choices) ? data.choices : [];
     const finalLine = data.finalLine || "";
 
-    // ---------- HERO（チャプター名＋サブコメント） ----------
-    if (heroTitleEl) heroTitleEl.textContent = title;
-    if (heroSubtitleEl) {
-      heroSubtitleEl.textContent =
-        overview || "このチャプターの概要は順次追加していきます。";
+    // ---------- ① チャプター概要 ----------
+    if (overviewHeadingEl) {
+      const labelFromTab = stageLabelMap[stage];
+      const heading =
+        labelFromTab ||
+        (data.title
+          ? String(data.title).replace(/（.*?）/g, "")
+          : "チャプター概要");
+      overviewHeadingEl.textContent = heading;
     }
 
-    // ① チャプター概要
     if (overviewTextEl) {
       overviewTextEl.textContent =
         overview || "このステージの概要は準備中です。";
     }
 
-    // ② 本質（配列 → 箇条書き）
+    // ---------- ② 本質 ----------
+    // ヘッダーのタイトルにサマリ（例：本質 世界が狭い、承認と安心、興味の芽）
+    const essenceSummary = buildSummaryFromArray(essenceArr, 3);
+    setAccordionTitleSummary("essence", essenceSummary, "② 本質");
+
     if (essenceTextEl) {
       if (essenceArr.length === 0) {
         essenceTextEl.textContent =
@@ -247,7 +259,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // ③ 分岐パターン（commonPaths[] → 箇条書き）
+    // ---------- ③ 分岐パターン ----------
+    const branchSummary = buildSummaryFromLabels(pathsArr, 3);
+    setAccordionTitleSummary("branches", branchSummary, "③ 分岐パターン");
+
     if (branchesTextEl) {
       if (pathsArr.length === 0) {
         branchesTextEl.textContent =
@@ -263,7 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // ④ 迷い・不安・つまずき（pains[] → 箇条書き）
+    // ---------- ④ 迷い・不安・つまずき ----------
+    const painsSummary = buildSummaryFromArray(painsArr, 3);
+    setAccordionTitleSummary("pains", painsSummary, "④ 迷い・不安・つまずき");
+
     if (painsTextEl) {
       if (painsArr.length === 0) {
         painsTextEl.textContent =
@@ -275,56 +293,63 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // ⑤ 二周目視点（抽象）＋処世術（具体）
-    // insights[] 1件ごとに [タイトル / 抽象 / 具体] を束ねてカード風テキストにする
-    if (secondRoundTextEl || solutionsTextEl) {
-      if (insightsArr.length === 0) {
-        if (secondRoundTextEl) {
-          secondRoundTextEl.textContent =
-            "二周目視点での抽象的な理解は準備中です。";
-        }
-        if (solutionsTextEl) {
-          solutionsTextEl.textContent =
-            "生活レベルでの処世術は順次追加していきます。";
-        }
-      } else {
-        // 抽象側：abstract を中心に
-        if (secondRoundTextEl) {
-          const abstractLines = insightsArr.map((ins) => {
-            const title = ins.title ? `【${ins.title}】` : "";
-            const abs = ins.abstract || "";
-            return (
-              title +
-              (title && abs ? " " : "") +
-              (abs ? escapeHtml(abs) : "")
-            );
-          });
-          secondRoundTextEl.innerHTML = abstractLines
-            .filter((s) => s.trim() !== "")
-            .map((s) => "・" + s)
-            .join("<br>");
-        }
+    // ---------- ⑤ 二周目視点（抽象）＋処世術（具体） ----------
+    const insightTitles = insightsArr
+      .map((ins) => ins.title)
+      .filter((t) => t && String(t).trim() !== "");
+    const coreSummary = buildSummaryFromArray(insightTitles, 3);
+    setAccordionTitleSummary("secondRound", coreSummary, "⑤ 二周目視点＋処世術");
 
-        // 具体側：action を中心に
-        if (solutionsTextEl) {
-          const actionLines = insightsArr.map((ins) => {
-            const title = ins.title ? `【${ins.title}】` : "";
-            const act = ins.action || "";
-            return (
-              title +
-              (title && act ? " " : "") +
-              (act ? escapeHtml(act) : "")
-            );
-          });
-          solutionsTextEl.innerHTML = actionLines
-            .filter((s) => s.trim() !== "")
-            .map((s) => "・" + s)
-            .join("<br>");
-        }
+    if (insightsArr.length === 0) {
+      if (secondRoundTextEl) {
+        secondRoundTextEl.textContent =
+          "二周目視点での抽象的な理解は準備中です。";
+      }
+      if (solutionsTextEl) {
+        solutionsTextEl.textContent =
+          "生活レベルでの処世術は順次追加していきます。";
+      }
+    } else {
+      if (secondRoundTextEl) {
+        const abstractLines = insightsArr.map((ins) => {
+          const title = ins.title ? `【${ins.title}】` : "";
+          const abs = ins.abstract || "";
+          return (
+            title +
+            (title && abs ? " " : "") +
+            (abs ? escapeHtml(abs) : "")
+          );
+        });
+        secondRoundTextEl.innerHTML = abstractLines
+          .filter((s) => s.trim() !== "")
+          .map((s) => "・" + s)
+          .join("<br>");
+      }
+
+      if (solutionsTextEl) {
+        const actionLines = insightsArr.map((ins) => {
+          const title = ins.title ? `【${ins.title}】` : "";
+          const act = ins.action || "";
+          return (
+            title +
+            (title && act ? " " : "") +
+            (act ? escapeHtml(act) : "")
+          );
+        });
+        solutionsTextEl.innerHTML = actionLines
+          .filter((s) => s.trim() !== "")
+          .map((s) => "・" + s)
+          .join("<br>");
       }
     }
 
-    // ⑥ 選択のコンパス（choices[] → 箇条書き）
+    // ---------- ⑥ 選択のコンパス ----------
+    const choiceTitles = choicesArr
+      .map((c) => c.title)
+      .filter((t) => t && String(t).trim() !== "");
+    const compassSummary = buildSummaryFromArray(choiceTitles, 2);
+    setAccordionTitleSummary("compass", compassSummary, "⑥ 選択のコンパス");
+
     if (compassTextEl) {
       if (choicesArr.length === 0) {
         compassTextEl.textContent =
@@ -348,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // ⑦ 最後の一言
+    // ---------- ⑦ 最後の一言 ----------
     if (finalLineTextEl) {
       finalLineTextEl.textContent =
         finalLine || "このステージの「最後の一言」はこれから整えていきます。";
@@ -358,11 +383,11 @@ document.addEventListener("DOMContentLoaded", () => {
   /**
    * 読み込みエラー時
    */
-  function renderError(filePath) {
-    // HEROはとりあえずデフォルトに近い状態を出しておく
-    if (heroTitleEl) heroTitleEl.textContent = "データを読み込めませんでした";
-    if (heroSubtitleEl)
-      heroSubtitleEl.textContent = `ファイル構成（${filePath}）を確認してください。`;
+  function renderError(filePath, stage) {
+    if (overviewHeadingEl) {
+      const labelFromTab = stageLabelMap[stage] || "チャプター概要";
+      overviewHeadingEl.textContent = labelFromTab;
+    }
 
     if (overviewTextEl)
       overviewTextEl.textContent =
@@ -405,6 +430,51 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+  }
+
+  /**
+   * 指定のセクション（data-key）に対して、
+   * タイトル行に「ベースラベル + サマリ」を設定
+   * 例：② 本質 世界が狭い、承認と安心、興味の芽
+   */
+  function setAccordionTitleSummary(sectionKey, summary, fallbackBase) {
+    const section = document.querySelector(
+      `.chapter-section.accordion[data-key="${sectionKey}"]`
+    );
+    if (!section) return;
+    const titleEl = section.querySelector(".accordion-title");
+    if (!titleEl) return;
+
+    const base = titleEl.dataset.base || fallbackBase || titleEl.textContent;
+    if (!summary) {
+      titleEl.textContent = base;
+    } else {
+      titleEl.textContent = `${base}　${summary}`;
+    }
+  }
+
+  /**
+   * 配列から、先頭N件を「、」区切りでまとめたサマリを作成
+   */
+  function buildSummaryFromArray(arr, maxCount) {
+    const list = (arr || [])
+      .map((t) => String(t || "").trim())
+      .filter((t) => t !== "");
+    if (!list.length) return "";
+    const sliced = list.slice(0, maxCount);
+    return sliced.join("、");
+  }
+
+  /**
+   * commonPaths[] から label だけ取り出してサマリを作成
+   */
+  function buildSummaryFromLabels(paths, maxCount) {
+    const list = (paths || [])
+      .map((p) => (p && p.label ? String(p.label).trim() : ""))
+      .filter((t) => t !== "");
+    if (!list.length) return "";
+    const sliced = list.slice(0, maxCount);
+    return sliced.join("、");
   }
 
   /**
