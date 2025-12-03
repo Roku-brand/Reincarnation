@@ -39,7 +39,8 @@
   <!-- ========== メイン ========== -->
   <main class="site-main generation-main">
     <div class="container">
-      <div class="generation-container">
+      <!-- 巻物パネル：人生地図禄 全体 -->
+      <div class="generation-container scroll-panel">
 
         <!-- HERO：常に固定（タブ切替でも一切変えない） -->
         <section class="hero-copy generation-hero-copy">
@@ -94,7 +95,7 @@
           <div class="gen-main">
             <!-- ≪トップ≫ビュー：人生マップ（全体俯瞰） -->
             <section id="top-view" class="generation-section is-visible" aria-hidden="false">
-              <section class="life-map card-block">
+              <section class="life-map card-block scroll-card scroll-card--primary">
                 <h2 class="life-map-title">人生マップ（全体デモ）</h2>
                 <p class="life-map-sub">
                   小学生〜セカンドキャリアまでの流れを、ざっくり俯瞰できるマップです。
@@ -150,28 +151,28 @@
 
                 <!-- フェーズごとの説明カード -->
                 <div class="life-map-phases">
-                  <article class="phase-card">
+                  <article class="phase-card scroll-card">
                     <h3 class="phase-title">成長のフェーズ（1〜3章）</h3>
                     <p class="phase-body">
                       小学生〜高校生は、「外のルール」を学びながら、自分の軸がゆっくり形になる時期。
                       後悔は「知らなかったこと」から生まれやすい。
                     </p>
                   </article>
-                  <article class="phase-card">
+                  <article class="phase-card scroll-card">
                     <h3 class="phase-title">選択が増えるフェーズ（4〜5章）</h3>
                     <p class="phase-body">
                       大学・専門生〜社会人前期は、選べる道が一気に増えるフェーズ。
                       二周目視点では、「選ばなかった道」をどう整理するかがカギになる。
                     </p>
                   </article>
-                  <article class="phase-card">
+                  <article class="phase-card scroll-card">
                     <h3 class="phase-title">仕事の重みが増すフェーズ（6〜7章）</h3>
                     <p class="phase-body">
                       社会人中期〜後期は、立場や責任が増え、いきなりの方向転換が難しくなるフェーズ。
                       ここでの迷いは、「構造の理解不足」からも生まれる。
                     </p>
                   </article>
-                  <article class="phase-card">
+                  <article class="phase-card scroll-card">
                     <h3 class="phase-title">自由度が再び高まるフェーズ（8章）</h3>
                     <p class="phase-body">
                       セカンドキャリアは、「もう一度、人生を編集し直す」タイミング。
@@ -186,7 +187,7 @@
             <section id="chapter-view" class="generation-section" aria-hidden="true">
               <div class="chapter-sections">
                 <!-- ① チャプター概要：見出しにチャプター名を表示する（例：小学生） -->
-                <section class="chapter-section chapter-overview">
+                <section class="chapter-section chapter-overview scroll-card scroll-card--primary">
                   <h2 id="overviewHeading" class="chapter-section-heading">チャプター概要</h2>
                   <p id="overviewText" class="chapter-section-text">
                     （このステージの概要が入ります）
@@ -194,7 +195,7 @@
                 </section>
 
                 <!-- ② 本質（アコーディオン） -->
-                <section class="chapter-section accordion" data-key="essence">
+                <section class="chapter-section accordion scroll-card" data-key="essence">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
                       <div class="accordion-title" data-base="② 本質">
@@ -214,7 +215,7 @@
                 </section>
 
                 <!-- ③ 分岐パターン（アコーディオン） -->
-                <section class="chapter-section accordion" data-key="branches">
+                <section class="chapter-section accordion scroll-card" data-key="branches">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
                       <div class="accordion-title" data-base="③ 分岐パターン">
@@ -234,7 +235,7 @@
                 </section>
 
                 <!-- ④ 迷い・不安・つまずき（アコーディオン） -->
-                <section class="chapter-section accordion" data-key="pains">
+                <section class="chapter-section accordion scroll-card" data-key="pains">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
                       <div class="accordion-title" data-base="④ 迷い・不安・つまずき">
@@ -254,7 +255,7 @@
                 </section>
 
                 <!-- ⑤ 二周目視点（抽象）＋処世術（具体）（アコーディオン・中核） -->
-                <section class="chapter-section accordion chapter-core" data-key="secondRound">
+                <section class="chapter-section accordion chapter-core scroll-card" data-key="secondRound">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
                       <div class="accordion-title" data-base="⑤ 二周目視点＋処世術">
@@ -278,7 +279,7 @@
                 </section>
 
                 <!-- ⑥ 選択のコンパス（アコーディオン） -->
-                <section class="chapter-section accordion" data-key="compass">
+                <section class="chapter-section accordion scroll-card" data-key="compass">
                   <button type="button" class="accordion-header">
                     <div class="accordion-header-main">
                       <div class="accordion-title" data-base="⑥ 選択のコンパス">
@@ -298,7 +299,7 @@
                 </section>
 
                 <!-- ⑦ 最後の一言（常時表示） -->
-                <section class="chapter-section chapter-final">
+                <section class="chapter-section chapter-final scroll-card">
                   <div class="stage-final">
                     <p class="stage-final-label">⑦ 最後の一言</p>
                     <p id="finalLineText" class="stage-final-text">
@@ -321,10 +322,8 @@
     </div>
   </footer>
 
-  <!-- スクリプト -->
-  <script src="generations.js"></script>
+  <!-- 巻物アニメーション共通スクリプト＋人生地図禄専用JS -->
+  <script src="../main.js" defer></script>
+  <script src="generations.js" defer></script>
 </body>
 </html>
-
-
-
