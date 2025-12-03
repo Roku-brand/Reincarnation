@@ -205,32 +205,7 @@
 }
 
 /* =============================================================
-   トップ用 2カラムレイアウト
-   ============================================================= */
-
-.kn-top-shell {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 20px;
-  align-items: flex-start;
-}
-
-/* 左カラム：検索＋今日の処世術＋悩みから探すを「必要十分サイズ」に縮小 */
-.kn-top-left {
-  width: 100%;
-}
-
-.kn-top-left-inner {
-  max-width: 600px; /* 必要十分な横幅 */
-}
-
-/* 右カラム：OS構造カード */
-.kn-top-right {
-  width: 100%;
-}
-
-/* =============================================================
-   検索バー（共通） - 横幅を左カラムに合わせて縮小
+   検索バー
    ============================================================= */
 
 .kn-search-section {
@@ -355,74 +330,7 @@
 }
 
 /* =============================================================
-   右カラム：OS構造カード
-   ============================================================= */
-
-.kn-os-structure-section {
-  /* JS でトップ以外のとき非表示に切り替える */
-}
-
-.kn-os-structure-card {
-  background: #ecfdf5;
-  border-radius: 18px;
-  border: 1px solid #a7f3d0;
-  padding: 14px 16px;
-  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.25);
-}
-
-.kn-os-structure-title {
-  margin: 0 0 6px;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #047857;
-}
-
-.kn-os-structure-lead {
-  margin: 0 0 10px;
-  font-size: 12px;
-  color: #065f46;
-}
-
-.kn-os-structure-list {
-  list-style: none;
-  margin: 0 0 10px;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.kn-os-structure-list li {
-  font-size: 12px;
-  color: #064e3b;
-}
-
-.kn-os-pill {
-  display: inline-block;
-  margin-bottom: 2px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: #d1fae5;
-  font-size: 11px;
-  font-weight: 600;
-  color: #047857;
-}
-
-.kn-os-structure-text {
-  display: block;
-  margin-left: 2px;
-}
-
-.kn-os-structure-footer {
-  margin: 6px 0 0;
-  font-size: 11px;
-  color: #047857;
-}
-
-/* =============================================================
-   OSモード：検索結果グリッド
+   OSモード：検索結果
    ============================================================= */
 
 .kn-results-header {
@@ -434,6 +342,47 @@
   color: #6b7280;
   margin: 0;
 }
+
+/* サブカテゴリタブ */
+.kn-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 10px;
+}
+
+.kn-subtab {
+  border-radius: 999px;
+  border: 1px solid #a7f3d0;
+  background: #f0fdf4;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: #065f46;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.18s ease,
+    transform 0.1s ease;
+}
+
+.kn-subtab:hover {
+  background: #bbf7d0;
+  border-color: #34d399;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+  transform: translateY(-1px);
+}
+
+.kn-subtab.is-active {
+  background: #047857;
+  border-color: #047857;
+  color: #ecfdf5;
+  box-shadow: 0 6px 14px rgba(5, 150, 105, 0.4);
+}
+
+/* カードグリッド */
 
 .kn-card-grid {
   display: grid;
@@ -457,7 +406,7 @@
   border: 1px solid #d1d5db;
   padding: 11px 13px;
   box-shadow: 0 10px 20px rgba(15, 118, 110, 0.08);
-  cursor: pointer;
+  cursor: default;
   transition:
     transform 0.16s ease,
     box-shadow 0.18s ease,
@@ -466,8 +415,8 @@
 }
 
 .shosei-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 34px rgba(5, 150, 105, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(5, 150, 105, 0.18);
   border-color: #22c55e;
   background: #f0fdf4;
 }
@@ -515,7 +464,7 @@
   color: #3730a3;
 }
 
-/* 詳細アコーディオン */
+/* 詳細ブロック（今は開かないが構造だけ保持） */
 
 .shosei-detail {
   overflow: hidden;
@@ -585,17 +534,5 @@
 
   .kn-sidebar-toggle {
     display: inline-flex;
-  }
-
-  .kn-top-shell {
-    display: block; /* スマホでは1カラムに */
-  }
-
-  .kn-top-left-inner {
-    max-width: none;
-  }
-
-  .kn-top-right {
-    margin-top: 8px;
   }
 }
