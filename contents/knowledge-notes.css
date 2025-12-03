@@ -479,45 +479,51 @@
 
 /* =============================================================
    処世術カード（共通）
-   ─ 必要十分サイズに小さく ＋ 巻物風の枠デザイン
+   ─ 必要十分サイズに小さく ＋ 「巻物風」枠デザイン
    ============================================================= */
 
 /*
-  デザインイメージ：
-  - 背景：白（本文）
-  - 左右端：やや濃い茶色の縦エッジ
-  - 全体の縁：薄い茶色の線
-  - カード自体は横幅を絞り、必要十分なコンパクトサイズ
+  デザインコンセプト：
+  - 背景：白（本文の紙）
+  - 左右：やや濃い茶色の縦エッジ（巻物の端）
+  - 上下：少し飛び出した“軸”パーツ（木の棒）
+  - カード自体は必要十分な幅まで絞る
 */
 .shosei-card {
   position: relative;
   width: 100%;
-  max-width: 560px; /* 画面が広くてもカード自体は“必要十分サイズ”に */
-  border-radius: 14px;
-  padding: 9px 14px 10px; /* 以前より少し小さめの余白 */
+  max-width: 520px; /* 必要十分サイズにコンパクト */
+  border-radius: 0; /* 巻物らしく角を立てる */
+  padding: 12px 16px 12px;
   cursor: pointer;
 
-  /* 巻物の「紙」のベースは白 */
+  /* 本文は白、左右端に茶色の縦エッジを重ねる */
   background:
-    /* 左端の縦エッジ（茶色系） */
+    /* 左側エッジ */
     linear-gradient(
       to right,
-      rgba(120, 53, 15, 0.22),
-      rgba(120, 53, 15, 0.08),
-      transparent 26%
-    ) 0 0 / 10px 100% no-repeat,
-    /* 右端の縦エッジ（茶色系） */
+      rgba(120, 53, 15, 0.4),
+      rgba(120, 53, 15, 0.18),
+      transparent 24%
+    ) 0 0 / 12px 100% no-repeat,
+    /* 右側エッジ */
     linear-gradient(
       to left,
-      rgba(120, 53, 15, 0.22),
-      rgba(120, 53, 15, 0.08),
-      transparent 26%
-    ) 100% 0 / 10px 100% no-repeat,
-    /* 本文部分は白のまま */
-    linear-gradient(0deg, #ffffff, #ffffff);
+      rgba(120, 53, 15, 0.4),
+      rgba(120, 53, 15, 0.18),
+      transparent 24%
+    ) 100% 0 / 12px 100% no-repeat,
+    /* 和紙っぽい薄い筋 */
+    repeating-linear-gradient(
+      135deg,
+      #ffffff 0px,
+      #ffffff 2px,
+      #f9f5ec 2px,
+      #f9f5ec 4px
+    );
 
-  border: 1px solid rgba(148, 86, 28, 0.6); /* 茶色の細い縁 */
-  box-shadow: 0 8px 16px rgba(55, 65, 81, 0.12); /* 影は控えめに */
+  border: 1px solid rgba(120, 53, 15, 0.85); /* 茶色の細い縁 */
+  box-shadow: 0 8px 16px rgba(55, 65, 81, 0.16);
 
   transition:
     transform 0.16s ease,
@@ -526,57 +532,93 @@
     background 0.18s ease;
 }
 
-/* ホバー時：わずかに浮き、縁の茶色を少しだけ濃く */
+/* 上下の“軸”パーツ（木の棒っぽいキャップ） */
+.shosei-card::before,
+.shosei-card::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 50%, #fef3c7 0%, #b45309 80%);
+  box-shadow: 0 1px 0 rgba(120, 53, 15, 0.7);
+  z-index: -1;
+}
+
+.shosei-card::before {
+  top: -6px; /* 上に少し飛び出している */
+}
+
+.shosei-card::after {
+  bottom: -6px; /* 下に少し飛び出している */
+  box-shadow: 0 -1px 0 rgba(120, 53, 15, 0.7);
+}
+
+/* ホバー時：そっと浮かせる＋エッジを少し濃く */
 .shosei-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 26px rgba(55, 65, 81, 0.18);
-  border-color: rgba(120, 53, 15, 0.85);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(55, 65, 81, 0.22);
+  border-color: rgba(120, 53, 15, 0.95);
   background:
     linear-gradient(
       to right,
-      rgba(120, 53, 15, 0.26),
-      rgba(120, 53, 15, 0.1),
-      transparent 26%
-    ) 0 0 / 10px 100% no-repeat,
+      rgba(120, 53, 15, 0.48),
+      rgba(120, 53, 15, 0.22),
+      transparent 24%
+    ) 0 0 / 12px 100% no-repeat,
     linear-gradient(
       to left,
-      rgba(120, 53, 15, 0.26),
-      rgba(120, 53, 15, 0.1),
-      transparent 26%
-    ) 100% 0 / 10px 100% no-repeat,
-    linear-gradient(0deg, #ffffff, #fdfcf9);
+      rgba(120, 53, 15, 0.48),
+      rgba(120, 53, 15, 0.22),
+      transparent 24%
+    ) 100% 0 / 12px 100% no-repeat,
+    repeating-linear-gradient(
+      135deg,
+      #ffffff 0px,
+      #ffffff 2px,
+      #f7f1e4 2px,
+      #f7f1e4 4px
+    );
 }
 
-/* 「今日の処世術」用カード：ほんの少しだけ強調 */
+/* 「今日の処世術」用カード：温かめに強調 */
 .shosei-card.is-today {
-  border-color: rgba(180, 83, 9, 0.85);
-  box-shadow: 0 18px 40px rgba(120, 53, 15, 0.24);
+  border-color: rgba(180, 83, 9, 1);
+  box-shadow: 0 18px 42px rgba(120, 53, 15, 0.3);
   background:
     linear-gradient(
       to right,
+      rgba(180, 83, 9, 0.5),
       rgba(180, 83, 9, 0.26),
-      rgba(180, 83, 9, 0.12),
-      transparent 26%
-    ) 0 0 / 10px 100% no-repeat,
+      transparent 24%
+    ) 0 0 / 12px 100% no-repeat,
     linear-gradient(
       to left,
+      rgba(180, 83, 9, 0.5),
       rgba(180, 83, 9, 0.26),
-      rgba(180, 83, 9, 0.12),
-      transparent 26%
-    ) 100% 0 / 10px 100% no-repeat,
-    linear-gradient(0deg, #ffffff, #fffbeb);
+      transparent 24%
+    ) 100% 0 / 12px 100% no-repeat,
+    repeating-linear-gradient(
+      135deg,
+      #fffbeb 0px,
+      #fffbeb 2px,
+      #fef3c7 2px,
+      #fef3c7 4px
+    );
 }
 
+/* タイトル・本文は一回り小さく、必要十分サイズに */
 .shosei-title {
   margin: 0 0 3px;
-  font-size: 13px;          /* ひと回り小さく */
+  font-size: 13px;
   font-weight: 600;
   color: #111827;
 }
 
 .shosei-summary {
   margin: 0 0 4px;
-  font-size: 11px;          /* 必要十分なサイズに */
+  font-size: 11px;
   color: #4b5563;
 }
 
@@ -601,7 +643,7 @@
   gap: 4px;
 }
 
-/* お気に入り・いいねボタンはカードに馴染むよう控えめトーンに */
+/* お気に入り・いいねボタン：巻物の世界観に合わせて優しめの色に */
 .shosei-ctrl-btn {
   border-radius: 999px;
   border: 1px solid #e5e7eb;
@@ -665,15 +707,15 @@
   color: #3730a3;
 }
 
-/* 詳細アコーディオン：高さ揃えを一切しない */
+/* 詳細アコーディオン：高さ揃えは一切しない */
 
 .shosei-detail {
-  display: none; /* デフォルト非表示 */
+  display: none;
   margin-top: 5px;
 }
 
 .shosei-card.is-open .shosei-detail {
-  display: block; /* そのカードだけ開く */
+  display: block;
 }
 
 /* 詳細内も少し「和紙」寄りに */
@@ -760,3 +802,4 @@
     margin-top: 8px;
   }
 }
+
