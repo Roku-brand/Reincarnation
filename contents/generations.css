@@ -1,26 +1,22 @@
 /* ======================================
-   世代別ノート専用スタイル
+   人生地図禄 専用スタイル
    （ヘッダー・HERO は index.html と共通レイアウト）
    ====================================== */
 
 /* ページ全体のレイアウト微調整 */
-.generation-body {
-  /* 背景は style.css の body / body::before で共通管理 */
-}
-
 .generation-main {
   padding-top: 10px;
   padding-bottom: 40px;
 }
 
-/* コンテナを「ほぼフル幅」にしてフル画面寄せ */
+/* コンテナをフル幅寄せ（左右の余白だけ確保） */
 .generation-main .container {
   max-width: 100%;
   padding-left: 16px;
   padding-right: 16px;
 }
 
-/* コンテンツラッパ：中央固定幅をやめてフル幅寄りに */
+/* コンテンツラッパ：中央の固定幅をやめてフル画面寄りに */
 .generation-container {
   position: relative;
   z-index: 1;
@@ -49,7 +45,7 @@
 
 /* ==============================
    左サイドタブ + 右メイン
-   （処世術禄のレイアウトトーンを踏襲）
+   （処世術禄のトーンを踏襲）
    ============================== */
 
 .generation-layout {
@@ -62,13 +58,13 @@
 /* 左サイドバー（縦タブ） */
 
 .gen-sidebar {
-  width: 220px;
+  width: 230px;
   flex-shrink: 0;
-  background: transparent;
-  border: none;
+  background: #f9fffb;
   border-radius: 0;
-  padding: 4px 0;
-  box-shadow: none;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.12);
+  padding: 12px 10px 14px;
 }
 
 .gen-sidebar-title {
@@ -80,7 +76,7 @@
   margin-bottom: 8px;
 }
 
-/* ステージタブ（処世術禄の OS タブと同系統のデザイン） */
+/* ステージタブ（処世術禄と同じ深緑アクティブ） */
 
 .stage-tab {
   display: block;
@@ -122,15 +118,13 @@
   box-shadow: 0 10px 24px rgba(5, 150, 105, 0.6);
 }
 
-/* 右メイン側 */
-
 .gen-main {
   flex: 1;
   min-width: 0;
 }
 
 /* ==============================
-   ビュー切り替え（アニメーション付き）
+   ビュー切り替え
    ============================== */
 
 .generation-section {
@@ -151,45 +145,18 @@
   pointer-events: auto;
 }
 
-.generation-section.is-leaving {
-  opacity: 0;
-  transform: translateY(-2px);
-}
-
 /* ==============================
    トップビュー：人生マップ
    ============================== */
 
-.generation-hero {
-  margin-bottom: 18px;
-  padding: 20px 18px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-}
-
-.generation-title {
-  margin: 0 0 6px;
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.generation-lead {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #4b5563;
-}
-
-/* 共通カードブロック風 */
 .card-block {
-  margin-top: 18px;
+  margin-top: 0;
   padding: 20px 18px 22px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.96);
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
 }
 
-/* 人生マップのタイトル */
 .life-map-title {
   margin: 0 0 6px;
   font-size: 1.08rem;
@@ -296,46 +263,47 @@
 }
 
 /* ==============================
-   ステージビュー（JSON描画側）
+   チャプター7部構成ビュー
    ============================== */
 
-.stage-content {
-  margin-top: 6px;
-}
-
-/* 概要カード（必要に応じて HTML/JS 側で使用） */
-.stage-overview {
-  padding: 18px 18px 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-  margin-bottom: 18px;
-}
-
-.stage-overview-label {
-  margin: 0 0 4px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #16a34a;
-  letter-spacing: 0.08em;
-}
-
-.stage-overview-text {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #14532d;
+.chapter-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* 各セクション共通 */
-.stage-section {
-  margin-top: 14px;
+
+.chapter-section {
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 16px 34px rgba(15, 23, 42, 0.12);
   overflow: hidden;
 }
 
-/* アコーディオン */
+.chapter-section-heading {
+  margin: 0 0 4px;
+  padding: 14px 16px 6px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.chapter-overview .chapter-section-text {
+  padding: 0 16px 14px;
+}
+
+.chapter-section-text {
+  font-size: 0.86rem;
+  color: #4b5563;
+}
+
+/* アコーディオンセクション（②〜⑥） */
+
+.accordion .chapter-section-heading {
+  display: none; /* アコーディオンでは見出しは header の方に表示 */
+}
+
 .accordion-header {
   width: 100%;
   padding: 14px 16px;
@@ -349,20 +317,20 @@
   font-family: inherit;
 }
 
+.accordion-header-main {
+  display: flex;
+  flex-direction: column;
+}
+
 .accordion-title {
   font-size: 0.96rem;
   font-weight: 600;
 }
 
-.accordion-sub {
+.accordion-subtitle {
   font-size: 0.8rem;
   color: #4b5563;
   margin-top: 2px;
-}
-
-.accordion-title-wrap {
-  display: flex;
-  flex-direction: column;
 }
 
 .accordion-icon {
@@ -376,19 +344,21 @@
   justify-content: center;
   font-size: 0.9rem;
   color: #16a34a;
+  background: #f0fdf4;
   transition:
     transform 0.18s ease,
     background 0.18s ease,
     color 0.18s ease;
 }
 
-.stage-section.is-open .accordion-icon {
+.chapter-section.open .accordion-icon {
   transform: rotate(90deg);
   background: #16a34a;
   color: #ffffff;
 }
 
 /* パネル部分 */
+
 .accordion-panel {
   max-height: 0;
   overflow: hidden;
@@ -403,120 +373,25 @@
   color: #4b5563;
 }
 
-/* Essence（本質3つ） */
-.essence-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
+/* ⑤ の中見出し */
 
-.essence-item {
-  padding: 10px 10px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-  font-size: 0.82rem;
-}
-
-/* Common Paths */
-.common-paths-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.common-path-item {
-  padding: 10px 10px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-}
-
-.common-path-label {
-  font-size: 0.82rem;
-  font-weight: 600;
-  margin-bottom: 2px;
-  color: #14532d;
-}
-
-.common-path-desc {
-  font-size: 0.8rem;
-  margin: 0;
-  color: #4b5563;
-}
-
-/* Pains */
-.pains-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.pain-item {
-  padding: 10px 10px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-  font-size: 0.8rem;
-}
-
-/* Insights（主役①） */
-.insights-list {
-  display: grid;
-  gap: 10px;
-}
-
-.insight-item {
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-}
-
-.insight-title {
-  font-size: 0.86rem;
-  font-weight: 600;
+.chapter-subheading {
   margin: 0 0 4px;
-}
-
-.insight-abstract {
-  font-size: 0.8rem;
-  margin: 0 0 4px;
-}
-
-.insight-action {
-  font-size: 0.8rem;
-  margin: 0;
-  color: #0f766e;
-}
-
-/* Choices（主役②） */
-.choices-list {
-  display: grid;
-  gap: 10px;
-}
-
-.choice-item {
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-}
-
-.choice-title {
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  margin: 0 0 4px;
+  color: #047857;
 }
 
-.choice-insight {
-  font-size: 0.8rem;
-  margin: 0;
+/* ⑤・⑥ は少し強調 */
+
+.chapter-core {
+  box-shadow: 0 20px 44px rgba(5, 150, 105, 0.25);
 }
 
-/* Final Line */
+/* ⑦ 最後の一言 */
+
 .stage-final {
-  margin-top: 18px;
+  margin: 0;
   padding: 16px 18px 18px;
   border-radius: 20px;
   background: rgba(15, 118, 110, 0.96);
@@ -538,47 +413,13 @@
   font-size: 0.92rem;
 }
 
-/* ローディング・エラー表示 */
+/* ローディング・エラー表示（将来拡張用） */
+
 .stage-message {
   margin-top: 30px;
   text-align: center;
   font-size: 0.9rem;
   color: #4b5563;
-}
-
-/* メタ情報用コンテナ（任意） */
-
-.stage-meta {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.stage-meta-block {
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-  font-size: 0.8rem;
-}
-
-.stage-meta-title {
-  margin: 0 0 4px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #14532d;
-}
-
-.stage-meta-list {
-  margin: 0;
-  padding-left: 16px;
-  font-size: 0.78rem;
-  color: #4b5563;
-}
-
-.stage-meta-list li {
-  margin-bottom: 2px;
 }
 
 /* ==============================
@@ -594,43 +435,14 @@
     width: 100%;
   }
 
-  .generation-container {
-    padding: 0 0 28px;
-  }
-
   .life-map-phases {
-    grid-template-columns: 1fr;
-  }
-
-  .essence-list {
-    grid-template-columns: 1fr;
-  }
-
-  .common-paths-list {
-    grid-template-columns: 1fr;
-  }
-
-  .pains-list {
-    grid-template-columns: 1fr;
-  }
-
-  .stage-meta {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 640px) {
-  .generation-hero-copy {
-    padding-top: 32px;
-  }
-
   .card-block {
     padding: 16px 14px 18px;
-  }
-
-  .life-map-timeline {
-    padding-left: 8px;
-    padding-right: 8px;
   }
 
   .timeline-steps {
