@@ -19,7 +19,7 @@
 </head>
 <body class="home-body page-life-stories">
 
-  <!-- ヘッダー -->
+  <!-- ヘッダー（処世術禄と同じ構成） -->
   <header class="site-header">
     <div class="header-inner container">
       <div class="logo-block">
@@ -41,7 +41,7 @@
   <main class="site-main">
     <div class="container">
 
-      <!-- HERO -->
+      <!-- HERO（ホームと同じ左詰め＋二重アンダーライン） -->
       <section class="hero-copy">
         <div class="hero-inner">
           <div class="hero-heading-block">
@@ -56,124 +56,135 @@
         </div>
       </section>
 
-      <!-- 本体コンテンツ -->
-      <div class="page-inner main-content">
+      <!-- 本体コンテンツ：処世術禄と同じく、左タスクバー＋右メイン -->
+      <div class="page-inner">
 
-        <!-- チャプタータブ -->
-        <div class="chapter-tabs" role="tablist" aria-label="人生体験禄のチャプター">
-          <button
-            type="button"
-            class="chapter-tab is-active"
-            data-target="chapter-top"
-            role="tab"
-            aria-selected="true"
-          >
-            トップ
-          </button>
-          <button
-            type="button"
-            class="chapter-tab"
-            data-target="chapter-patterns"
-            role="tab"
-            aria-selected="false"
-          >
-            人生パターン図鑑
-          </button>
-          <button
-            type="button"
-            class="chapter-tab"
-            data-target="chapter-jobs"
-            role="tab"
-            aria-selected="false"
-          >
-            職業図鑑
-          </button>
+        <div class="ls-layout">
+          <!-- 左サイド：人生体験禄タスクバー -->
+          <aside class="ls-sidebar" id="ls-sidebar" aria-label="人生体験禄のビュー切り替え">
+            <div class="ls-sidebar-title">人生体験禄</div>
+            <button
+              type="button"
+              class="ls-nav-tab is-active"
+              data-section="ls-top"
+            >
+              ≪トップ≫
+            </button>
+            <button
+              type="button"
+              class="ls-nav-tab"
+              data-section="ls-patterns"
+            >
+              1. 人生パターン図鑑
+            </button>
+            <button
+              type="button"
+              class="ls-nav-tab"
+              data-section="ls-jobs"
+            >
+              2. 職業図鑑
+            </button>
+          </aside>
+
+          <!-- 右メインコンテンツ -->
+          <section class="ls-main">
+            <!-- スマホ用：サイドバー開閉ボタン -->
+            <button
+              class="ls-sidebar-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="ls-sidebar"
+            >
+              <span class="ls-sidebar-toggle-icon"></span>
+              <span class="ls-sidebar-toggle-label">人生体験禄メニュー</span>
+            </button>
+
+            <!-- ▼ トップ（デモ用：2つの機能説明カードのみ） -->
+            <section id="ls-top" class="ls-section is-active" aria-label="人生体験禄トップ">
+              <div class="ls-feature-grid">
+                <article class="ls-feature-card">
+                  <h2 class="ls-feature-title">人生パターン図鑑とは</h2>
+                  <p class="ls-feature-body">
+                    「地方公立 → 国立大 → 大企業総合職」「専門学校 → 地元中小 → 手に職」など、<br>
+                    よく見られる人生ルートを、一つひとつカードとして整理します。
+                  </p>
+                  <p class="ls-feature-body">
+                    正解・不正解を決めるためではなく、<br>
+                    <strong>「どこで迷いやすく、どこで軌道修正しやすいか」</strong>を可視化するための図鑑です。
+                  </p>
+                </article>
+
+                <article class="ls-feature-card">
+                  <h2 class="ls-feature-title">職業図鑑とは</h2>
+                  <p class="ls-feature-body">
+                    各職業について、「なり方」「1日の流れ」「よくある悩み」「喜び・やりがい」を<br>
+                    コンパクトな構造に落とし込んだノートです。
+                  </p>
+                  <p class="ls-feature-body">
+                    職種ごとのリアルな質感をつかみながら、<br>
+                    <strong>「どの働き方が自分の二周目に合うのか」</strong>を検討するためのベースとして使います。
+                  </p>
+                </article>
+              </div>
+            </section>
+
+            <!-- ▼ 人生パターン図鑑：大枠・概要説明を削除し、カード群のみ -->
+            <section id="ls-patterns" class="ls-section" aria-label="人生パターン図鑑" hidden>
+              <header class="ls-section-header">
+                <h2 class="ls-section-title">人生パターン図鑑</h2>
+              </header>
+
+              <div class="pattern-card-grid" id="pattern-card-grid" aria-live="polite">
+                <!-- JSでカードを挿入 -->
+              </div>
+            </section>
+
+            <!-- ▼ 職業図鑑：検索＋3分類（会社員系／専門職系／その他） -->
+            <section id="ls-jobs" class="ls-section" aria-label="職業図鑑" hidden>
+              <header class="ls-section-header">
+                <h2 class="ls-section-title">職業図鑑</h2>
+              </header>
+
+              <!-- 検索バー -->
+              <section class="ls-job-search" aria-label="職業検索">
+                <div class="ls-job-search-inner">
+                  <div class="ls-job-search-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" class="ls-job-search-svg">
+                      <circle cx="11" cy="11" r="6" stroke-width="2" fill="none"></circle>
+                      <line x1="15" y1="15" x2="20" y2="20" stroke-width="2"></line>
+                    </svg>
+                  </div>
+                  <input
+                    id="job-search-input"
+                    class="ls-job-search-input"
+                    type="search"
+                    placeholder="職業名・業界・特徴で検索…（例：公務員・商社・エンジニア など）"
+                    autocomplete="off"
+                  />
+                </div>
+              </section>
+
+              <!-- 3分類ごとのタグ群（JSで中身を生成） -->
+              <section class="ls-job-groups" id="job-groups" aria-label="職業カテゴリ一覧">
+                <!-- JSで 会社員系／専門職系／その他 のグループ＋タグボタンを挿入 -->
+              </section>
+
+              <!-- 詳細カード -->
+              <div class="job-detail-container" id="job-detail-container" aria-live="polite">
+                <!-- JSで選択中の職業カードを挿入 -->
+              </div>
+            </section>
+
+            <footer class="page-footer">
+              <p>人生二周目ノート &mdash; 人生の構造を静かに見つめるためのノート</p>
+            </footer>
+          </section>
         </div>
-
-        <!-- ① トップ -->
-        <section id="chapter-top" class="chapter chapter-top is-active" role="tabpanel">
-          <section class="section section-top-intro">
-            <div class="section-header">
-              <h2 class="section-title">このノートについて</h2>
-              <p class="section-subtitle">
-                典型パターンから、自分の人生の位置を見つけるためのノートです。
-              </p>
-            </div>
-            <div class="top-intro-body">
-              <p>
-                「地方公立 → 国立大 → 大企業総合職」「専門学校 → 地元中小 → 手に職」など、<br>
-                よく見られる人生ルートをカードにして並べていきます。
-              </p>
-              <p>
-                正解・不正解を決めるためではなく、<br>
-                <strong>「どこで迷いやすく、どこで軌道修正しやすいか」</strong>を理解するためのページです。
-              </p>
-              <p>
-                下のタブから、<strong>人生パターン図鑑</strong>と<strong>職業図鑑</strong>を切り替えて閲覧できます。
-              </p>
-            </div>
-          </section>
-        </section>
-
-        <!-- ② 人生パターン図鑑 -->
-        <section id="chapter-patterns" class="chapter chapter-patterns" role="tabpanel" hidden>
-          <section class="section section-patterns" id="life-patterns">
-            <div class="section-header">
-              <h2 class="section-title">人生パターン図鑑</h2>
-              <p class="section-subtitle">
-                自分の人生ルートに近いパターンを見つけて、<br>
-                「分岐」と「つまずき」の構造を理解する。
-              </p>
-            </div>
-
-            <div class="patterns-intro">
-              <p>
-                ここでは、価値判断をできる限り取り除き、<br>
-                「どんなルートをたどっている（／たどる可能性がある）のか」という構造だけを切り出しています。
-              </p>
-            </div>
-
-            <div class="pattern-card-grid" id="pattern-card-grid" aria-live="polite">
-              <!-- JSでカードを挿入 -->
-            </div>
-          </section>
-        </section>
-
-        <!-- ③ 職業図鑑 -->
-        <section id="chapter-jobs" class="chapter chapter-jobs" role="tabpanel" hidden>
-          <section class="section section-jobs" id="job-catalog">
-            <div class="section-header">
-              <h2 class="section-title">職業図鑑</h2>
-              <p class="section-subtitle">
-                仕事の「なり方」「1日の流れ」「悩み」「喜び」を<br>
-                コンパクトに構造化した働き方の図鑑。
-              </p>
-            </div>
-
-            <div class="jobs-intro">
-              <p>
-                このエリアに職業タグが並びます。気になるタグをタップすると、下に概要カードが開きます。
-              </p>
-            </div>
-
-            <div class="job-tag-container" id="job-tag-container" aria-label="職業タグ一覧">
-              <!-- JSで挿入 -->
-            </div>
-
-            <div class="job-detail-container" id="job-detail-container" aria-live="polite">
-              <!-- JSで挿入 -->
-            </div>
-          </section>
-        </section>
-
-        <footer class="page-footer">
-          <p>人生二周目ノート &mdash; 人生の構造を静かに見つめるためのノート</p>
-        </footer>
       </div>
     </div>
   </main>
 
   <!-- JS：このページ専用だけ -->
-  <script src="life-stories.js"></script>
+  <script src="life-stories.js" defer></script>
 </body>
 </html>
