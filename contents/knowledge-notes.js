@@ -95,7 +95,8 @@
   const sidebarToggleBtn = document.querySelector(".kn-sidebar-toggle");
   const osTabButtons     = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
 
-  const searchInput      = document.getElementById("kn-search-input");
+  const searchInputTop   = document.getElementById("kn-search-input");
+  const searchInputOs    = document.getElementById("kn-search-input-os");
 
   const topModeSection   = document.getElementById("top-mode");
   const osModeSection    = document.getElementById("os-mode");
@@ -239,6 +240,13 @@
       osModeSection.hidden = isTop;
       osModeSection.style.display = isTop ? "none" : "";
     }
+
+    // 検索入力の同期（どちらモードでも同じ検索語を使う）
+    if (isTop) {
+      if (searchInputTop) searchInputTop.value = state.search;
+    } else {
+      if (searchInputOs) searchInputOs.value = state.search;
+    }
   }
 
   // ============================================================
@@ -307,23 +315,40 @@
   }
 
   // ============================================================
-  // 検索入力
+  // 検索入力（トップ・OS両方を同期）
   // ============================================================
   function setupSearchInput() {
-    if (!searchInput) return;
-
-    // トップモードの検索
-    searchInput.addEventListener("input", () => {
-      state.search = searchInput.value || "";
-      renderResults();
-    });
-
-    searchInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        state.search = searchInput.value || "";
+    if (searchInputTop) {
+      searchInputTop.addEventListener("input", () => {
+        state.search = searchInputTop.value || "";
+        if (searchInputOs) searchInputOs.value = state.search;
         renderResults();
-      }
-    });
+      });
+
+      searchInputTop.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          state.search = searchInputTop.value || "";
+          if (searchInputOs) searchInputOs.value = state.search;
+          renderResults();
+        }
+      });
+    }
+
+    if (searchInputOs) {
+      searchInputOs.addEventListener("input", () => {
+        state.search = searchInputOs.value || "";
+        if (searchInputTop) searchInputTop.value = state.search;
+        renderResults();
+      });
+
+      searchInputOs.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          state.search = searchInputOs.value || "";
+          if (searchInputTop) searchInputTop.value = state.search;
+          renderResults();
+        }
+      });
+    }
   }
 
   // ============================================================
@@ -335,9 +360,12 @@
     shortcutButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const keyword = btn.getAttribute("data-keyword") || "";
-        if (!searchInput) return;
-
-        searchInput.value = keyword;
+        if (searchInputTop) {
+          searchInputTop.value = keyword;
+        }
+        if (searchInputOs) {
+          searchInputOs.value = keyword;
+        }
         state.search = keyword;
 
         renderResults();
@@ -495,7 +523,7 @@
   }
 
   // ============================================================
-  // カード生成（詳細は今は開かない）
+  // カード生成（各カードごとに独立して開閉）
   // ============================================================
   function createShoseiCard(topic) {
     const card = document.createElement("article");
@@ -547,6 +575,26 @@
     if (detailInner.children.length > 0) {
       detailWrapper.appendChild(detailInner);
     }
+
+    // ▼ 各カードごとに独立した開閉状態を持たせる
+    let isOpen = false;
+
+    card.addEventListener("click", (event) => {
+      // aタグとかボタンを中に置いた場合に備えて一応
+      if (event.target.closest("a, button")) return;
+
+      isOpen = !isOpen;
+      card.classList.toggle("is-open", isOpen);
+
+      if (isOpen) {
+        // 一旦 autoにして高さを計測してからmax-heightに反映
+        detailWrapper.style.maxHeight = "none";
+        const h = detailInner.scrollHeight;
+        detailWrapper.style.maxHeight = h + "px";
+      } else {
+        detailWrapper.style.maxHeight = "0";
+      }
+    });
 
     card.appendChild(titleEl);
     card.appendChild(summaryEl);
