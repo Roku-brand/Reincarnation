@@ -9,7 +9,10 @@
   // ============================================================
   const state = {
     loaded: false,
-    topics: [],         // { title, summary, tags, essence, traps, actionTips, _category, _subCategory }
+    // topics:
+    // { title, summary, tags, essence, traps, actionTips,
+    //   _category, _subCategory, _cardId, _globalId }
+    topics: [],
     activeCategory: "all",
     search: "",
     // OSごとのサブカテゴリの選択状態
@@ -22,7 +25,16 @@
     }
   };
 
-  // カテゴリ設定
+  // ユーザー別の永続データ（localStorage）
+  const STORAGE_KEY = "shoseijutsu_user_v1";
+
+  const userData = {
+    favorites: [], // [globalId, ...]
+    likes: {},     // { [globalId]: number }
+    history: []    // 最近開いたカード [globalId, ...]
+  };
+
+  // カテゴリ設定（JSON一元管理前提）
   const categoryConfigs = {
     mind: {
       jsonPath: "data/shoseijutsu/mind.json",
@@ -123,6 +135,7 @@
     loadAllCategories()
       .then(() => {
         state.loaded = true;
+        loadUserData();      // ★ localStorage から favorites / likes / history 復元
         renderTodayCard();   // トップモード用
         renderResults();     // OSモード用（トップでは一覧非表示）
         updateModeVisibility();
@@ -145,7 +158,81 @@
   }
 
   // ============================================================
-  // データロード
+  // localStorage：ユーザーデータの読み書き（④の基盤）
+  // ============================================================
+  function loadUserData() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+
+      const parsed = JSON.parse(raw);
+
+      if (Array.isArray(parsed.favorites)) {
+        userData.favorites = parsed.favorites;
+      }
+      if (parsed.likes && typeof parsed.likes === "object") {
+        userData.likes = parsed.likes;
+      }
+      if (Array.isArray(parsed.history)) {
+        userData.history = parsed.history;
+      }
+    } catch (e) {
+      console.warn("failed to load userData from localStorage", e);
+    }
+  }
+
+  function saveUserData() {
+    try {
+      const payload = {
+        favorites: userData.favorites,
+        likes: userData.likes,
+        history: userData.history
+      };
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch (e) {
+      console.warn("failed to save userData to localStorage", e);
+    }
+  }
+
+  function isFavorite(globalId) {
+    return userData.favorites.includes(globalId);
+  }
+
+  function toggleFavorite(globalId) {
+    const idx = userData.favorites.indexOf(globalId);
+    if (idx >= 0) {
+      userData.favorites.splice(idx, 1);
+    } else {
+      userData.favorites.push(globalId);
+    }
+    saveUserData();
+  }
+
+  function getLikeCount(globalId) {
+    return userData.likes[globalId] || 0;
+  }
+
+  function incrementLike(globalId) {
+    const current = userData.likes[globalId] || 0;
+    userData.likes[globalId] = current + 1;
+    saveUserData();
+  }
+
+  function recordHistory(globalId) {
+    if (!globalId) return;
+    const idx = userData.history.indexOf(globalId);
+    if (idx >= 0) {
+      userData.history.splice(idx, 1);
+    }
+    userData.history.unshift(globalId);
+    if (userData.history.length > 100) {
+      userData.history.length = 100;
+    }
+    saveUserData();
+  }
+
+  // ============================================================
+  // データロード（② JSON一元管理 ＋ ① 永続ID付与）
   // ============================================================
   function loadAllCategories() {
     const entries = Object.entries(categoryConfigs);
@@ -159,13 +246,29 @@
         })
         .then((json) => {
           const topics = Array.isArray(json.topics) ? json.topics : [];
-          topics.forEach((topic) => {
+          topics.forEach((topic, index) => {
             const rawSub = (topic.subCategory || "").trim();
             const normalizedSub = rawSub || "other";
+
+            // ★ カードIDの決定ルール
+            // 1. topic.cardId があればそれを採用（番号振りを JSON に書いた場合）
+            // 2. なければ topic.id を利用（現行 mind/work/... の id）
+            // 3. それもなければ categoryId + 連番でフォールバック
+            const baseId =
+              (topic.cardId && String(topic.cardId).trim()) ||
+              (topic.id && String(topic.id).trim()) ||
+              `${categoryId}-${index + 1}`;
+
+            // グローバル一意ID（localStorageや連携で一生使うキー）
+            const globalId = `${categoryId}:${baseId}`;
+
             const cloned = Object.assign({}, topic, {
               _category: categoryId,
-              _subCategory: normalizedSub
+              _subCategory: normalizedSub,
+              _cardId: baseId,
+              _globalId: globalId
             });
+
             state.topics.push(cloned);
           });
         });
@@ -227,7 +330,7 @@
   }
 
   // ============================================================
-  // モード表示切り替え
+  // モード表示切り替え（③ UI構造の固定）
   // ============================================================
   function updateModeVisibility() {
     const isTop = state.activeCategory === "all";
@@ -499,10 +602,13 @@
 
   // ============================================================
   // カード生成（各カードごとに独立して開閉・高さ揃え無し）
+  // ここで ① 永続ID を UI上に表示し、
+  // ④ localStorage を使った favorites / likes を紐づける。
   // ============================================================
   function createShoseiCard(topic) {
     const card = document.createElement("article");
     card.className = "shosei-card";
+    card.dataset.globalId = topic._globalId || "";
 
     const titleEl = document.createElement("h3");
     titleEl.className = "shosei-title";
@@ -512,6 +618,68 @@
     summaryEl.className = "shosei-summary";
     summaryEl.textContent = topic.summary || "";
 
+    // ▼ ID + お気に入り / いいね 行
+    const metaRow = document.createElement("div");
+    metaRow.className = "shosei-meta-row";
+
+    const idSpan = document.createElement("span");
+    idSpan.className = "shosei-id";
+    idSpan.textContent = topic._cardId || topic._globalId || "ID未設定";
+
+    const controls = document.createElement("div");
+    controls.className = "shosei-controls";
+
+    // お気に入り（★）
+    const favBtn = document.createElement("button");
+    favBtn.type = "button";
+    favBtn.className = "shosei-ctrl-btn shosei-fav-btn";
+    favBtn.setAttribute("aria-label", "この処世術をお気に入りに追加");
+    favBtn.textContent = "★";
+
+    if (isFavorite(topic._globalId)) {
+      favBtn.classList.add("is-active");
+    }
+
+    favBtn.addEventListener("click", (event) => {
+      event.stopPropagation(); // カードの開閉とは独立
+      toggleFavorite(topic._globalId);
+
+      if (isFavorite(topic._globalId)) {
+        favBtn.classList.add("is-active");
+      } else {
+        favBtn.classList.remove("is-active");
+      }
+    });
+
+    // いいね（♥ + カウント）
+    const likeBtn = document.createElement("button");
+    likeBtn.type = "button";
+    likeBtn.className = "shosei-ctrl-btn shosei-like-btn";
+    likeBtn.setAttribute("aria-label", "この処世術にいいね");
+
+    const likeIconSpan = document.createElement("span");
+    likeIconSpan.textContent = "♥";
+
+    const likeCountSpan = document.createElement("span");
+    likeCountSpan.className = "shosei-like-btn-count";
+    likeCountSpan.textContent = String(getLikeCount(topic._globalId));
+
+    likeBtn.appendChild(likeIconSpan);
+    likeBtn.appendChild(likeCountSpan);
+
+    likeBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      incrementLike(topic._globalId);
+      likeCountSpan.textContent = String(getLikeCount(topic._globalId));
+    });
+
+    controls.appendChild(favBtn);
+    controls.appendChild(likeBtn);
+
+    metaRow.appendChild(idSpan);
+    metaRow.appendChild(controls);
+
+    // タグ
     const tagsWrap = document.createElement("div");
     tagsWrap.className = "shosei-tags";
     if (Array.isArray(topic.tags)) {
@@ -523,6 +691,7 @@
       });
     }
 
+    // 詳細
     const detailWrapper = document.createElement("div");
     detailWrapper.className = "shosei-detail";
 
@@ -560,12 +729,16 @@
 
       isOpen = !isOpen;
       card.classList.toggle("is-open", isOpen);
-      // 詳細の display 切り替えは CSS:
-      // .shosei-card.is-open .shosei-detail { display:block; }
+
+      // 開かれたカードだけ履歴に記録（history は基盤だけ作っておく）
+      if (isOpen) {
+        recordHistory(topic._globalId);
+      }
     });
 
     card.appendChild(titleEl);
     card.appendChild(summaryEl);
+    card.appendChild(metaRow);
     card.appendChild(tagsWrap);
     card.appendChild(detailWrapper);
 
