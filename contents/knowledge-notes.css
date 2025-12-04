@@ -10,13 +10,10 @@
 }
 
 .page-knowledge-notes .container {
-  /* ✅ 本当に画面いっぱいに広げる */
   width: 100%;
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
-
-  /* 余白は中身で持つ */
   padding-left: 0;
   padding-right: 0;
 }
@@ -25,7 +22,7 @@
 .page-inner {
   max-width: 100%;
   margin: 0;
-  padding: 0 16px 24px;  /* 👈 ここに左右余白を移す */
+  padding: 0 16px 24px;
 }
 
 .page-knowledge-notes .site-main {
@@ -72,7 +69,6 @@
   border-color: rgba(56, 189, 248, 0.25);
 }
 
-/* 中身は通常レイヤーに乗せる */
 .scroll-panel > * {
   position: relative;
   z-index: 1;
@@ -273,7 +269,7 @@
 
 /* スマホ用：OSカテゴリ折りたたみトグル */
 .kn-sidebar-toggle {
-  display: none; /* PCでは非表示 */
+  display: none;
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
@@ -524,7 +520,7 @@
 }
 
 /* =============================================================
-   OSモード：検索結果
+   OSモード：一覧
    ============================================================= */
 
 .kn-results-header {
@@ -581,29 +577,28 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
-  justify-items: stretch; /* 左右いっぱいに広げる */
+  justify-items: stretch;
 }
 
-/* ✅ 768px 以上（PC幅）は 2列構成にする */
+/* PC では 2列 */
 @media (min-width: 768px) {
   .kn-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-items: stretch;
   }
 
-  /* カードの max-width を外して、列幅いっぱい使う */
   .shosei-card {
     max-width: none;
   }
 }
 
-/* 検索モード専用の微調整（必要に応じて） */
+/* 検索モード専用の微調整 */
 .kn-search-mode-section .kn-search-section {
   margin-bottom: 8px;
 }
 
 /* =============================================================
-   処世術カード（OS帯＋OS感デザイン）
+   処世術カード
    ============================================================= */
 
 .shosei-card {
@@ -856,7 +851,7 @@
 
   .kn-sidebar {
     width: 100%;
-    display: none; /* トグルで開く */
+    display: none;
   }
 
   .kn-sidebar.is-open {
