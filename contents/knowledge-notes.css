@@ -867,5 +867,19 @@
   margin-bottom: 12px !important;
 }
 
+/* ============================================================
+   処世術禄トップ：HEROとサイドバー距離＆検索バー位置の微調整
+   ============================================================ */
+.page-knowledge-notes .hero-copy.hero-knowledge {
+  /* HERO の下マージンを少し詰めて、サイドバーとの距離を近づける */
+  margin-bottom: 12px;
+}
+
+/* トップ専用の検索バー（サイドバーと横並び） */
+.page-knowledge-notes .top-search-under-hero {
+  margin: 0 0 16px;   /* 左寄せ＆少しだけ下に余白 */
+  max-width: 640px;  /* 横幅はお好みで。広くしたければ 800px などに */
+}
+
 
 
