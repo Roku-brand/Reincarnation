@@ -75,48 +75,9 @@
 }
 
 /* =============================================================
-   HERO
+   検索バー（検索タブ内で使用）
    ============================================================= */
 
-.hero-copy.hero-knowledge {
-  margin-bottom: 4px;
-}
-
-.hero-inner {
-  max-width: 720px;
-}
-
-.hero-section-title {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #022c22;
-  margin: 0 0 4px;
-}
-
-.hero-section-underline {
-  width: 140px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #22c55e, #0ea5e9);
-  margin-bottom: 3px;
-}
-
-.hero-section-underline.second {
-  width: 110px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(34, 197, 94, 0.7), rgba(56, 189, 248, 0.6));
-}
-
-.hero-text {
-  margin: 8px 0 14px;
-  font-size: 13px;
-  line-height: 1.8;
-  color: #1f2933;
-}
-
-/* 検索バー（検索タブ内で使用） */
 .kn-search-section {
   margin-top: 6px;
   max-width: 520px;
@@ -880,23 +841,7 @@
 }
 
 @media (max-width: 640px) {
-  .hero-section-title {
-    font-size: 22px;
-  }
-
-  .hero-text {
-    font-size: 12px;
-  }
-
   .kn-search-section {
     max-width: 100%;
   }
-}
-
-.hero-copy.hero-knowledge {
-  text-align: left;
-}
-
-.hero-inner {
-  margin-left: 0;
 }
