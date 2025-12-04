@@ -1,5 +1,5 @@
 // knowledge-notes.js
-// 処世術禄：トップモード / OSモード / 検索 / 今日の処世術 / お気に入り / いいね
+// 処世術禄：トップモード / OSモード / 横断検索 / 今日の処世術 / お気に入り / いいね
 
 (function () {
   "use strict";
@@ -93,7 +93,7 @@
     // { title, summary, tags, essence, traps, actionTips,
     //   _category, _subCategory, _cardId, _globalId }
     topics: [],
-    activeCategory: "all",
+    activeCategory: "all", // "all" はトップ or 横断検索
     search: "",
     activeSubCategory: {
       mind: "all",
@@ -109,8 +109,8 @@
 
   let userData = {
     favorites: [], // [globalId, ...]
-    likes: {},     // { [globalId]: number }
-    history: []    // 最近開いたカード [globalId, ...]
+    likes: {}, // { [globalId]: number }
+    history: [] // 最近開いたカード [globalId, ...]
   };
 
   function loadUserData() {
@@ -234,7 +234,7 @@
       });
     }
 
-    // 検索バー
+    // 横断OS検索バー
     if (searchInput) {
       searchInput.addEventListener("input", () => {
         state.search = searchInput.value.trim();
@@ -250,7 +250,8 @@
           searchInput.value = keyword;
           state.search = keyword;
         }
-        // ショートカットはトップモードのままキーワード検索
+        // ショートカット → そのまま横断検索モードへ
+        setActiveCategory("all");
         refreshCurrentView();
       });
     });
@@ -266,28 +267,6 @@
   // ============================================================
   // データ読み込み
   // ============================================================
-
-  // JSON からカード配列を取り出すためのユーティリティ
-  function extractTopicArray(json, cfg) {
-    // そのまま配列ならOK
-    if (Array.isArray(json)) {
-      return json;
-    }
-
-    // オブジェクトの場合、よくありそうなキーから取り出す
-    if (json && typeof json === "object") {
-      const candidateKeys = ["cards", "items", "data", "list", "topics"];
-      for (const key of candidateKeys) {
-        if (Array.isArray(json[key])) {
-          return json[key];
-        }
-      }
-    }
-
-    console.warn("JSON format unexpected for", cfg.jsonPath, json);
-    return [];
-  }
-
   function fetchAllTopics() {
     const entries = Object.entries(categoryConfigs);
     const promises = entries.map(([categoryId, cfg]) =>
@@ -296,8 +275,11 @@
           if (!res.ok) throw new Error(`${cfg.jsonPath} 読み込みエラー`);
           return res.json();
         })
-        .then((json) => {
-          const list = extractTopicArray(json, cfg);
+        .then((list) => {
+          if (!Array.isArray(list)) {
+            console.warn("JSON format unexpected for", cfg.jsonPath);
+            return [];
+          }
           return list.map((item, index) => normalizeTopic(item, categoryId, index));
         })
         .catch((err) => {
@@ -314,7 +296,6 @@
   }
 
   function normalizeTopic(raw, categoryId, index) {
-    const cfg = categoryConfigs[categoryId];
     const safeTitle = raw.title || raw.name || "タイトル未設定";
     const safeSummary = raw.summary || raw.description || "";
     const tags = Array.isArray(raw.tags) ? raw.tags : raw.tags ? [raw.tags] : [];
@@ -356,16 +337,20 @@
   }
 
   function renderInitialView() {
-    // 初期はトップモード
+    // 初期はトップモード（検索値は空）
     setActiveCategory("all");
     renderTodayCard(false);
   }
 
   function refreshCurrentView() {
-    if (state.activeCategory === "all") {
+    const hasKeyword = !!state.search;
+
+    if (!hasKeyword && state.activeCategory === "all") {
+      // 完全なトップモード
       showTopMode();
       renderTodayCard(false);
     } else {
+      // 横断検索 or OS別一覧
       showOsMode();
       renderResults();
     }
@@ -386,7 +371,7 @@
   // ============================================================
   // 今日の処世術
   // ============================================================
-  function renderTodayCard(forceRefresh) {
+  function renderTodayCard() {
     if (!todayCardContainer || !state.topics.length) return;
 
     todayCardContainer.innerHTML = "";
@@ -421,37 +406,56 @@
   }
 
   // ============================================================
-  // 検索結果のレンダリング（OSモード専用）
+  // 検索結果のレンダリング
   // ============================================================
   function renderResults() {
     if (!resultsContainer || !state.topics.length) return;
 
-    const catId = state.activeCategory;
-    const cfg = categoryConfigs[catId];
+    const catId = state.activeCategory; // "all" or mind / relation ...
+    const hasKeyword = !!state.search;
 
     // タイトル
     if (resultsTitleEl) {
-      resultsTitleEl.textContent = cfg
-        ? `${cfg.label} の処世術一覧`
-        : "処世術カード一覧";
+      if (catId === "all") {
+        resultsTitleEl.textContent = hasKeyword
+          ? "横断OS検索の結果"
+          : "処世術カード一覧";
+      } else {
+        const cfg = categoryConfigs[catId];
+        resultsTitleEl.textContent = cfg
+          ? `${cfg.label} の処世術一覧`
+          : "処世術カード一覧";
+      }
     }
 
-    // サブカテゴリタブ
-    renderSubCategoryTabs(catId);
+    // サブカテゴリタブ（OS選択時のみ）
+    if (catId === "all") {
+      if (subTabsContainer) subTabsContainer.innerHTML = "";
+    } else {
+      renderSubCategoryTabs(catId);
+    }
 
     // フィルタリング
-    const subActive = state.activeSubCategory[catId] || "all";
-    const keyword = (state.search || "").toLowerCase();
+    let filtered = state.topics.slice();
 
-    let filtered = state.topics.filter((t) => t._category === catId);
-
-    if (subActive !== "all") {
-      filtered = filtered.filter((t) => {
-        const sc = (t._subCategory || "").toString().toLowerCase();
-        return sc === subActive.toLowerCase();
-      });
+    // OS 絞り込み
+    if (catId !== "all") {
+      filtered = filtered.filter((t) => t._category === catId);
     }
 
+    // サブカテゴリ（OS指定時のみ）
+    if (catId !== "all") {
+      const subActive = state.activeSubCategory[catId] || "all";
+      if (subActive !== "all") {
+        filtered = filtered.filter((t) => {
+          const sc = (t._subCategory || "").toString().toLowerCase();
+          return sc === subActive.toLowerCase();
+        });
+      }
+    }
+
+    // キーワードは常に「横断OS」で適用
+    const keyword = (state.search || "").toLowerCase();
     if (keyword) {
       filtered = filtered.filter((t) => {
         const joined = [
@@ -471,15 +475,26 @@
     // メタ
     if (resultsMetaEl) {
       const count = filtered.length;
-      const keywordPart = keyword ? `「${state.search}」で絞り込み中 / ` : "";
-      const subPart =
-        subActive !== "all" && subCategoryOptions[catId]
-          ? `サブカテゴリ：${
-              (subCategoryOptions[catId].find((o) => o.id === subActive) || {}).label ||
-              "その他"
-            } / `
-          : "";
-      resultsMetaEl.textContent = `${keywordPart}${subPart}件数：${count} 件`;
+      const parts = [];
+
+      if (keyword) {
+        parts.push(`「${state.search}」で横断検索中`);
+      }
+
+      if (catId !== "all") {
+        const cfg = categoryConfigs[catId];
+        if (cfg) parts.push(`OS：${cfg.label}`);
+        const subActive = state.activeSubCategory[catId] || "all";
+        if (subActive !== "all" && subCategoryOptions[catId]) {
+          const subLabel =
+            (subCategoryOptions[catId].find((o) => o.id === subActive) || {})
+              .label || "その他";
+          parts.push(`サブカテゴリ：${subLabel}`);
+        }
+      }
+
+      parts.push(`件数：${count} 件`);
+      resultsMetaEl.textContent = parts.join(" / ");
     }
 
     // 表示
