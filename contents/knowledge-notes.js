@@ -178,6 +178,9 @@
 
   // トップ検索バー
   const topSearchInput = document.getElementById("kn-search-input-top");
+  const topSearchSection = topSearchInput
+    ? topSearchInput.closest(".kn-search-section")
+    : null;
 
   // 検索タブ内の入力
   const searchInput = document.getElementById("kn-search-input");
@@ -232,7 +235,7 @@
       });
     }
 
-    // 検索バー（検索タブ専用）
+    // 検索タブの検索バー
     if (searchInput) {
       searchInput.addEventListener("input", () => {
         state.search = searchInput.value.trim();
@@ -244,7 +247,7 @@
       });
     }
 
-    // トップ検索バー：Enterで検索タブに遷移
+    // トップ検索バー（Enterで検索タブへ遷移）
     if (topSearchInput) {
       topSearchInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
@@ -304,7 +307,6 @@
   }
 
   function normalizeTopic(raw, categoryId, index) {
-    const cfg = categoryConfigs[categoryId];
     const safeTitle = raw.title || raw.name || "タイトル未設定";
     const safeSummary = raw.summary || raw.description || "";
     const tags = Array.isArray(raw.tags) ? raw.tags : raw.tags ? [raw.tags] : [];
@@ -363,18 +365,21 @@
     if (topModeSection) topModeSection.hidden = false;
     if (osModeSection) osModeSection.hidden = true;
     if (searchModeSection) searchModeSection.hidden = true;
+    if (topSearchSection) topSearchSection.style.display = "";
   }
 
   function showOsMode() {
     if (topModeSection) topModeSection.hidden = true;
     if (osModeSection) osModeSection.hidden = false;
     if (searchModeSection) searchModeSection.hidden = true;
+    if (topSearchSection) topSearchSection.style.display = "none";
   }
 
   function showSearchMode() {
     if (topModeSection) topModeSection.hidden = true;
     if (osModeSection) osModeSection.hidden = true;
     if (searchModeSection) searchModeSection.hidden = false;
+    if (topSearchSection) topSearchSection.style.display = "none";
   }
 
   // ============================================================
@@ -485,7 +490,7 @@
       return;
     }
 
-    let filtered = state.topics.filter((t) => {
+    const filtered = state.topics.filter((t) => {
       const joined = [
         t.title,
         t.summary,
@@ -686,7 +691,7 @@
           li.textContent = line;
           list.appendChild(li);
         });
-      } else {
+      } else if (content) {
         const li = document.createElement("li");
         li.textContent = content;
         list.appendChild(li);
