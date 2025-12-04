@@ -845,3 +845,11 @@
     max-width: 100%;
   }
 }
+
+/* HERO 下の検索バーを中央寄せで幅広に */
+.top-search-under-hero {
+  margin: 24px auto 0;
+  max-width: 640px;
+}
+
+
