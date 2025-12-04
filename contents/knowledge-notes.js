@@ -1,21 +1,100 @@
 // knowledge-notes.js
-// モード分離：
-//  - ≪トップ≫(activeCategory === "all") → top-mode + 構造カードを表示
-//  - その他OSタブ → os-mode だけ表示（カード一覧）
+// 処世術禄：トップモード / OSモード / 検索 / 今日の処世術 / お気に入り / いいね
 
 (function () {
+  "use strict";
+
+  // ============================================================
+  // カテゴリ設定（JSON一元管理前提）
+  // ============================================================
+  const categoryConfigs = {
+    mind: {
+      id: "mind",
+      jsonPath: "data/shoseijutsu/mind.json",
+      label: "心の扱い方（内部OS）",
+      icon: "🧠"
+    },
+    relation: {
+      id: "relation",
+      jsonPath: "data/shoseijutsu/relation.json",
+      label: "人との関わり方（対人OS）",
+      icon: "🤝"
+    },
+    work: {
+      id: "work",
+      jsonPath: "data/shoseijutsu/work.json",
+      label: "社会での立ち回り（社会OS）",
+      icon: "🏢"
+    },
+    habit: {
+      id: "habit",
+      jsonPath: "data/shoseijutsu/habit.json",
+      label: "行動・習慣の技術（行動OS）",
+      icon: "⚙️"
+    },
+    future: {
+      id: "future",
+      jsonPath: "data/shoseijutsu/future.json",
+      label: "キャッチアップの極意（未来OS）",
+      icon: "📡"
+    }
+  };
+
+  // OSごとのサブカテゴリ（UI表示用）
+  const subCategoryOptions = {
+    mind: [
+      { id: "all", label: "すべて" },
+      { id: "emotion", label: "感情" },
+      { id: "thought", label: "思考" },
+      { id: "self", label: "自己イメージ" },
+      { id: "stress", label: "ストレス" },
+      { id: "other", label: "その他" }
+    ],
+    relation: [
+      { id: "all", label: "すべて" },
+      { id: "close", label: "家族・恋人" },
+      { id: "middle", label: "友人・同僚" },
+      { id: "boss", label: "上司・組織" },
+      { id: "boundary", label: "境界線" },
+      { id: "other", label: "その他" }
+    ],
+    work: [
+      { id: "all", label: "すべて" },
+      { id: "evaluation", label: "評価" },
+      { id: "safety", label: "安全保障" },
+      { id: "negotiation", label: "交渉" },
+      { id: "context", label: "環境理解" },
+      { id: "other", label: "その他" }
+    ],
+    habit: [
+      { id: "all", label: "すべて" },
+      { id: "routine", label: "ルーティン" },
+      { id: "productivity", label: "生産性" },
+      { id: "health", label: "健康" },
+      { id: "mindset", label: "マインドセット" },
+      { id: "other", label: "その他" }
+    ],
+    future: [
+      { id: "all", label: "すべて" },
+      { id: "info", label: "情報収集" },
+      { id: "learning", label: "学習" },
+      { id: "ai", label: "AI活用" },
+      { id: "strategy", label: "キャリア戦略" },
+      { id: "other", label: "その他" }
+    ]
+  };
+
   // ============================================================
   // 状態管理
   // ============================================================
   const state = {
     loaded: false,
-    // topics:
+    // トピック:
     // { title, summary, tags, essence, traps, actionTips,
     //   _category, _subCategory, _cardId, _globalId }
     topics: [],
     activeCategory: "all",
     search: "",
-    // OSごとのサブカテゴリの選択状態
     activeSubCategory: {
       mind: "all",
       relation: "all",
@@ -28,169 +107,34 @@
   // ユーザー別の永続データ（localStorage）
   const STORAGE_KEY = "shoseijutsu_user_v1";
 
-  const userData = {
+  let userData = {
     favorites: [], // [globalId, ...]
     likes: {},     // { [globalId]: number }
     history: []    // 最近開いたカード [globalId, ...]
   };
 
-  // カテゴリ設定（JSON一元管理前提）
-  const categoryConfigs = {
-    mind: {
-      jsonPath: "data/shoseijutsu/mind.json",
-      label: "心の扱い方（内部OS）"
-    },
-    relation: {
-      jsonPath: "data/shoseijutsu/relation.json",
-      label: "人との関わり方（対人OS）"
-    },
-    work: {
-      jsonPath: "data/shoseijutsu/work.json",
-      label: "社会での立ち回り（社会OS）"
-    },
-    habit: {
-      jsonPath: "data/shoseijutsu/habit.json",
-      label: "行動・習慣の技術（行動OS）"
-    },
-    future: {
-      jsonPath: "data/shoseijutsu/future.json",
-      label: "キャッチアップの極意（未来OS）"
-    }
-  };
-
-  // OSごとのサブカテゴリ定義
-  const subCategoryConfigs = {
-    mind: [
-      { id: "all",       label: "すべて" },
-      { id: "emotion",   label: "感情" },
-      { id: "cognition", label: "認知" },
-      { id: "self",      label: "自己" },
-      { id: "resilience",label: "メンタル耐性" },
-      { id: "other",     label: "その他" }
-    ],
-    relation: [
-      { id: "all",       label: "すべて" },
-      { id: "close",     label: "家族・恋人" },
-      { id: "middle",    label: "友人・同僚" },
-      { id: "boss",      label: "上司・組織" },
-      { id: "boundary",  label: "境界線" },
-      { id: "other",     label: "その他" }
-    ],
-    work: [
-      { id: "all",       label: "すべて" },
-      { id: "evaluation",label: "評価" },
-      { id: "safety",    label: "安全保障" },
-      { id: "negotiation",label: "交渉" },
-      { id: "context",   label: "環境理解" },
-      { id: "other",     label: "その他" }
-    ],
-    habit: [
-      { id: "all",       label: "すべて" },
-      { id: "start",     label: "着手" },
-      { id: "continue",  label: "継続" },
-      { id: "focus",     label: "集中" },
-      { id: "decision",  label: "意思決定" },
-      { id: "other",     label: "その他" }
-    ],
-    future: [
-      { id: "all",       label: "すべて" },
-      { id: "info",      label: "情報収集" },
-      { id: "learning",  label: "学習" },
-      { id: "ai",        label: "AI活用" },
-      { id: "strategy",  label: "キャリア戦略" },
-      { id: "other",     label: "その他" }
-    ]
-  };
-
-  // DOM参照
-  const sidebarEl          = document.getElementById("kn-sidebar");
-  const sidebarToggleBtn   = document.querySelector(".kn-sidebar-toggle");
-  const osTabButtons       = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
-
-  const searchInput        = document.getElementById("kn-search-input");
-
-  const topModeSection     = document.getElementById("top-mode");
-  const osModeSection      = document.getElementById("os-mode");
-  const osStructureSection = document.querySelector(".kn-os-structure-section");
-
-  const todayCardContainer = document.getElementById("kn-today-card");
-  const todayRefreshBtn    = document.getElementById("kn-today-refresh");
-
-  const shortcutButtons    = document.querySelectorAll(".kn-shortcut");
-
-  const resultsContainer   = document.getElementById("kn-results-container");
-  const resultsMetaEl      = document.getElementById("kn-results-meta");
-  const subTabsContainer   = document.getElementById("kn-subcategory-tabs");
-
-  // ============================================================
-  // 初期化
-  // ============================================================
-  function init() {
-    setupSidebarToggle();
-    setupOsTabs();
-    setupSearchInput();
-    setupShortcuts();
-    setupTodayRefresh();
-
-    loadAllCategories()
-      .then(() => {
-        state.loaded = true;
-        loadUserData();      // ★ localStorage から favorites / likes / history 復元
-        renderTodayCard();   // トップモード用
-        renderResults();     // OSモード用（トップでは一覧非表示）
-        updateModeVisibility();
-        renderSubTabs();
-      })
-      .catch((err) => {
-        console.error(err);
-        if (todayCardContainer) {
-          todayCardContainer.innerHTML =
-            '<p class="kn-loading-text">データの読み込み中にエラーが発生しました。</p>';
-        }
-        if (resultsMetaEl) {
-          resultsMetaEl.textContent =
-            "データの読み込み中にエラーが発生しました。";
-        }
-      });
-
-    // 初期状態：≪トップ≫
-    updateModeVisibility();
-  }
-
-  // ============================================================
-  // localStorage：ユーザーデータの読み書き（④の基盤）
-  // ============================================================
   function loadUserData() {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
-
       const parsed = JSON.parse(raw);
-
-      if (Array.isArray(parsed.favorites)) {
-        userData.favorites = parsed.favorites;
-      }
-      if (parsed.likes && typeof parsed.likes === "object") {
-        userData.likes = parsed.likes;
-      }
-      if (Array.isArray(parsed.history)) {
-        userData.history = parsed.history;
+      if (parsed && typeof parsed === "object") {
+        userData = {
+          favorites: Array.isArray(parsed.favorites) ? parsed.favorites : [],
+          likes: parsed.likes && typeof parsed.likes === "object" ? parsed.likes : {},
+          history: Array.isArray(parsed.history) ? parsed.history : []
+        };
       }
     } catch (e) {
-      console.warn("failed to load userData from localStorage", e);
+      console.warn("Failed to load user data", e);
     }
   }
 
   function saveUserData() {
     try {
-      const payload = {
-        favorites: userData.favorites,
-        likes: userData.likes,
-        history: userData.history
-      };
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
     } catch (e) {
-      console.warn("failed to save userData to localStorage", e);
+      console.warn("Failed to save user data", e);
     }
   }
 
@@ -199,9 +143,9 @@
   }
 
   function toggleFavorite(globalId) {
-    const idx = userData.favorites.indexOf(globalId);
-    if (idx >= 0) {
-      userData.favorites.splice(idx, 1);
+    if (!globalId) return;
+    if (isFavorite(globalId)) {
+      userData.favorites = userData.favorites.filter((id) => id !== globalId);
     } else {
       userData.favorites.push(globalId);
     }
@@ -209,277 +153,239 @@
   }
 
   function getLikeCount(globalId) {
+    if (!globalId) return 0;
     return userData.likes[globalId] || 0;
   }
 
   function incrementLike(globalId) {
+    if (!globalId) return;
     const current = userData.likes[globalId] || 0;
     userData.likes[globalId] = current + 1;
     saveUserData();
   }
 
-  function recordHistory(globalId) {
+  function pushHistory(globalId) {
     if (!globalId) return;
-    const idx = userData.history.indexOf(globalId);
-    if (idx >= 0) {
-      userData.history.splice(idx, 1);
-    }
-    userData.history.unshift(globalId);
-    if (userData.history.length > 100) {
-      userData.history.length = 100;
-    }
+    userData.history = [globalId]
+      .concat(userData.history.filter((id) => id !== globalId))
+      .slice(0, 30);
     saveUserData();
   }
 
   // ============================================================
-  // データロード（② JSON一元管理 ＋ ① 永続ID付与）
+  // DOM参照
   // ============================================================
- function loadAllCategories() {
-  const entries = Object.entries(categoryConfigs);
+  const sidebarEl = document.getElementById("kn-sidebar");
+  const sidebarToggleBtn = document.querySelector(".kn-sidebar-toggle");
+  const osTabButtons = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
 
-  const promises = entries.map(([categoryId, config]) => {
-    return fetch(config.jsonPath)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`failed to load ${config.jsonPath} (${res.status})`);
-        }
-        // いったんテキストとして受け取る
-        return res.text();
+  const searchInput = document.getElementById("kn-search-input");
+
+  const topModeSection = document.getElementById("top-mode");
+  const osModeSection = document.getElementById("os-mode");
+  const osStructureSection = document.querySelector(".kn-os-structure-section");
+
+  const todayCardContainer = document.getElementById("kn-today-card");
+  const todayRefreshBtn = document.getElementById("kn-today-refresh");
+
+  const shortcutButtons = document.querySelectorAll(".kn-shortcut");
+
+  const resultsContainer = document.getElementById("kn-results-container");
+  const resultsMetaEl = document.getElementById("kn-results-meta");
+  const resultsTitleEl = document.getElementById("kn-results-title");
+  const subTabsContainer = document.getElementById("kn-subcategory-tabs");
+
+  // ============================================================
+  // 初期化
+  // ============================================================
+  function init() {
+    loadUserData();
+    attachEventListeners();
+    fetchAllTopics()
+      .then(() => {
+        state.loaded = true;
+        renderInitialView();
       })
-      .then((text) => {
-        try {
-          const json = JSON.parse(text);
-
-          const topics = Array.isArray(json.topics) ? json.topics : [];
-          topics.forEach((topic) => {
-            const rawSub = (topic.subCategory || "").trim();
-            const normalizedSub = rawSub || "other";
-            const cloned = Object.assign({}, topic, {
-              _category: categoryId,
-              _subCategory: normalizedSub
-            });
-            state.topics.push(cloned);
-          });
-        } catch (error) {
-          console.error("JSON パースエラー:", config.jsonPath, error);
-          console.error("----- 問題の JSON 末尾 500 文字 -----");
-          console.error(text.slice(-500));
-          // ここで throw しておけば、どこで落ちたか分かる
-          throw error;
+      .catch((err) => {
+        console.error("処世術カードの読み込みに失敗しました", err);
+        if (todayCardContainer) {
+          todayCardContainer.innerHTML =
+            '<p class="kn-loading-text">カードの読み込みに失敗しました。</p>';
         }
       });
-  });
-
-  return Promise.all(promises);
-}
-
-
-  // ============================================================
-  // サイドバー（OSタブ）
-  // ============================================================
-  function setupSidebarToggle() {
-    if (!sidebarToggleBtn || !sidebarEl) return;
-
-    sidebarToggleBtn.addEventListener("click", () => {
-      const isOpen = sidebarEl.classList.toggle("is-open");
-      sidebarToggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
   }
 
-  function setupOsTabs() {
-    if (!osTabButtons || osTabButtons.length === 0) return;
-
+  function attachEventListeners() {
+    // サイドバータブ
     osTabButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const categoryId = btn.getAttribute("data-category") || "all";
-        setActiveCategory(categoryId);
-
-        // スマホ時：タブ選択後はサイドバーを閉じる
-        if (sidebarEl && sidebarEl.classList.contains("is-open")) {
-          sidebarEl.classList.remove("is-open");
-          if (sidebarToggleBtn) {
-            sidebarToggleBtn.setAttribute("aria-expanded", "false");
-          }
-        }
+        const category = btn.getAttribute("data-category") || "all";
+        setActiveCategory(category);
       });
     });
-  }
 
-  function setActiveCategory(categoryId) {
-    state.activeCategory = categoryId;
-
-    // タブの見た目更新
-    if (osTabButtons && osTabButtons.length > 0) {
-      osTabButtons.forEach((btn) => {
-        const target = btn.getAttribute("data-category");
-        btn.classList.toggle("is-active", target === categoryId);
+    // サイドバー（スマホ）トグル
+    if (sidebarToggleBtn && sidebarEl) {
+      sidebarToggleBtn.addEventListener("click", () => {
+        const expanded = sidebarToggleBtn.getAttribute("aria-expanded") === "true";
+        const newState = !expanded;
+        sidebarToggleBtn.setAttribute("aria-expanded", String(newState));
+        sidebarEl.classList.toggle("is-open", newState);
       });
     }
 
-    // モード切り替え
-    updateModeVisibility();
-
-    // サブカテゴリタブを更新
-    renderSubTabs();
-
-    // OSモードのときだけ一覧を再描画
-    renderResults();
-  }
-
-  // ============================================================
-  // モード表示切り替え（③ UI構造の固定）
-  // ============================================================
-  function updateModeVisibility() {
-    const isTop = state.activeCategory === "all";
-
-    if (topModeSection) {
-      topModeSection.hidden = !isTop;
-      topModeSection.style.display = isTop ? "" : "none";
-    }
-    if (osModeSection) {
-      osModeSection.hidden = isTop;
-      osModeSection.style.display = isTop ? "none" : "";
-    }
-    if (osStructureSection) {
-      osStructureSection.hidden = !isTop;
-      osStructureSection.style.display = isTop ? "" : "none";
-    }
-  }
-
-  // ============================================================
-  // サブカテゴリタブ
-  // ============================================================
-  function renderSubTabs() {
-    if (!subTabsContainer) return;
-
-    const cat = state.activeCategory;
-
-    // ≪トップ≫や不明カテゴリでは非表示
-    if (!cat || cat === "all" || !subCategoryConfigs[cat]) {
-      subTabsContainer.innerHTML = "";
-      subTabsContainer.style.display = "none";
-      return;
-    }
-
-    const defs = subCategoryConfigs[cat];
-    const currentSub = state.activeSubCategory[cat] || "all";
-
-    subTabsContainer.innerHTML = "";
-    subTabsContainer.style.display = "";
-
-    defs.forEach((def) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "kn-subtab";
-      if (def.id === currentSub) {
-        btn.classList.add("is-active");
-      }
-      btn.textContent = def.label;
-      btn.dataset.subcategoryId = def.id;
-
-      btn.addEventListener("click", () => {
-        setActiveSubCategory(cat, def.id);
+    // 検索バー
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        state.search = searchInput.value.trim();
+        refreshCurrentView();
       });
-
-      subTabsContainer.appendChild(btn);
-    });
-  }
-
-  function setActiveSubCategory(categoryId, subId) {
-    if (!state.activeSubCategory[categoryId]) {
-      state.activeSubCategory[categoryId] = "all";
     }
-    state.activeSubCategory[categoryId] = subId || "all";
 
-    // サブタブの見た目を更新
-    renderSubTabs();
-
-    // 結果一覧を再描画
-    renderResults();
-  }
-
-  function getCategoryLabel(categoryId) {
-    const cfg = categoryConfigs[categoryId];
-    return cfg ? cfg.label : "不明カテゴリ";
-  }
-
-  function getSubCategoryLabel(categoryId, subId) {
-    if (!subId || subId === "all") return "すべて";
-    const defs = subCategoryConfigs[categoryId];
-    if (!defs) return "";
-    const found = defs.find((d) => d.id === subId);
-    return found ? found.label : "";
-  }
-
-  // ============================================================
-  // 検索入力（上の1本だけを全タブ共通で使う）
-  // ============================================================
-  function setupSearchInput() {
-    if (!searchInput) return;
-
-    searchInput.addEventListener("input", () => {
-      state.search = searchInput.value || "";
-      renderResults();
-    });
-
-    searchInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        state.search = searchInput.value || "";
-        renderResults();
-      }
-    });
-  }
-
-  // ============================================================
-  // ショートカット（シチュエーション別）
-  // ============================================================
-  function setupShortcuts() {
-    if (!shortcutButtons || shortcutButtons.length === 0) return;
-
+    // ショートカット
     shortcutButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const keyword = btn.getAttribute("data-keyword") || "";
         if (searchInput) {
           searchInput.value = keyword;
+          state.search = keyword;
         }
-        state.search = keyword;
-        renderResults();
+        // ショートカットはトップモードのままキーワード検索
+        refreshCurrentView();
       });
     });
+
+    // 今日の処世術 更新
+    if (todayRefreshBtn) {
+      todayRefreshBtn.addEventListener("click", () => {
+        renderTodayCard(true);
+      });
+    }
   }
 
   // ============================================================
-  // 今日の処世術（ランダムカード）＋更新ボタン
+  // データ読み込み
   // ============================================================
-  function setupTodayRefresh() {
-    if (!todayRefreshBtn) return;
+  function fetchAllTopics() {
+    const entries = Object.entries(categoryConfigs);
+    const promises = entries.map(([categoryId, cfg]) =>
+      fetch(cfg.jsonPath)
+        .then((res) => {
+          if (!res.ok) throw new Error(`${cfg.jsonPath} 読み込みエラー`);
+          return res.json();
+        })
+        .then((list) => {
+          if (!Array.isArray(list)) {
+            console.warn("JSON format unexpected for", cfg.jsonPath);
+            return [];
+          }
+          return list.map((item, index) => normalizeTopic(item, categoryId, index));
+        })
+        .catch((err) => {
+          console.warn("カテゴリ読み込み失敗:", categoryId, err);
+          return [];
+        })
+    );
 
-    todayRefreshBtn.addEventListener("click", () => {
-      if (!state.loaded) return;
-      renderTodayCard();
+    return Promise.all(promises).then((results) => {
+      const merged = [];
+      results.forEach((arr) => merged.push(...arr));
+      state.topics = merged;
     });
   }
 
-  function renderTodayCard() {
-    if (!todayCardContainer) return;
+  function normalizeTopic(raw, categoryId, index) {
+    const cfg = categoryConfigs[categoryId];
+    const safeTitle = raw.title || raw.name || "タイトル未設定";
+    const safeSummary = raw.summary || raw.description || "";
+    const tags = Array.isArray(raw.tags) ? raw.tags : (raw.tags ? [raw.tags] : []);
+    const essence = raw.essence || raw.core || "";
+    const traps = raw.traps || raw.troubles || raw.pitfalls || "";
+    const actionTips = raw.actionTips || raw.actions || raw.howto || "";
+
+    const subCatRaw = raw.subCategory || raw.subcategory || raw.area || "other";
+
+    const globalId = `${categoryId}-${index + 1}`;
+
+    return {
+      title: safeTitle,
+      summary: safeSummary,
+      tags,
+      essence,
+      traps,
+      actionTips,
+      _category: categoryId,
+      _subCategory: subCatRaw,
+      _cardId: index + 1,
+      _globalId: globalId
+    };
+  }
+
+  // ============================================================
+  // 表示切り替え
+  // ============================================================
+  function setActiveCategory(category) {
+    state.activeCategory = category || "all";
+
+    // OSタブの見た目
+    osTabButtons.forEach((btn) => {
+      const cat = btn.getAttribute("data-category") || "";
+      btn.classList.toggle("is-active", cat === state.activeCategory);
+    });
+
+    refreshCurrentView();
+  }
+
+  function renderInitialView() {
+    // 初期はトップモード
+    setActiveCategory("all");
+    renderTodayCard(false);
+  }
+
+  function refreshCurrentView() {
+    if (state.activeCategory === "all") {
+      showTopMode();
+      renderTodayCard(false);
+    } else {
+      showOsMode();
+      renderResults();
+    }
+  }
+
+  function showTopMode() {
+    if (topModeSection) topModeSection.hidden = false;
+    if (osModeSection) osModeSection.hidden = true;
+    if (osStructureSection) osStructureSection.style.display = "";
+  }
+
+  function showOsMode() {
+    if (topModeSection) topModeSection.hidden = true;
+    if (osModeSection) osModeSection.hidden = false;
+    if (osStructureSection) osStructureSection.style.display = "none";
+  }
+
+  // ============================================================
+  // 今日の処世術
+  // ============================================================
+  function renderTodayCard(forceRefresh) {
+    if (!todayCardContainer || !state.topics.length) return;
 
     todayCardContainer.innerHTML = "";
 
-    if (!state.loaded || !Array.isArray(state.topics) || state.topics.length === 0) {
-      const p = document.createElement("p");
-      p.className = "kn-loading-text";
-      p.textContent = "利用可能な処世術カードがまだありません。";
-      todayCardContainer.appendChild(p);
+    const candidates = state.topics;
+    if (!candidates.length) {
+      todayCardContainer.innerHTML =
+        '<p class="kn-loading-text">カードがまだ登録されていません。</p>';
       return;
     }
 
-    const randomIndex = Math.floor(Math.random() * state.topics.length);
-    const topic = state.topics[randomIndex];
+    const randomIndex = Math.floor(Math.random() * candidates.length);
+    const topic = candidates[randomIndex];
 
-    const card = createShoseiCard(topic);
+    const card = createShoseiCard(topic, { compact: true });
     card.classList.add("is-today");
 
-    // カテゴリラベル
+    // カテゴリラベル（OS名）をタグ先頭に
     const catLabel = document.createElement("span");
     catLabel.className = "tag-chip tag-chip-category";
     const categoryLabel = categoryConfigs[topic._category]
@@ -499,121 +405,154 @@
   // 検索結果のレンダリング（OSモード専用）
   // ============================================================
   function renderResults() {
-    if (!resultsContainer || !resultsMetaEl) return;
+    if (!resultsContainer || !state.topics.length) return;
 
-    // ≪トップ≫モードのときは一覧不要
-    if (state.activeCategory === "all") {
-      resultsContainer.innerHTML = "";
-      resultsMetaEl.textContent =
-        "≪トップ≫では処世術カード一覧は表示していません。OSタブを選ぶと、そのOSのカードが一覧できます。";
-      return;
+    const catId = state.activeCategory;
+    const cfg = categoryConfigs[catId];
+
+    // タイトル
+    if (resultsTitleEl) {
+      resultsTitleEl.textContent = cfg
+        ? `${cfg.label} の処世術一覧`
+        : "処世術カード一覧";
     }
 
-    resultsContainer.innerHTML = "";
+    // サブカテゴリタブ
+    renderSubCategoryTabs(catId);
 
-    if (!state.loaded) {
-      resultsMetaEl.textContent = "データを読み込み中です…";
-      return;
-    }
+    // フィルタリング
+    const subActive = state.activeSubCategory[catId] || "all";
+    const keyword = (state.search || "").toLowerCase();
 
-    const allTopics = Array.isArray(state.topics) ? state.topics : [];
-    if (allTopics.length === 0) {
-      resultsMetaEl.textContent =
-        "まだ処世術カードが登録されていません。";
-      return;
-    }
+    let filtered = state.topics.filter((t) => t._category === catId);
 
-    const keyword   = (state.search || "").trim().toLowerCase();
-    const activeCat = state.activeCategory;
-    const subId     = (state.activeSubCategory[activeCat] || "all");
-
-    let filtered = allTopics;
-
-    // カテゴリフィルタ（all 以外しかここには来ない）
-    if (activeCat && activeCat !== "all") {
-      filtered = filtered.filter((t) => t._category === activeCat);
-    }
-
-    // サブカテゴリフィルタ
-    if (activeCat && activeCat !== "all" && subId && subId !== "all") {
+    if (subActive !== "all") {
       filtered = filtered.filter((t) => {
-        const topicSub = t._subCategory || "other";
-        return topicSub === subId;
+        const sc = (t._subCategory || "").toString().toLowerCase();
+        return sc === subActive.toLowerCase();
       });
     }
 
-    // キーワードフィルタ
     if (keyword) {
-      filtered = filtered.filter((topic) => {
-        const title   = (topic.title   || "").toLowerCase();
-        const summary = (topic.summary || "").toLowerCase();
-        return title.includes(keyword) || summary.includes(keyword);
+      filtered = filtered.filter((t) => {
+        const joined =
+          [
+            t.title,
+            t.summary,
+            t.essence,
+            t.traps,
+            t.actionTips,
+            (t.tags || []).join(" ")
+          ]
+            .join(" ")
+            .toLowerCase();
+        return joined.includes(keyword);
       });
     }
 
-    const totalCount = filtered.length;
-
-    const catLabelText = getCategoryLabel(activeCat);
-    const subLabelText = getSubCategoryLabel(activeCat, subId);
-
-    if (!keyword) {
-      if (subId === "all" || !subLabelText) {
-        resultsMetaEl.textContent = `${catLabelText} から ${totalCount}件を表示中。`;
-      } else {
-        resultsMetaEl.textContent = `${catLabelText}｜${subLabelText} から ${totalCount}件を表示中。`;
-      }
-    } else {
-      if (subId === "all" || !subLabelText) {
-        resultsMetaEl.textContent = `${catLabelText} × 「${keyword}」で ${totalCount}件ヒットしました。`;
-      } else {
-        resultsMetaEl.textContent = `${catLabelText}｜${subLabelText} × 「${keyword}」で ${totalCount}件ヒットしました。`;
-      }
+    // メタ
+    if (resultsMetaEl) {
+      const count = filtered.length;
+      const keywordPart = keyword ? `「${state.search}」で絞り込み中 / ` : "";
+      const subPart =
+        subActive !== "all" && subCategoryOptions[catId]
+          ? `サブカテゴリ：${
+              (subCategoryOptions[catId].find((o) => o.id === subActive) || {}).label ||
+              "その他"
+            } / `
+          : "";
+      resultsMetaEl.textContent = `${keywordPart}${subPart}件数：${count} 件`;
     }
 
-    if (filtered.length === 0) {
+    // 表示
+    resultsContainer.innerHTML = "";
+    if (!filtered.length) {
       const p = document.createElement("p");
       p.className = "kn-loading-text";
-      p.textContent = "条件に合う処世術カードがありませんでした。";
+      p.textContent = "条件に合う処世術カードが見つかりませんでした。";
       resultsContainer.appendChild(p);
       return;
     }
 
     filtered.forEach((topic) => {
       const card = createShoseiCard(topic);
-
-      const catLabel = document.createElement("span");
-      catLabel.className = "tag-chip tag-chip-category";
-      const categoryLabel = categoryConfigs[topic._category]
-        ? categoryConfigs[topic._category].label
-        : "不明カテゴリ";
-      catLabel.textContent = categoryLabel;
-
-      const tagsWrap = card.querySelector(".shosei-tags");
-      if (tagsWrap) {
-        tagsWrap.insertBefore(catLabel, tagsWrap.firstChild);
-      }
-
+      card.classList.add("fade-up");
       resultsContainer.appendChild(card);
     });
   }
 
+  function renderSubCategoryTabs(catId) {
+    if (!subTabsContainer) return;
+    subTabsContainer.innerHTML = "";
+
+    const options = subCategoryOptions[catId];
+    if (!options || !options.length) return;
+
+    const activeId = state.activeSubCategory[catId] || "all";
+
+    options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "kn-subtab";
+      if (opt.id === activeId) {
+        btn.classList.add("is-active");
+      }
+      btn.textContent = opt.label;
+      btn.addEventListener("click", () => {
+        state.activeSubCategory[catId] = opt.id;
+        renderResults();
+      });
+      subTabsContainer.appendChild(btn);
+    });
+  }
+
   // ============================================================
-  // カード生成（各カードごとに独立して開閉・高さ揃え無し）
-  // ここで ① 永続ID を UI上に表示し、
-  // ④ localStorage を使った favorites / likes を紐づける。
+  // カード生成
   // ============================================================
-  function createShoseiCard(topic) {
+  function createShoseiCard(topic, options) {
+    const opts = options || {};
+    const catId = topic._category || "other";
+    const cfg = categoryConfigs[catId];
+
     const card = document.createElement("article");
     card.className = "shosei-card";
     card.dataset.globalId = topic._globalId || "";
 
+    // OSクラス
+    card.classList.add(`os-${catId}`);
+    if (opts.compact) {
+      card.classList.add("shosei-card--compact");
+    }
+
+    // OS帯
+    const band = document.createElement("div");
+    band.className = "shosei-os-band";
+    card.appendChild(band);
+
+    // タイトル
     const titleEl = document.createElement("h3");
     titleEl.className = "shosei-title";
-    titleEl.textContent = topic.title || "タイトル未設定";
 
-    const summaryEl = document.createElement("p");
-    summaryEl.className = "shosei-summary";
-    summaryEl.textContent = topic.summary || "";
+    if (cfg && cfg.icon) {
+      const iconSpan = document.createElement("span");
+      iconSpan.className = "shosei-title-icon";
+      iconSpan.textContent = cfg.icon;
+      titleEl.appendChild(iconSpan);
+    }
+
+    const titleTextNode = document.createElement("span");
+    titleTextNode.textContent = topic.title || "タイトル未設定";
+    titleEl.appendChild(titleTextNode);
+
+    card.appendChild(titleEl);
+
+    // サマリー
+    if (topic.summary) {
+      const summaryEl = document.createElement("p");
+      summaryEl.className = "shosei-summary";
+      summaryEl.textContent = topic.summary;
+      card.appendChild(summaryEl);
+    }
 
     // ▼ ID + お気に入り / いいね 行
     const metaRow = document.createElement("div");
@@ -621,12 +560,11 @@
 
     const idSpan = document.createElement("span");
     idSpan.className = "shosei-id";
-    idSpan.textContent = topic._cardId || topic._globalId || "ID未設定";
+    idSpan.textContent = topic._globalId || "";
 
     const controls = document.createElement("div");
     controls.className = "shosei-controls";
 
-    // お気に入り（★）
     const favBtn = document.createElement("button");
     favBtn.type = "button";
     favBtn.className = "shosei-ctrl-btn shosei-fav-btn";
@@ -648,7 +586,6 @@
       }
     });
 
-    // いいね（♥ + カウント）
     const likeBtn = document.createElement("button");
     likeBtn.type = "button";
     likeBtn.className = "shosei-ctrl-btn shosei-like-btn";
@@ -675,6 +612,7 @@
 
     metaRow.appendChild(idSpan);
     metaRow.appendChild(controls);
+    card.appendChild(metaRow);
 
     // タグ
     const tagsWrap = document.createElement("div");
@@ -687,62 +625,40 @@
         tagsWrap.appendChild(chip);
       });
     }
+    card.appendChild(tagsWrap);
 
-    // 詳細
-    const detailWrapper = document.createElement("div");
-    detailWrapper.className = "shosei-detail";
+    // 詳細部分
+    const detail = document.createElement("div");
+    detail.className = "shosei-detail";
 
     const detailInner = document.createElement("div");
     detailInner.className = "shosei-detail-inner";
 
-    if (Array.isArray(topic.essence) && topic.essence.length > 0) {
-      detailInner.appendChild(
-        createDetailBlock("本質ポイント", topic.essence)
-      );
+    if (topic.essence) {
+      detailInner.appendChild(createDetailBlock("本質・要点", topic.essence));
+    }
+    if (topic.traps) {
+      detailInner.appendChild(createDetailBlock("やりがちな落とし穴", topic.traps));
+    }
+    if (topic.actionTips) {
+      detailInner.appendChild(createDetailBlock("具体的な一手", topic.actionTips));
     }
 
-    if (Array.isArray(topic.traps) && topic.traps.length > 0) {
-      detailInner.appendChild(
-        createDetailBlock("よくある罠", topic.traps)
-      );
-    }
+    detail.appendChild(detailInner);
+    card.appendChild(detail);
 
-    if (Array.isArray(topic.actionTips) && topic.actionTips.length > 0) {
-      detailInner.appendChild(
-        createDetailBlock("行動ヒント", topic.actionTips)
-      );
-    }
-
-    if (detailInner.children.length > 0) {
-      detailWrapper.appendChild(detailInner);
-    }
-
-    // ▼ 各カードごとに独立した開閉状態を持たせる（高さはCSS側に任せる）
-    let isOpen = false;
-
-    card.addEventListener("click", (event) => {
-      // aタグやボタンが中に入ってきた場合の保険
-      if (event.target.closest("a, button")) return;
-
-      isOpen = !isOpen;
-      card.classList.toggle("is-open", isOpen);
-
-      // 開かれたカードだけ履歴に記録（history は基盤だけ作っておく）
+    // カードクリックで詳細開閉
+    card.addEventListener("click", () => {
+      const isOpen = card.classList.toggle("is-open");
       if (isOpen) {
-        recordHistory(topic._globalId);
+        pushHistory(topic._globalId);
       }
     });
-
-    card.appendChild(titleEl);
-    card.appendChild(summaryEl);
-    card.appendChild(metaRow);
-    card.appendChild(tagsWrap);
-    card.appendChild(detailWrapper);
 
     return card;
   }
 
-  function createDetailBlock(title, items) {
+  function createDetailBlock(title, content) {
     const block = document.createElement("div");
     block.className = "detail-block";
 
@@ -750,23 +666,42 @@
     titleEl.className = "detail-title";
     titleEl.textContent = title;
 
-    const ul = document.createElement("ul");
-    ul.className = "detail-list";
+    const list = document.createElement("ul");
+    list.className = "detail-list";
 
-    items.forEach((text) => {
-      const li = document.createElement("li");
-      li.textContent = text;
-      ul.appendChild(li);
-    });
+    if (Array.isArray(content)) {
+      content.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+    } else if (typeof content === "string") {
+      // 改行で分割して箇条書き風に
+      const lines = content.split(/\r?\n/).filter((line) => line.trim() !== "");
+      if (lines.length > 1) {
+        lines.forEach((line) => {
+          const li = document.createElement("li");
+          li.textContent = line;
+          list.appendChild(li);
+        });
+      } else {
+        const li = document.createElement("li");
+        li.textContent = content;
+        list.appendChild(li);
+      }
+    }
 
     block.appendChild(titleEl);
-    block.appendChild(ul);
+    block.appendChild(list);
     return block;
   }
 
   // ============================================================
   // 実行
   // ============================================================
-  init();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();
-
