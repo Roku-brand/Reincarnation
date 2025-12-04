@@ -10,10 +10,13 @@
 }
 
 .page-knowledge-notes .container {
+  /* ✅ 本当に画面いっぱいに広げる */
   width: 100%;
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
+
+  /* 余白は中身で持つ */
   padding-left: 0;
   padding-right: 0;
 }
@@ -22,8 +25,9 @@
 .page-inner {
   max-width: 100%;
   margin: 0;
-  padding: 0 16px 24px;
+  padding: 0 16px 24px;  /* 👈 ここに左右余白を移す */
 }
+
 
 .page-knowledge-notes .site-main {
   padding-top: 16px;
@@ -69,15 +73,57 @@
   border-color: rgba(56, 189, 248, 0.25);
 }
 
+/* 中身は通常レイヤーに乗せる */
 .scroll-panel > * {
   position: relative;
   z-index: 1;
 }
 
+
+
 /* =============================================================
-   検索バー（トップ＆検索タブ共通）
+   HERO
    ============================================================= */
 
+.hero-copy.hero-knowledge {
+  margin-bottom: 4px;
+}
+
+.hero-inner {
+  max-width: 720px;
+}
+
+.hero-section-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #022c22;
+  margin: 0 0 4px;
+}
+
+.hero-section-underline {
+  width: 140px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #0ea5e9);
+  margin-bottom: 3px;
+}
+
+.hero-section-underline.second {
+  width: 110px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.7), rgba(56, 189, 248, 0.6));
+}
+
+.hero-text {
+  margin: 8px 0 14px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #1f2933;
+}
+
+/* HERO内検索バー */
 .kn-search-section {
   margin-top: 6px;
   max-width: 520px;
@@ -117,11 +163,6 @@
 
 .kn-search-input::placeholder {
   color: #9ca3af;
-}
-
-/* 検索モード専用の微調整 */
-.kn-search-mode-section .kn-search-section {
-  margin-bottom: 8px;
 }
 
 /* =============================================================
@@ -223,9 +264,6 @@
 .os-tab-future {
   border-left: 3px solid #fed7d7;
 }
-.os-tab-search {
-  border-left: 3px solid #d1d5db;
-}
 
 /* メイン側 */
 .kn-main {
@@ -235,7 +273,7 @@
 
 /* スマホ用：OSカテゴリ折りたたみトグル */
 .kn-sidebar-toggle {
-  display: none;
+  display: none; /* PCでは非表示 */
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
@@ -318,6 +356,30 @@
 }
 
 /* =============================================================
+   トップ用 2カラムレイアウト
+   ============================================================= */
+
+.kn-top-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 4px;
+}
+
+.kn-top-left {
+  width: 100%;
+}
+
+.kn-top-left-inner {
+  max-width: 640px;
+}
+
+.kn-top-right {
+  width: 100%;
+}
+
+/* =============================================================
    トップモード：ショートカット
    ============================================================= */
 
@@ -353,12 +415,54 @@
 }
 
 /* =============================================================
-   HERO直下の構造カード
+   トップモード：今日の処世術
    ============================================================= */
 
-.kn-os-structure-section {
-  margin-top: 14px;
+.kn-today-card-container {
+  margin-top: 4px;
 }
+
+.kn-loading-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.kn-today-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.kn-today-refresh-btn {
+  border-radius: 999px;
+  border: 1px solid #34d399;
+  background: #ecfdf5;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #047857;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.28);
+  transition:
+    background 0.16s ease,
+    transform 0.12s ease,
+    box-shadow 0.16s ease;
+}
+
+.kn-today-refresh-btn:hover {
+  background: #bbf7d0;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* =============================================================
+   右カラム：OS構造カード
+   ============================================================= */
 
 .kn-os-structure-card {
   background: #ecfdf5;
@@ -420,7 +524,7 @@
 }
 
 /* =============================================================
-   OSモード：一覧
+   OSモード：検索結果
    ============================================================= */
 
 .kn-results-header {
@@ -472,28 +576,29 @@
   box-shadow: 0 6px 14px rgba(5, 150, 105, 0.4);
 }
 
-/* 共通カードグリッド（OSモード・検索モード共通） */
+/* デフォルト（スマホ想定）は 1 列でOK */
 .kn-card-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
-  justify-items: stretch;
+  justify-items: stretch; /* 左右いっぱいに広げる */
 }
 
-/* PC では 2列 */
+/* ✅ 768px 以上（PC幅）は 2列構成にする */
 @media (min-width: 768px) {
   .kn-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-items: stretch;
   }
 
+  /* カードの max-width を外して、列幅いっぱい使う */
   .shosei-card {
     max-width: none;
   }
 }
 
 /* =============================================================
-   処世術カード
+   処世術カード（OS帯＋OS感デザイン）
    ============================================================= */
 
 .shosei-card {
@@ -534,6 +639,12 @@
 }
 .os-future .shosei-os-band {
   background: linear-gradient(90deg, #fed7d7, #fb7185);
+}
+
+/* 今日の処世術カードは少し強め */
+.shosei-card.is-today {
+  border-color: rgba(251, 191, 36, 0.9);
+  box-shadow: 0 18px 40px rgba(180, 83, 9, 0.35);
 }
 
 /* ホバー */
@@ -696,6 +807,36 @@
 }
 
 /* =============================================================
+   フッター
+   ============================================================= */
+
+.page-footer,
+.footer-inner,
+.footer-copy {
+  font-size: 11px;
+}
+
+/* =============================================================
+   アニメーション
+   ============================================================= */
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fade-up 0.4s ease forwards;
+}
+
+/* =============================================================
    レスポンシブ調整
    ============================================================= */
 
@@ -710,7 +851,7 @@
 
   .kn-sidebar {
     width: 100%;
-    display: none;
+    display: none; /* トグルで開く */
   }
 
   .kn-sidebar.is-open {
@@ -721,13 +862,43 @@
     display: inline-flex;
   }
 
+  .kn-top-shell {
+    display: block;
+  }
+
+  .kn-top-left-inner {
+    max-width: none;
+  }
+
+  .kn-top-right {
+    margin-top: 8px;
+  }
+
   .kn-card-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 640px) {
+  .hero-section-title {
+    font-size: 22px;
+  }
+
+  .hero-text {
+    font-size: 12px;
+  }
+
   .kn-search-section {
     max-width: 100%;
   }
 }
+
+.hero-copy.hero-knowledge {
+  text-align: left;
+}
+
+.hero-inner {
+  margin-left: 0;
+}
+
+
