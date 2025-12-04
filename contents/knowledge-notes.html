@@ -1,393 +1,264 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>処世術禄 | 人生二周目録-β版</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <title>処世術禄｜人生二周目録</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- 共通スタイル -->
-    <link rel="stylesheet" href="../style.css" />
-    <!-- このページ専用 -->
-    <link rel="stylesheet" href="knowledge-notes.css" />
+  <!-- フォント -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
 
-    <meta
-      name="description"
-      content="処世術禄 - 人生を賢く、したたかに。5つのOSに構造化された“処世術カード”で、情報過多の時代を生き抜くための知恵を整理します。"
-    />
-  </head>
-  <body class="page-knowledge-notes">
-    <div class="site-wrapper">
-      <!-- =========================================================
-           グローバルヘッダー（index.html と同じ構造を想定）
-           ========================================================= -->
-      <header class="site-header">
-        <div class="header-inner container">
-          <div class="site-brand">
-            <a href="../index.html" class="site-logo">人生二周目録-β版</a>
-            <p class="site-tagline">二周目目線で、人生をアップデートする</p>
-          </div>
+  <!-- 共通CSS / このページ専用CSS -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="knowledge-notes.css" />
+</head>
+<body class="home-body page-knowledge-notes">
+  <!-- ======================
+       ヘッダー（ホームと統一イメージ）
+       ====================== -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <div class="logo-block">
+        <div class="logo-title">人生二周目録ーβ版</div>
+        <div class="logo-sub">二周目視点で、人生をアップデートする</div>
+      </div>
 
-          <nav class="site-nav">
-            <ul class="site-nav-list">
-              <li class="site-nav-item">
-                <a href="../index.html">ホーム</a>
-              </li>
-              <li class="site-nav-item">
-                <a href="generations.html">人生地図禄</a>
-              </li>
-              <li class="site-nav-item is-active">
-                <a href="knowledge-notes.html">処世術禄</a>
-              </li>
-              <li class="site-nav-item">
-                <a href="life-stories.html">人生体験禄</a>
-              </li>
-              <li class="site-nav-item">
-                <a href="user-features.html">ユーザー機能</a>
-              </li>
-              <li class="site-nav-item">
-                <a href="concept.html">コンセプト</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">ホーム</a>
+        <a href="generations.html" class="nav-link">人生地図禄</a>
+        <a href="knowledge-notes.html" class="nav-link is-current">処世術禄</a>
+        <a href="life-stories.html" class="nav-link">人生体験禄</a>
+        <a href="user-notes.html" class="nav-link">ユーザー機能</a>
+        <a href="concept.html" class="nav-link">コンセプト</a>
+      </nav>
+    </div>
+  </header>
 
-      <!-- =========================================================
-           メイン
-           ========================================================= -->
-      <main class="site-main">
-        <div class="container">
-          <div class="page-inner">
-            <section class="scroll-panel">
-              <!-- ================= HERO ================= -->
-              <header class="hero-copy hero-knowledge">
-                <div class="hero-inner">
-                  <h1 class="hero-section-title">処世術禄</h1>
-                  <div class="hero-section-underline"></div>
-                  <div class="hero-section-underline second"></div>
-                  <p class="hero-text">
-                    人生を賢く、したたかに。世の教訓は5つのOSに構造化される。<br />
-                    情報が多すぎる時代に必要なのは、「断片的な知識」ではなく<br />
-                    「構造化された知恵」。
-                  </p>
+  <!-- ======================
+       メイン
+       ====================== -->
+  <main class="site-main">
+    <div class="container">
+      <!-- OS感のあるパネル全体 -->
+      <div class="scroll-panel">
+        <!-- ======================
+             HERO
+             ====================== -->
+        <section class="hero-copy hero-knowledge">
+          <div class="hero-inner">
+            <div class="hero-heading-block">
+              <h1 class="hero-section-title">処世術禄</h1>
+              <div class="hero-section-underline"></div>
+              <div class="hero-section-underline second"></div>
+            </div>
+            <p class="hero-text">
+              人生を賢く、したたかに。世の教訓は5つのOSに構造化される。<br />
+              情報が多すぎる時代に必要なのは、「断片的な知識」ではなく「構造化された知恵」。
+            </p>
+
+            <!-- HERO内に統合された検索バー -->
+            <section class="kn-search-section" aria-label="処世術を検索する">
+              <div class="kn-search-inner">
+                <div class="kn-search-icon">
+                  <svg
+                    class="kn-search-svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <circle cx="11" cy="11" r="6" stroke-width="2" />
+                    <line x1="15.5" y1="15.5" x2="20" y2="20" stroke-width="2" />
+                  </svg>
                 </div>
-              </header>
-
-              <!-- スマホ用：OSカテゴリトグル -->
-              <button
-                type="button"
-                class="kn-sidebar-toggle"
-                aria-expanded="false"
-              >
-                <span class="kn-sidebar-toggle-icon"></span>
-                <span class="kn-sidebar-toggle-label">処世術OS を選ぶ</span>
-              </button>
-
-              <!-- ================= レイアウト ================= -->
-              <div class="kn-layout">
-                <!-- ========== 左サイドバー（OSタブ + 横断検索） ========== -->
-                <aside class="kn-sidebar" id="kn-sidebar">
-                  <p class="kn-sidebar-title">処世術OS</p>
-
-                  <!-- トップモード -->
-                  <button
-                    type="button"
-                    class="kn-os-tab os-tab-top is-active"
-                    data-category="all"
-                  >
-                    <span class="kn-os-tab-main">&lt;&lt; トップ &gt;&gt;</span>
-                    <span class="kn-os-label">おすすめカードと全体像</span>
-                  </button>
-
-                  <!-- OSタブ -->
-                  <button
-                    type="button"
-                    class="kn-os-tab os-tab-mind"
-                    data-category="mind"
-                  >
-                    <span class="kn-os-tab-main">1.心の扱い方</span>
-                    <span class="kn-os-label">内部OS</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="kn-os-tab os-tab-relation"
-                    data-category="relation"
-                  >
-                    <span class="kn-os-tab-main">2.人との関わり方</span>
-                    <span class="kn-os-label">対人OS</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="kn-os-tab os-tab-work"
-                    data-category="work"
-                  >
-                    <span class="kn-os-tab-main">3.社会での立ち回り</span>
-                    <span class="kn-os-label">社会OS</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="kn-os-tab os-tab-habit"
-                    data-category="habit"
-                  >
-                    <span class="kn-os-tab-main">4.行動・習慣の技術</span>
-                    <span class="kn-os-label">行動OS</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="kn-os-tab os-tab-future"
-                    data-category="future"
-                  >
-                    <span class="kn-os-tab-main">5.キャッチアップの極意</span>
-                    <span class="kn-os-label">未来OS</span>
-                  </button>
-
-                  <!-- ===== 横断OS検索タブ ===== -->
-                  <div class="kn-cross-search">
-                    <h3 class="kn-cross-search-title">横断OS検索</h3>
-                    <p class="kn-cross-search-hint">
-                      キーワードで、すべてのOSからカードを横断検索できます。
-                    </p>
-
-                    <div class="kn-search-section">
-                      <div class="kn-search-inner">
-                        <div class="kn-search-icon" aria-hidden="true">
-                          <svg
-                            class="kn-search-svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <circle
-                              cx="11"
-                              cy="11"
-                              r="6"
-                              stroke-width="1.6"
-                            ></circle>
-                            <line
-                              x1="15.2"
-                              y1="15.2"
-                              x2="20"
-                              y2="20"
-                              stroke-width="1.6"
-                              stroke-linecap="round"
-                            ></line>
-                          </svg>
-                        </div>
-                        <input
-                          id="kn-search-input"
-                          class="kn-search-input"
-                          type="search"
-                          placeholder="例）感情 / 自己肯定感 / 上司 / 評価 など"
-                          autocomplete="off"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </aside>
-
-                <!-- ========== メインカラム ========== -->
-                <section class="kn-main">
-                  <!-- ---------------- トップモード ---------------- -->
-                  <section id="top-mode" class="kn-section kn-top-mode">
-                    <header class="kn-section-header">
-                      <h2 class="kn-section-title">処世術カード一覧</h2>
-                      <p class="kn-section-subtitle">
-                        まずは「よくある悩み」から入って、今日の一枚で感覚をつかむ。
-                      </p>
-                    </header>
-
-                    <div class="kn-top-shell">
-                      <!-- 左：ショートカット + 今日の処世術 -->
-                      <div class="kn-top-left">
-                        <div class="kn-top-left-inner">
-                          <!-- ショートカット -->
-                          <section class="kn-section">
-                            <header class="kn-shortcuts-header">
-                              <h3 class="kn-section-title">
-                                よくあるテーマから探す
-                              </h3>
-                              <p class="kn-section-subtitle">
-                                いま気になる切り口をタップすると、関連カードに絞り込みます。
-                              </p>
-                            </header>
-
-                            <div class="kn-shortcut-list">
-                              <button
-                                type="button"
-                                class="kn-shortcut"
-                                data-keyword="感情"
-                              >
-                                感情の扱い
-                              </button>
-                              <button
-                                type="button"
-                                class="kn-shortcut"
-                                data-keyword="自己肯定感"
-                              >
-                                自己肯定感
-                              </button>
-                              <button
-                                type="button"
-                                class="kn-shortcut"
-                                data-keyword="人間関係"
-                              >
-                                人間関係の距離感
-                              </button>
-                              <button
-                                type="button"
-                                class="kn-shortcut"
-                                data-keyword="上司"
-                              >
-                                上司との付き合い方
-                              </button>
-                              <button
-                                type="button"
-                                class="kn-shortcut"
-                                data-keyword="評価"
-                              >
-                                評価・昇進
-                              </button>
-                              <button
-                                type="button"
-                                class="kn-shortcut"
-                                data-keyword="習慣"
-                              >
-                                習慣を変えたい
-                              </button>
-                              <button
-                                type="button"
-                                class="kn-shortcut"
-                                data-keyword="将来"
-                              >
-                                将来への不安
-                              </button>
-                            </div>
-                          </section>
-
-                          <!-- 今日の処世術 -->
-                          <section class="kn-section">
-                            <header class="kn-today-header">
-                              <h3 class="kn-section-title">今日の処世術</h3>
-                              <button
-                                id="kn-today-refresh"
-                                type="button"
-                                class="kn-today-refresh-btn"
-                              >
-                                カードを更新
-                              </button>
-                            </header>
-
-                            <div
-                              id="kn-today-card"
-                              class="kn-today-card-container"
-                            >
-                              <p class="kn-loading-text">
-                                カードを読み込み中です…
-                              </p>
-                            </div>
-                          </section>
-                        </div>
-                      </div>
-
-                      <!-- 右：OS構造カード -->
-                      <div class="kn-top-right">
-                        <section class="kn-os-structure-section">
-                          <div class="kn-os-structure-card">
-                            <h3 class="kn-os-structure-title">
-                              処世術OSの全体像
-                            </h3>
-                            <p class="kn-os-structure-lead">
-                              世の教訓を、5つの「OS」に整理しました。<br />
-                              迷ったときは「どのOSの問題か？」から考えると、道が見えやすくなります。
-                            </p>
-
-                            <ul class="kn-os-structure-list">
-                              <li>
-                                <span class="kn-os-pill">内部OS</span>
-                                <span class="kn-os-structure-text">
-                                  自分の感情・思考・自己イメージの扱い方。
-                                </span>
-                              </li>
-                              <li>
-                                <span class="kn-os-pill">対人OS</span>
-                                <span class="kn-os-structure-text">
-                                  人との距離感、境界線、コミュニケーションの設計。
-                                </span>
-                              </li>
-                              <li>
-                                <span class="kn-os-pill">社会OS</span>
-                                <span class="kn-os-structure-text">
-                                  組織・評価・ルールなど「社会の文法」を読む力。
-                                </span>
-                              </li>
-                              <li>
-                                <span class="kn-os-pill">行動OS</span>
-                                <span class="kn-os-structure-text">
-                                  習慣・行動・実行力を支える小さな仕組み。
-                                </span>
-                              </li>
-                              <li>
-                                <span class="kn-os-pill">未来OS</span>
-                                <span class="kn-os-structure-text">
-                                  情報収集・学び・キャリア戦略のアップデート方法。
-                                </span>
-                              </li>
-                            </ul>
-
-                            <p class="kn-os-structure-footer">
-                              どのOSから入ってもOK。<br />
-                              「いま一番詰まっているところ」からカードを開いてみてください。
-                            </p>
-                          </div>
-                        </section>
-                      </div>
-                    </div>
-                  </section>
-
-                  <!-- ---------------- OSモード（カテゴリ別一覧） ---------------- -->
-                  <section id="os-mode" class="kn-section" hidden>
-                    <header class="kn-section-header">
-                      <h2 id="kn-results-title" class="kn-section-title">
-                        処世術カード一覧
-                      </h2>
-                      <p id="kn-results-meta" class="kn-results-meta">
-                        件数：0 件
-                      </p>
-                    </header>
-
-                    <!-- サブカテゴリタブ -->
-                    <div id="kn-subcategory-tabs" class="kn-subtabs"></div>
-
-                    <!-- カードグリッド -->
-                    <div
-                      id="kn-results-container"
-                      class="kn-card-grid"
-                    ></div>
-                  </section>
-                </section>
+                <input
+                  id="kn-search-input"
+                  class="kn-search-input"
+                  type="search"
+                  placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
+                  autocomplete="off"
+                />
               </div>
             </section>
           </div>
-        </div>
-      </main>
+        </section>
 
-      <!-- =========================================================
-           フッター
-           ========================================================= -->
-      <footer class="page-footer">
-        <div class="footer-inner container">
-          <p class="footer-copy">
-            © 人生二周目録-β版 / Reincarnation Note.
-          </p>
+        <!-- ======================
+             HEROより下：処世術禄 専用UI
+             ====================== -->
+        <div class="page-inner">
+          <div class="kn-layout">
+            <!-- 左サイド：処世術禄一覧タブ -->
+            <aside class="kn-sidebar" id="kn-sidebar" aria-label="処世術禄一覧">
+              <div class="kn-sidebar-title">処世術OS</div>
+
+              <button class="kn-os-tab is-active" type="button" data-category="all">
+                ≪トップ≫
+              </button>
+
+              <button class="kn-os-tab os-tab-mind" type="button" data-category="mind">
+                <span class="kn-os-tab-main">1.心の扱い方</span><br />
+                <span class="kn-os-label">内部OS</span>
+              </button>
+
+              <button class="kn-os-tab os-tab-relation" type="button" data-category="relation">
+                <span class="kn-os-tab-main">2.人との関わり方</span><br />
+                <span class="kn-os-label">対人OS</span>
+              </button>
+
+              <button class="kn-os-tab os-tab-work" type="button" data-category="work">
+                <span class="kn-os-tab-main">3.社会での立ち回り</span><br />
+                <span class="kn-os-label">社会OS</span>
+              </button>
+
+              <button class="kn-os-tab os-tab-habit" type="button" data-category="habit">
+                <span class="kn-os-tab-main">4.行動・習慣の技術</span><br />
+                <span class="kn-os-label">行動OS</span>
+              </button>
+
+              <button class="kn-os-tab os-tab-future" type="button" data-category="future">
+                <span class="kn-os-tab-main">5.キャッチアップの極意</span><br />
+                <span class="kn-os-label">未来OS</span>
+              </button>
+            </aside>
+
+            <!-- メインコンテンツ -->
+            <section class="kn-main">
+              <!-- スマホ用：OSカテゴリ折りたたみトグル -->
+              <button
+                class="kn-sidebar-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="kn-sidebar"
+              >
+                <span class="kn-sidebar-toggle-icon"></span>
+                <span class="kn-sidebar-toggle-label">処世術OSを選ぶ</span>
+              </button>
+
+              <!-- ▼トップ専用：左右2カラム（左：悩み＋今日 / 右：構造カード） -->
+              <div class="kn-top-shell" id="kn-top-shell">
+                <!-- 左カラム -->
+                <div class="kn-top-left">
+                  <div class="kn-top-left-inner">
+                    <!-- トップ専用コンテンツ -->
+                    <section id="top-mode" aria-label="処世術禄トップモード">
+                      <!-- 今の悩みから探す -->
+                      <section class="kn-section kn-shortcuts-section" aria-label="今の悩みから探す">
+                        <div class="kn-section-header kn-shortcuts-header">
+                          <h2 class="kn-section-title">今の悩みから探す →</h2>
+                          <p class="kn-section-subtitle">
+                            いま気になっているテーマに近いボタンを押すと、そのキーワードで検索欄がセットされます。
+                          </p>
+                        </div>
+                        <div class="kn-shortcut-list">
+                          <button class="kn-shortcut" type="button" data-keyword="職場">🔘 職場</button>
+                          <button class="kn-shortcut" type="button" data-keyword="恋愛">🔘 恋愛</button>
+                          <button class="kn-shortcut" type="button" data-keyword="将来">🔘 将来</button>
+                          <button class="kn-shortcut" type="button" data-keyword="メンタル">🔘 メンタル</button>
+                          <button class="kn-shortcut" type="button" data-keyword="お金">🔘 お金</button>
+                        </div>
+                      </section>
+
+                      <!-- 今日の処世術 -->
+                      <section class="kn-section kn-today-section" aria-label="今日の処世術">
+                        <div class="kn-section-header kn-today-header">
+                          <div>
+                            <h2 class="kn-section-title">今日の処世術</h2>
+                            <p class="kn-section-subtitle">
+                              ページを開くたび、または「更新」を押すたびにランダムで1つだけ表示します。
+                            </p>
+                          </div>
+                          <button id="kn-today-refresh" class="kn-today-refresh-btn" type="button">
+                            ↻ 更新
+                          </button>
+                        </div>
+                        <div id="kn-today-card" class="kn-today-card-container">
+                          <p class="kn-loading-text">処世術カードを読み込み中です…</p>
+                        </div>
+                      </section>
+                    </section>
+                  </div>
+                </div>
+
+                <!-- 右カラム：OS構造の説明カード（トップ時のみ表示） -->
+                <aside class="kn-top-right">
+                  <section class="kn-section kn-os-structure-section" aria-label="処世術OSの構造化">
+                    <div class="kn-os-structure-card scroll-card scroll-card--primary">
+                      <h2 class="kn-os-structure-title">処世術OSの全体構造</h2>
+                      <p class="kn-os-structure-lead">
+                        人生の「詰まり」を分解すると、だいたいこの5つのOSに整理できます。
+                        どのOSが現在バグっているかを見極めるのが、この処世術禄の使い方です。
+                      </p>
+                      <ul class="kn-os-structure-list">
+                        <li>
+                          <span class="kn-os-pill">内部OS</span>
+                          <span class="kn-os-structure-text">感情・思考・自己イメージなど、心の扱い方。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">対人OS</span>
+                          <span class="kn-os-structure-text">家族・友人・職場との距離感、コミュニケーション。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">社会OS</span>
+                          <span class="kn-os-structure-text">評価・立ち回り・リスク管理など、社会との付き合い方。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">行動OS</span>
+                          <span class="kn-os-structure-text">習慣・行動パターン・小さな一手をどう積むか。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">未来OS</span>
+                          <span class="kn-os-structure-text">学び・情報収集・AI活用・キャリア戦略。</span>
+                        </li>
+                      </ul>
+                      <p class="kn-os-structure-footer">
+                        「いま自分はどのOSで詰まっている？」と問いながら、カードを拾っていくのがコツです。
+                      </p>
+                    </div>
+                  </section>
+                </aside>
+              </div>
+
+              <!-- ▼OSモード：特定OSを選んだときの検索結果エリア -->
+              <section id="os-mode" class="kn-section kn-os-mode-section" aria-label="OS別の処世術一覧" hidden>
+                <div class="kn-results-header">
+                  <h2 class="kn-section-title" id="kn-results-title">処世術カード一覧</h2>
+                  <p id="kn-results-meta" class="kn-results-meta">
+                    キーワードとサブカテゴリで、OS内のカードを絞り込みます。
+                  </p>
+                </div>
+
+                <!-- サブカテゴリタブ -->
+                <div id="kn-subcategory-tabs" class="kn-subtabs" aria-label="サブカテゴリで絞り込む">
+                  <!-- JSで生成 -->
+                </div>
+
+                <!-- カードグリッド（PC：2列 / スマホ：1列） -->
+                <div id="kn-results-container" class="kn-card-grid" aria-live="polite">
+                  <!-- JSでカード生成 -->
+                </div>
+              </section>
+            </section>
+          </div>
         </div>
-      </footer>
+      </div>
     </div>
+  </main>
 
-    <!-- スクリプト -->
-    <script src="knowledge-notes.js" defer></script>
-  </body>
+  <!-- ========== フッター ========== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">© 人生二周目録</p>
+    </div>
+  </footer>
+
+  <!-- 共通JS ＋ このページ専用JS -->
+  <script src="../main.js" defer></script>
+  <script src="knowledge-notes.js" defer></script>
+</body>
 </html>
