@@ -49,7 +49,7 @@
     <div class="container">
       <div class="scroll-panel">
 
-               <!-- ======================
+        <!-- ======================
              HERO（世界観のみ）
              ====================== -->
         <section class="hero-copy hero-knowledge">
@@ -69,39 +69,6 @@
         <!-- ======================
              HERO より下：処世術禄 UI
              ====================== -->
-
-
-        <!-- ===============================
-            HERO 直下の検索バー（新配置）
-            =============================== -->
-        <section class="kn-search-section top-search-under-hero" aria-label="処世術を検索する">
-          <div class="kn-search-inner">
-            <div class="kn-search-icon">
-              <svg
-                class="kn-search-svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="6" stroke-width="2" />
-                <line x1="15.5" y1="15.5" x2="20" y2="20" stroke-width="2" />
-              </svg>
-            </div>
-
-            <input
-              id="kn-search-input-top"
-              class="kn-search-input"
-              type="search"
-              placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
-              autocomplete="off"
-            />
-          </div>
-        </section>
-
-        <!-- ======================
-            MAIN LAYOUT
-            ====================== -->
         <div class="page-inner">
           <div class="kn-layout">
 
@@ -141,6 +108,32 @@
                  メインコンテンツ
                  ====================== -->
             <section class="kn-main">
+
+              <!-- ▼ トップ用検索バー（サイドバーと横並び） -->
+              <section class="kn-search-section top-search-under-hero" aria-label="処世術を検索する">
+                <div class="kn-search-inner">
+                  <div class="kn-search-icon">
+                    <svg
+                      class="kn-search-svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <circle cx="11" cy="11" r="6" stroke-width="2" />
+                      <line x1="15.5" y1="15.5" x2="20" y2="20" stroke-width="2" />
+                    </svg>
+                  </div>
+
+                  <input
+                    id="kn-search-input-top"
+                    class="kn-search-input"
+                    type="search"
+                    placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
+                    autocomplete="off"
+                  />
+                </div>
+              </section>
 
               <!-- ▼ トップ（カード非表示） -->
               <section id="top-mode" class="kn-section">
@@ -216,4 +209,3 @@
   <script src="knowledge-notes.js" defer></script>
 </body>
 </html>
-
