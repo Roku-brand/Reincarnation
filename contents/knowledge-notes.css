@@ -10,10 +10,24 @@
 }
 
 .page-knowledge-notes .container {
-  max-width: 1120px;
-  padding-left: 16px;
-  padding-right: 16px;
+  /* ✅ 本当に画面いっぱいに広げる */
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+
+  /* 余白は中身で持つ */
+  padding-left: 0;
+  padding-right: 0;
 }
+
+/* 中身側（page-inner）で 16px の余白を付ける */
+.page-inner {
+  max-width: 100%;
+  margin: 0;
+  padding: 0 16px 24px;  /* 👈 ここに左右余白を移す */
+}
+
 
 .page-knowledge-notes .site-main {
   padding-top: 16px;
@@ -869,3 +883,4 @@
     max-width: 100%;
   }
 }
+
