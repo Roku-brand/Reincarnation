@@ -19,7 +19,7 @@
 </head>
 <body class="home-body page-knowledge-notes">
   <!-- ======================
-       ヘッダー
+       ヘッダー（ホームと統一イメージ）
        ====================== -->
   <header class="site-header">
     <div class="header-inner container">
@@ -44,9 +44,10 @@
        ====================== -->
   <main class="site-main">
     <div class="container">
+      <!-- OS感のあるパネル全体 -->
       <div class="scroll-panel">
         <!-- ======================
-             HERO（世界観＋トップ検索＋構造説明）
+             HERO
              ====================== -->
         <section class="hero-copy hero-knowledge">
           <div class="hero-inner">
@@ -60,7 +61,7 @@
               情報が多すぎる時代に必要なのは、「断片的な知識」ではなく「構造化された知恵」。
             </p>
 
-            <!-- ▼ トップ検索バー（Enterで検索タブに飛ぶ） -->
+            <!-- HERO内に統合された検索バー -->
             <section class="kn-search-section" aria-label="処世術を検索する">
               <div class="kn-search-inner">
                 <div class="kn-search-icon">
@@ -76,7 +77,7 @@
                   </svg>
                 </div>
                 <input
-                  id="kn-search-input-top"
+                  id="kn-search-input"
                   class="kn-search-input"
                   type="search"
                   placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
@@ -84,51 +85,15 @@
                 />
               </div>
             </section>
-
-            <!-- ▼ 構造説明（処世術OSの全体構造） -->
-            <section class="kn-os-structure-section" aria-label="処世術OSの構造化">
-              <div class="kn-os-structure-card scroll-card scroll-card--primary">
-                <h2 class="kn-os-structure-title">処世術OSの全体構造</h2>
-                <p class="kn-os-structure-lead">
-                  人生の「詰まり」を分解すると、だいたいこの5つのOSに整理できます。
-                  どのOSが現在バグっているかを見極めるのが、この処世術禄の使い方です。
-                </p>
-                <ul class="kn-os-structure-list">
-                  <li>
-                    <span class="kn-os-pill">内部OS</span>
-                    <span class="kn-os-structure-text">感情・思考・自己イメージなど、心の扱い方。</span>
-                  </li>
-                  <li>
-                    <span class="kn-os-pill">対人OS</span>
-                    <span class="kn-os-structure-text">家族・友人・職場との距離感、コミュニケーション。</span>
-                  </li>
-                  <li>
-                    <span class="kn-os-pill">社会OS</span>
-                    <span class="kn-os-structure-text">評価・立ち回り・リスク管理など、社会との付き合い方。</span>
-                  </li>
-                  <li>
-                    <span class="kn-os-pill">行動OS</span>
-                    <span class="kn-os-structure-text">習慣・行動パターン・小さな一手をどう積むか。</span>
-                  </li>
-                  <li>
-                    <span class="kn-os-pill">未来OS</span>
-                    <span class="kn-os-structure-text">学び・情報収集・AI活用・キャリア戦略。</span>
-                  </li>
-                </ul>
-                <p class="kn-os-structure-footer">
-                  「いま自分はどのOSで詰まっている？」と問いながら、カードを拾っていくのがコツです。
-                </p>
-              </div>
-            </section>
           </div>
         </section>
 
         <!-- ======================
-             HERO より下：処世術禄 UI
+             HEROより下：処世術禄 専用UI
              ====================== -->
         <div class="page-inner">
           <div class="kn-layout">
-            <!-- 左サイドバー（OSタブ＋検索タブ） -->
+            <!-- 左サイド：処世術禄一覧タブ -->
             <aside class="kn-sidebar" id="kn-sidebar" aria-label="処世術禄一覧">
               <div class="kn-sidebar-title">処世術OS</div>
 
@@ -160,16 +125,11 @@
                 <span class="kn-os-tab-main">5.キャッチアップの極意</span><br />
                 <span class="kn-os-label">未来OS</span>
               </button>
-
-              <!-- ▼ 追加：「検索」タブ（OS横断検索） -->
-              <button class="kn-os-tab os-tab-search" type="button" data-category="search">
-                🔍 検索（OS横断）
-              </button>
             </aside>
 
             <!-- メインコンテンツ -->
             <section class="kn-main">
-              <!-- スマホ用：サイドバー表示トグル -->
+              <!-- スマホ用：OSカテゴリ折りたたみトグル -->
               <button
                 class="kn-sidebar-toggle"
                 type="button"
@@ -180,36 +140,96 @@
                 <span class="kn-sidebar-toggle-label">処世術OSを選ぶ</span>
               </button>
 
-              <!-- ▼ トップモード：今の悩みから探す のみ -->
-              <section id="top-mode" class="kn-section" aria-label="処世術禄トップモード">
-                <section class="kn-section kn-shortcuts-section" aria-label="今の悩みから探す">
-                  <div class="kn-section-header kn-shortcuts-header">
-                    <h2 class="kn-section-title">今の悩みから探す →</h2>
-                    <p class="kn-section-subtitle">
-                      いま気になっているテーマに近いボタンを押すと、そのキーワードで検索タブに飛びます。
-                    </p>
-                  </div>
-                  <div class="kn-shortcut-list">
-                    <button class="kn-shortcut" type="button" data-keyword="職場">🔘 職場</button>
-                    <button class="kn-shortcut" type="button" data-keyword="恋愛">🔘 恋愛</button>
-                    <button class="kn-shortcut" type="button" data-keyword="将来">🔘 将来</button>
-                    <button class="kn-shortcut" type="button" data-keyword="メンタル">🔘 メンタル</button>
-                    <button class="kn-shortcut" type="button" data-keyword="お金">🔘 お金</button>
-                  </div>
-                </section>
-              </section>
+              <!-- ▼トップ専用：左右2カラム（左：悩み＋今日 / 右：構造カード） -->
+              <div class="kn-top-shell" id="kn-top-shell">
+                <!-- 左カラム -->
+                <div class="kn-top-left">
+                  <div class="kn-top-left-inner">
+                    <!-- トップ専用コンテンツ -->
+                    <section id="top-mode" aria-label="処世術禄トップモード">
+                      <!-- 今の悩みから探す -->
+                      <section class="kn-section kn-shortcuts-section" aria-label="今の悩みから探す">
+                        <div class="kn-section-header kn-shortcuts-header">
+                          <h2 class="kn-section-title">今の悩みから探す →</h2>
+                          <p class="kn-section-subtitle">
+                            いま気になっているテーマに近いボタンを押すと、そのキーワードで検索欄がセットされます。
+                          </p>
+                        </div>
+                        <div class="kn-shortcut-list">
+                          <button class="kn-shortcut" type="button" data-keyword="職場">🔘 職場</button>
+                          <button class="kn-shortcut" type="button" data-keyword="恋愛">🔘 恋愛</button>
+                          <button class="kn-shortcut" type="button" data-keyword="将来">🔘 将来</button>
+                          <button class="kn-shortcut" type="button" data-keyword="メンタル">🔘 メンタル</button>
+                          <button class="kn-shortcut" type="button" data-keyword="お金">🔘 お金</button>
+                        </div>
+                      </section>
 
-              <!-- ▼ OSモード：特定OSを選んだ時の一覧 -->
-              <section
-                id="os-mode"
-                class="kn-section kn-os-mode-section"
-                aria-label="OS別の処世術一覧"
-                hidden
-              >
+                      <!-- 今日の処世術 -->
+                      <section class="kn-section kn-today-section" aria-label="今日の処世術">
+                        <div class="kn-section-header kn-today-header">
+                          <div>
+                            <h2 class="kn-section-title">今日の処世術</h2>
+                            <p class="kn-section-subtitle">
+                              ページを開くたび、または「更新」を押すたびにランダムで1つだけ表示します。
+                            </p>
+                          </div>
+                          <button id="kn-today-refresh" class="kn-today-refresh-btn" type="button">
+                            ↻ 更新
+                          </button>
+                        </div>
+                        <div id="kn-today-card" class="kn-today-card-container">
+                          <p class="kn-loading-text">処世術カードを読み込み中です…</p>
+                        </div>
+                      </section>
+                    </section>
+                  </div>
+                </div>
+
+                <!-- 右カラム：OS構造の説明カード（トップ時のみ表示） -->
+                <aside class="kn-top-right">
+                  <section class="kn-section kn-os-structure-section" aria-label="処世術OSの構造化">
+                    <div class="kn-os-structure-card scroll-card scroll-card--primary">
+                      <h2 class="kn-os-structure-title">処世術OSの全体構造</h2>
+                      <p class="kn-os-structure-lead">
+                        人生の「詰まり」を分解すると、だいたいこの5つのOSに整理できます。
+                        どのOSが現在バグっているかを見極めるのが、この処世術禄の使い方です。
+                      </p>
+                      <ul class="kn-os-structure-list">
+                        <li>
+                          <span class="kn-os-pill">内部OS</span>
+                          <span class="kn-os-structure-text">感情・思考・自己イメージなど、心の扱い方。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">対人OS</span>
+                          <span class="kn-os-structure-text">家族・友人・職場との距離感、コミュニケーション。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">社会OS</span>
+                          <span class="kn-os-structure-text">評価・立ち回り・リスク管理など、社会との付き合い方。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">行動OS</span>
+                          <span class="kn-os-structure-text">習慣・行動パターン・小さな一手をどう積むか。</span>
+                        </li>
+                        <li>
+                          <span class="kn-os-pill">未来OS</span>
+                          <span class="kn-os-structure-text">学び・情報収集・AI活用・キャリア戦略。</span>
+                        </li>
+                      </ul>
+                      <p class="kn-os-structure-footer">
+                        「いま自分はどのOSで詰まっている？」と問いながら、カードを拾っていくのがコツです。
+                      </p>
+                    </div>
+                  </section>
+                </aside>
+              </div>
+
+              <!-- ▼OSモード：特定OSを選んだときの検索結果エリア -->
+              <section id="os-mode" class="kn-section kn-os-mode-section" aria-label="OS別の処世術一覧" hidden>
                 <div class="kn-results-header">
                   <h2 class="kn-section-title" id="kn-results-title">処世術カード一覧</h2>
                   <p id="kn-results-meta" class="kn-results-meta">
-                    サブカテゴリで、OS内のカードを絞り込みます。
+                    キーワードとサブカテゴリで、OS内のカードを絞り込みます。
                   </p>
                 </div>
 
@@ -218,53 +238,8 @@
                   <!-- JSで生成 -->
                 </div>
 
-                <!-- カードグリッド -->
+                <!-- カードグリッド（PC：2列 / スマホ：1列） -->
                 <div id="kn-results-container" class="kn-card-grid" aria-live="polite">
-                  <!-- JSでカード生成 -->
-                </div>
-              </section>
-
-              <!-- ▼ 検索モード：「検索」タブ用のOS横断検索 -->
-              <section
-                id="search-mode"
-                class="kn-section kn-search-mode-section"
-                aria-label="OS横断の処世術検索"
-                hidden
-              >
-                <div class="kn-results-header">
-                  <h2 class="kn-section-title" id="kn-search-title">処世術 横断検索</h2>
-                  <p id="kn-search-meta" class="kn-results-meta">
-                    キーワードを入力すると、すべてのOSから該当する処世術カードを表示します。
-                  </p>
-                </div>
-
-                <!-- 検索タブ専用検索バー -->
-                <section class="kn-search-section" aria-label="処世術を検索する">
-                  <div class="kn-search-inner">
-                    <div class="kn-search-icon">
-                      <svg
-                        class="kn-search-svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                      >
-                        <circle cx="11" cy="11" r="6" stroke-width="2" />
-                        <line x1="15.5" y1="15.5" x2="20" y2="20" stroke-width="2" />
-                      </svg>
-                    </div>
-                    <input
-                      id="kn-search-input"
-                      class="kn-search-input"
-                      type="search"
-                      placeholder="キーワードで探す…（例：評価・転職・自信・不安 など）"
-                      autocomplete="off"
-                    />
-                  </div>
-                </section>
-
-                <!-- 検索結果（OS横断） -->
-                <div id="kn-search-results" class="kn-card-grid" aria-live="polite">
                   <!-- JSでカード生成 -->
                 </div>
               </section>
