@@ -1,5 +1,5 @@
 // knowledge-notes.js
-// 処世術禄：トップモード / OSモード / 検索タブ（OS横断） / 今日の処世術 / お気に入り / いいね
+// 処世術禄：トップモード / OSモード / 検索タブ（OS横断） / お気に入り / いいね
 
 (function () {
   "use strict";
@@ -176,18 +176,15 @@
   const sidebarToggleBtn = document.querySelector(".kn-sidebar-toggle");
   const osTabButtons = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
 
+  // トップ検索バー
+  const topSearchInput = document.getElementById("kn-search-input-top");
+
   // 検索タブ内の入力
   const searchInput = document.getElementById("kn-search-input");
 
   const topModeSection = document.getElementById("top-mode");
   const osModeSection = document.getElementById("os-mode");
   const searchModeSection = document.getElementById("search-mode");
-  const osStructureSection = document.querySelector(".kn-os-structure-section");
-
-  const todayCardContainer = document.getElementById("kn-today-card");
-  const todayRefreshBtn = document.getElementById("kn-today-refresh");
-
-  const shortcutButtons = document.querySelectorAll(".kn-shortcut");
 
   // OSモード用
   const resultsContainer = document.getElementById("kn-results-container");
@@ -213,10 +210,6 @@
       })
       .catch((err) => {
         console.error("処世術カードの読み込みに失敗しました", err);
-        if (todayCardContainer) {
-          todayCardContainer.innerHTML =
-            '<p class="kn-loading-text">カードの読み込みに失敗しました。</p>';
-        }
       });
   }
 
@@ -251,22 +244,17 @@
       });
     }
 
-    // ショートカット → 検索タブへ飛ばす
-    shortcutButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const keyword = btn.getAttribute("data-keyword") || "";
-        if (searchInput) {
-          searchInput.value = keyword;
+    // トップ検索バー：Enterで検索タブに遷移
+    if (topSearchInput) {
+      topSearchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          const value = topSearchInput.value.trim();
+          if (searchInput) {
+            searchInput.value = value;
+          }
+          state.search = value;
+          setActiveCategory("search");
         }
-        state.search = keyword;
-        setActiveCategory("search");
-      });
-    });
-
-    // 今日の処世術 更新
-    if (todayRefreshBtn) {
-      todayRefreshBtn.addEventListener("click", () => {
-        renderTodayCard(true);
       });
     }
   }
@@ -357,13 +345,11 @@
 
   function renderInitialView() {
     setActiveCategory("all");
-    renderTodayCard(false);
   }
 
   function refreshCurrentView() {
     if (state.activeCategory === "all") {
       showTopMode();
-      renderTodayCard(false);
     } else if (state.activeCategory === "search") {
       showSearchMode();
       renderGlobalSearch();
@@ -377,57 +363,18 @@
     if (topModeSection) topModeSection.hidden = false;
     if (osModeSection) osModeSection.hidden = true;
     if (searchModeSection) searchModeSection.hidden = true;
-    if (osStructureSection) osStructureSection.style.display = "";
   }
 
   function showOsMode() {
     if (topModeSection) topModeSection.hidden = true;
     if (osModeSection) osModeSection.hidden = false;
     if (searchModeSection) searchModeSection.hidden = true;
-    if (osStructureSection) osStructureSection.style.display = "none";
   }
 
   function showSearchMode() {
     if (topModeSection) topModeSection.hidden = true;
     if (osModeSection) osModeSection.hidden = true;
     if (searchModeSection) searchModeSection.hidden = false;
-    if (osStructureSection) osStructureSection.style.display = "none";
-  }
-
-  // ============================================================
-  // 今日の処世術
-  // ============================================================
-  function renderTodayCard() {
-    if (!todayCardContainer || !state.topics.length) return;
-
-    todayCardContainer.innerHTML = "";
-
-    const candidates = state.topics;
-    if (!candidates.length) {
-      todayCardContainer.innerHTML =
-        '<p class="kn-loading-text">カードがまだ登録されていません。</p>';
-      return;
-    }
-
-    const randomIndex = Math.floor(Math.random() * candidates.length);
-    const topic = candidates[randomIndex];
-
-    const card = createShoseiCard(topic, { compact: true });
-    card.classList.add("is-today");
-
-    const catLabel = document.createElement("span");
-    catLabel.className = "tag-chip tag-chip-category";
-    const categoryLabel = categoryConfigs[topic._category]
-      ? categoryConfigs[topic._category].label
-      : "不明カテゴリ";
-    catLabel.textContent = categoryLabel;
-
-    const tagsWrap = card.querySelector(".shosei-tags");
-    if (tagsWrap) {
-      tagsWrap.insertBefore(catLabel, tagsWrap.firstChild);
-    }
-
-    todayCardContainer.appendChild(card);
   }
 
   // ============================================================
@@ -533,7 +480,7 @@
       }
       const p = document.createElement("p");
       p.className = "kn-loading-text";
-      p.textContent = "左の検索欄に、いま気になっている言葉を入れてみてください。";
+      p.textContent = "検索欄に、いま気になっている言葉を入れてみてください。";
       searchResultsContainer.appendChild(p);
       return;
     }
