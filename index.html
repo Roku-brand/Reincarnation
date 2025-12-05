@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <title>人生二周目録</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="情報過多の時代を終わらせるための“人生OS”。生涯禄・処世術禄・キャリア禄で、二周目視点から人生を整理するポータブル Web サイトです。">
+  <meta
+    name="description"
+    content="情報過多の時代を終わらせるための“人生OS”。生涯禄・処世術禄・キャリア禄で、二周目視点から人生を整理するポータブル Web サイトです。"
+  >
 
   <!-- フォント -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +25,7 @@
         <div class="logo-sub">二周目視点で、人生をアップデートする</div>
       </div>
 
+      <!-- PC 用ナビ（従来どおり） -->
       <nav class="header-nav">
         <a href="index.html" class="nav-link is-current">ホーム</a>
         <a href="contents/generations.html" class="nav-link">生涯禄</a>
@@ -30,6 +34,28 @@
         <a href="contents/user-notes.html" class="nav-link">ユーザー機能</a>
         <a href="contents/concept.html" class="nav-link">コンセプト</a>
       </nav>
+
+      <!-- SP 用アコーディオンナビ（画面右上） -->
+      <div class="mobile-nav-wrapper">
+        <input
+          type="checkbox"
+          id="mobile-nav-toggle"
+          class="mobile-nav-checkbox"
+          aria-hidden="true"
+        >
+        <label for="mobile-nav-toggle" class="mobile-nav-button">
+          <span class="mobile-nav-button-bar"></span>
+          <span class="mobile-nav-button-label">メニュー</span>
+        </label>
+        <div class="mobile-nav-panel" aria-label="グローバルナビゲーション">
+          <a href="index.html" class="mobile-nav-link">ホーム</a>
+          <a href="contents/generations.html" class="mobile-nav-link">生涯禄</a>
+          <a href="contents/knowledge-notes.html" class="mobile-nav-link">処世術禄</a>
+          <a href="contents/life-stories.html" class="mobile-nav-link">キャリア禄</a>
+          <a href="contents/user-notes.html" class="mobile-nav-link">ユーザー機能</a>
+          <a href="contents/concept.html" class="mobile-nav-link">コンセプト</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -174,5 +200,3 @@
   <script src="main.js" defer></script>
 </body>
 </html>
-
-
