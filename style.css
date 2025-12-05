@@ -664,3 +664,21 @@ a {
     font-size: 1.08rem;
   }
 }
+
+/* =========================
+   PC背景を淡いグリーンに戻す
+   （黒い枠を消すための上書き）
+   ========================= */
+
+/* 背景を全面・淡いグリーンに戻す */
+body {
+  background: linear-gradient(180deg, #ecfdf5 0%, #e0f7ec 45%, #f5fdf8 100%);
+}
+
+/* 黒っぽいリング背景を無効化 */
+body::before,
+body::after {
+  content: none !important;
+  display: none !important;
+}
+
