@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://roku-brand.github.io/Reincarnation/index.html</loc>
     <lastmod>2025-01-01</lastmod>
   </url>
+
   <url>
-    <loc>https://roku-brand.github.io/Reincarnation/contents/jinsei-chizu-roku.html</loc>
+    <loc>https://roku-brand.github.io/Reincarnation/contents/concept.html</loc>
+    <lastmod>2025-01-01</lastmod>
   </url>
+
   <url>
-    <loc>https://roku-brand.github.io/Reincarnation/contents/jinsei-taiken-roku.html</loc>
+    <loc>https://roku-brand.github.io/Reincarnation/contents/generations.html</loc>
+    <lastmod>2025-01-01</lastmod>
   </url>
+
   <url>
-    <loc>https://roku-brand.github.io/Reincarnation/contents/shoseijutsu-roku.html</loc>
+    <loc>https://roku-brand.github.io/Reincarnation/contents/knowledge-notes.html</loc>
+    <lastmod>2025-01-01</lastmod>
   </url>
+
+  <url>
+    <loc>https://roku-brand.github.io/Reincarnation/contents/life-stories.html</loc>
+    <lastmod>2025-01-01</lastmod>
+  </url>
+
+  <url>
+    <loc>https://roku-brand.github.io/Reincarnation/contents/user-notes.html</loc>
+    <lastmod>2025-01-01</lastmod>
+  </url>
+
 </urlset>
