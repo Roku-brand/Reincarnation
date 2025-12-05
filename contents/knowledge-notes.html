@@ -22,27 +22,50 @@
 </head>
 
 <body class="home-body page-knowledge-notes">
-  <!-- ======================
-       ヘッダー
-       ====================== -->
+  <!-- ========== ヘッダー ========== -->
   <header class="site-header">
     <div class="header-inner container">
       <div class="logo-block">
-        <div class="logo-title">人生二周目録ーβ版</div>
+        <div class="logo-title">人生二周目録－β版</div>
         <div class="logo-sub">二周目視点で、人生をアップデートする</div>
       </div>
 
+      <!-- PC 用ナビ（従来どおり） -->
       <nav class="header-nav">
-        <a href="../index.html" class="nav-link">ホーム</a>
-        <a href="generations.html" class="nav-link">生涯禄</a>
-        <a href="knowledge-notes.html" class="nav-link is-current">処世術禄</a>
-        <a href="life-stories.html" class="nav-link">キャリア禄</a>
-        <a href="user-notes.html" class="nav-link">ユーザー機能</a>
-        <a href="concept.html" class="nav-link">コンセプト</a>
+        <a href="index.html" class="nav-link is-current">ホーム</a>
+        <a href="contents/generations.html" class="nav-link">生涯禄</a>
+        <a href="contents/knowledge-notes.html" class="nav-link">処世術禄</a>
+        <a href="contents/life-stories.html" class="nav-link">キャリア禄</a>
+        <a href="contents/user-notes.html" class="nav-link">ユーザー機能</a>
+        <a href="contents/concept.html" class="nav-link">コンセプト</a>
       </nav>
+
+      <!-- SP 用アコーディオンナビ（画面右上） -->
+      <div class="mobile-nav-wrapper">
+        <input
+          type="checkbox"
+          id="mobile-nav-toggle"
+          class="mobile-nav-checkbox"
+          aria-hidden="true"
+        >
+        <label for="mobile-nav-toggle" class="mobile-nav-button">
+          <span class="mobile-nav-button-bar"></span>
+          <span class="mobile-nav-button-label">メニュー</span>
+        </label>
+        <div class="mobile-nav-panel" aria-label="グローバルナビゲーション">
+          <a href="index.html" class="mobile-nav-link">ホーム</a>
+          <a href="contents/generations.html" class="mobile-nav-link">生涯禄</a>
+          <a href="contents/knowledge-notes.html" class="mobile-nav-link">処世術禄</a>
+          <a href="contents/life-stories.html" class="mobile-nav-link">キャリア禄</a>
+          <a href="contents/user-notes.html" class="mobile-nav-link">ユーザー機能</a>
+          <a href="contents/concept.html" class="mobile-nav-link">コンセプト</a>
+        </div>
+      </div>
     </div>
   </header>
 
+  <main class="site-main">
+    <div class="container">
   <!-- ======================
        メイン
        ====================== -->
@@ -224,6 +247,7 @@
   <script src="knowledge-notes.js" defer></script>
 </body>
 </html>
+
 
 
 
