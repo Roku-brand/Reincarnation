@@ -5,7 +5,8 @@
 ========================================= */
 
 .concept-body {
-  /* 背景は共通の body グラデーション＋コンパスをそのまま使う */
+  /* 背景を index.html と統一 */
+  background: linear-gradient(180deg, #e6fbf0 0%, #e0f7ec 45%, #fafdff 100%);
   color: #111827;
   font-family: "Inter", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }

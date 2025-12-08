@@ -5,7 +5,8 @@
 
 /* ページ全体のレイアウト微調整 */
 .generation-body {
-  /* 背景は style.css の body / body::before で共通管理 */
+  /* 背景を index.html と統一 */
+  background: linear-gradient(180deg, #e6fbf0 0%, #e0f7ec 45%, #fafdff 100%);
 }
 
 .generation-main {

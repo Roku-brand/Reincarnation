@@ -2,9 +2,9 @@
    レイアウト（HERO直下）
    ============================== */
 
-/* 背景を真っ黒ではなく、処世術禄に近い淡いトーンに寄せる */
+/* 背景を index.html と統一 */
 body.home-body.page-life-stories {
-  background-color: #f9fafb;
+  background: linear-gradient(180deg, #e6fbf0 0%, #e0f7ec 45%, #fafdff 100%);
 }
 
 .page-life-stories .site-main {

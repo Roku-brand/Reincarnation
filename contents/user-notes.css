@@ -2,6 +2,11 @@
    レイアウト（コンセプト寄せの余白）
    ========================= */
 
+/* 背景を index.html と統一 */
+.page-user-notes {
+  background: linear-gradient(180deg, #e6fbf0 0%, #e0f7ec 45%, #fafdff 100%);
+}
+
 .page-user-notes .site-main {
   padding-top: 12px;
   padding-bottom: 72px;
