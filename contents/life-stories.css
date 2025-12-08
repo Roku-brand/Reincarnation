@@ -12,12 +12,14 @@ body.home-body.page-life-stories {
   padding-bottom: 80px;
 }
 
-/* このページはフル画面幅にする：左右の余白をほぼゼロに */
+/* このページはフル画面幅にする：左右の余白をゼロに */
 .page-life-stories .site-main .container {
-  max-width: none;
+  max-width: 100%;
   width: 100%;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .page-life-stories .page-inner {

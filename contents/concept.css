@@ -16,11 +16,12 @@
   padding-bottom: 40px;
 }
 
-/* メインコンテンツ幅：他タブと同じ 1120px 中央寄せ */
+/* メインコンテンツ幅：フル画面に */
 .concept-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px 24px;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0 16px 24px;
 }
 
 /* ---------- HERO（ホームと同じ構造の軽い調整） ---------- */

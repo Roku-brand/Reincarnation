@@ -17,8 +17,11 @@
 /* コンテナを「ほぼフル幅」にしてフル画面寄せ */
 .generation-main .container {
   max-width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* コンテンツラッパ：中央固定幅をやめてフル幅寄りに */

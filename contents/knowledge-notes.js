@@ -5,6 +5,12 @@
   "use strict";
 
   // ============================================================
+  // 定数
+  // ============================================================
+  // スマホ表示の閾値（CSSのメディアクエリと一致させる）
+  const MOBILE_BREAKPOINT = 900;
+
+  // ============================================================
   // カテゴリ設定
   // ============================================================
   const categoryConfigs = {
@@ -239,10 +245,14 @@
     // スマホ用サイドバー開閉
     if (sidebarToggleBtn && sidebarEl) {
       sidebarToggleBtn.addEventListener("click", () => {
-        const expanded = sidebarToggleBtn.getAttribute("aria-expanded") === "true";
-        const newState = !expanded;
-        sidebarToggleBtn.setAttribute("aria-expanded", String(newState));
-        sidebarEl.classList.toggle("is-open", newState);
+        const isOpen = sidebarEl.classList.contains("is-open");
+        if (isOpen) {
+          sidebarEl.classList.remove("is-open");
+          sidebarToggleBtn.setAttribute("aria-expanded", "false");
+        } else {
+          sidebarEl.classList.add("is-open");
+          sidebarToggleBtn.setAttribute("aria-expanded", "true");
+        }
       });
     }
 
@@ -781,28 +791,13 @@
   }
 
   // ============================================================
-  // スマホ用：サイドバートグル
+  // スマホ用：サイドバーのタブクリック時の自動閉じ処理
   // ============================================================
-  // スマホ表示の閾値（CSSのメディアクエリと一致させる）
-  const MOBILE_BREAKPOINT = 900;
-  
   function initSidebarToggle() {
     const toggleBtn = document.querySelector(".kn-sidebar-toggle");
     const sidebar = document.getElementById("kn-sidebar");
     
     if (!toggleBtn || !sidebar) return;
-    
-    toggleBtn.addEventListener("click", () => {
-      const isOpen = sidebar.classList.contains("is-open");
-      
-      if (isOpen) {
-        sidebar.classList.remove("is-open");
-        toggleBtn.setAttribute("aria-expanded", "false");
-      } else {
-        sidebar.classList.add("is-open");
-        toggleBtn.setAttribute("aria-expanded", "true");
-      }
-    });
     
     // サイドバー内のタブをクリックしたら自動で閉じる（スマホのみ）
     const osTabs = sidebar.querySelectorAll(".kn-os-tab");
