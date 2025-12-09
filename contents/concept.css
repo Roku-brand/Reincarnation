@@ -51,32 +51,26 @@
   }
 }
 
-/* ---------- 3カードレイアウト ---------- */
+/* ---------- フル画面レイアウト（カード形式なし） ---------- */
 
 .concept-section {
   margin-top: 16px;
 }
 
 .concept-grid {
-  display: grid;
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-/* 幅が広いときは3カード横並び */
-@media (min-width: 960px) {
-  .concept-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-/* カード本体（共通 .card の上に軽く上書き） */
+/* カード形式を削除し、フラットな表示に */
 .concept-card {
   position: relative;
-  padding: 24px 20px 22px;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 10px 25px rgba(15, 118, 110, 0.08);
-  border: 0.5px solid rgba(15, 118, 110, 0.18);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  border: none;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -84,35 +78,34 @@
 
 /* 番号バッジ */
 .concept-card .card-badge {
-  position: absolute;
-  top: 16px;
-  left: 18px;
-  width: 28px;
-  height: 28px;
+  position: static;
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
   border-radius: 999px;
   border: 1px solid rgba(15, 118, 110, 0.6);
-  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #065f46;
   background: #ecfdf5;
+  margin-bottom: 8px;
 }
 
-/* タイトルをバッジの右から始める */
+/* タイトル */
 .concept-card-title {
-  margin: 0 0 4px;
-  padding-left: 44px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  margin: 0 0 8px;
+  padding-left: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: #111827;
 }
 
 /* 本文テキスト */
 .concept-card-text {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.9;
   color: #374151;
 }
@@ -120,38 +113,38 @@
 /* 補足ノート */
 .concept-card-note {
   margin: 8px 0 0;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   line-height: 1.8;
   color: #047857;
 }
 
-/* ホバーで少しだけ浮かせる */
+/* ホバー効果を削除（フラット表示なので不要） */
 .concept-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.16);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transform: none;
+  box-shadow: none;
 }
 
 .concept-card:not(:hover) {
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transform: none;
+  box-shadow: none;
 }
 
-/* タブレット以下で少し余白を広めに */
+/* タブレット以下 */
 @media (max-width: 959px) {
   .concept-inner {
     padding: 0 16px 24px;
   }
 
   .concept-card {
-    padding: 20px 18px 20px;
+    padding: 0;
   }
 
   .concept-card-title {
-    padding-left: 40px;
-    font-size: 1.02rem;
+    padding-left: 0;
+    font-size: 1.1rem;
   }
 
   .concept-card-text {
-    font-size: 0.93rem;
+    font-size: 0.95rem;
   }
 }
