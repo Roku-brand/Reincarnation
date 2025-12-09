@@ -246,10 +246,39 @@
     if (sidebarToggleBtn && sidebarEl) {
       sidebarToggleBtn.addEventListener("click", () => {
         const isOpen = sidebarEl.classList.contains("is-open");
+        const backdrop = document.getElementById("kn-sidebar-backdrop");
+        
         sidebarEl.classList.toggle("is-open", !isOpen);
         sidebarToggleBtn.setAttribute("aria-expanded", String(!isOpen));
+        
+        if (backdrop) {
+          backdrop.classList.toggle("is-open", !isOpen);
+        }
       });
     }
+
+    // スマホ用：背景クリックでサイドバーを閉じる
+    const backdrop = document.getElementById("kn-sidebar-backdrop");
+    if (backdrop && sidebarEl && sidebarToggleBtn) {
+      backdrop.addEventListener("click", () => {
+        sidebarEl.classList.remove("is-open");
+        backdrop.classList.remove("is-open");
+        sidebarToggleBtn.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    // スマホ用：ESCキーでサイドバーを閉じる
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && sidebarEl && sidebarEl.classList.contains("is-open")) {
+        sidebarEl.classList.remove("is-open");
+        if (backdrop) {
+          backdrop.classList.remove("is-open");
+        }
+        if (sidebarToggleBtn) {
+          sidebarToggleBtn.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
 
     // 検索タブ専用検索バー
     if (searchInput) {
@@ -791,6 +820,7 @@
   function initSidebarToggle() {
     const toggleBtn = document.querySelector(".kn-sidebar-toggle");
     const sidebar = document.getElementById("kn-sidebar");
+    const backdrop = document.getElementById("kn-sidebar-backdrop");
     
     if (!toggleBtn || !sidebar) return;
     
@@ -802,6 +832,9 @@
         if (window.innerWidth <= MOBILE_BREAKPOINT) {
           sidebar.classList.remove("is-open");
           toggleBtn.setAttribute("aria-expanded", "false");
+          if (backdrop) {
+            backdrop.classList.remove("is-open");
+          }
         }
       });
     });
