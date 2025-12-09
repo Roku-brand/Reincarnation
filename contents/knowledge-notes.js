@@ -242,6 +242,20 @@
       });
     });
 
+    // ヘルパー関数：サイドバーを閉じる
+    function closeSidebar() {
+      if (sidebarEl) {
+        sidebarEl.classList.remove("is-open");
+      }
+      const backdrop = document.getElementById("kn-sidebar-backdrop");
+      if (backdrop) {
+        backdrop.classList.remove("is-open");
+      }
+      if (sidebarToggleBtn) {
+        sidebarToggleBtn.setAttribute("aria-expanded", "false");
+      }
+    }
+
     // スマホ用サイドバー開閉
     if (sidebarToggleBtn && sidebarEl) {
       sidebarToggleBtn.addEventListener("click", () => {
@@ -259,24 +273,14 @@
 
     // スマホ用：背景クリックでサイドバーを閉じる
     const backdrop = document.getElementById("kn-sidebar-backdrop");
-    if (backdrop && sidebarEl && sidebarToggleBtn) {
-      backdrop.addEventListener("click", () => {
-        sidebarEl.classList.remove("is-open");
-        backdrop.classList.remove("is-open");
-        sidebarToggleBtn.setAttribute("aria-expanded", "false");
-      });
+    if (backdrop) {
+      backdrop.addEventListener("click", closeSidebar);
     }
 
     // スマホ用：ESCキーでサイドバーを閉じる
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && sidebarEl && sidebarEl.classList.contains("is-open")) {
-        sidebarEl.classList.remove("is-open");
-        if (backdrop) {
-          backdrop.classList.remove("is-open");
-        }
-        if (sidebarToggleBtn) {
-          sidebarToggleBtn.setAttribute("aria-expanded", "false");
-        }
+        closeSidebar();
       }
     });
 
