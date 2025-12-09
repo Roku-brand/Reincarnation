@@ -181,6 +181,7 @@
   const sidebarEl = document.getElementById("kn-sidebar");
   const sidebarToggleBtn = document.querySelector(".kn-sidebar-toggle");
   const osTabButtons = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
+  const backdropEl = document.getElementById("kn-sidebar-backdrop");
 
   // 検索タブ内の入力
   const searchInput = document.getElementById("kn-search-input");
@@ -214,6 +215,21 @@
   const searchTitleEl = document.getElementById("kn-search-title");
 
   // ============================================================
+  // ヘルパー関数：サイドバーを閉じる
+  // ============================================================
+  function closeSidebar() {
+    if (sidebarEl) {
+      sidebarEl.classList.remove("is-open");
+    }
+    if (backdropEl) {
+      backdropEl.classList.remove("is-open");
+    }
+    if (sidebarToggleBtn) {
+      sidebarToggleBtn.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  // ============================================================
   // 初期化
   // ============================================================
   function init() {
@@ -242,39 +258,23 @@
       });
     });
 
-    // ヘルパー関数：サイドバーを閉じる
-    function closeSidebar() {
-      if (sidebarEl) {
-        sidebarEl.classList.remove("is-open");
-      }
-      const backdrop = document.getElementById("kn-sidebar-backdrop");
-      if (backdrop) {
-        backdrop.classList.remove("is-open");
-      }
-      if (sidebarToggleBtn) {
-        sidebarToggleBtn.setAttribute("aria-expanded", "false");
-      }
-    }
-
     // スマホ用サイドバー開閉
     if (sidebarToggleBtn && sidebarEl) {
       sidebarToggleBtn.addEventListener("click", () => {
         const isOpen = sidebarEl.classList.contains("is-open");
-        const backdrop = document.getElementById("kn-sidebar-backdrop");
         
         sidebarEl.classList.toggle("is-open", !isOpen);
         sidebarToggleBtn.setAttribute("aria-expanded", String(!isOpen));
         
-        if (backdrop) {
-          backdrop.classList.toggle("is-open", !isOpen);
+        if (backdropEl) {
+          backdropEl.classList.toggle("is-open", !isOpen);
         }
       });
     }
 
     // スマホ用：背景クリックでサイドバーを閉じる
-    const backdrop = document.getElementById("kn-sidebar-backdrop");
-    if (backdrop) {
-      backdrop.addEventListener("click", closeSidebar);
+    if (backdropEl) {
+      backdropEl.addEventListener("click", closeSidebar);
     }
 
     // スマホ用：ESCキーでサイドバーを閉じる
@@ -824,7 +824,6 @@
   function initSidebarToggle() {
     const toggleBtn = document.querySelector(".kn-sidebar-toggle");
     const sidebar = document.getElementById("kn-sidebar");
-    const backdrop = document.getElementById("kn-sidebar-backdrop");
     
     if (!toggleBtn || !sidebar) return;
     
@@ -834,11 +833,7 @@
       tab.addEventListener("click", () => {
         // ウィンドウ幅が閾値以下の場合のみ閉じる
         if (window.innerWidth <= MOBILE_BREAKPOINT) {
-          sidebar.classList.remove("is-open");
-          toggleBtn.setAttribute("aria-expanded", "false");
-          if (backdrop) {
-            backdrop.classList.remove("is-open");
-          }
+          closeSidebar();
         }
       });
     });
