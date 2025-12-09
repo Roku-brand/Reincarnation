@@ -181,6 +181,7 @@
   const sidebarEl = document.getElementById("kn-sidebar");
   const sidebarToggleBtn = document.querySelector(".kn-sidebar-toggle");
   const osTabButtons = sidebarEl ? sidebarEl.querySelectorAll(".kn-os-tab") : [];
+  const backdropEl = document.getElementById("kn-sidebar-backdrop");
 
   // 検索タブ内の入力
   const searchInput = document.getElementById("kn-search-input");
@@ -212,6 +213,21 @@
   const searchResultsContainer = document.getElementById("kn-search-results");
   const searchMetaEl = document.getElementById("kn-search-meta");
   const searchTitleEl = document.getElementById("kn-search-title");
+
+  // ============================================================
+  // ヘルパー関数：サイドバーを閉じる
+  // ============================================================
+  function closeSidebar() {
+    if (sidebarEl) {
+      sidebarEl.classList.remove("is-open");
+    }
+    if (backdropEl) {
+      backdropEl.classList.remove("is-open");
+    }
+    if (sidebarToggleBtn) {
+      sidebarToggleBtn.setAttribute("aria-expanded", "false");
+    }
+  }
 
   // ============================================================
   // 初期化
@@ -246,10 +262,27 @@
     if (sidebarToggleBtn && sidebarEl) {
       sidebarToggleBtn.addEventListener("click", () => {
         const isOpen = sidebarEl.classList.contains("is-open");
+        
         sidebarEl.classList.toggle("is-open", !isOpen);
         sidebarToggleBtn.setAttribute("aria-expanded", String(!isOpen));
+        
+        if (backdropEl) {
+          backdropEl.classList.toggle("is-open", !isOpen);
+        }
       });
     }
+
+    // スマホ用：背景クリックでサイドバーを閉じる
+    if (backdropEl) {
+      backdropEl.addEventListener("click", closeSidebar);
+    }
+
+    // スマホ用：ESCキーでサイドバーを閉じる
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && sidebarEl && sidebarEl.classList.contains("is-open")) {
+        closeSidebar();
+      }
+    });
 
     // 検索タブ専用検索バー
     if (searchInput) {
@@ -800,8 +833,7 @@
       tab.addEventListener("click", () => {
         // ウィンドウ幅が閾値以下の場合のみ閉じる
         if (window.innerWidth <= MOBILE_BREAKPOINT) {
-          sidebar.classList.remove("is-open");
-          toggleBtn.setAttribute("aria-expanded", "false");
+          closeSidebar();
         }
       });
     });
