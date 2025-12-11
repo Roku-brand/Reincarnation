@@ -131,6 +131,31 @@
             </button>
           </form>
         </section>
+
+        <!-- ルーティン時刻表 -->
+        <section class="card routine-card">
+          <h2 class="section-title">1日のルーティン時刻表</h2>
+          <p class="section-desc">
+            決まっている 1 日の流れを時刻表形式で管理します。時間や内容は自由に編集でき、ブラウザに保存されます。
+          </p>
+
+          <div class="routine-head">
+            <p class="routine-note">デフォルトのルーティンをベースに、必要に応じて時間や項目を入れ替えてください。</p>
+            <div class="routine-actions">
+              <button type="button" class="routine-btn" id="routineAddBtn">
+                <span class="material-symbols-rounded">add</span>
+                <span>行を追加</span>
+              </button>
+              <button type="button" class="routine-btn ghost" id="routineResetBtn">
+                <span class="material-symbols-rounded">refresh</span>
+                <span>デフォルトに戻す</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="routineTable" class="routine-table" aria-live="polite"></div>
+          <p class="routine-footnote">変更はこの端末の localStorage に保存されます（他端末とは同期されません）。</p>
+        </section>
       </div>
     </div>
   </main>
