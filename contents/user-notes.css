@@ -1,5 +1,5 @@
 /* =========================
-   レイアウト（コンセプト寄せの余白）
+   レイアウト（フル画面・カード形式なし）
    ========================= */
 
 /* 背景を index.html と統一 */
@@ -12,12 +12,22 @@
   padding-bottom: 72px;
 }
 
+/* フル画面レイアウト - カード形式を削除 */
+.page-user-notes .container {
+  max-width: 100%;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .page-inner {
   margin: 0;
   max-width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
-  gap: 18px;
+  gap: 32px;
   padding: 0 16px 24px;
 }
 
@@ -27,18 +37,20 @@
   }
 }
 
-/* セクションタイトル・説明（カード内） */
+/* セクションタイトル・説明（カードなしでフラット表示） */
 
 .section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #111827;
 }
 
 .section-desc {
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   color: var(--text-sub);
-  margin: 0 0 10px;
+  margin: 0 0 16px;
+  line-height: 1.6;
 }
 
 /* =========================
