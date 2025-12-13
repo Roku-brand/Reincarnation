@@ -207,7 +207,7 @@ body.home-body.page-life-stories {
 .pattern-card {
   border-radius: 16px;
   border: none;
-  background: #f9fffb;
+  background: var(--ls-card-bg);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
   transition:
@@ -286,7 +286,7 @@ body.home-body.page-life-stories {
 .pattern-card-details-inner {
   padding: 10px 12px 12px;
   font-size: 12px;
-  background: #f9fffb;
+  background: var(--ls-card-bg);
 }
 
 .pattern-detail-block {
@@ -364,8 +364,8 @@ body.home-body.page-life-stories {
   gap: 8px;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid #bbf7d0;
-  background: #f0fdf4;
+  border: 1px solid var(--accent-soft);
+  background: var(--ls-accent-soft);
   box-shadow: var(--shadow-soft);
 }
 
@@ -402,7 +402,7 @@ body.home-body.page-life-stories {
   padding: 8px 10px 10px;
   border-radius: 14px;
   border: none;
-  background: #f9fffb;
+  background: var(--ls-card-bg);
   box-shadow: var(--shadow-soft);
 }
 
@@ -424,8 +424,8 @@ body.home-body.page-life-stories {
 .job-tag-button {
   padding: 4px 10px;
   border-radius: 999px;
-  border: 1px solid #bbf7d0;
-  background: #f0fdf4;
+  border: 1px solid var(--accent-soft);
+  background: var(--ls-accent-soft);
   font-size: 11px;
   color: #065f46;
   cursor: pointer;
@@ -458,7 +458,7 @@ body.home-body.page-life-stories {
 .job-card {
   border-radius: 16px;
   border: none;
-  background: #f9fffb;
+  background: var(--ls-card-bg);
   padding: 14px 14px 16px;
   box-shadow: var(--shadow-soft);
   font-size: 12px;
@@ -586,6 +586,8 @@ body.home-body.page-life-stories {
 ---------------------------------------------------- */
 
 body.page-life-stories {
+  --ls-card-bg: #f9fffb;
+  --ls-accent-soft: #f0fdf4;
   background: #f4faf7 !important;   /* 淡い緑がかった処世術禄トーン */
 }
 
