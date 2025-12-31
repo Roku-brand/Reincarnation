@@ -68,7 +68,8 @@
       { id: "all", label: "すべて" },
       { id: "evaluation", label: "評価" },
       { id: "safety", label: "安全保障" },
-      { id: "negotiation", label: "交渉" },
+      { id: "money", label: "お金集め" },
+      { id: "network", label: "人脈集め" },
       { id: "context", label: "環境理解" },
       { id: "other", label: "その他" }
     ],

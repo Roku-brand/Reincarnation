@@ -131,6 +131,170 @@
             </button>
           </form>
         </section>
+
+        <!-- アイテムボックス（マリオのキノコのような強化アイテム） -->
+        <section>
+          <h2 class="section-title">🎁 アイテムボックス</h2>
+          <p class="section-desc">
+            人生を助けてくれる「アイテム」を集めておく場所です。<br>
+            マリオのキノコのように、いざという時に自分を強化してくれるものをストックしましょう。
+          </p>
+
+          <div class="item-box-grid" id="itemBoxGrid">
+            <!-- JSで描画 -->
+          </div>
+
+          <div class="item-add-row">
+            <input
+              id="itemNameInput"
+              type="text"
+              placeholder="アイテム名（例：コーヒー、音楽、散歩）"
+            />
+            <select id="itemTypeSelect">
+              <option value="power">💪 パワーアップ</option>
+              <option value="heal">💚 回復</option>
+              <option value="shield">🛡️ 防御</option>
+              <option value="star">⭐ スター</option>
+            </select>
+            <button id="itemAddBtn" class="primary-btn">
+              <span class="material-symbols-rounded">add</span>
+              <span>追加</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 技（スキル）コレクション -->
+        <section>
+          <h2 class="section-title">⚡ 技コレクション</h2>
+          <p class="section-desc">
+            自分が身につけた「技（スキル）」を記録する場所です。<br>
+            小さな技から必殺技まで、成長の証を集めていきましょう。
+          </p>
+
+          <div class="skill-list" id="skillList">
+            <!-- JSで描画 -->
+          </div>
+
+          <div class="skill-add-row">
+            <input
+              id="skillNameInput"
+              type="text"
+              placeholder="技名（例：早起き、深呼吸、断る力）"
+            />
+            <select id="skillLevelSelect">
+              <option value="1">Lv.1 覚えたて</option>
+              <option value="2">Lv.2 慣れてきた</option>
+              <option value="3">Lv.3 使いこなせる</option>
+              <option value="4">Lv.4 得意技</option>
+              <option value="5">Lv.5 必殺技</option>
+            </select>
+            <button id="skillAddBtn" class="primary-btn">
+              <span class="material-symbols-rounded">add</span>
+              <span>追加</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- お金集め機能 -->
+        <section>
+          <h2 class="section-title">💰 お金集めトラッカー</h2>
+          <p class="section-desc">
+            お金を増やすための知識や行動を記録する場所です。<br>
+            収入源、節約術、投資の知識など、お金に関する学びをストックしましょう。
+          </p>
+
+          <div class="money-stats" id="moneyStats">
+            <div class="stat-card">
+              <span class="stat-icon">📈</span>
+              <span class="stat-label">収入源</span>
+              <span class="stat-count" id="incomeCount">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">💡</span>
+              <span class="stat-label">節約術</span>
+              <span class="stat-count" id="savingCount">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">📚</span>
+              <span class="stat-label">投資知識</span>
+              <span class="stat-count" id="investCount">0</span>
+            </div>
+          </div>
+
+          <div class="money-list" id="moneyList">
+            <!-- JSで描画 -->
+          </div>
+
+          <div class="money-add-row">
+            <input
+              id="moneyTipInput"
+              type="text"
+              placeholder="お金の知恵（例：毎月の貯金額を自動化した）"
+            />
+            <select id="moneyTypeSelect">
+              <option value="income">📈 収入源</option>
+              <option value="saving">💡 節約術</option>
+              <option value="invest">📚 投資知識</option>
+            </select>
+            <button id="moneyAddBtn" class="primary-btn">
+              <span class="material-symbols-rounded">add</span>
+              <span>追加</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 人脈集め機能 -->
+        <section>
+          <h2 class="section-title">🤝 人脈マップ</h2>
+          <p class="section-desc">
+            大切なつながりを記録し、人脈を可視化する場所です。<br>
+            出会った人、助けてもらった人、一緒に成長できる仲間をストックしましょう。
+          </p>
+
+          <div class="network-stats" id="networkStats">
+            <div class="stat-card">
+              <span class="stat-icon">👥</span>
+              <span class="stat-label">メンター</span>
+              <span class="stat-count" id="mentorCount">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🤝</span>
+              <span class="stat-label">仲間</span>
+              <span class="stat-count" id="peerCount">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">🌱</span>
+              <span class="stat-label">応援したい人</span>
+              <span class="stat-count" id="supportCount">0</span>
+            </div>
+          </div>
+
+          <div class="network-list" id="networkList">
+            <!-- JSで描画 -->
+          </div>
+
+          <div class="network-add-row">
+            <input
+              id="networkNameInput"
+              type="text"
+              placeholder="人の名前またはニックネーム"
+            />
+            <input
+              id="networkNoteInput"
+              type="text"
+              placeholder="メモ（例：〇〇の相談ができる）"
+            />
+            <select id="networkTypeSelect">
+              <option value="mentor">👥 メンター</option>
+              <option value="peer">🤝 仲間</option>
+              <option value="support">🌱 応援したい人</option>
+            </select>
+            <button id="networkAddBtn" class="primary-btn">
+              <span class="material-symbols-rounded">add</span>
+              <span>追加</span>
+            </button>
+          </div>
+        </section>
       </div>
     </div>
   </main>
