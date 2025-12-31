@@ -186,3 +186,293 @@
   align-self: flex-end;
 }
 
+/* =========================
+   アイテムボックス
+   ========================= */
+
+.item-box-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.item-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 6px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.item-card.power { border-color: #f97316; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%); }
+.item-card.heal { border-color: #22c55e; background: linear-gradient(135deg, #dcfce7 0%, #ffffff 100%); }
+.item-card.shield { border-color: #3b82f6; background: linear-gradient(135deg, #dbeafe 0%, #ffffff 100%); }
+.item-card.star { border-color: #eab308; background: linear-gradient(135deg, #fef9c3 0%, #ffffff 100%); }
+
+.item-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.item-name {
+  font-size: 11px;
+  text-align: center;
+  color: #374151;
+  word-break: break-word;
+}
+
+.item-delete {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.item-card:hover .item-delete {
+  opacity: 1;
+}
+
+.item-add-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.item-add-row input,
+.item-add-row select {
+  flex: 1;
+  min-width: 120px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.item-add-row select {
+  min-width: 150px;
+}
+
+/* =========================
+   技コレクション
+   ========================= */
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.skill-item.lv1 { border-left: 4px solid #9ca3af; }
+.skill-item.lv2 { border-left: 4px solid #22c55e; }
+.skill-item.lv3 { border-left: 4px solid #3b82f6; }
+.skill-item.lv4 { border-left: 4px solid #8b5cf6; }
+.skill-item.lv5 { border-left: 4px solid #f59e0b; }
+
+.skill-level {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.skill-item.lv5 .skill-level {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+}
+
+.skill-name {
+  flex: 1;
+  font-size: 13px;
+  color: #374151;
+}
+
+.skill-delete {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.skill-add-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.skill-add-row input,
+.skill-add-row select {
+  flex: 1;
+  min-width: 120px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* =========================
+   お金集めトラッカー
+   ========================= */
+
+.money-stats,
+.network-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.stat-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+.stat-count {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.money-list,
+.network-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.money-item,
+.network-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.money-item.income { border-left: 3px solid #22c55e; }
+.money-item.saving { border-left: 3px solid #3b82f6; }
+.money-item.invest { border-left: 3px solid #8b5cf6; }
+
+.network-item.mentor { border-left: 3px solid #f59e0b; }
+.network-item.peer { border-left: 3px solid #22c55e; }
+.network-item.support { border-left: 3px solid #ec4899; }
+
+.money-type,
+.network-type {
+  font-size: 14px;
+}
+
+.money-text,
+.network-name {
+  flex: 1;
+  font-size: 12px;
+  color: #374151;
+}
+
+.network-note {
+  font-size: 11px;
+  color: #9ca3af;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.money-delete,
+.network-delete {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.money-add-row,
+.network-add-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.money-add-row input,
+.money-add-row select,
+.network-add-row input,
+.network-add-row select {
+  flex: 1;
+  min-width: 100px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .money-stats,
+  .network-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  
+  .stat-card {
+    padding: 8px 4px;
+  }
+  
+  .stat-icon {
+    font-size: 16px;
+  }
+  
+  .stat-count {
+    font-size: 16px;
+  }
+}
+
